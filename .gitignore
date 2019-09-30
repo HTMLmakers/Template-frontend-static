@@ -1,3 +1,4 @@
 node_modules
 design
 ./**/*.sass-cache
+.idea/
