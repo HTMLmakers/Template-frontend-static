@@ -1,22 +1,56 @@
-const { src, dest, series, parallel, watch } = require('gulp');
-const del = require('del');
+'use strict';
 
-function cleanCSS() {
-  return del('dev/css');
-}
 
-function taskCSS() {
-  return src('src/styles/*.css')
-    .pipe(dest('dev/css'));
-}
+const {src, dest} = require('gulp');
 
-function taskJS() {
-  return src('src/js/*.js')
-    .pipe(dest('dev/js'));
-}
 
-function taskCSSWatch() {
-  watch('src/styles/', series(cleanCSS, taskCSS));
-}
+const srcRoot = './src';
+const devRoot = './dev';
+const buildRoot = './build';
 
-exports.default = taskCSSWatch;
+const srcPath = {
+  assets: {
+
+  },
+  components: {
+
+  },
+  fonts: {
+
+  },
+  js: {
+
+  },
+  pages: {
+
+  },
+  styles: {
+
+  }
+};
+
+const devPath = {
+  assets: {
+
+  },
+  components: {
+
+  },
+  fonts: {
+
+  },
+  js: {
+
+  },
+  pages: {
+
+  },
+  styles: {
+
+  }
+};
+
+const buildPath = {
+
+};
+
