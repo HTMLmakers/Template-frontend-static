@@ -113,7 +113,7 @@ const buildPath = {
 // 1. Шрифты в формате TTF вставляем в ${srcPath.fonts}
 // 2. На выходе получаем веб шрифты в ${devPath.fonts}
 //
-const fontGeneration = series(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
+const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
 
 function convertTTFToWOFF() {
   return src([`${srcPath.fonts}/*.ttf`])
