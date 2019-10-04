@@ -1,3 +1,5 @@
+'use strict';
+
 const { src, dest, series, parallel } = require('gulp');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
