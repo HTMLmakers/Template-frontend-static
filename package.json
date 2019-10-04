@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/HTMLmakers/Template-frontend-static#readme",
   "devDependencies": {
-    "del": "^5.1.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-ttf2eot": "^1.1.2",
+    "gulp-ttf2woff": "^1.1.1",
+    "gulp-ttf2woff2": "^3.0.0",
+    "postcss-font-magician": "^2.2.2"
   }
 }
