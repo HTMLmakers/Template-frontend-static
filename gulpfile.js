@@ -1,5 +1,3 @@
-'use strict';
-
 const { src, dest, series, parallel } = require('gulp');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
@@ -38,7 +36,7 @@ const buildPath = {
 
 };
 
-/*const webFonts = {
+const webFonts = {
   // вариант 1
   'Custom Font': {
     variants: {
@@ -103,7 +101,7 @@ const buildPath = {
       }
     }
   },
-};*/
+};
 
 // ==========================================================================
 // Генерация веб щрифтов
@@ -175,11 +173,11 @@ exports.serve = series(
 
 // список задач для создания build-версии
 // TODO: добавить build задачи
-exports.build = series(
+/*exports.build = series(
   // Очистка build директории,
   parallel(
     // Минификация
     // Оптимизация картинок
     // И пр.
   )
-);
+);*/
