@@ -105,10 +105,4 @@ function watchHtml() {
   watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
 };
 
-
-//exports.default = function() {
-//  watch('./src/pages/*.html', { events: 'unlink'}, series(cleanHtml, compileHtml));
-//};
-
-
-exports.default = watchHtml;
+exports.html = watchHtml;
