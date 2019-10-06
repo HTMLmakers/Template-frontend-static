@@ -18,6 +18,7 @@
   "homepage": "https://github.com/HTMLmakers/Template-frontend-static#readme",
   "devDependencies": {
     "del": "^5.1.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-file-include": "^2.1.0"
   }
 }
