@@ -16,7 +16,9 @@ const srcPath = {
 
   },
   components: {
-
+    root: `${srcRoot}/components`,
+    core: `${srcRoot}/components/core`,
+    features: `${srcRoot}/components/features`
   },
   fonts: {
 
@@ -24,7 +26,10 @@ const srcPath = {
   js: {
 
   },
-  pages: `${srcRoot}/pages/`,
+  pages: {
+    root: `${srcRoot}/pages`,
+    include: `${srcRoot}/pages/include`
+  },
   styles: {
 
   }
@@ -43,7 +48,7 @@ const devPath = {
   js: {
 
   },
-  pages: `${devRoot}/`,
+  pages: `${devRoot}`,
   styles: {
 
   }
@@ -73,7 +78,7 @@ const buildPath = {
  */
 
 function compileHtml() {
-  return src(`${srcPath.pages}/*.html`)
+  return src(`${srcPath.pages.root}/*.html`)
     //.pipe(plumber())
     .pipe(fileInclude())
     //.pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
@@ -86,16 +91,18 @@ function compileHtml() {
  */
 
 function cleanHtml() {
-  return del([`${devPath.pages}/*.html`]);
+  return del(`${devPath.pages}/*.html`);
 }
 
 /**
- * Отслеживание html:   чистка каталога ./dev/ от всех файлов .html
- * 1. Отслеживание изменений в файлах .html ./src/components/, ./src/pages/
+ * Отслеживание изменений html:
+ * 1. Отслеживание ./src/pages/ на все события (add, del, change)
+ * 2. Отслеживание ./src/components/, ./src/pages/include/ на change
  */
 
 function watchHtml() {
-  watch('./src/pages/*.html', { events: 'unlink'}, series(cleanHtml, compileHtml));
+  watch(`${srcPath.pages.root}/*.html`, series(cleanHtml, compileHtml));
+  watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
 };
 
 
