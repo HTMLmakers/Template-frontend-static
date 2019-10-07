@@ -141,11 +141,15 @@ function convertTTFToEOT() {
 //
 
 function transformByPostCSS() {
+  const fontMagician = require('postcss-font-magician');
+  const autoprefixer = require('autoprefixer');
+
   return src(`${devPath.style}`).pipe(
     postcss([
-      require('postcss-font-magician')({
+      fontMagician({
         custom: webFonts,
-      })
+      }),
+      autoprefixer()
     ])
   ).pipe(
     dest(`${devRoot}`)
