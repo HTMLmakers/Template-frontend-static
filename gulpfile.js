@@ -73,7 +73,7 @@ const buildPath = {
 /**
  * Сборка html:
  * 1. Сборка всех инклудов из ./src/components/, ./src/pages/
- * 2. Очистка от лишних коментариев, переводов строк
+ * 2. Очистка от лишних коментариев и переводов строк
  * 3. Обработка текста с помощью https://github.com/typograf/typograf
  * 4. Сохранение собраных файлов .html в ./dev/
  */
@@ -116,7 +116,7 @@ function watchHtml() {
 
 /**
  * Сборка js:
- * 1. Сборка всех файлов .js из /src/js/vendors/ и ./src/components/
+ * 1. Сборка всех файлов .js из ./src/js/vendors/ и ./src/components/
  * 2. Сохранение собраных файлов .js в ./dev/js
  */
 
@@ -177,7 +177,7 @@ function watchJs() {
 /**
  * Сборка и компиляция scss:
  * 1. Сборка всех файлов .scss и .css из ./src/styles/ и ./src/components/
- * 2. Коплиляция .scss в .css и сохранение скомпилированных файлов в ./dev/styles/
+ * 2. Коплиляция .scss в .css и сохранение в ./dev/styles/
  */
 
 function compileCssGeneral() {
