@@ -6,6 +6,7 @@ const {src, dest, watch, series} = require('gulp');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
+const replace = require('gulp-replace');
 
 
 const srcRoot = './src';
