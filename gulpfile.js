@@ -1,13 +1,11 @@
 'use strict';
 
-
-const {src, dest, watch, series} = require('gulp');
+const {src, dest, series, watch} = require('gulp');
 
 const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
-
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -26,7 +24,8 @@ const srcPath = {
 
   },
   js: {
-
+    root: `${srcRoot}/js`,
+    vendors: `${srcRoot}/js/vendors`
   },
   pages: {
     root: `${srcRoot}/pages`,
@@ -47,9 +46,7 @@ const devPath = {
   fonts: {
 
   },
-  js: {
-
-  },
+  js: `${devRoot}/js`,
   pages: `${devRoot}`,
   styles: {
 
@@ -64,18 +61,15 @@ const buildPath = {
 //-----------------------------------------------------
 
 
-
-
 /**
  * Html
  * --------------------------------------------------------------------------
  */
 
-
 /**
  * Сборка html:
  * 1. Сборка всех инклудов из ./src/components/, ./src/pages/
- * 2. Очистка от лишних коментариев, переводов строк !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * 2. Очистка от лишних коментариев, переводов строк
  * 3. Сохранение собраных файлов .html в ./dev/
  */
 
@@ -107,4 +101,71 @@ function watchHtml() {
   watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
 };
 
+
+/**
+ * Js
+ * --------------------------------------------------------------------------
+ */
+
+
+/**
+ * Сборка js:
+ * 1. Сборка всех файлов .js из /src/js/vendors/ и ./src/components/
+ * 2. Сохранение собраных файлов .js в ./dev/js
+ */
+
+function compileJsVendors() {
+  return src(`${srcPath.js.root}/vendors.js`)
+    .pipe(plumber())
+    .pipe(fileInclude())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsComponents() {
+  return src(`${srcPath.js.root}/components.js`)
+    .pipe(plumber())
+    .pipe(fileInclude())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsCommon() {
+  return src(`${srcPath.js.root}/common.js`)
+    .pipe(plumber())
+    .pipe(dest(`${devPath.js}`));
+}
+
+/**
+ * Очистка каталога ./dev/js от файлов .js
+ */
+
+function cleanJsVendors() {
+  return del(`${devPath.js}/vendors.js`);
+}
+
+function cleanJsComponents() {
+  return del(`${devPath.js}/components.js`);
+}
+
+function cleanJsCommon() {
+  return del(`${devPath.js}/common.js`);
+}
+
+/**
+ * Отслеживание изменений js:
+ * 1. Отслеживание ./src/js/, ./src/js/vendors/ и ./src/components/ на change
+ */
+
+function watchJs() {
+  watch([`${srcPath.js.root}/vendors.js`,`${srcPath.js.vendors}/*.js`], { events: 'change'}, series(cleanJsVendors, compileJsVendors));
+  watch([`${srcPath.js.root}/components.js`,`${srcPath.components.root}/**/*.js`], { events: 'change'}, series(cleanJsComponents, compileJsComponents));
+  watch(`${srcPath.js.root}/common.js`, { events: 'change'}, series(cleanJsCommon, compileJsCommon));
+};
+
+
+
+//-----------------------------------------------------
+
+
 exports.html = watchHtml;
+exports.js = watchJs;
+
