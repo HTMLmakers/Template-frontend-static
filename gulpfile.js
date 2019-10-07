@@ -7,6 +7,7 @@ const del = require('del');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass');
+const typograf = require('gulp-typograf');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -73,7 +74,8 @@ const buildPath = {
  * Сборка html:
  * 1. Сборка всех инклудов из ./src/components/, ./src/pages/
  * 2. Очистка от лишних коментариев, переводов строк
- * 3. Сохранение собраных файлов .html в ./dev/
+ * 3. Обработка текста с помощью https://github.com/typograf/typograf
+ * 4. Сохранение собраных файлов .html в ./dev/
  */
 
 function compileHtml() {
@@ -82,6 +84,7 @@ function compileHtml() {
     .pipe(fileInclude())
     .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
 		.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
 
@@ -181,8 +184,8 @@ function compileCssGeneral() {
   return src(`${srcPath.styles.root}/style.scss`)
     .pipe(plumber())
     .pipe(sass())
-    // TODO добавить autoprefixer
-    // TODO добавить обработкау шрифтов
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
 }
 
@@ -190,8 +193,8 @@ function compileCssVendors() {
   return src(`${srcPath.styles.root}/vendors.scss`)
     .pipe(plumber())
     .pipe(sass())
-    // TODO добавить autoprefixer
-    // TODO добавить обработкау шрифтов
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
 }
 
@@ -199,8 +202,8 @@ function compileCssComponents() {
   return src(`${srcPath.styles.root}/components.scss`)
     .pipe(plumber())
     .pipe(sass())
-    // TODO добавить autoprefixer
-    // TODO добавить обработкау шрифтов
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
 }
 
@@ -218,13 +221,11 @@ function watchCss() {
   watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
 }
 
-exports.default = watchCss;
-
-
 
 //-----------------------------------------------------
 
 
 exports.html = watchHtml;
 exports.js = watchJs;
+exports.css = watchCss;
 
