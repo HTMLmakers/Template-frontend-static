@@ -16,7 +16,14 @@
     "url": "https://github.com/HTMLmakers/Template-frontend-static/issues"
   },
   "homepage": "https://github.com/HTMLmakers/Template-frontend-static#readme",
+  "browserslist": [
+    "> 1%",
+    "last 3 versions",
+    "IE 10",
+    "IE 11"
+  ],
   "devDependencies": {
+    "autoprefixer": "^9.6.4",
     "gulp": "^4.0.2",
     "gulp-postcss": "^8.0.0",
     "gulp-ttf2eot": "^1.1.2",
