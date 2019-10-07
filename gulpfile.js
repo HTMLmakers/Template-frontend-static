@@ -3,6 +3,7 @@
 
 const {src, dest, watch, series} = require('gulp');
 
+const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
 
@@ -79,10 +80,10 @@ const buildPath = {
 
 function compileHtml() {
   return src(`${srcPath.pages.root}/*.html`)
-    //.pipe(plumber())
+    .pipe(plumber())
     .pipe(fileInclude())
-    //.pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
-		//.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
+		.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
     .pipe(dest(`${devPath.pages}`));
 }
 
