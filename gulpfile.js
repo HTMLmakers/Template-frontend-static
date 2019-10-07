@@ -9,6 +9,9 @@ const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const typograf = require('gulp-typograf');
 const mediaQueriesGroup = require('gulp-group-css-media-queries');
+const csso = require('gulp-csso');
+const rename = require("gulp-rename");
+const uglify = require('gulp-uglify');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -59,7 +62,15 @@ const devPath = {
 };
 
 const buildPath = {
+  assets: {
 
+  },
+  fonts: {
+
+  },
+  js: `${buildRoot}/js`,
+  pages: `${buildRoot}`,
+  styles: `${buildRoot}/styles`
 };
 
 
@@ -154,6 +165,25 @@ function watchJs() {
 
 
 /**
+ * Минификация файлов .js для build
+ * 1. Сохранение обычного файла .js в ./build/js/
+ * 2. Минификация и сохранение файла .min.js в ./build/js/
+ */
+
+function minifyJs() {
+  return src(`${devPath.js}/*.js`)
+    .pipe(plumber())
+    .pipe(dest(`${buildRoot}/js`))
+		.pipe(uglify())
+		.pipe(rename({suffix: ".min"}))
+		.pipe(dest(`${buildRoot}/js`));
+}
+
+exports.default = minifyJs;
+
+
+
+/**
  * Scss, css
  * --------------------------------------------------------------------------
  */
@@ -195,8 +225,6 @@ function compileCssComponents() {
     .pipe(dest(`${devPath.styles}`));
 }
 
-exports.default = compileCssGeneral;
-
 /**
  * Отслеживание изменений scss, css на change
  * 1. Отслеживание директории ./src/styles/** кроме ./src/styles/vendors,
@@ -211,9 +239,27 @@ function watchCss() {
   watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
 }
 
+/**
+ * Минификация файлов .css для build
+ * 1. Сохранение обычного файла .css в ./build/styles/
+ * 2. Минификация и сохранение файла .min.css в ./build/styles/
+ */
+
+function minifyCss() {
+  return src(`${devPath.styles}/*.css`)
+    .pipe(plumber())
+    .pipe(dest(`${buildRoot}/styles`))
+		.pipe(csso())
+		.pipe(rename({suffix: ".min"}))
+		.pipe(dest(`${buildRoot}/styles`));
+}
+
+//exports.default = minifyCss;
+
 
 //-----------------------------------------------------
 
+//exports.default = watchCss;
 
 exports.html = watchHtml;
 exports.js = watchJs;
