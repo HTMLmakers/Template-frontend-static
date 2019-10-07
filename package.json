@@ -20,6 +20,7 @@
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-file-include": "^2.1.0",
-    "gulp-plumber": "^1.2.1"
+    "gulp-plumber": "^1.2.1",
+    "gulp-replace": "^1.0.0"
   }
 }
