@@ -1,8 +1,9 @@
-const { src, dest, series, parallel } = require('gulp');
+const { src, dest, series, parallel, watch } = require('gulp');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
 const ttf2eot = require('gulp-ttf2eot');
 const postcss = require('gulp-postcss');
+const browserSync = require('browser-sync').create();
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -103,14 +104,17 @@ const webFonts = {
   },
 };
 
-// ==========================================================================
-// Генерация веб щрифтов
-// ==========================================================================
+/**
+ * Fonts
+ * --------------------------------------------------------------------------
+ */
 
-//
-// 1. Шрифты в формате TTF вставляем в ${srcPath.fonts}
-// 2. На выходе получаем веб шрифты в ${devPath.fonts}
-//
+/**
+ * Генерация веб щрифтов:
+ * 1. Шрифты в формате TTF вставляем в ./src/fonts/
+ * 2. На выходе получаем веб шрифты в ./dev/fonts
+ */
+
 const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
 
 function convertTTFToWOFF() {
@@ -131,14 +135,17 @@ function convertTTFToEOT() {
     .pipe(dest([`${devPath.fonts}`]));
 }
 
+/**
+ * Styles
+ * --------------------------------------------------------------------------
+ */
+
 // TODO: Обновить, когда будет ясна структура dev директории для стилей
-// ==========================================================================
-// Post CSS трансформация
-// ==========================================================================
-//
-// 1. Берем style.css файл из ${devPath.style}
-// 2. Трансформируем его в ${devPath.style}
-//
+/**
+ * Post CSS трансформация:
+ * 1. Берем style.css файл из ./dev/style.css
+ * 2. Трансформируем его и перезаписываем в ./dev/style.css
+ */
 
 function transformByPostCSS() {
   const fontMagician = require('postcss-font-magician');
@@ -156,9 +163,35 @@ function transformByPostCSS() {
   );
 }
 
+/**
+ * Server
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Browser Sync:
+ * 1. Инициализация дев-сервера
+ * 2. Live reload
+ */
+
+function initServer(done) {
+  browserSync.init({
+    server: devRoot
+  });
+  done();
+}
+
+function liveReload(done) {
+  browserSync.reload();
+  done();
+}
+
+/**
+ * Exports
+ * --------------------------------------------------------------------------
+ */
+
 exports.fontGeneration = fontGeneration;
-// TODO: удалить позже
-exports.transformByPostCSS = transformByPostCSS;
 
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
@@ -166,11 +199,14 @@ exports.serve = series(
   fontGeneration,
 
   // работа со стилями
-  transformByPostCSS,
+
+  // инициализация дев-сервера
+  initServer,
 
   // колбек с вотчерами
   function (done) {
     // TODO: добавить вотчеры
+    console.log('watch');
     done();
   }
 );
