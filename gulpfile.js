@@ -141,30 +141,14 @@ function compileJsCommon() {
 }
 
 /**
- * Очистка каталога ./dev/js от файлов .js
- */
-
-function cleanJsVendors() {
-  return del(`${devPath.js}/vendors.js`);
-}
-
-function cleanJsComponents() {
-  return del(`${devPath.js}/components.js`);
-}
-
-function cleanJsCommon() {
-  return del(`${devPath.js}/common.js`);
-}
-
-/**
  * Отслеживание изменений js:
  * 1. Отслеживание ./src/js/, ./src/js/vendors/ и ./src/components/ на change
  */
 
 function watchJs() {
-  watch([`${srcPath.js.root}/vendors.js`,`${srcPath.js.vendors}/*.js`], { events: 'change'}, series(cleanJsVendors, compileJsVendors));
-  watch([`${srcPath.js.root}/components.js`,`${srcPath.components.root}/**/*.js`], { events: 'change'}, series(cleanJsComponents, compileJsComponents));
-  watch(`${srcPath.js.root}/common.js`, { events: 'change'}, series(cleanJsCommon, compileJsCommon));
+  watch([`${srcPath.js.root}/vendors.js`,`${srcPath.js.vendors}/*.js`], { events: 'change'}, compileJsVendors);
+  watch([`${srcPath.js.root}/components.js`,`${srcPath.components.root}/**/*.js`], { events: 'change'}, compileJsComponents);
+  watch(`${srcPath.js.root}/common.js`, { events: 'change'}, compileJsCommon);
 }
 
 
