@@ -20,10 +20,11 @@
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-file-include": "^2.1.0",
+    "gulp-group-css-media-queries": "^1.2.2",
     "gulp-plumber": "^1.2.1",
     "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.0.2",
+    "gulp-typograf": "^4.0.1",
     "node-sass": "^4.12.0"
-    "gulp-typograf": "^4.0.1"
   }
 }
