@@ -6,6 +6,7 @@ const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
+const sass = require('gulp-sass');
 const typograf = require('gulp-typograf');
 
 const srcRoot = './src';
@@ -33,7 +34,11 @@ const srcPath = {
     include: `${srcRoot}/pages/include`
   },
   styles: {
-
+    root: `${srcRoot}/styles`,
+    common: `${srcRoot}/styles/common`,
+    mixins: `${srcRoot}/styles/mixins`,
+    uaKit: `${srcRoot}/styles/ua-kit`,
+    vendors: `${srcRoot}/styles/vendors`
   }
 };
 
@@ -49,9 +54,7 @@ const devPath = {
   },
   js: `${devRoot}/js`,
   pages: `${devRoot}`,
-  styles: {
-
-  }
+  styles: `${devRoot}/styles`
 };
 
 const buildPath = {
@@ -102,7 +105,7 @@ function cleanHtml() {
 function watchHtml() {
   watch(`${srcPath.pages.root}/*.html`, series(cleanHtml, compileHtml));
   watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
-};
+}
 
 
 /**
@@ -162,8 +165,61 @@ function watchJs() {
   watch([`${srcPath.js.root}/vendors.js`,`${srcPath.js.vendors}/*.js`], { events: 'change'}, series(cleanJsVendors, compileJsVendors));
   watch([`${srcPath.js.root}/components.js`,`${srcPath.components.root}/**/*.js`], { events: 'change'}, series(cleanJsComponents, compileJsComponents));
   watch(`${srcPath.js.root}/common.js`, { events: 'change'}, series(cleanJsCommon, compileJsCommon));
-};
+}
 
+
+/**
+ * Scss, css
+ * --------------------------------------------------------------------------
+ */
+
+
+/**
+ * Сборка и компиляция scss:
+ * 1. Сборка всех файлов .scss и .css из ./src/styles/ и ./src/components/
+ * 2. Коплиляция .scss в .css и сохранение скомпилированных файлов в ./dev/styles/
+ */
+
+function compileCssGeneral() {
+  return src(`${srcPath.styles.root}/style.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
+    .pipe(dest(`${devPath.styles}`));
+}
+
+function compileCssVendors() {
+  return src(`${srcPath.styles.root}/vendors.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
+    .pipe(dest(`${devPath.styles}`));
+}
+
+function compileCssComponents() {
+  return src(`${srcPath.styles.root}/components.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    // TODO: добавить autoprefixer
+    // TODO: добавить обработкау шрифтов
+    .pipe(dest(`${devPath.styles}`));
+}
+
+/**
+ * Отслеживание изменений scss, css на change
+ * 1. Отслеживание директории ./src/styles/** кроме ./src/styles/vendors,
+ * vendors.scss и components.scss
+ * 2. Отслеживание директории ./src/styles/vendors/ и файла vendors.scss
+ * 3. Отслеживание директории ./src/components/** и файла components.scss
+ */
+
+function watchCss() {
+  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCssGeneral);
+  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, compileCssVendors);
+  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
+}
 
 
 //-----------------------------------------------------
@@ -171,4 +227,5 @@ function watchJs() {
 
 exports.html = watchHtml;
 exports.js = watchJs;
+exports.css = watchCss;
 
