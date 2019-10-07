@@ -6,6 +6,7 @@ const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
+const typograf = require('gulp-typograf');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -70,7 +71,8 @@ const buildPath = {
  * Сборка html:
  * 1. Сборка всех инклудов из ./src/components/, ./src/pages/
  * 2. Очистка от лишних коментариев, переводов строк
- * 3. Сохранение собраных файлов .html в ./dev/
+ * 3. Обработка текста с помощью https://github.com/typograf/typograf
+ * 4. Сохранение собраных файлов .html в ./dev/
  */
 
 function compileHtml() {
@@ -79,6 +81,7 @@ function compileHtml() {
     .pipe(fileInclude())
     .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
 		.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
 
