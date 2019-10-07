@@ -8,6 +8,7 @@ const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const typograf = require('gulp-typograf');
+const mediaQueriesGroup = require('gulp-group-css-media-queries');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -168,6 +169,7 @@ function compileCssGeneral() {
   return src(`${srcPath.styles.root}/style.scss`)
     .pipe(plumber())
     .pipe(sass())
+    .pipe(mediaQueriesGroup())
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
@@ -177,6 +179,7 @@ function compileCssVendors() {
   return src(`${srcPath.styles.root}/vendors.scss`)
     .pipe(plumber())
     .pipe(sass())
+    .pipe(mediaQueriesGroup())
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
@@ -186,10 +189,13 @@ function compileCssComponents() {
   return src(`${srcPath.styles.root}/components.scss`)
     .pipe(plumber())
     .pipe(sass())
+    .pipe(mediaQueriesGroup())
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
 }
+
+exports.default = compileCssGeneral;
 
 /**
  * Отслеживание изменений scss, css на change
