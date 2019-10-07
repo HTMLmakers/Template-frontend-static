@@ -36,7 +36,7 @@ const srcPath = {
     root: `${srcRoot}/styles`,
     common: `${srcRoot}/styles/common`,
     mixins: `${srcRoot}/styles/mixins`,
-    uakit: `${srcRoot}/styles/ua-kit`,
+    uaKit: `${srcRoot}/styles/ua-kit`,
     vendors: `${srcRoot}/styles/vendors`
   }
 };
@@ -173,11 +173,11 @@ function watchJs() {
 
 /**
  * Сборка и компиляция scss:
- * 1. Сборка всех файлов .scss и .css из /src/styles/ и ./src/components/
+ * 1. Сборка всех файлов .scss и .css из ./src/styles/ и ./src/components/
  * 2. Коплиляция .scss в .css и сохранение скомпилированных файлов в ./dev/styles/
  */
 
-function compileCss() {
+function compileCssGeneral() {
   return src(`${srcPath.styles.root}/style.scss`)
     .pipe(plumber())
     .pipe(sass())
@@ -213,7 +213,7 @@ function compileCssComponents() {
  */
 
 function watchCss() {
-  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCss);
+  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCssGeneral);
   watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, compileCssVendors);
   watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
 }
