@@ -3,6 +3,7 @@
 
 const {src, dest, series, watch} = require('gulp');
 
+const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
 
@@ -76,21 +77,21 @@ const buildPath = {
 
 function compileJsVendors() {
   return src(`${srcPath.js.root}/vendors.js`)
-    //.pipe(plumber())
+    .pipe(plumber())
     .pipe(fileInclude())
     .pipe(dest(`${devPath.js}`));
 }
 
 function compileJsComponents() {
   return src(`${srcPath.js.root}/components.js`)
-    //.pipe(plumber())
+    .pipe(plumber())
     .pipe(fileInclude())
     .pipe(dest(`${devPath.js}`));
 }
 
 function compileJsCommon() {
   return src(`${srcPath.js.root}/common.js`)
-    //.pipe(plumber())
+    .pipe(plumber())
     .pipe(dest(`${devPath.js}`));
 }
 
