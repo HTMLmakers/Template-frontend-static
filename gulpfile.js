@@ -322,6 +322,17 @@ function minifyImg() {
     .pipe(dest(`${devPath.assets.img.root}`));
 }
 
+/**
+ * Перенос файлов
+ * Экспорт всех файлов из ./dev/assets/ (кроме ./dev/assets/img) в ./build/assets/
+ */
+
+function exportAssetsFiles() {
+  return src([`${srcPath.assets.root}/**/*`,`!${srcPath.assets.img.root}`,`!${srcPath.assets.img.root}/**/*`])
+    .pipe(dest(`${devPath.assets}`));
+}
+
+
 
 //-----------------------------------------------------
 
