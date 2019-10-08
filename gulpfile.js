@@ -12,6 +12,8 @@ const mediaQueriesGroup = require('gulp-group-css-media-queries');
 const csso = require('gulp-csso');
 const rename = require("gulp-rename");
 const uglify = require('gulp-uglify');
+const svgSprite = require('gulp-svgstore');
+const imagemin = require('gulp-imagemin');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -19,7 +21,14 @@ const buildRoot = './build';
 
 const srcPath = {
   assets: {
-
+    root: `${srcRoot}/assets`,
+    img: {
+      root: `${srcRoot}/assets/img`,
+      sprite: {
+        svg: `${srcRoot}/assets/img/sprite/svg`,
+        png: `${srcRoot}/assets/img/sprite/png`
+      }
+    }
   },
   components: {
     root: `${srcRoot}/components`,
@@ -48,10 +57,11 @@ const srcPath = {
 
 const devPath = {
   assets: {
-
-  },
-  components: {
-
+    root: `${devRoot}/assets`,
+    img: {
+      root: `${devRoot}/assets/img`,
+      sprite: `${devRoot}/assets/img/sprite`
+    }
   },
   fonts: {
 
@@ -62,9 +72,7 @@ const devPath = {
 };
 
 const buildPath = {
-  assets: {
-
-  },
+  assets: `${buildRoot}/assets`,
   fonts: {
 
   },
@@ -250,6 +258,40 @@ function minifyCss() {
     .pipe(rename({suffix: ".min"}))
     .pipe(dest(`${buildPath.styles}`));
 }
+
+
+/**
+ * Svg спрайт
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Создание спрайта svg
+ * 1. Сбор всех файлов .svg из ./src/assets/img/sprite/svg/ в спрайт
+ * 2. Оптимизация svg-спрайта
+ * 3. Переименование и сохранение в ./dev/assets/img/sprite/
+ */
+
+function compileSvgSprite() {
+  return src(`${srcPath.assets.img.sprite.svg}/*.svg`)
+    .pipe(plumber())
+    .pipe(svgSprite({inlineSvg: true}))
+    .pipe(imagemin([
+      imagemin.svgo({
+        plugins: [
+            {removeViewBox: true},
+            {cleanupIDs: false}
+        ]
+      })
+     ]))
+    .pipe(rename({basename: "sprite"}))
+    .pipe(dest(`${devPath.assets.img.sprite}`));
+}
+
+function watchSvgSprite() {
+  watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
+}
+
 
 
 //-----------------------------------------------------
