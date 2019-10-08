@@ -95,7 +95,7 @@ function compileHtml() {
     .pipe(plumber())
     .pipe(fileInclude())
     .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
-		.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
@@ -173,14 +173,11 @@ function watchJs() {
 function minifyJs() {
   return src(`${devPath.js}/*.js`)
     .pipe(plumber())
-    .pipe(dest(`${buildRoot}/js`))
-		.pipe(uglify())
-		.pipe(rename({suffix: ".min"}))
-		.pipe(dest(`${buildRoot}/js`));
+    .pipe(dest(`${buildPath.js}`))
+    .pipe(uglify())
+    .pipe(rename({suffix: ".min"}))
+    .pipe(dest(`${buildPath.js}`));
 }
-
-exports.default = minifyJs;
-
 
 
 /**
@@ -248,13 +245,11 @@ function watchCss() {
 function minifyCss() {
   return src(`${devPath.styles}/*.css`)
     .pipe(plumber())
-    .pipe(dest(`${buildRoot}/styles`))
-		.pipe(csso())
-		.pipe(rename({suffix: ".min"}))
-		.pipe(dest(`${buildRoot}/styles`));
+    .pipe(dest(`${buildPath.styles}`))
+    .pipe(csso())
+    .pipe(rename({suffix: ".min"}))
+    .pipe(dest(`${buildPath.styles}`));
 }
-
-//exports.default = minifyCss;
 
 
 //-----------------------------------------------------
@@ -264,4 +259,3 @@ function minifyCss() {
 exports.html = watchHtml;
 exports.js = watchJs;
 exports.css = watchCss;
-
