@@ -294,6 +294,35 @@ function watchSvgSprite() {
 
 
 
+/**
+ * Финальная сборка (build)
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Оптимизация изображений
+ * 1. Сбор всех файлов .png, .jpg, .svg из ./dev/assets/img/
+ * 2. Оптимизация изображений
+ * 3. Cохранение в ./build/assets/img/
+ */
+
+function minifiedImg() {
+  return src([`${srcPath.assets.img.root}/*.{png,jpg,svg}`,`!${srcPath.assets.img.sprite}`,`!${srcPath.assets.img.sprite}/**/*`])
+    .pipe(plumber())
+    .pipe(imagemin([
+      imagemin.jpegtran({progressive: true}),
+      imagemin.optipng({optimizationLevel: 3}),
+      imagemin.svgo({
+        plugins: [
+          {removeViewBox: true},
+          {cleanupIDs: false}
+        ]
+      })
+    ]))
+    .pipe(dest(`${devPath.assets.img.root}`));
+}
+
+
 //-----------------------------------------------------
 
 //exports.default = watchCss;
