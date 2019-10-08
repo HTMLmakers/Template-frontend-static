@@ -306,7 +306,7 @@ function watchSvgSprite() {
  * 3. Cохранение в ./build/assets/img/
  */
 
-function minifiedImg() {
+function minifyImg() {
   return src([`${srcPath.assets.img.root}/*.{png,jpg,svg}`,`!${srcPath.assets.img.sprite}`,`!${srcPath.assets.img.sprite}/**/*`])
     .pipe(plumber())
     .pipe(imagemin([
