@@ -21,6 +21,7 @@ const buildRoot = './build';
 
 const srcPath = {
   assets: {
+    root: `${srcRoot}/assets`,
     img: {
       root: `${srcRoot}/assets/img`,
       sprite: {
