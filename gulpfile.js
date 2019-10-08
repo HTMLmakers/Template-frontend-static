@@ -9,6 +9,9 @@ const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const typograf = require('gulp-typograf');
 const mediaQueriesGroup = require('gulp-group-css-media-queries');
+const csso = require('gulp-csso');
+const rename = require("gulp-rename");
+const uglify = require('gulp-uglify');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -59,7 +62,15 @@ const devPath = {
 };
 
 const buildPath = {
+  assets: {
 
+  },
+  fonts: {
+
+  },
+  js: `${buildRoot}/js`,
+  pages: `${buildRoot}`,
+  styles: `${buildRoot}/styles`
 };
 
 
@@ -84,7 +95,7 @@ function compileHtml() {
     .pipe(plumber())
     .pipe(fileInclude())
     .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
-		.pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
@@ -154,6 +165,22 @@ function watchJs() {
 
 
 /**
+ * Минификация файлов .js для build
+ * 1. Сохранение обычного файла .js в ./build/js/
+ * 2. Минификация и сохранение файла .min.js в ./build/js/
+ */
+
+function minifyJs() {
+  return src(`${devPath.js}/*.js`)
+    .pipe(plumber())
+    .pipe(dest(`${buildPath.js}`))
+    .pipe(uglify())
+    .pipe(rename({suffix: ".min"}))
+    .pipe(dest(`${buildPath.js}`));
+}
+
+
+/**
  * Scss, css
  * --------------------------------------------------------------------------
  */
@@ -195,8 +222,6 @@ function compileCssComponents() {
     .pipe(dest(`${devPath.styles}`));
 }
 
-exports.default = compileCssGeneral;
-
 /**
  * Отслеживание изменений scss, css на change
  * 1. Отслеживание директории ./src/styles/** кроме ./src/styles/vendors,
@@ -211,11 +236,26 @@ function watchCss() {
   watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
 }
 
+/**
+ * Минификация файлов .css для build
+ * 1. Сохранение обычного файла .css в ./build/styles/
+ * 2. Минификация и сохранение файла .min.css в ./build/styles/
+ */
+
+function minifyCss() {
+  return src(`${devPath.styles}/*.css`)
+    .pipe(plumber())
+    .pipe(dest(`${buildPath.styles}`))
+    .pipe(csso())
+    .pipe(rename({suffix: ".min"}))
+    .pipe(dest(`${buildPath.styles}`));
+}
+
 
 //-----------------------------------------------------
 
+//exports.default = watchCss;
 
 exports.html = watchHtml;
 exports.js = watchJs;
 exports.css = watchCss;
-
