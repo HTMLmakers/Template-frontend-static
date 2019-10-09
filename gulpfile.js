@@ -177,8 +177,8 @@ function transformByPostCSS() {
 
 /**
  * Browser Sync:
- * 1. Инициализация build-сервера
- * 2. Инициализация dev-сервера
+ * 1. Инициализация dev-сервера
+ * 2. Инициализация build-сервера
  * 3. Инициализация ngrok
  * 4. Live reload
  */
