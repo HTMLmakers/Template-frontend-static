@@ -296,12 +296,26 @@ function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
 
-
-
 function compilePngSprite() {
-  var retina3x = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  var options = {};
-  var imgs = 0, imgs2x = 0, imgs3x = 0;
+  let plugin = pngSprite;
+  let spriteSrc = `${srcPath.assets.img.sprite.png}/*.png`;
+  let imgs = 0, imgs2x = 0, imgs3x = 0;
+
+  let options = {
+    imgName: 'sprite.png',
+    imgPath: '../img/sprite.png',
+    cssName: '_sprites.scss',
+  };
+  let options2x = {
+    retinaImgName: 'sprite@2x.png',
+    retinaImgPath: '../img/sprite@2x.png',
+    retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
+  };
+  let options3x = {
+    retina3xImgName: 'sprite@3x.png',
+    retina3xImgPath: '../img/sprite@3x.png',
+    retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
+  };
 
   fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach(file => {
     if ((/^[^@]+\.png$/i).test(file)) {
@@ -313,54 +327,30 @@ function compilePngSprite() {
     if ((/@3x\.png$/i).test(file)) {
       imgs3x++;
     }
-  })
+  });
 
-  if (imgs == imgs2x && imgs == imgs3x) {
-    retina3x = false;
-   /* options = {
-      retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
-      retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
-      imgName: 'sprite.png',
-      retinaImgName: 'sprite@2x.png',
-      retina3xImgName: 'sprite@3x.png',
-      imgPath: '../img/sprite.png',//путь в _sprites.scss
-      retinaImgPath: '../img/sprite@2x.png',//путь в _sprites.scss
-      retina3xImgPath: '../img/sprite@3x.png',//путь в _sprites.scss
-      cssName: '_sprites.scss'
-    };*/
-    console.log('---- '+imgs+imgs2x+imgs3x);
-    //console.log('---- '+retina3x);
-  } else if (imgs == imgs2x) {
-    retina3x = true;
-/*    options = {
-      retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
-      imgName: 'sprite.png',
-      retinaImgName: 'sprite@2x.png',
-      imgPath: '../img/sprite.png',//путь в _sprites.scss
-      retinaImgPath: '../img/sprite@2x.png',//путь в _sprites.scss
-      cssName: '_sprites.scss'
-    };*/
-    console.log('++++ '+imgs+imgs2x+imgs3x);
-    //console.log('++++ '+retina3x);
+  if (imgs === imgs2x && imgs === imgs3x) {
+    plugin = pngSprite3x;
+    Object.assign(options, options2x, options3x);
+  } else if (imgs === imgs2x) {
+    spriteSrc = [
+      `${srcPath.assets.img.sprite.png}/*.png`,
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+    ];
+    Object.assign(options, options2x);
   } else {
-    retina3x = true;
-/*    options = {
-      imgName: 'sprite.png',
-      imgPath: '../img/sprite.png',//путь в _sprites.scss
-      cssName: '_sprites.scss'
-    };*/
-    console.log('**** '+imgs+imgs2x+imgs3x);
-    //console.log('**** '+retina3x);
-
+    spriteSrc = [
+      `${srcPath.assets.img.sprite.png}/*.png`,
+      `!${srcPath.assets.img.sprite.png}/*@2x.png`,
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+    ];
   }
 
-/*  return src(`${srcPath.assets.img.sprite.png}/*.png`) //Исключение @2 и @3
+  return src(spriteSrc)
     .pipe(plumber())
-    //.pipe(pngSprite(options))
-    //.pipe(pngSprite3x(options))
-    .pipe(gulpIf(retina3x, pngSprite(options), pngSprite3x(options))) //!!!!!!!
+    .pipe(plugin(options))
     .pipe(gulpIf('*.png', dest(`${devPath.assets.img.sprite}`)))
-    .pipe(gulpIf('*.scss', dest(`${devPath.assets.img.sprite}`)));*/
+    .pipe(gulpIf('*.scss', dest(`${devPath.assets.img.sprite}`)));
 }
 
 exports.default = compilePngSprite;
