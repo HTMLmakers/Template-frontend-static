@@ -14,6 +14,10 @@ const rename = require("gulp-rename");
 const uglify = require('gulp-uglify');
 const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
+const fs = require('fs');
+const gulpIf = require('gulp-if');
+const pngSprite = require('gulp.spritesmith');
+const pngSprite3x = require('gulp.spritesmith.3x');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -293,6 +297,73 @@ function watchSvgSprite() {
 }
 
 
+
+function compilePngSprite() {
+  var retina3x = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  var options = {};
+  var imgs = 0, imgs2x = 0, imgs3x = 0;
+
+  fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach(file => {
+    if ((/^[^@]+\.png$/i).test(file)) {
+      imgs++;
+    }
+    if ((/@2x\.png$/i).test(file)) {
+      imgs2x++;
+    }
+    if ((/@3x\.png$/i).test(file)) {
+      imgs3x++;
+    }
+  })
+
+  if (imgs == imgs2x && imgs == imgs3x) {
+    retina3x = false;
+   /* options = {
+      retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
+      retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
+      imgName: 'sprite.png',
+      retinaImgName: 'sprite@2x.png',
+      retina3xImgName: 'sprite@3x.png',
+      imgPath: '../img/sprite.png',//путь в _sprites.scss
+      retinaImgPath: '../img/sprite@2x.png',//путь в _sprites.scss
+      retina3xImgPath: '../img/sprite@3x.png',//путь в _sprites.scss
+      cssName: '_sprites.scss'
+    };*/
+    console.log('---- '+imgs+imgs2x+imgs3x);
+    //console.log('---- '+retina3x);
+  } else if (imgs == imgs2x) {
+    retina3x = true;
+/*    options = {
+      retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
+      imgName: 'sprite.png',
+      retinaImgName: 'sprite@2x.png',
+      imgPath: '../img/sprite.png',//путь в _sprites.scss
+      retinaImgPath: '../img/sprite@2x.png',//путь в _sprites.scss
+      cssName: '_sprites.scss'
+    };*/
+    console.log('++++ '+imgs+imgs2x+imgs3x);
+    //console.log('++++ '+retina3x);
+  } else {
+    retina3x = true;
+/*    options = {
+      imgName: 'sprite.png',
+      imgPath: '../img/sprite.png',//путь в _sprites.scss
+      cssName: '_sprites.scss'
+    };*/
+    console.log('**** '+imgs+imgs2x+imgs3x);
+    //console.log('**** '+retina3x);
+
+  }
+
+/*  return src(`${srcPath.assets.img.sprite.png}/*.png`) //Исключение @2 и @3
+    .pipe(plumber())
+    //.pipe(pngSprite(options))
+    //.pipe(pngSprite3x(options))
+    .pipe(gulpIf(retina3x, pngSprite(options), pngSprite3x(options))) //!!!!!!!
+    .pipe(gulpIf('*.png', dest(`${devPath.assets.img.sprite}`)))
+    .pipe(gulpIf('*.scss', dest(`${devPath.assets.img.sprite}`)));*/
+}
+
+exports.default = compilePngSprite;
 
 /**
  * Финальная сборка (build)
