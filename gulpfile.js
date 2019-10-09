@@ -4,6 +4,13 @@ const ttf2woff2 = require('gulp-ttf2woff2');
 const ttf2eot = require('gulp-ttf2eot');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
+const psi = require('psi');
+const ngrok = require('ngrok');
+const path = require('path');
+const tap = require('gulp-tap');
+
+let buildUrl = '';
+let urls = [];
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -164,19 +171,39 @@ function transformByPostCSS() {
 }
 
 /**
- * Server
+ * Servers
  * --------------------------------------------------------------------------
  */
 
 /**
  * Browser Sync:
- * 1. Инициализация дев-сервера
+ * 1. Инициализация dev-сервера
  * 2. Live reload
+ * 3. Инициализация ngrok
  */
 
-function initServer(done) {
+function initDevServer(done) {
   browserSync.init({
-    server: devRoot
+    server: devRoot,
+    port: 8080,
+  }, function(err, bs) {
+    return ngrok.connect(bs.options.get('port')).then(function (url) {
+      console.log('Tunnel Dev:', url);
+      buildUrl = url;
+      done();
+    });
+  });
+}
+
+function initBuildServer(done) {
+  browserSync.init({
+    server: buildRoot,
+    port: 5000,
+  }, function(err, bs) {
+    ngrok.connect(bs.options.get('port')).then(function (url) {
+      console.log('Tunnel Build:', url);
+      done();
+    });
   });
   done();
 }
@@ -184,6 +211,65 @@ function initServer(done) {
 function liveReload(done) {
   browserSync.reload();
   done();
+}
+
+/**
+ * Optimization reports
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Psi:
+ * 1. получаем все url страниц
+ * 2. Выводим десктопный отчет
+ * 3. Выводим мобильный отчет
+ */
+
+const getPsiReport = series(getAllUrls, getPsiDesktopReport, getPsiMobileReport);
+
+function getAllUrls() {
+  return src(`${devRoot}/*.html`)
+    .pipe(
+      tap(function(file){
+        const filename = path.basename(file.path);
+        const url = `${buildUrl}/${filename}`;
+
+        urls.push(url);
+      })
+    );
+}
+
+function getPsiDesktopReport(done) {
+  logPsiReport('DESKTOP PSI REPORT', 'desktop', done);
+}
+
+function getPsiMobileReport(done) {
+  logPsiReport('MOBILE PSI REPORT', 'mobile', done);
+}
+
+function logPsiReport(title, strategy, done) {
+  console.log('--------------------------------------');
+  console.log(title);
+  console.log('--------------------------------------');
+  urls.forEach(function (url, index) {
+    psi(url, {
+      nokey: 'true',
+      strategy: strategy
+    }).then(function (data) {
+      console.log(url);
+      console.log('Speed score:', data.ruleGroups.SPEED.score);
+      if (strategy === 'mobile') {
+        console.log('Usability score:', data.ruleGroups.USABILITY.score);
+      }
+      console.log('---');
+
+      setTimeout(function () {
+        if(index === (urls.length - 1)) {
+          done();
+        }
+      }, 1000);
+    });
+  });
 }
 
 /**
@@ -200,8 +286,10 @@ exports.serve = series(
 
   // работа со стилями
 
-  // инициализация дев-сервера
-  initServer,
+  // инициализация dev-сервера
+  initDevServer,
+  // Psi отчет
+  getPsiReport,
 
   // колбек с вотчерами
   function (done) {
@@ -213,11 +301,14 @@ exports.serve = series(
 
 // список задач для создания build-версии
 // TODO: добавить build задачи
-/*exports.build = series(
+exports.build = series(
   // Очистка build директории,
-  parallel(
+  /*parallel(
     // Минификация
     // Оптимизация картинок
     // И пр.
-  )
-);*/
+  ),*/
+  // инициализация build-сервера
+  initBuildServer,
+
+);
