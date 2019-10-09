@@ -177,9 +177,10 @@ function transformByPostCSS() {
 
 /**
  * Browser Sync:
- * 1. Инициализация dev-сервера
- * 2. Live reload
+ * 1. Инициализация build-сервера
+ * 2. Инициализация dev-сервера
  * 3. Инициализация ngrok
+ * 4. Live reload
  */
 
 function initDevServer(done) {
@@ -219,7 +220,7 @@ function liveReload(done) {
 
 /**
  * Psi:
- * 1. получаем все url страниц
+ * 1. получаем все url build-страниц
  * 2. Выводим десктопный отчет
  * 3. Выводим мобильный отчет
  */
