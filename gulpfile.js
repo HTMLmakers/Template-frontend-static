@@ -189,7 +189,6 @@ function initDevServer(done) {
   }, function(err, bs) {
     return ngrok.connect(bs.options.get('port')).then(function (url) {
       console.log('Tunnel Dev:', url);
-      buildUrl = url;
       done();
     });
   });
@@ -200,12 +199,12 @@ function initBuildServer(done) {
     server: buildRoot,
     port: 5000,
   }, function(err, bs) {
-    ngrok.connect(bs.options.get('port')).then(function (url) {
+    return ngrok.connect(bs.options.get('port')).then(function (url) {
       console.log('Tunnel Build:', url);
+      buildUrl = url;
       done();
     });
   });
-  done();
 }
 
 function liveReload(done) {
@@ -225,10 +224,10 @@ function liveReload(done) {
  * 3. Выводим мобильный отчет
  */
 
-const getPsiReport = series(getAllUrls, getPsiDesktopReport, getPsiMobileReport);
+const getPsiReport = series(getAllBuildUrls, getPsiDesktopReport, getPsiMobileReport);
 
-function getAllUrls() {
-  return src(`${devRoot}/*.html`)
+function getAllBuildUrls() {
+  return src(`${buildRoot}/*.html`)
     .pipe(
       tap(function(file){
         const filename = path.basename(file.path);
@@ -288,8 +287,6 @@ exports.serve = series(
 
   // инициализация dev-сервера
   initDevServer,
-  // Psi отчет
-  getPsiReport,
 
   // колбек с вотчерами
   function (done) {
@@ -310,5 +307,6 @@ exports.build = series(
   ),*/
   // инициализация build-сервера
   initBuildServer,
-
+  // Psi отчет
+  getPsiReport,
 );
