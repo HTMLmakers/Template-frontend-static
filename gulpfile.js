@@ -14,6 +14,7 @@ const rename = require("gulp-rename");
 const uglify = require('gulp-uglify');
 const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
+const stylelint = require('gulp-stylelint');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -205,6 +206,11 @@ function compileCssGeneral() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
+    .pipe(stylelint({
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+    }))
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
@@ -215,6 +221,11 @@ function compileCssVendors() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
+    .pipe(stylelint({
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+    }))
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
