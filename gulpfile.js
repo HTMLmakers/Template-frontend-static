@@ -201,16 +201,21 @@ function minifyJs() {
  * 2. Коплиляция .scss в .css и сохранение в ./dev/styles/
  */
 
+const stylelintOptions = {
+  fix: true,
+  reporters: [
+    {
+      formatter: 'string',
+      console: true
+    }
+  ]
+};
+
 function compileCssGeneral() {
   return src(`${srcPath.styles.root}/style.scss`)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
-    .pipe(stylelint({
-      reporters: [
-        {formatter: 'string', console: true}
-      ]
-    }))
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
@@ -221,11 +226,6 @@ function compileCssVendors() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
-    .pipe(stylelint({
-      reporters: [
-        {formatter: 'string', console: true}
-      ]
-    }))
     // TODO: добавить autoprefixer
     // TODO: добавить обработкау шрифтов
     .pipe(dest(`${devPath.styles}`));
@@ -241,6 +241,24 @@ function compileCssComponents() {
     .pipe(dest(`${devPath.styles}`));
 }
 
+function lintCssGeneral() {
+  return src(`${devPath.styles}/style.css`)
+    .pipe(stylelint(stylelintOptions))
+    .pipe(dest(`${devPath.styles}`));
+}
+
+function lintCssVendors() {
+  return src(`${devPath.styles}/vendors.css`)
+    .pipe(stylelint(stylelintOptions))
+    .pipe(dest(`${devPath.styles}`));
+}
+
+function lintCssComponents() {
+  return src(`${devPath.styles}/components.css`)
+    .pipe(stylelint(stylelintOptions))
+    .pipe(dest(`${devPath.styles}`));
+}
+
 /**
  * Отслеживание изменений scss, css на change
  * 1. Отслеживание директории ./src/styles/** кроме ./src/styles/vendors,
@@ -250,9 +268,9 @@ function compileCssComponents() {
  */
 
 function watchCss() {
-  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCssGeneral);
-  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, compileCssVendors);
-  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
+  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, series(compileCssGeneral, lintCssGeneral));
+  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, series(compileCssVendors, lintCssVendors));
+  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, series(compileCssComponents, lintCssComponents));
 }
 
 /**
