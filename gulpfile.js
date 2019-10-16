@@ -1,6 +1,6 @@
 'use strict';
 
-const {src, dest, series, watch} = require('gulp');
+const { src, dest, series, watch } = require('gulp');
 
 const plumber = require('gulp-plumber');
 const del = require('del');
@@ -15,6 +15,7 @@ const uglify = require('gulp-uglify');
 const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
 const stylelint = require('gulp-stylelint');
+const eslint = require('gulp-eslint');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -103,7 +104,7 @@ function compileHtml() {
   return src(`${srcPath.pages.root}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude())
-    .pipe(replace(/(\<\!\-\-)(?!\s*build\:|\*|\s*endbuild\s)[^>]*(\S*\-\-\>)/gi, ''))
+    .pipe(replace(/(\/<\/!\/-\/-)(?!\s*build\/:|\*|\s*endbuild\s)[^>]*(\S*\/-\/-\/>)/gi, ''))
     .pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
@@ -158,6 +159,19 @@ function compileJsComponents() {
 function compileJsCommon() {
   return src(`${srcPath.js.root}/common.js`)
     .pipe(plumber())
+    .pipe(dest(`${devPath.js}`));
+}
+
+// TODO: перенести линтеры на build
+function lintJsComponents() {
+  return src(`${devPath.js}/components.js`)
+    .pipe(eslint())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function lintJsCommon() {
+  return src(`${devPath.js}/common.js`)
+    .pipe(eslint())
     .pipe(dest(`${devPath.js}`));
 }
 
@@ -241,14 +255,9 @@ function compileCssComponents() {
     .pipe(dest(`${devPath.styles}`));
 }
 
+// TODO: перенести линтеры на build
 function lintCssGeneral() {
   return src(`${devPath.styles}/style.css`)
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
-}
-
-function lintCssVendors() {
-  return src(`${devPath.styles}/vendors.css`)
     .pipe(stylelint(stylelintOptions))
     .pipe(dest(`${devPath.styles}`));
 }
@@ -268,9 +277,9 @@ function lintCssComponents() {
  */
 
 function watchCss() {
-  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, series(compileCssGeneral, lintCssGeneral));
-  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, series(compileCssVendors, lintCssVendors));
-  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, series(compileCssComponents, lintCssComponents));
+  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCssGeneral);
+  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, compileCssVendors);
+  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
 }
 
 /**
