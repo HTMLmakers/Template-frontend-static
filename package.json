@@ -18,8 +18,10 @@
   "homepage": "https://github.com/HTMLmakers/Template-frontend-static#readme",
   "devDependencies": {
     "del": "^5.1.0",
+    "eslint": "^6.5.1",
     "gulp": "^4.0.2",
     "gulp-csso": "^3.0.1",
+    "gulp-eslint": "^6.0.0",
     "gulp-file-include": "^2.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-imagemin": "^6.1.1",
