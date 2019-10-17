@@ -1,0 +1,21 @@
+{
+    "line-end-style": false,
+    "indent-style": "spaces",
+    "indent-width": false,
+    "doctype-first": true,
+    "doctype-html5": true,
+    "html-req-lang": true,
+    "attr-new-line": 1,
+    "id-class-style": "dash",
+    "attr-order": ["class", "id", "name", "src", "for", "type", "href", "value", "title", "alt", "role"],
+    "class-no-dup": true,
+    "class-style": "bem",
+    "head-req-title": true,
+    "head-valid-content-model": true,
+    "html-valid-content-model": true,
+    "id-no-dup": true,
+    "img-req-alt": true,
+    "img-req-src": true,
+    "input-radio-req-name": true,
+    "input-req-label": true
+}

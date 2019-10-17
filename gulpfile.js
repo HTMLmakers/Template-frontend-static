@@ -16,6 +16,7 @@ const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
 const stylelint = require('gulp-stylelint');
 const eslint = require('gulp-eslint');
+const htmllint = require('gulp-htmllint');
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -124,11 +125,16 @@ function cleanHtml() {
  * 2. Отслеживание ./src/components/, ./src/pages/include/ на change
  */
 
+// TODO: перенести линтеры на build
+function lintHtml() {
+  return src(`${devPath.pages}/*.html`)
+    .pipe(htmllint());
+}
+
 function watchHtml() {
   watch(`${srcPath.pages.root}/*.html`, series(cleanHtml, compileHtml));
   watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
 }
-
 
 /**
  * Js
