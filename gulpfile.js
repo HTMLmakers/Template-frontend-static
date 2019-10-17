@@ -1,6 +1,7 @@
-'use strict';
 
-const { src, dest, series, watch } = require('gulp');
+const {
+  src, dest, series, watch,
+} = require('gulp');
 
 const plumber = require('gulp-plumber');
 const del = require('del');
@@ -10,7 +11,7 @@ const sass = require('gulp-sass');
 const typograf = require('gulp-typograf');
 const mediaQueriesGroup = require('gulp-group-css-media-queries');
 const csso = require('gulp-csso');
-const rename = require("gulp-rename");
+const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
@@ -29,33 +30,33 @@ const srcPath = {
       root: `${srcRoot}/assets/img`,
       sprite: {
         svg: `${srcRoot}/assets/img/sprite/svg`,
-        png: `${srcRoot}/assets/img/sprite/png`
-      }
-    }
+        png: `${srcRoot}/assets/img/sprite/png`,
+      },
+    },
   },
   components: {
     root: `${srcRoot}/components`,
     core: `${srcRoot}/components/core`,
-    features: `${srcRoot}/components/features`
+    features: `${srcRoot}/components/features`,
   },
   fonts: {
 
   },
   js: {
     root: `${srcRoot}/js`,
-    vendors: `${srcRoot}/js/vendors`
+    vendors: `${srcRoot}/js/vendors`,
   },
   pages: {
     root: `${srcRoot}/pages`,
-    include: `${srcRoot}/pages/include`
+    include: `${srcRoot}/pages/include`,
   },
   styles: {
     root: `${srcRoot}/styles`,
     common: `${srcRoot}/styles/common`,
     mixins: `${srcRoot}/styles/mixins`,
     uaKit: `${srcRoot}/styles/ua-kit`,
-    vendors: `${srcRoot}/styles/vendors`
-  }
+    vendors: `${srcRoot}/styles/vendors`,
+  },
 };
 
 const devPath = {
@@ -63,15 +64,15 @@ const devPath = {
     root: `${devRoot}/assets`,
     img: {
       root: `${devRoot}/assets/img`,
-      sprite: `${devRoot}/assets/img/sprite`
-    }
+      sprite: `${devRoot}/assets/img/sprite`,
+    },
   },
   fonts: {
 
   },
   js: `${devRoot}/js`,
   pages: `${devRoot}`,
-  styles: `${devRoot}/styles`
+  styles: `${devRoot}/styles`,
 };
 
 const buildPath = {
@@ -81,7 +82,7 @@ const buildPath = {
   },
   js: `${buildRoot}/js`,
   pages: `${buildRoot}`,
-  styles: `${buildRoot}/styles`
+  styles: `${buildRoot}/styles`,
 };
 
 
@@ -133,7 +134,7 @@ function lintHtml() {
 
 function watchHtml() {
   watch(`${srcPath.pages.root}/*.html`, series(cleanHtml, compileHtml));
-  watch([`${srcPath.pages.include}/*.html`,`${srcPath.components.root}/**/*.html`], { events: 'change'}, series(cleanHtml, compileHtml));
+  watch([`${srcPath.pages.include}/*.html`, `${srcPath.components.root}/**/*.html`], { events: 'change' }, series(cleanHtml, compileHtml));
 }
 
 /**
@@ -187,9 +188,9 @@ function lintJsCommon() {
  */
 
 function watchJs() {
-  watch([`${srcPath.js.root}/vendors.js`,`${srcPath.js.vendors}/*.js`], { events: 'change'}, compileJsVendors);
-  watch([`${srcPath.js.root}/components.js`,`${srcPath.components.root}/**/*.js`], { events: 'change'}, compileJsComponents);
-  watch(`${srcPath.js.root}/common.js`, { events: 'change'}, compileJsCommon);
+  watch([`${srcPath.js.root}/vendors.js`, `${srcPath.js.vendors}/*.js`], { events: 'change' }, compileJsVendors);
+  watch([`${srcPath.js.root}/components.js`, `${srcPath.components.root}/**/*.js`], { events: 'change' }, compileJsComponents);
+  watch(`${srcPath.js.root}/common.js`, { events: 'change' }, compileJsCommon);
 }
 
 
@@ -204,7 +205,7 @@ function minifyJs() {
     .pipe(plumber())
     .pipe(dest(`${buildPath.js}`))
     .pipe(uglify())
-    .pipe(rename({suffix: ".min"}))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(dest(`${buildPath.js}`));
 }
 
@@ -226,9 +227,9 @@ const stylelintOptions = {
   reporters: [
     {
       formatter: 'string',
-      console: true
-    }
-  ]
+      console: true,
+    },
+  ],
 };
 
 function compileCssGeneral() {
@@ -283,9 +284,9 @@ function lintCssComponents() {
  */
 
 function watchCss() {
-  watch([`${srcPath.styles.root}/**/*.scss`,`!${srcPath.styles.vendors}/*`,`!${srcPath.styles.root}/vendors.scss`,`!${srcPath.styles.root}/components.scss`], { events: 'change'}, compileCssGeneral);
-  watch([`${srcPath.styles.vendors}/*`,`${srcPath.styles.root}/vendors.scss`], { events: 'change'}, compileCssVendors);
-  watch([`${srcPath.styles.root}/components.scss`,`${srcPath.components.root}/**/*.scss`], { events: 'change'}, compileCssComponents);
+  watch([`${srcPath.styles.root}/**/*.scss`, `!${srcPath.styles.vendors}/*`, `!${srcPath.styles.root}/vendors.scss`, `!${srcPath.styles.root}/components.scss`], { events: 'change' }, compileCssGeneral);
+  watch([`${srcPath.styles.vendors}/*`, `${srcPath.styles.root}/vendors.scss`], { events: 'change' }, compileCssVendors);
+  watch([`${srcPath.styles.root}/components.scss`, `${srcPath.components.root}/**/*.scss`], { events: 'change' }, compileCssComponents);
 }
 
 /**
@@ -299,7 +300,7 @@ function minifyCss() {
     .pipe(plumber())
     .pipe(dest(`${buildPath.styles}`))
     .pipe(csso())
-    .pipe(rename({suffix: ".min"}))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(dest(`${buildPath.styles}`));
 }
 
@@ -319,23 +320,22 @@ function minifyCss() {
 function compileSvgSprite() {
   return src(`${srcPath.assets.img.sprite.svg}/*.svg`)
     .pipe(plumber())
-    .pipe(svgSprite({inlineSvg: true}))
+    .pipe(svgSprite({ inlineSvg: true }))
     .pipe(imagemin([
       imagemin.svgo({
         plugins: [
-            {removeViewBox: true},
-            {cleanupIDs: false}
-        ]
-      })
-     ]))
-    .pipe(rename({basename: "sprite"}))
+          { removeViewBox: true },
+          { cleanupIDs: false },
+        ],
+      }),
+    ]))
+    .pipe(rename({ basename: 'sprite' }))
     .pipe(dest(`${devPath.assets.img.sprite}`));
 }
 
 function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
-
 
 
 /**
@@ -351,17 +351,17 @@ function watchSvgSprite() {
  */
 
 function minifyImg() {
-  return src([`${srcPath.assets.img.root}/*.{png,jpg,svg}`,`!${srcPath.assets.img.sprite}`,`!${srcPath.assets.img.sprite}/**/*`])
+  return src([`${srcPath.assets.img.root}/*.{png,jpg,svg}`, `!${srcPath.assets.img.sprite}`, `!${srcPath.assets.img.sprite}/**/*`])
     .pipe(plumber())
     .pipe(imagemin([
-      imagemin.jpegtran({progressive: true}),
-      imagemin.optipng({optimizationLevel: 3}),
+      imagemin.jpegtran({ progressive: true }),
+      imagemin.optipng({ optimizationLevel: 3 }),
       imagemin.svgo({
         plugins: [
-          {removeViewBox: true},
-          {cleanupIDs: false}
-        ]
-      })
+          { removeViewBox: true },
+          { cleanupIDs: false },
+        ],
+      }),
     ]))
     .pipe(dest(`${devPath.assets.img.root}`));
 }
@@ -372,15 +372,14 @@ function minifyImg() {
  */
 
 function exportAssetsFiles() {
-  return src([`${srcPath.assets.root}/**/*`,`!${srcPath.assets.img.root}`,`!${srcPath.assets.img.root}/**/*`])
+  return src([`${srcPath.assets.root}/**/*`, `!${srcPath.assets.img.root}`, `!${srcPath.assets.img.root}/**/*`])
     .pipe(dest(`${devPath.assets}`));
 }
 
 
-
 //-----------------------------------------------------
 
-//exports.default = watchCss;
+// exports.default = watchCss;
 
 exports.html = watchHtml;
 exports.js = watchJs;
