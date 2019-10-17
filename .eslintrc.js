@@ -5,7 +5,7 @@ module.exports = {
         "amd": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "airbnb"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
