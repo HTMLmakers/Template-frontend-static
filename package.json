@@ -24,6 +24,7 @@
     "gulp-eslint": "^6.0.0",
     "gulp-file-include": "^2.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-htmllint": "0.0.16",
     "gulp-imagemin": "^6.1.1",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",
