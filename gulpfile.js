@@ -32,6 +32,7 @@ const path = require('path');
 const tap = require('gulp-tap');
 const fontMagician = require('postcss-font-magician');
 const autoprefixer = require('autoprefixer');
+const htmlreplace = require('gulp-html-replace');
 
 let buildUrl = '';
 const urls = [];
@@ -230,6 +231,7 @@ function compileHtml() {
     .pipe(replace(buildRegEx, ''))
     .pipe(replace(emptySpacesRegEx, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
+    .pipe(htmllint())
     .pipe(dest(`${devPath.pages}`));
 }
 
@@ -247,10 +249,19 @@ function cleanHtml() {
  * 2. Отслеживание ./src/components/, ./src/pages/include/ на change
  */
 
-// TODO: перенести линтеры на build
-function lintHtml() {
+function buildHtml() {
   return src(`${devPath.pages}/*.html`)
-    .pipe(htmllint());
+    .pipe(htmlreplace({
+      css: {
+        src: null,
+        tpl: '<link rel="stylesheet" href="styles/style.min.css" media="all">',
+      },
+      js: {
+        src: null,
+        tpl: '<script src="js/script.min.js" async></script>',
+      },
+    }))
+    .pipe(dest(`${buildPath.pages}`));
 }
 
 function watchHtml() {
@@ -259,6 +270,7 @@ function watchHtml() {
   watch(`${srcPath.pages.root}/*.html`, compile);
   watch([`${srcPath.pages.include}/*.html`, `${srcPath.components.root}/**/*.html`], { events: 'change' }, compile);
 }
+
 
 /**
  * Js
@@ -683,6 +695,8 @@ exports.fontGeneration = fontGeneration;
 exports.serve = series(
   // общие задачи
   // fontGeneration,
+  cleanHtml,
+  compileHtml,
 
   // работа со стилями
 
@@ -703,6 +717,7 @@ exports.serve = series(
 // TODO: добавить build задачи
 exports.build = series(
   // Очистка build директории,
+  buildHtml,
   /* parallel(
     // Минификация
     // Оптимизация картинок
@@ -711,7 +726,7 @@ exports.build = series(
   // инициализация build-сервера
   initBuildServer,
   // Psi отчет
-  getPsiReport,
+  // getPsiReport,
 );
 
 // exports.default = watchCss;
