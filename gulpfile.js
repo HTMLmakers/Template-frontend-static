@@ -15,6 +15,10 @@ const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const svgSprite = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
+const fs = require('fs');
+const gulpIf = require('gulp-if');
+const pngSprite = require('gulp.spritesmith');
+const pngSprite3x = require('gulp.spritesmith.3x');
 const stylelint = require('gulp-stylelint');
 const eslint = require('gulp-eslint');
 const htmllint = require('gulp-htmllint');
@@ -337,6 +341,66 @@ function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
 
+function compilePngSprite() {
+  let plugin = pngSprite;
+  let spriteSrc = `${srcPath.assets.img.sprite.png}/*.png`;
+  let imgs = 0, imgs2x = 0, imgs3x = 0;
+
+  let options = {
+    imgName: 'sprite.png',
+    imgPath: '../img/sprite.png',
+    cssName: '_sprites.scss',
+  };
+  let options2x = {
+    retinaImgName: 'sprite@2x.png',
+    retinaImgPath: '../img/sprite@2x.png',
+    retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
+  };
+  let options3x = {
+    retina3xImgName: 'sprite@3x.png',
+    retina3xImgPath: '../img/sprite@3x.png',
+    retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
+  };
+
+  fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach(file => {
+    if ((/^[^@]+\.png$/i).test(file)) {
+      imgs++;
+    }
+    if ((/@2x\.png$/i).test(file)) {
+      imgs2x++;
+    }
+    if ((/@3x\.png$/i).test(file)) {
+      imgs3x++;
+    }
+  });
+
+  if (imgs === imgs2x && imgs === imgs3x) {
+    plugin = pngSprite3x;
+    Object.assign(options, options2x, options3x);
+  } else if (imgs === imgs2x) {
+    spriteSrc = [
+      `${srcPath.assets.img.sprite.png}/*.png`,
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+    ];
+    Object.assign(options, options2x);
+  } else {
+    spriteSrc = [
+      `${srcPath.assets.img.sprite.png}/*.png`,
+      `!${srcPath.assets.img.sprite.png}/*@2x.png`,
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+    ];
+  }
+
+  return src(spriteSrc)
+    .pipe(plumber())
+    .pipe(plugin(options))
+    .pipe(gulpIf('*.png', dest(`${devPath.assets.img.sprite}`)))
+    .pipe(gulpIf('*.scss', dest(`${devPath.assets.img.sprite}`)));
+}
+
+function watchPngSprite() {
+  watch(`${srcPath.assets.img.sprite.png}`, compilePngSprite);
+}
 
 /**
  * Финальная сборка (build)
