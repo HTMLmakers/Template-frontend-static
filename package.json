@@ -48,14 +48,13 @@
     "gulp-uglify": "^3.0.2",
     "gulp.spritesmith": "^6.11.0",
     "gulp.spritesmith.3x": "^1.0.9",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
     "stylelint": "^11.1.1",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^19.0.0",
-    "stylelint-order": "^3.1.1"
+    "stylelint-order": "^3.1.1",
     "autoprefixer": "^9.6.4",
     "browser-sync": "^2.26.7",
-    "gulp": "^4.0.2",
     "gulp-postcss": "^8.0.0",
     "gulp-tap": "^2.0.0",
     "gulp-ttf2eot": "^1.1.2",

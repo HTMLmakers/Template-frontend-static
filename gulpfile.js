@@ -1,5 +1,5 @@
 const {
-  src, dest, series, watch,
+  src, dest, series, watch, parallel,
 } = require('gulp');
 
 const plumber = require('gulp-plumber');
@@ -21,7 +21,6 @@ const pngSprite3x = require('gulp.spritesmith.3x');
 const stylelint = require('gulp-stylelint');
 const eslint = require('gulp-eslint');
 const htmllint = require('gulp-htmllint');
-const { src, dest, series, parallel, watch } = require('gulp');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
 const ttf2eot = require('gulp-ttf2eot');
@@ -31,9 +30,11 @@ const psi = require('psi');
 const ngrok = require('ngrok');
 const path = require('path');
 const tap = require('gulp-tap');
+const fontMagician = require('postcss-font-magician');
+const autoprefixer = require('autoprefixer');
 
 let buildUrl = '';
-let urls = [];
+const urls = [];
 
 const srcRoot = './src';
 const devRoot = './dev';
@@ -78,13 +79,13 @@ const devPath = {
     root: `${devRoot}/assets`,
     img: {
       root: `${devRoot}/assets/img`,
-      sprite: `${devRoot}/assets/img/sprite`
-    }
+      sprite: `${devRoot}/assets/img/sprite`,
+    },
   },
   fonts: `${devRoot}/fonts`,
   js: `${devRoot}/js`,
   pages: `${devRoot}`,
-  styles: `${devRoot}/styles`
+  styles: `${devRoot}/styles`,
 };
 
 const buildPath = {
@@ -92,7 +93,7 @@ const buildPath = {
   fonts: `${buildRoot}/fonts`,
   js: `${buildRoot}/js`,
   pages: `${buildRoot}`,
-  styles: `${buildRoot}/styles`
+  styles: `${buildRoot}/styles`,
 };
 
 const webFonts = {
@@ -102,34 +103,34 @@ const webFonts = {
       normal: {
         400: {
           url: {
-            woff: `fonts/CustomFont.woff`,
-            woff2: `fonts/CustomFont.woff2`,
-            eot: `fonts/CustomFont.eot`,
-          }
+            woff: 'fonts/CustomFont.woff',
+            woff2: 'fonts/CustomFont.woff2',
+            eot: 'fonts/CustomFont.eot',
+          },
         },
         700: {
           url: {
-            woff: `fonts/CustomFont-Bold.woff`,
-            woff2: `fonts/CustomFont-Bold.woff2`,
-            eot: `fonts/CustomFont-Bold.eot`,
-          }
-        }
-      }
-    }
+            woff: 'fonts/CustomFont-Bold.woff',
+            woff2: 'fonts/CustomFont-Bold.woff2',
+            eot: 'fonts/CustomFont-Bold.eot',
+          },
+        },
+      },
+    },
   },
-    // вариант 2
+  // вариант 2
   'Custom Font Regular': {
     variants: {
       normal: {
         normal: {
           url: {
-            woff: `fonts/CustomFont.woff`,
-            woff2: `fonts/CustomFont.woff2`,
-            eot: `fonts/CustomFont.eot`,
-          }
-        }
-      }
-    }
+            woff: 'fonts/CustomFont.woff',
+            woff2: 'fonts/CustomFont.woff2',
+            eot: 'fonts/CustomFont.eot',
+          },
+        },
+      },
+    },
   },
 
   'Custom Font Italic': {
@@ -137,13 +138,13 @@ const webFonts = {
       normal: {
         normal: {
           url: {
-            woff: `fonts/CustomFontItalic.woff`,
-            woff2: `fonts/CustomFontItalic.woff2`,
-            eot: `fonts/CustomFontItalic.eot`,
-          }
-        }
-      }
-    }
+            woff: 'fonts/CustomFontItalic.woff',
+            woff2: 'fonts/CustomFontItalic.woff2',
+            eot: 'fonts/CustomFontItalic.eot',
+          },
+        },
+      },
+    },
   },
 
   'Custom Font Bold': {
@@ -151,16 +152,16 @@ const webFonts = {
       normal: {
         normal: {
           url: {
-            woff: `fonts/CustomFontBold.woff`,
-            woff2: `fonts/CustomFontBold.woff2`,
-            eot: `fonts/CustomFontBold.eot`,
-          }
-        }
-      }
-    }
+            woff: 'fonts/CustomFontBold.woff',
+            woff2: 'fonts/CustomFontBold.woff2',
+            eot: 'fonts/CustomFontBold.eot',
+          },
+        },
+      },
+    },
   },
 };
-  
+
 
 //-----------------------------------------------------
 
@@ -388,18 +389,15 @@ function minifyCss() {
  */
 
 function transformByPostCSS() {
-  const fontMagician = require('postcss-font-magician');
-  const autoprefixer = require('autoprefixer');
-
   return src(`${devPath.style}`).pipe(
     postcss([
       fontMagician({
         custom: webFonts,
       }),
-      autoprefixer()
-    ])
+      autoprefixer(),
+    ]),
   ).pipe(
-    dest(`${devRoot}`)
+    dest(`${devRoot}`),
   );
 }
 
@@ -439,25 +437,27 @@ function watchSvgSprite() {
 function compilePngSprite() {
   let plugin = pngSprite;
   let spriteSrc = `${srcPath.assets.img.sprite.png}/*.png`;
-  let imgs = 0, imgs2x = 0, imgs3x = 0;
+  let imgs = 0;
+  let imgs2x = 0;
+  let imgs3x = 0;
 
-  let options = {
+  const options = {
     imgName: 'sprite.png',
     imgPath: '../img/sprite.png',
     cssName: '_sprites.scss',
   };
-  let options2x = {
+  const options2x = {
     retinaImgName: 'sprite@2x.png',
     retinaImgPath: '../img/sprite@2x.png',
     retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
   };
-  let options3x = {
+  const options3x = {
     retina3xImgName: 'sprite@3x.png',
     retina3xImgPath: '../img/sprite@3x.png',
     retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
   };
 
-  fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach(file => {
+  fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach((file) => {
     if ((/^[^@]+\.png$/i).test(file)) {
       imgs++;
     }
@@ -475,14 +475,14 @@ function compilePngSprite() {
   } else if (imgs === imgs2x) {
     spriteSrc = [
       `${srcPath.assets.img.sprite.png}/*.png`,
-      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`,
     ];
     Object.assign(options, options2x);
   } else {
     spriteSrc = [
       `${srcPath.assets.img.sprite.png}/*.png`,
       `!${srcPath.assets.img.sprite.png}/*@2x.png`,
-      `!${srcPath.assets.img.sprite.png}/*@3x.png`
+      `!${srcPath.assets.img.sprite.png}/*@3x.png`,
     ];
   }
 
@@ -508,8 +508,6 @@ function watchPngSprite() {
  * 2. На выходе получаем веб шрифты в ./dev/fonts
  */
 
-const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
-
 function convertTTFToWOFF() {
   return src([`${srcPath.fonts}/*.ttf`])
     .pipe(ttf2woff())
@@ -528,6 +526,8 @@ function convertTTFToEOT() {
     .pipe(dest([`${devPath.fonts}`]));
 }
 
+const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
+
 /**
  * Servers
  * --------------------------------------------------------------------------
@@ -545,25 +545,21 @@ function initDevServer(done) {
   browserSync.init({
     server: devRoot,
     port: 8080,
-  }, function(err, bs) {
-    return ngrok.connect(bs.options.get('port')).then(function (url) {
-      console.log('Tunnel Dev:', url);
-      done();
-    });
-  });
+  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
+    console.log('Tunnel Dev:', url);
+    done();
+  }));
 }
 
 function initBuildServer(done) {
   browserSync.init({
     server: buildRoot,
     port: 5000,
-  }, function(err, bs) {
-    return ngrok.connect(bs.options.get('port')).then(function (url) {
-      console.log('Tunnel Build:', url);
-      buildUrl = url;
-      done();
-    });
-  });
+  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
+    console.log('Tunnel Build:', url);
+    buildUrl = url;
+    done();
+  }));
 }
 
 function liveReload(done) {
@@ -583,17 +579,15 @@ function liveReload(done) {
  * 3. Выводим мобильный отчет
  */
 
-const getPsiReport = series(getAllBuildUrls, getPsiDesktopReport, getPsiMobileReport);
-
 function getAllBuildUrls() {
   return src(`${buildRoot}/*.html`)
     .pipe(
-      tap(function(file){
+      tap((file) => {
         const filename = path.basename(file.path);
         const url = `${buildUrl}/${filename}`;
 
         urls.push(url);
-      })
+      }),
     );
 }
 
@@ -609,11 +603,11 @@ function logPsiReport(title, strategy, done) {
   console.log('--------------------------------------');
   console.log(title);
   console.log('--------------------------------------');
-  urls.forEach(function (url, index) {
+  urls.forEach((url, index) => {
     psi(url, {
       nokey: 'true',
-      strategy: strategy
-    }).then(function (data) {
+      strategy,
+    }).then((data) => {
       console.log(url);
       console.log('Speed score:', data.ruleGroups.SPEED.score);
       if (strategy === 'mobile') {
@@ -621,8 +615,8 @@ function logPsiReport(title, strategy, done) {
       }
       console.log('---');
 
-      setTimeout(function () {
-        if(index === (urls.length - 1)) {
+      setTimeout(() => {
+        if (index === (urls.length - 1)) {
           done();
         }
       }, 1000);
@@ -630,6 +624,7 @@ function logPsiReport(title, strategy, done) {
   });
 }
 
+const getPsiReport = series(getAllBuildUrls, getPsiDesktopReport, getPsiMobileReport);
 
 /**
  * Финальная сборка (build)
@@ -688,22 +683,22 @@ exports.serve = series(
   initDevServer,
 
   // колбек с вотчерами
-  function (done) {
+  (done) => {
     // TODO: добавить вотчеры
     console.log('watch');
     done();
-  }
+  },
 );
 
 // список задач для создания build-версии
 // TODO: добавить build задачи
 exports.build = series(
   // Очистка build директории,
-  /*parallel(
+  /* parallel(
     // Минификация
     // Оптимизация картинок
     // И пр.
-  ),*/
+  ), */
   // инициализация build-сервера
   initBuildServer,
   // Psi отчет
