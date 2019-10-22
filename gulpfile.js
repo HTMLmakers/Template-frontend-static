@@ -207,6 +207,25 @@ function liveReload(done) {
   done();
 }
 
+/**
+ * Cleaning
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Очистка директорий:
+ * 1. Очистка ./dev
+ * 2. Очистка ./build
+ */
+
+
+function cleanDev() {
+  return del(`${devRoot}`);
+}
+
+function cleanBuild() {
+  return del(`${buildRoot}`);
+}
 
 /**
  * Html
@@ -693,6 +712,8 @@ exports.fontGeneration = fontGeneration;
 
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
+  // очистка
+  cleanDev,
   // общие задачи
   // fontGeneration,
   cleanHtml,
@@ -716,7 +737,9 @@ exports.serve = series(
 // список задач для создания build-версии
 // TODO: добавить build задачи
 exports.build = series(
-  // Очистка build директории,
+  // очистка
+  cleanBuild,
+  // сборка
   buildHtml,
   /* parallel(
     // Минификация
