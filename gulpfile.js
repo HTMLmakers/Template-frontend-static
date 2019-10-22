@@ -165,6 +165,47 @@ const webFonts = {
 
 //-----------------------------------------------------
 
+/**
+ * Servers
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Browser Sync:
+ * 1. Инициализация dev-сервера
+ * 2. Инициализация build-сервера
+ * 3. Инициализация ngrok
+ * 4. Live reload
+ */
+
+function initDevServer(done) {
+  browserSync.init({
+    server: devRoot,
+    port: 8080,
+    browser: 'chrome',
+  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
+    console.log('Tunnel Dev:', url);
+    done();
+  }));
+}
+
+function initBuildServer(done) {
+  browserSync.init({
+    server: buildRoot,
+    port: 5000,
+    browser: 'chrome',
+  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
+    console.log('Tunnel Build:', url);
+    buildUrl = url;
+    done();
+  }));
+}
+
+function liveReload(done) {
+  browserSync.reload();
+  done();
+}
+
 
 /**
  * Html
@@ -180,11 +221,14 @@ const webFonts = {
  */
 
 function compileHtml() {
+  const buildRegEx = /(\/<\/!\/-\/-)(?!\s*build\/:|\*|\s*endbuild\s)[^>]*(\S*\/-\/-\/>)/gi;
+  const emptySpacesRegEx = /$(\n)(\s|\n|\t)+^/gm;
+
   return src(`${srcPath.pages.root}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude())
-    .pipe(replace(/(\/<\/!\/-\/-)(?!\s*build\/:|\*|\s*endbuild\s)[^>]*(\S*\/-\/-\/>)/gi, ''))
-    .pipe(replace(/$(\n)(\s|\n|\t)+^/gm, '$1'))
+    .pipe(replace(buildRegEx, ''))
+    .pipe(replace(emptySpacesRegEx, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
@@ -210,8 +254,10 @@ function lintHtml() {
 }
 
 function watchHtml() {
-  watch(`${srcPath.pages.root}/*.html`, series(cleanHtml, compileHtml));
-  watch([`${srcPath.pages.include}/*.html`, `${srcPath.components.root}/**/*.html`], { events: 'change' }, series(cleanHtml, compileHtml));
+  const compile = series(cleanHtml, compileHtml, liveReload);
+
+  watch(`${srcPath.pages.root}/*.html`, compile);
+  watch([`${srcPath.pages.include}/*.html`, `${srcPath.components.root}/**/*.html`], { events: 'change' }, compile);
 }
 
 /**
@@ -529,45 +575,6 @@ function convertTTFToEOT() {
 const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
 
 /**
- * Servers
- * --------------------------------------------------------------------------
- */
-
-/**
- * Browser Sync:
- * 1. Инициализация dev-сервера
- * 2. Инициализация build-сервера
- * 3. Инициализация ngrok
- * 4. Live reload
- */
-
-function initDevServer(done) {
-  browserSync.init({
-    server: devRoot,
-    port: 8080,
-  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
-    console.log('Tunnel Dev:', url);
-    done();
-  }));
-}
-
-function initBuildServer(done) {
-  browserSync.init({
-    server: buildRoot,
-    port: 5000,
-  }, (err, bs) => ngrok.connect(bs.options.get('port')).then((url) => {
-    console.log('Tunnel Build:', url);
-    buildUrl = url;
-    done();
-  }));
-}
-
-function liveReload(done) {
-  browserSync.reload();
-  done();
-}
-
-/**
  * Optimization reports
  * --------------------------------------------------------------------------
  */
@@ -675,7 +682,7 @@ exports.fontGeneration = fontGeneration;
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
   // общие задачи
-  fontGeneration,
+  // fontGeneration,
 
   // работа со стилями
 
@@ -686,6 +693,8 @@ exports.serve = series(
   (done) => {
     // TODO: добавить вотчеры
     console.log('watch');
+    watchHtml();
+
     done();
   },
 );
