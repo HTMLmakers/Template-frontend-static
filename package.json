@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^7.16.0",
     "fs": "0.0.1-security",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-eslint": "^6.0.0",
     "gulp-file-include": "^2.1.0",

@@ -33,6 +33,7 @@ const tap = require('gulp-tap');
 const fontMagician = require('postcss-font-magician');
 const autoprefixer = require('autoprefixer');
 const htmlreplace = require('gulp-html-replace');
+const concat = require('gulp-concat');
 
 let buildUrl = '';
 const urls = [];
@@ -287,9 +288,11 @@ function watchHtml() {
   const compile = series(cleanHtml, compileHtml, liveReload);
 
   watch(`${srcPath.pages.root}/*.html`, compile);
-  watch([`${srcPath.pages.include}/*.html`, `${srcPath.components.root}/**/*.html`], { events: 'change' }, compile);
+  watch([
+    `${srcPath.pages.include}/*.html`,
+    `${srcPath.components.root}/**/*.html`,
+  ], { events: 'change' }, compile);
 }
-
 
 /**
  * Js
@@ -369,11 +372,11 @@ function minifyJs() {
  * --------------------------------------------------------------------------
  */
 
-
 /**
  * Сборка и компиляция scss:
  * 1. Сборка всех файлов .scss и .css из ./src/styles/ и ./src/components/
  * 2. Коплиляция .scss в .css и сохранение в ./dev/styles/
+ * 3. Post CSS трансформация
  */
 
 const stylelintOptions = {
@@ -391,8 +394,15 @@ function compileCssGeneral() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
-    // TODO: добавить autoprefixer
-    // TODO: добавить обработкау шрифтов
+    .pipe(
+      postcss([
+        fontMagician({
+          custom: webFonts,
+        }),
+        autoprefixer(),
+      ]),
+    )
+    .pipe(stylelint(stylelintOptions))
     .pipe(dest(`${devPath.styles}`));
 }
 
@@ -401,8 +411,14 @@ function compileCssVendors() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
-    // TODO: добавить autoprefixer
-    // TODO: добавить обработкау шрифтов
+    .pipe(
+      postcss([
+        fontMagician({
+          custom: webFonts,
+        }),
+        autoprefixer(),
+      ]),
+    )
     .pipe(dest(`${devPath.styles}`));
 }
 
@@ -411,22 +427,36 @@ function compileCssComponents() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
-    // TODO: добавить autoprefixer
-    // TODO: добавить обработкау шрифтов
-    .pipe(dest(`${devPath.styles}`));
-}
-
-// TODO: перенести линтеры на build
-function lintCssGeneral() {
-  return src(`${devPath.styles}/style.css`)
+    .pipe(
+      postcss([
+        fontMagician({
+          custom: webFonts,
+        }),
+        autoprefixer(),
+      ]),
+    )
     .pipe(stylelint(stylelintOptions))
     .pipe(dest(`${devPath.styles}`));
 }
 
-function lintCssComponents() {
-  return src(`${devPath.styles}/components.css`)
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+/**
+ * Build для файлов .css
+ * 1. Сохранение обычного файла .css в ./build/styles/
+ * 2. Минификация и сохранение файла .min.css в ./build/styles/
+ */
+
+function buildCss() {
+  return src([
+    `${devPath.styles}/vendors.css`,
+    `${devPath.styles}/style.css`,
+    `${devPath.styles}/components.css`,
+  ])
+    .pipe(plumber())
+    .pipe(concat('style.css'))
+    .pipe(dest(`${buildPath.styles}`))
+    .pipe(csso())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(`${buildPath.styles}`));
 }
 
 /**
@@ -438,46 +468,21 @@ function lintCssComponents() {
  */
 
 function watchCss() {
-  watch([`${srcPath.styles.root}/**/*.scss`, `!${srcPath.styles.vendors}/*`, `!${srcPath.styles.root}/vendors.scss`, `!${srcPath.styles.root}/components.scss`], { events: 'change' }, compileCssGeneral);
-  watch([`${srcPath.styles.vendors}/*`, `${srcPath.styles.root}/vendors.scss`], { events: 'change' }, compileCssVendors);
-  watch([`${srcPath.styles.root}/components.scss`, `${srcPath.components.root}/**/*.scss`], { events: 'change' }, compileCssComponents);
+  watch([
+    `${srcPath.styles.root}/**/*.scss`,
+    `!${srcPath.styles.vendors}/*`,
+    `!${srcPath.styles.root}/vendors.scss`,
+    `!${srcPath.styles.root}/components.scss`,
+  ], { events: 'change' }, series(compileCssGeneral, liveReload));
+  watch([
+    `${srcPath.styles.vendors}/*`,
+    `${srcPath.styles.root}/vendors.scss`,
+  ], { events: 'change' }, series(compileCssVendors, liveReload));
+  watch([
+    `${srcPath.styles.root}/components.scss`,
+    `${srcPath.components.root}/**/*.scss`,
+  ], { events: 'change' }, series(compileCssComponents, liveReload));
 }
-
-/**
- * Минификация файлов .css для build
- * 1. Сохранение обычного файла .css в ./build/styles/
- * 2. Минификация и сохранение файла .min.css в ./build/styles/
- */
-
-function minifyCss() {
-  return src(`${devPath.styles}/*.css`)
-    .pipe(plumber())
-    .pipe(dest(`${buildPath.styles}`))
-    .pipe(csso())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(`${buildPath.styles}`));
-}
-
-// TODO: Обновить, когда будет ясна структура dev директории для стилей
-/**
- * Post CSS трансформация:
- * 1. Берем style.css файл из ./dev/style.css
- * 2. Трансформируем его и перезаписываем в ./dev/style.css
- */
-
-function transformByPostCSS() {
-  return src(`${devPath.style}`).pipe(
-    postcss([
-      fontMagician({
-        custom: webFonts,
-      }),
-      autoprefixer(),
-    ]),
-  ).pipe(
-    dest(`${devRoot}`),
-  );
-}
-
 
 /**
  * Svg спрайт
@@ -716,19 +721,20 @@ exports.serve = series(
   cleanDev,
   // общие задачи
   // fontGeneration,
-  cleanHtml,
+  // html
   compileHtml,
-
-  // работа со стилями
-
+  // css
+  compileCssGeneral,
+  compileCssVendors,
+  compileCssComponents,
   // инициализация dev-сервера
   initDevServer,
 
   // колбек с вотчерами
   (done) => {
     // TODO: добавить вотчеры
-    console.log('watch');
     watchHtml();
+    watchCss();
 
     done();
   },
@@ -741,6 +747,7 @@ exports.build = series(
   cleanBuild,
   // сборка
   buildHtml,
+  buildCss,
   /* parallel(
     // Минификация
     // Оптимизация картинок
