@@ -48,6 +48,7 @@ const srcPath = {
     img: {
       root: `${srcRoot}/assets/img`,
       sprite: {
+        root: `${srcRoot}/assets/img/sprite`,
         svg: `${srcRoot}/assets/img/sprite/svg`,
         png: `${srcRoot}/assets/img/sprite/png`,
       },
@@ -81,7 +82,6 @@ const devPath = {
     root: `${devRoot}/assets`,
     img: {
       root: `${devRoot}/assets/img`,
-      sprite: `${devRoot}/assets/img/sprite`,
     },
   },
   fonts: `${devRoot}/fonts`,
@@ -244,10 +244,22 @@ function cleanBuild() {
 function compileHtml() {
   const buildRegEx = /(\/<\/!\/-\/-)(?!\s*build\/:|\*|\s*endbuild\s)[^>]*(\S*\/-\/-\/>)/gi;
   const emptySpacesRegEx = /$(\n)(\s|\n|\t)+^/gm;
+  let svgSpriteExists;
+
+  if (fs.existsSync(`${srcPath.assets.img.sprite.root}/sprite.svg`)) {
+    svgSpriteExists = true;
+  } else {
+    svgSpriteExists = false;
+  }
 
   return src(`${srcPath.pages.root}/*.html`)
     .pipe(plumber())
-    .pipe(fileInclude())
+    .pipe(fileInclude({
+      basepath: `${srcRoot}`,
+      context: {
+        svgSpriteExists,
+      },
+    }))
     .pipe(replace(buildRegEx, ''))
     .pipe(replace(emptySpacesRegEx, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
@@ -285,13 +297,14 @@ function buildHtml() {
 }
 
 function watchHtml() {
-  const compile = series(cleanHtml, compileHtml, liveReload);
+  const tasks = series(cleanHtml, compileHtml, liveReload);
 
-  watch(`${srcPath.pages.root}/*.html`, compile);
+  watch(`${srcPath.pages.root}/*.html`, tasks);
   watch([
     `${srcPath.pages.include}/*.html`,
     `${srcPath.components.root}/**/*.html`,
-  ], { events: 'change' }, compile);
+  ], { events: 'change' }, tasks);
+  watch(`${srcPath.assets.img.sprite.root}/sprite.svg`, tasks);
 }
 
 /**
@@ -509,54 +522,12 @@ function compileSvgSprite() {
       }),
     ]))
     .pipe(rename({ basename: 'sprite' }))
-    .pipe(dest(`${devPath.assets.img.sprite}`));
+    .pipe(dest(`${srcPath.assets.img.sprite.root}`));
 }
 
 function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
-
-function svgSpriteInline() {
-  let svg_sprite_file_checking = false;
-
-  if (fs.existsSync(`${devPath.assets.img.sprite}/sprite.svg`)) {
-    svg_sprite_file_checking = true;
-    console.log(svg_sprite_file_checking+'++++++++++++++++++');
-  } else {
-    console.log(svg_sprite_file_checking+'----------------');
-
-  }
-
-  return src(`${srcPath.pages.include}/svg-inline.html`)
-    .pipe(plumber())
-    .pipe(gulpIf(svg_sprite_file_checking, htmlreplace({
-      svg: {
-        src: null,
-        tpl: '<!-- build:svg -->\n<div style="display:none;">\n@@include("../../temp/img/sprite.svg")\n</div>\n<!-- endbuild -->'
-      },
-      nosvg: {
-        src: null,
-        tpl: '<!-- build:svg -->\n<div style="display:none;">\n@@include("../../temp/img/sprite.svg")\n</div>\n<!-- endbuild -->'
-      },
-    }), htmlreplace({
-      svg: {
-        src: null,
-        tpl: '<!-- build:nosvg --><!-- endbuild -->'
-      },
-      nosvg: {
-        src: null,
-        tpl: '<!-- build:nosvg --><!-- endbuild -->'
-      },
-    })))
-    .pipe(dest(`${srcPath.pages.include}`));
-}
-
-exports.default = svgSpriteInline;
-
-
-
-
-
 
 function compilePngSprite() {
   let plugin = pngSprite;
@@ -613,8 +584,8 @@ function compilePngSprite() {
   return src(spriteSrc)
     .pipe(plumber())
     .pipe(plugin(options))
-    .pipe(gulpIf('*.png', dest(`${devPath.assets.img.sprite}`)))
-    .pipe(gulpIf('*.scss', dest(`${devPath.assets.img.sprite}`)));
+    .pipe(gulpIf('*.png', dest(`${srcPath.assets.img.sprite}`)))
+    .pipe(gulpIf('*.scss', dest(`${srcPath.styles.mixins}`)));
 }
 
 function watchPngSprite() {
@@ -750,19 +721,14 @@ function exportAssetsFiles() {
 }
 
 
-/**
- * Exports
- * --------------------------------------------------------------------------
- */
-
-exports.fontGeneration = fontGeneration;
-
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
   // очистка
   cleanDev,
   // общие задачи
   // fontGeneration,
+  // sprites
+  compileSvgSprite,
   // html
   compileHtml,
   // css
@@ -777,10 +743,18 @@ exports.serve = series(
     // TODO: добавить вотчеры
     watchHtml();
     watchCss();
+    watchSvgSprite();
 
     done();
   },
 );
+
+/**
+ * Exports
+ * --------------------------------------------------------------------------
+ */
+
+exports.fontGeneration = fontGeneration;
 
 // список задач для создания build-версии
 // TODO: добавить build задачи
@@ -806,3 +780,5 @@ exports.build = series(
 exports.html = watchHtml;
 exports.js = watchJs;
 exports.css = watchCss;
+
+exports.compileHtml = compileHtml;

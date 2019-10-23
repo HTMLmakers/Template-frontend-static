@@ -17,5 +17,6 @@
     "img-req-alt": true,
     "img-req-src": true,
     "input-radio-req-name": true,
-    "input-req-label": true
+    "input-req-label": true,
+    "raw-ignore-regex": /\<\!-- htmllint ignore --\>[^]*?\<\!-- htmllint unignore --\>/
 }
