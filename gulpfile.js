@@ -516,6 +516,48 @@ function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
 
+function svgSpriteInline() {
+  let svg_sprite_file_checking = false;
+
+  if (fs.existsSync(`${devPath.assets.img.sprite}/sprite.svg`)) {
+    svg_sprite_file_checking = true;
+    console.log(svg_sprite_file_checking+'++++++++++++++++++');
+  } else {
+    console.log(svg_sprite_file_checking+'----------------');
+
+  }
+
+  return src(`${srcPath.pages.include}/svg-inline.html`)
+    .pipe(plumber())
+    .pipe(gulpIf(svg_sprite_file_checking, htmlreplace({
+      svg: {
+        src: null,
+        tpl: '<!-- build:svg -->\n<div style="display:none;">\n@@include("../../temp/img/sprite.svg")\n</div>\n<!-- endbuild -->'
+      },
+      nosvg: {
+        src: null,
+        tpl: '<!-- build:svg -->\n<div style="display:none;">\n@@include("../../temp/img/sprite.svg")\n</div>\n<!-- endbuild -->'
+      },
+    }), htmlreplace({
+      svg: {
+        src: null,
+        tpl: '<!-- build:nosvg --><!-- endbuild -->'
+      },
+      nosvg: {
+        src: null,
+        tpl: '<!-- build:nosvg --><!-- endbuild -->'
+      },
+    })))
+    .pipe(dest(`${srcPath.pages.include}`));
+}
+
+exports.default = svgSpriteInline;
+
+
+
+
+
+
 function compilePngSprite() {
   let plugin = pngSprite;
   let spriteSrc = `${srcPath.assets.img.sprite.png}/*.png`;
