@@ -312,7 +312,6 @@ function watchHtml() {
  * --------------------------------------------------------------------------
  */
 
-
 /**
  * Сборка js:
  * 1. Сборка всех файлов .js из ./src/js/vendors/ и ./src/components/
@@ -322,32 +321,25 @@ function watchHtml() {
 function compileJsVendors() {
   return src(`${srcPath.js.root}/vendors.js`)
     .pipe(plumber())
-    .pipe(fileInclude())
+    .pipe(fileInclude({
+      basepath: `${srcRoot}`,
+    }))
     .pipe(dest(`${devPath.js}`));
 }
 
 function compileJsComponents() {
   return src(`${srcPath.js.root}/components.js`)
     .pipe(plumber())
-    .pipe(fileInclude())
+    .pipe(fileInclude({
+      basepath: `${srcRoot}`,
+    }))
+    .pipe(eslint())
     .pipe(dest(`${devPath.js}`));
 }
 
 function compileJsCommon() {
   return src(`${srcPath.js.root}/common.js`)
     .pipe(plumber())
-    .pipe(dest(`${devPath.js}`));
-}
-
-// TODO: перенести линтеры на build
-function lintJsComponents() {
-  return src(`${devPath.js}/components.js`)
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
-}
-
-function lintJsCommon() {
-  return src(`${devPath.js}/common.js`)
     .pipe(eslint())
     .pipe(dest(`${devPath.js}`));
 }
@@ -358,9 +350,15 @@ function lintJsCommon() {
  */
 
 function watchJs() {
-  watch([`${srcPath.js.root}/vendors.js`, `${srcPath.js.vendors}/*.js`], { events: 'change' }, compileJsVendors);
-  watch([`${srcPath.js.root}/components.js`, `${srcPath.components.root}/**/*.js`], { events: 'change' }, compileJsComponents);
-  watch(`${srcPath.js.root}/common.js`, { events: 'change' }, compileJsCommon);
+  watch([
+    `${srcPath.js.root}/vendors.js`,
+    `${srcPath.js.vendors}/*.js`,
+  ], { events: 'change' }, series(compileJsVendors, liveReload));
+  watch([
+    `${srcPath.js.root}/components.js`,
+    `${srcPath.components.root}/**/*.js`,
+  ], { events: 'change' }, series(compileJsComponents, liveReload));
+  watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
 }
 
 
@@ -715,11 +713,39 @@ function minifyImg() {
  * Экспорт всех файлов из ./dev/assets/ (кроме ./dev/assets/img) в ./build/assets/
  */
 
-function exportAssetsFiles() {
-  return src([`${srcPath.assets.root}/**/*`, `!${srcPath.assets.img.root}`, `!${srcPath.assets.img.root}/**/*`])
+/*function exportAssetsFiles() {
+  return src([
+    `${srcPath.assets.root}/!**!/!*`,
+    `!${srcPath.assets.img.root}`,
+    `!${srcPath.assets.img.root}/!**!/!*`,
+  ])
     .pipe(dest(`${devPath.assets}`));
+}*/
+
+function cleanAssetsDev() {
+  return del(`${devPath.assets.root}`);
 }
 
+function exportAssetsDev() {
+  return src([
+    `${srcPath.assets.root}/**/*.*`,
+    `!${srcPath.assets.img.sprite.png}`,
+    `!${srcPath.assets.img.sprite.png}/**/*`,
+    `!${srcPath.assets.img.sprite.svg}`,
+    `!${srcPath.assets.img.sprite.svg}/**/*`,
+  ])
+    .pipe(dest(`${devPath.assets.root}`));
+}
+
+function watchAssets() {
+  watch([
+    `${srcPath.assets.root}/**/*.*`,
+    `!${srcPath.assets.img.sprite.png}`,
+    `!${srcPath.assets.img.sprite.png}/**/*`,
+    `!${srcPath.assets.img.sprite.svg}`,
+    `!${srcPath.assets.img.sprite.svg}/**/*`,
+  ], series(cleanAssetsDev, exportAssetsDev));
+}
 
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
@@ -727,6 +753,7 @@ exports.serve = series(
   cleanDev,
   // общие задачи
   // fontGeneration,
+  exportAssetsDev,
   // sprites
   compileSvgSprite,
   compilePngSprite,
@@ -736,6 +763,11 @@ exports.serve = series(
   compileCssGeneral,
   compileCssVendors,
   compileCssComponents,
+  // js
+  compileJsCommon,
+  compileJsVendors,
+  compileJsComponents,
+
   // инициализация dev-сервера
   initDevServer,
 
@@ -744,8 +776,10 @@ exports.serve = series(
     // TODO: добавить вотчеры
     watchHtml();
     watchCss();
+    watchJs();
     watchSvgSprite();
     watchPngSprite();
+    watchAssets();
 
     done();
   },
@@ -782,3 +816,5 @@ exports.build = series(
 exports.html = watchHtml;
 exports.js = watchJs;
 exports.css = watchCss;
+
+exports.watchAssets = watchAssets;
