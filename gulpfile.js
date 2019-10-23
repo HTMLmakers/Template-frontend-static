@@ -584,7 +584,7 @@ function compilePngSprite() {
   return src(spriteSrc)
     .pipe(plumber())
     .pipe(plugin(options))
-    .pipe(gulpIf('*.png', dest(`${srcPath.assets.img.sprite}`)))
+    .pipe(gulpIf('*.png', dest(`${srcPath.assets.img.sprite.root}`)))
     .pipe(gulpIf('*.scss', dest(`${srcPath.styles.mixins}`)));
 }
 
@@ -729,6 +729,7 @@ exports.serve = series(
   // fontGeneration,
   // sprites
   compileSvgSprite,
+  compilePngSprite,
   // html
   compileHtml,
   // css
@@ -744,6 +745,7 @@ exports.serve = series(
     watchHtml();
     watchCss();
     watchSvgSprite();
+    watchPngSprite();
 
     done();
   },
@@ -780,5 +782,3 @@ exports.build = series(
 exports.html = watchHtml;
 exports.js = watchJs;
 exports.css = watchCss;
-
-exports.compileHtml = compileHtml;
