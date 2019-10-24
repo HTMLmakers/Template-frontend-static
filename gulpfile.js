@@ -30,7 +30,6 @@ const psi = require('psi');
 const ngrok = require('ngrok');
 const path = require('path');
 const tap = require('gulp-tap');
-const fontMagician = require('postcss-font-magician');
 const autoprefixer = require('autoprefixer');
 const htmlreplace = require('gulp-html-replace');
 const concat = require('gulp-concat');
@@ -97,73 +96,6 @@ const buildPath = {
   pages: `${buildRoot}`,
   styles: `${buildRoot}/styles`,
 };
-
-const webFonts = {
-  // вариант 1
-  'Custom Font': {
-    variants: {
-      normal: {
-        400: {
-          url: {
-            woff: 'fonts/CustomFont.woff',
-            woff2: 'fonts/CustomFont.woff2',
-            eot: 'fonts/CustomFont.eot',
-          },
-        },
-        700: {
-          url: {
-            woff: 'fonts/CustomFont-Bold.woff',
-            woff2: 'fonts/CustomFont-Bold.woff2',
-            eot: 'fonts/CustomFont-Bold.eot',
-          },
-        },
-      },
-    },
-  },
-  // вариант 2
-  'Custom Font Regular': {
-    variants: {
-      normal: {
-        normal: {
-          url: {
-            woff: 'fonts/CustomFont.woff',
-            woff2: 'fonts/CustomFont.woff2',
-            eot: 'fonts/CustomFont.eot',
-          },
-        },
-      },
-    },
-  },
-
-  'Custom Font Italic': {
-    variants: {
-      normal: {
-        normal: {
-          url: {
-            woff: 'fonts/CustomFontItalic.woff',
-            woff2: 'fonts/CustomFontItalic.woff2',
-            eot: 'fonts/CustomFontItalic.eot',
-          },
-        },
-      },
-    },
-  },
-
-  'Custom Font Bold': {
-    variants: {
-      normal: {
-        normal: {
-          url: {
-            woff: 'fonts/CustomFontBold.woff',
-            woff2: 'fonts/CustomFontBold.woff2',
-            eot: 'fonts/CustomFontBold.eot',
-          },
-        },
-      },
-    },
-  },
-};
-
 
 //-----------------------------------------------------
 
@@ -407,9 +339,6 @@ function compileCssGeneral() {
     .pipe(mediaQueriesGroup())
     .pipe(
       postcss([
-        fontMagician({
-          custom: webFonts,
-        }),
         autoprefixer(),
       ]),
     )
@@ -424,9 +353,6 @@ function compileCssVendors() {
     .pipe(mediaQueriesGroup())
     .pipe(
       postcss([
-        fontMagician({
-          custom: webFonts,
-        }),
         autoprefixer(),
       ]),
     )
@@ -440,9 +366,6 @@ function compileCssComponents() {
     .pipe(mediaQueriesGroup())
     .pipe(
       postcss([
-        fontMagician({
-          custom: webFonts,
-        }),
         autoprefixer(),
       ]),
     )
@@ -619,7 +542,18 @@ function convertTTFToEOT() {
     .pipe(dest([`${devPath.fonts}`]));
 }
 
-const fontGeneration = parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT);
+function cleanFonts() {
+  return del(`${devPath.fonts}`);
+}
+
+function watchFonts() {
+  watch(`${srcPath.fonts}/*.ttf`, fontGeneration);
+}
+
+const fontGeneration = series(
+  cleanFonts,
+  parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
+);
 
 /**
  * Optimization reports
@@ -722,7 +656,7 @@ function minifyImg() {
     .pipe(dest(`${devPath.assets}`));
 }*/
 
-function cleanAssetsDev() {
+function cleanAsset() {
   return del(`${devPath.assets.root}`);
 }
 
@@ -744,7 +678,7 @@ function watchAssets() {
     `!${srcPath.assets.img.sprite.png}/**/*`,
     `!${srcPath.assets.img.sprite.svg}`,
     `!${srcPath.assets.img.sprite.svg}/**/*`,
-  ], series(cleanAssetsDev, exportAssetsDev));
+  ], series(cleanAsset, exportAssetsDev));
 }
 
 // список задач и вотчеров для создания dev-версии
@@ -752,7 +686,7 @@ exports.serve = series(
   // очистка
   cleanDev,
   // общие задачи
-  // fontGeneration,
+  fontGeneration,
   exportAssetsDev,
   // sprites
   compileSvgSprite,
@@ -773,13 +707,13 @@ exports.serve = series(
 
   // колбек с вотчерами
   (done) => {
-    // TODO: добавить вотчеры
     watchHtml();
     watchCss();
     watchJs();
     watchSvgSprite();
     watchPngSprite();
     watchAssets();
+    watchFonts();
 
     done();
   },
@@ -789,8 +723,6 @@ exports.serve = series(
  * Exports
  * --------------------------------------------------------------------------
  */
-
-exports.fontGeneration = fontGeneration;
 
 // список задач для создания build-версии
 // TODO: добавить build задачи
@@ -810,11 +742,3 @@ exports.build = series(
   // Psi отчет
   // getPsiReport,
 );
-
-// exports.default = watchCss;
-
-exports.html = watchHtml;
-exports.js = watchJs;
-exports.css = watchCss;
-
-exports.watchAssets = watchAssets;
