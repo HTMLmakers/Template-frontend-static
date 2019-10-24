@@ -79,9 +79,7 @@ const srcPath = {
 const devPath = {
   assets: {
     root: `${devRoot}/assets`,
-    img: {
-      root: `${devRoot}/assets/img`,
-    },
+    img: `${devRoot}/assets/img`,
   },
   fonts: `${devRoot}/fonts`,
   js: `${devRoot}/js`,
@@ -90,7 +88,10 @@ const devPath = {
 };
 
 const buildPath = {
-  assets: `${buildRoot}/assets`,
+  assets: {
+    root: `${buildRoot}/assets`,
+    img: `${buildRoot}/assets/img`,
+  },
   fonts: `${buildRoot}/fonts`,
   js: `${buildRoot}/js`,
   pages: `${buildRoot}`,
@@ -216,10 +217,7 @@ function cleanHtml() {
 function buildHtml() {
   return src(`${devPath.pages}/*.html`)
     .pipe(htmlreplace({
-      css: {
-        src: null,
-        tpl: '<link rel="stylesheet" href="styles/style.min.css" media="all">',
-      },
+      css: 'styles/style.min.css',
       js: {
         src: null,
         tpl: '<script src="js/script.min.js" async></script>',
@@ -277,6 +275,26 @@ function compileJsCommon() {
 }
 
 /**
+ * Минификация файлов .js для build
+ * 1. Сохранение обычного файла .js в ./build/js/
+ * 2. Минификация и сохранение файла .min.js в ./build/js/
+ */
+
+function buildJs() {
+  return src([
+    `${devPath.js}/vendors.js`,
+    `${devPath.js}/common.js`,
+    `${devPath.js}/components.js`,
+  ])
+    .pipe(plumber())
+    .pipe(concat('script.js'))
+    .pipe(dest(`${buildPath.js}`))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(`${buildPath.js}`));
+}
+
+/**
  * Отслеживание изменений js:
  * 1. Отслеживание ./src/js/, ./src/js/vendors/ и ./src/components/ на change
  */
@@ -292,23 +310,6 @@ function watchJs() {
   ], { events: 'change' }, series(compileJsComponents, liveReload));
   watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
 }
-
-
-/**
- * Минификация файлов .js для build
- * 1. Сохранение обычного файла .js в ./build/js/
- * 2. Минификация и сохранение файла .min.js в ./build/js/
- */
-
-function minifyJs() {
-  return src(`${devPath.js}/*.js`)
-    .pipe(plumber())
-    .pipe(dest(`${buildPath.js}`))
-    .pipe(uglify())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(`${buildPath.js}`));
-}
-
 
 /**
  * Scss, css
@@ -550,6 +551,11 @@ function watchFonts() {
   watch(`${srcPath.fonts}/*.ttf`, fontGeneration);
 }
 
+function buildFonts() {
+  return src(`${devPath.fonts}/*.*`)
+    .pipe(dest(`${buildPath.fonts}`));
+}
+
 const fontGeneration = series(
   cleanFonts,
   parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
@@ -626,8 +632,10 @@ const getPsiReport = series(getAllBuildUrls, getPsiDesktopReport, getPsiMobileRe
  * 3. Cохранение в ./build/assets/img/
  */
 
-function minifyImg() {
-  return src([`${srcPath.assets.img.root}/*.{png,jpg,svg}`, `!${srcPath.assets.img.sprite}`, `!${srcPath.assets.img.sprite}/**/*`])
+function exportImgBuild() {
+  return src([
+    `${devPath.assets.img}/**/*.{png,jpg,svg}`,
+  ])
     .pipe(plumber())
     .pipe(imagemin([
       imagemin.jpegtran({ progressive: true }),
@@ -639,7 +647,7 @@ function minifyImg() {
         ],
       }),
     ]))
-    .pipe(dest(`${devPath.assets.img.root}`));
+    .pipe(dest(`${buildPath.assets.img}`));
 }
 
 /**
@@ -647,14 +655,14 @@ function minifyImg() {
  * Экспорт всех файлов из ./dev/assets/ (кроме ./dev/assets/img) в ./build/assets/
  */
 
-/*function exportAssetsFiles() {
+function exportFilesBuild() {
   return src([
-    `${srcPath.assets.root}/!**!/!*`,
-    `!${srcPath.assets.img.root}`,
-    `!${srcPath.assets.img.root}/!**!/!*`,
+    `${devPath.assets.root}/**/*`,
+    `!${devPath.assets.img}`,
+    `!${devPath.assets.img}/**/*`,
   ])
-    .pipe(dest(`${devPath.assets}`));
-}*/
+    .pipe(dest(`${buildPath.assets.root}`));
+}
 
 function cleanAsset() {
   return del(`${devPath.assets.root}`);
@@ -681,6 +689,13 @@ function watchAssets() {
   ], series(cleanAsset, exportAssetsDev));
 }
 
+const buildAssets = series(exportImgBuild, exportFilesBuild);
+
+/**
+ * Exports
+ * --------------------------------------------------------------------------
+ */
+
 // список задач и вотчеров для создания dev-версии
 exports.serve = series(
   // очистка
@@ -688,7 +703,7 @@ exports.serve = series(
   // общие задачи
   fontGeneration,
   exportAssetsDev,
-  // sprites
+  // спрайты
   compileSvgSprite,
   compilePngSprite,
   // html
@@ -701,7 +716,6 @@ exports.serve = series(
   compileJsCommon,
   compileJsVendors,
   compileJsComponents,
-
   // инициализация dev-сервера
   initDevServer,
 
@@ -719,26 +733,18 @@ exports.serve = series(
   },
 );
 
-/**
- * Exports
- * --------------------------------------------------------------------------
- */
-
 // список задач для создания build-версии
-// TODO: добавить build задачи
 exports.build = series(
   // очистка
   cleanBuild,
   // сборка
   buildHtml,
   buildCss,
-  /* parallel(
-    // Минификация
-    // Оптимизация картинок
-    // И пр.
-  ), */
+  buildJs,
+  buildFonts,
+  buildAssets,
   // инициализация build-сервера
   initBuildServer,
   // Psi отчет
-  // getPsiReport,
+  getPsiReport,
 );
