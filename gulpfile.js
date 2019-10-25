@@ -20,7 +20,6 @@ const pngSprite = require('gulp.spritesmith');
 const pngSprite3x = require('gulp.spritesmith.3x');
 const stylelint = require('gulp-stylelint');
 const eslint = require('gulp-eslint');
-const htmllint = require('gulp-htmllint');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
 const ttf2eot = require('gulp-ttf2eot');
@@ -192,11 +191,11 @@ function compileHtml() {
       context: {
         svgSpriteExists,
       },
+      indent: true,
     }))
     .pipe(replace(buildRegEx, ''))
     .pipe(replace(emptySpacesRegEx, '$1'))
     .pipe(typograf({ locale: ['ru', 'en-US'] }))
-    .pipe(htmllint())
     .pipe(dest(`${devPath.pages}`));
 }
 
@@ -253,6 +252,7 @@ function compileJsVendors() {
     .pipe(plumber())
     .pipe(fileInclude({
       basepath: `${srcRoot}`,
+      indent: true,
     }))
     .pipe(dest(`${devPath.js}`));
 }
@@ -262,6 +262,7 @@ function compileJsComponents() {
     .pipe(plumber())
     .pipe(fileInclude({
       basepath: `${srcRoot}`,
+      indent: true,
     }))
     .pipe(eslint())
     .pipe(dest(`${devPath.js}`));

@@ -40,7 +40,6 @@
     "gulp-file-include": "^2.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-html-replace": "^1.6.2",
-    "gulp-htmllint": "0.0.16",
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^6.1.1",
     "gulp-plumber": "^1.2.1",
