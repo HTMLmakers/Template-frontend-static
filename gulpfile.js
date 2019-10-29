@@ -493,12 +493,12 @@ function compilePngSprite() {
   const options2x = {
     retinaImgName: 'sprite@2x.png',
     retinaImgPath: '../img/sprite@2x.png',
-    retinaSrcFilter: './src/assets/img/sprite/png/*@2x.png',
+    retinaSrcFilter: '${srcPath.assets.img.sprite.png}/*@2x.png',
   };
   const options3x = {
     retina3xImgName: 'sprite@3x.png',
     retina3xImgPath: '../img/sprite@3x.png',
-    retina3xSrcFilter: './src/assets/img/sprite/png/*@3x.png',
+    retina3xSrcFilter: '${srcPath.assets.img.sprite.png}/*@3x.png',
   };
 
   fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach((file) => {
