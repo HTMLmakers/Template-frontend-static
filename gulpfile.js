@@ -97,8 +97,6 @@ const buildPath = {
   styles: `${buildRoot}/styles`,
 };
 
-//-----------------------------------------------------
-
 /**
  * Servers
  * --------------------------------------------------------------------------
@@ -167,7 +165,7 @@ function cleanBuild() {
 
 /**
  * Сборка html:
- * 1. Сборка всех инклудов из ./src/components/, ./src/pages/
+ * 1. Сборка всех инклудов из ./src/components/, ./src/pages/ в файлы .html
  * 2. Очистка от лишних коментариев и переводов строк
  * 3. Обработка текста с помощью https://github.com/typograf/typograf
  * 4. Сохранение собраных файлов .html в ./dev/
@@ -200,7 +198,7 @@ function compileHtml() {
 }
 
 /**
- * Очистка каталога ./dev/ от всех файлов .html
+ * Очистка директории ./dev/ от всех файлов .html
  */
 
 function cleanHtml() {
@@ -209,21 +207,9 @@ function cleanHtml() {
 
 /**
  * Отслеживание изменений html:
- * 1. Отслеживание ./src/pages/ на все события (add, del, change)
- * 2. Отслеживание ./src/components/, ./src/pages/include/ на change
+ * 1. Отслеживание директории ./src/pages/ на все события (add, del, change)
+ * 2. Отслеживание файлов .html в ./src/components/ и ./src/pages/include/ на изменения (change)
  */
-
-function buildHtml() {
-  return src(`${devPath.pages}/*.html`)
-    .pipe(htmlreplace({
-      css: 'styles/style.min.css',
-      js: {
-        src: null,
-        tpl: '<script src="js/script.min.js" async></script>',
-      },
-    }))
-    .pipe(dest(`${buildPath.pages}`));
-}
 
 function watchHtml() {
   const tasks = series(cleanHtml, compileHtml, liveReload);
@@ -237,91 +223,36 @@ function watchHtml() {
 }
 
 /**
- * Js
- * --------------------------------------------------------------------------
+ * Финальная сборка html:
+ * 1. Замена подключаемых файлов .css и .js на минифицированные
+ * 2. Перенос файлов .html в ./build/
  */
-
-/**
- * Сборка js:
- * 1. Сборка всех файлов .js из ./src/js/vendors/ и ./src/components/
- * 2. Сохранение собраных файлов .js в ./dev/js
- */
-
-function compileJsVendors() {
-  return src(`${srcPath.js.root}/vendors.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      basepath: `${srcRoot}`,
-      indent: true,
+function buildHtml() {
+  return src(`${devPath.pages}/*.html`)
+    .pipe(htmlreplace({
+      css: 'styles/style.min.css',
+      js: {
+        src: null,
+        tpl: '<script src="js/script.min.js" async></script>',
+      },
     }))
-    .pipe(dest(`${devPath.js}`));
+    .pipe(dest(`${buildPath.pages}`));
 }
 
-function compileJsComponents() {
-  return src(`${srcPath.js.root}/components.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
-}
-
-function compileJsCommon() {
-  return src(`${srcPath.js.root}/common.js`)
-    .pipe(plumber())
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
-}
 
 /**
- * Минификация файлов .js для build
- * 1. Сохранение обычного файла .js в ./build/js/
- * 2. Минификация и сохранение файла .min.js в ./build/js/
- */
-
-function buildJs() {
-  return src([
-    `${devPath.js}/vendors.js`,
-    `${devPath.js}/common.js`,
-    `${devPath.js}/components.js`,
-  ])
-    .pipe(plumber())
-    .pipe(concat('script.js'))
-    .pipe(dest(`${buildPath.js}`))
-    .pipe(uglify())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(`${buildPath.js}`));
-}
-
-/**
- * Отслеживание изменений js:
- * 1. Отслеживание ./src/js/, ./src/js/vendors/ и ./src/components/ на change
- */
-
-function watchJs() {
-  watch([
-    `${srcPath.js.root}/vendors.js`,
-    `${srcPath.js.vendors}/*.js`,
-  ], { events: 'change' }, series(compileJsVendors, liveReload));
-  watch([
-    `${srcPath.js.root}/components.js`,
-    `${srcPath.components.root}/**/*.js`,
-  ], { events: 'change' }, series(compileJsComponents, liveReload));
-  watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
-}
-
-/**
- * Scss, css
+ * Style
  * --------------------------------------------------------------------------
  */
 
 /**
  * Сборка и компиляция scss:
- * 1. Сборка всех файлов .scss и .css из ./src/styles/ и ./src/components/
- * 2. Коплиляция .scss в .css и сохранение в ./dev/styles/
- * 3. Post CSS трансформация
+ * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 4. Коплиляция .scss в .css
+ * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
+ * 6. Сохранение файла в ./dev/styles/
  */
 
 const stylelintOptions = {
@@ -376,31 +307,11 @@ function compileCssComponents() {
 }
 
 /**
- * Build для файлов .css
- * 1. Сохранение обычного файла .css в ./build/styles/
- * 2. Минификация и сохранение файла .min.css в ./build/styles/
- */
-
-function buildCss() {
-  return src([
-    `${devPath.styles}/vendors.css`,
-    `${devPath.styles}/style.css`,
-    `${devPath.styles}/components.css`,
-  ])
-    .pipe(plumber())
-    .pipe(concat('style.css'))
-    .pipe(dest(`${buildPath.styles}`))
-    .pipe(csso())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(`${buildPath.styles}`));
-}
-
-/**
- * Отслеживание изменений scss, css на change
- * 1. Отслеживание директории ./src/styles/** кроме ./src/styles/vendors,
- * vendors.scss и components.scss
- * 2. Отслеживание директории ./src/styles/vendors/ и файла vendors.scss
- * 3. Отслеживание директории ./src/components/** и файла components.scss
+ * Отслеживание изменений style
+ * 1. Отслеживание всех .scss (.css) файлов в ./src/styles/** (кроме ./src/styles/vendors,
+ * vendors.scss и components.scss) на изменения (change)
+ * 2. Отслеживание .scss файлов в ./src/styles/vendors/ и vendors.scss на изменения (change)
+ * 3. Отслеживание .scss файлов в ./src/components/** и components.scss на изменения (change)
  */
 
 function watchCss() {
@@ -421,15 +332,118 @@ function watchCss() {
 }
 
 /**
- * Svg спрайт
+ * Финальная сборка css:
+ * 1. Сборка всех .css файлов в style.js
+ * 2. Сохранение файла style.js в ./build/styles/
+ * 3. Минификация и сохранение файла style.min.js в ./build/styles/
+ */
+
+function buildCss() {
+  return src([
+    `${devPath.styles}/vendors.css`,
+    `${devPath.styles}/style.css`,
+    `${devPath.styles}/components.css`,
+  ])
+    .pipe(plumber())
+    .pipe(concat('style.css'))
+    .pipe(dest(`${buildPath.styles}`))
+    .pipe(csso())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(`${buildPath.styles}`));
+}
+
+/**
+ * JavaScript
  * --------------------------------------------------------------------------
  */
 
 /**
- * Создание спрайта svg
+ * Сборка js:
+ * 1. Сборка всех файлов .js из ./src/js/vendors/ в vendors.js
+ * 2. Сборка всех файлов .js из ./src/components/ в components.js
+ * 3. Сохранение собраных файлов .js в ./dev/js/
+ * 4. Перенос common.js в ./dev/js/
+ */
+
+function compileJsVendors() {
+  return src(`${srcPath.js.root}/vendors.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsComponents() {
+  return src(`${srcPath.js.root}/components.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(eslint())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsCommon() {
+  return src(`${srcPath.js.root}/common.js`)
+    .pipe(plumber())
+    .pipe(eslint())
+    .pipe(dest(`${devPath.js}`));
+}
+
+/**
+ * Отслеживание изменений js:
+ * 1. Отслеживание файлов .js в ./src/js/vendors/ на изменение (change)
+ * 2. Отслеживание файлов .js в ./src/components/ на изменение (change)
+ * 3. Отслеживание файла common.js на изменение (change)
+ */
+
+function watchJs() {
+  watch([
+    `${srcPath.js.root}/vendors.js`,
+    `${srcPath.js.vendors}/*.js`,
+  ], { events: 'change' }, series(compileJsVendors, liveReload));
+  watch([
+    `${srcPath.js.root}/components.js`,
+    `${srcPath.components.root}/**/*.js`,
+  ], { events: 'change' }, series(compileJsComponents, liveReload));
+  watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
+}
+
+/**
+ * Финальная сборка js:
+ * 1. Сборка всех .js файлов в script.js
+ * 2. Сохранение файла script.js в ./build/js/
+ * 3. Минификация и сохранение файла script.min.js в ./build/js/
+ */
+
+function buildJs() {
+  return src([
+    `${devPath.js}/vendors.js`,
+    `${devPath.js}/common.js`,
+    `${devPath.js}/components.js`,
+  ])
+    .pipe(plumber())
+    .pipe(concat('script.js'))
+    .pipe(dest(`${buildPath.js}`))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(`${buildPath.js}`));
+}
+
+
+/**
+ * Sprites
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Создание svg-спрайта
  * 1. Сбор всех файлов .svg из ./src/assets/img/sprite/svg/ в спрайт
- * 2. Оптимизация svg-спрайта
- * 3. Переименование и сохранение в ./dev/assets/img/sprite/
+ * 2. Оптимизация собранного svg-спрайта
+ * 3. Сохранение sprite.svg в ./src/assets/img/sprite/
  */
 
 function compileSvgSprite() {
@@ -448,9 +462,21 @@ function compileSvgSprite() {
     .pipe(dest(`${srcPath.assets.img.sprite.root}`));
 }
 
+/**
+ * Отслеживание изменений svg:
+ * 1. Отслеживание файлов svg в ./src/assets/img/sprite/svg/ на все события (add, del, change)
+ */
+
 function watchSvgSprite() {
   watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
 }
+
+/**
+ * Создание png-спрайта
+ * 1. Сбор всех файлов .png, @2x.png, @3x.png из ./src/assets/img/sprite/png/ в спрайт
+ * 2. Сохранение sprite.png, sprite@2x.png, sprite@3x.png в ./src/assets/img/sprite/
+ * 3. Сохранение sprite.scss в ./src/style/mixins/
+ */
 
 function compilePngSprite() {
   let plugin = pngSprite;
@@ -511,8 +537,57 @@ function compilePngSprite() {
     .pipe(gulpIf('*.scss', dest(`${srcPath.styles.mixins}`)));
 }
 
+/**
+ * Отслеживание изменений png:
+ * 1. Отслеживание файлов .png в ./src/assets/img/sprite/png/ на все события (add, del, change)
+ */
+
 function watchPngSprite() {
   watch(`${srcPath.assets.img.sprite.png}`, compilePngSprite);
+}
+
+/**
+ * Asset
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Экспорт файлов:
+ * 1. Перенос всех файлов из ./src/assets/ (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) в ./dev/assets/
+ */
+
+function exportAssetsDev() {
+  return src([
+    `${srcPath.assets.root}/**/*.*`,
+    `!${srcPath.assets.img.sprite.png}`,
+    `!${srcPath.assets.img.sprite.png}/**/*`,
+    `!${srcPath.assets.img.sprite.svg}`,
+    `!${srcPath.assets.img.sprite.svg}/**/*`,
+  ])
+    .pipe(dest(`${devPath.assets.root}`));
+}
+
+/**
+ * Очистка директории ./dev/assets/ от всех файлов
+ */
+
+function cleanAsset() {
+  return del(`${devPath.assets.root}`);
+}
+
+/**
+ * Отслеживание изменений assets:
+ * 1. Отслеживание всех файлов из ./src/assets/ (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) на все события (add, del, change)
+ */
+
+function watchAssets() {
+  watch([
+    `${srcPath.assets.root}/**/*.*`,
+    `!${srcPath.assets.img.sprite.png}`,
+    `!${srcPath.assets.img.sprite.png}/**/*`,
+    `!${srcPath.assets.img.sprite.svg}`,
+    `!${srcPath.assets.img.sprite.svg}/**/*`,
+  ], series(cleanAsset, exportAssetsDev));
 }
 
 /**
@@ -521,9 +596,9 @@ function watchPngSprite() {
  */
 
 /**
- * Генерация веб щрифтов:
- * 1. Шрифты в формате TTF вставляем в ./src/fonts/
- * 2. На выходе получаем веб шрифты в ./dev/fonts
+ * Генерация веб-шрифтов:
+ * 1. Из файлов .ttf в ./src/fonts/ генерируются файлы .woff, .woff2, .eot
+ * 2. Сохранение сгенерированных шрифтов в ./dev/fonts/
  */
 
 function convertTTFToWOFF() {
@@ -544,17 +619,21 @@ function convertTTFToEOT() {
     .pipe(dest([`${devPath.fonts}`]));
 }
 
+/**
+ * Очистка директории ./dev/fonts/ от всех файлов
+ */
+
 function cleanFonts() {
   return del(`${devPath.fonts}`);
 }
 
+/**
+ * Отслеживание изменений fonts:
+ * 1. Отслеживание файлов .ttf в ./src/fonts/ на все события (add, del, change)
+ */
+
 function watchFonts() {
   watch(`${srcPath.fonts}/*.ttf`, fontGeneration);
-}
-
-function buildFonts() {
-  return src(`${devPath.fonts}/*.*`)
-    .pipe(dest(`${buildPath.fonts}`));
 }
 
 const fontGeneration = series(
@@ -563,15 +642,25 @@ const fontGeneration = series(
 );
 
 /**
+ * Финальная сборка fonts:
+ * 1. Перенос всех .woff, .woff2, .eot  ./build/fonts/
+ */
+
+function buildFonts() {
+  return src(`${devPath.fonts}/*.*`)
+    .pipe(dest(`${buildPath.fonts}`));
+}
+
+/**
  * Optimization reports
  * --------------------------------------------------------------------------
  */
 
 /**
  * Psi:
- * 1. получаем все url build-страниц
- * 2. Выводим десктопный отчет
- * 3. Выводим мобильный отчет
+ * 1. Получение всех url html-страниц в ./build/
+ * 2. Вывод десктопного отчета
+ * 3. Вывод мобильного отчета
  */
 
 function getAllBuildUrls() {
@@ -622,15 +711,15 @@ function logPsiReport(title, strategy, done) {
 const getPsiReport = series(getAllBuildUrls, getPsiDesktopReport, getPsiMobileReport);
 
 /**
- * Финальная сборка (build)
+ * Final (build)
  * --------------------------------------------------------------------------
  */
 
 /**
- * Оптимизация изображений
+ * Перенос и оптимизация изображений
  * 1. Сбор всех файлов .png, .jpg, .svg из ./dev/assets/img/
  * 2. Оптимизация изображений
- * 3. Cохранение в ./build/assets/img/
+ * 3. Сохранение в ./build/assets/img/
  */
 
 function exportImgBuild() {
@@ -665,30 +754,6 @@ function exportFilesBuild() {
     .pipe(dest(`${buildPath.assets.root}`));
 }
 
-function cleanAsset() {
-  return del(`${devPath.assets.root}`);
-}
-
-function exportAssetsDev() {
-  return src([
-    `${srcPath.assets.root}/**/*.*`,
-    `!${srcPath.assets.img.sprite.png}`,
-    `!${srcPath.assets.img.sprite.png}/**/*`,
-    `!${srcPath.assets.img.sprite.svg}`,
-    `!${srcPath.assets.img.sprite.svg}/**/*`,
-  ])
-    .pipe(dest(`${devPath.assets.root}`));
-}
-
-function watchAssets() {
-  watch([
-    `${srcPath.assets.root}/**/*.*`,
-    `!${srcPath.assets.img.sprite.png}`,
-    `!${srcPath.assets.img.sprite.png}/**/*`,
-    `!${srcPath.assets.img.sprite.svg}`,
-    `!${srcPath.assets.img.sprite.svg}/**/*`,
-  ], series(cleanAsset, exportAssetsDev));
-}
 
 const buildAssets = series(exportImgBuild, exportFilesBuild);
 
