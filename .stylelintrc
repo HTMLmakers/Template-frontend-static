@@ -127,8 +127,7 @@
     "property-case": "lower",
     "rule-empty-line-before": [
       "always-multi-line", {
-        "except": ["first-nested"],
-        "ignore": ["after-comment"]
+        "ignore": ["first-nested", "after-comment"]
       }
     ],
     "selector-attribute-brackets-space-inside": "never",
