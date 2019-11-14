@@ -7,7 +7,6 @@ const del = require('del');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass');
-const typograf = require('gulp-typograf');
 const mediaQueriesGroup = require('gulp-group-css-media-queries');
 const csso = require('gulp-csso');
 const rename = require('gulp-rename');
@@ -32,6 +31,7 @@ const tap = require('gulp-tap');
 const autoprefixer = require('autoprefixer');
 const htmlreplace = require('gulp-html-replace');
 const concat = require('gulp-concat');
+const babel = require('gulp-babel');
 
 let buildUrl = '';
 const urls = [];
@@ -69,7 +69,10 @@ const srcPath = {
   styles: {
     root: `${srcRoot}/styles`,
     common: `${srcRoot}/styles/common`,
-    mixins: `${srcRoot}/styles/mixins`,
+    dependencies: {
+      root: `${srcRoot}/styles/dependencies`,
+      mixins: `${srcRoot}/styles/dependencies/mixins`,
+    },
     uaKit: `${srcRoot}/styles/ua-kit`,
     vendors: `${srcRoot}/styles/vendors`,
   },
@@ -149,7 +152,6 @@ function liveReload(done) {
  * 2. Очистка ./build
  */
 
-
 function cleanDev() {
   return del(`${devRoot}`);
 }
@@ -167,8 +169,7 @@ function cleanBuild() {
  * Сборка html:
  * 1. Сборка всех инклудов из ./src/components/, ./src/pages/ в файлы .html
  * 2. Очистка от лишних коментариев и переводов строк
- * 3. Обработка текста с помощью https://github.com/typograf/typograf
- * 4. Сохранение собраных файлов .html в ./dev/
+ * 3. Сохранение собраных файлов .html в ./dev/
  */
 
 function compileHtml() {
@@ -193,7 +194,6 @@ function compileHtml() {
     }))
     .pipe(replace(buildRegEx, ''))
     .pipe(replace(emptySpacesRegEx, '$1'))
-    .pipe(typograf({ locale: ['ru', 'en-US'] }))
     .pipe(dest(`${devPath.pages}`));
 }
 
@@ -238,7 +238,6 @@ function buildHtml() {
     }))
     .pipe(dest(`${buildPath.pages}`));
 }
-
 
 /**
  * Style
@@ -317,6 +316,7 @@ function compileCssComponents() {
 function watchCss() {
   watch([
     `${srcPath.styles.root}/**/*.scss`,
+    `!${srcPath.styles.dependencies.root}/**/*`,
     `!${srcPath.styles.vendors}/*`,
     `!${srcPath.styles.root}/vendors.scss`,
     `!${srcPath.styles.root}/components.scss`,
@@ -329,6 +329,7 @@ function watchCss() {
     `${srcPath.styles.root}/components.scss`,
     `${srcPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(compileCssComponents, liveReload));
+  watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssComponents, liveReload));
 }
 
 /**
@@ -426,13 +427,15 @@ function buildJs() {
     `${devPath.js}/components.js`,
   ])
     .pipe(plumber())
+    .pipe(babel({
+      presets: ['@babel/env'],
+    }))
     .pipe(concat('script.js'))
     .pipe(dest(`${buildPath.js}`))
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
     .pipe(dest(`${buildPath.js}`));
 }
-
 
 /**
  * Sprites
@@ -468,17 +471,18 @@ function compileSvgSprite() {
  */
 
 function watchSvgSprite() {
-  watch(`${srcPath.assets.img.sprite.svg}/*.svg`, compileSvgSprite);
+  watch(`${srcPath.assets.img.sprite.svg}/*.svg`, series(compileSvgSprite, liveReload));
 }
 
 /**
  * Создание png-спрайта
  * 1. Сбор всех файлов .png, @2x.png, @3x.png из ./src/assets/img/sprite/png/ в спрайт
  * 2. Сохранение sprite.png, sprite@2x.png, sprite@3x.png в ./src/assets/img/sprite/
- * 3. Сохранение sprite.scss в ./src/style/mixins/
+ * 3. Сохранение sprite.scss в ./src/style/dependencies/mixins/
  */
 
 function compilePngSprite() {
+  const spriteCssPath = '../assets/img/sprite/sprite';
   let plugin = pngSprite;
   let spriteSrc = `${srcPath.assets.img.sprite.png}/*.png`;
   let imgs = 0;
@@ -487,18 +491,19 @@ function compilePngSprite() {
 
   const options = {
     imgName: 'sprite.png',
-    imgPath: '../img/sprite.png',
+    imgPath: `${spriteCssPath}.png`,
     cssName: '_sprites.scss',
+    padding: 20,
   };
   const options2x = {
     retinaImgName: 'sprite@2x.png',
-    retinaImgPath: '../img/sprite@2x.png',
-    retinaSrcFilter: '${srcPath.assets.img.sprite.png}/*@2x.png',
+    retinaImgPath: `${spriteCssPath}@2x.png`,
+    retinaSrcFilter: `${srcPath.assets.img.sprite.png}/*@2x.png`,
   };
   const options3x = {
     retina3xImgName: 'sprite@3x.png',
-    retina3xImgPath: '../img/sprite@3x.png',
-    retina3xSrcFilter: '${srcPath.assets.img.sprite.png}/*@3x.png',
+    retina3xImgPath: `${spriteCssPath}@3x.png`,
+    retina3xSrcFilter: `${srcPath.assets.img.sprite.png}/*@3x.png`,
   };
 
   fs.readdirSync(`${srcPath.assets.img.sprite.png}`).forEach((file) => {
@@ -534,7 +539,7 @@ function compilePngSprite() {
     .pipe(plumber())
     .pipe(plugin(options))
     .pipe(gulpIf('*.png', dest(`${srcPath.assets.img.sprite.root}`)))
-    .pipe(gulpIf('*.scss', dest(`${srcPath.styles.mixins}`)));
+    .pipe(gulpIf('*.scss', dest(`${srcPath.styles.dependencies.mixins}`)));
 }
 
 /**
@@ -543,7 +548,7 @@ function compilePngSprite() {
  */
 
 function watchPngSprite() {
-  watch(`${srcPath.assets.img.sprite.png}`, compilePngSprite);
+  watch(`${srcPath.assets.img.sprite.png}`, series(compilePngSprite, liveReload));
 }
 
 /**
@@ -553,7 +558,8 @@ function watchPngSprite() {
 
 /**
  * Экспорт файлов:
- * 1. Перенос всех файлов из ./src/assets/ (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) в ./dev/assets/
+ * 1. Перенос всех файлов из ./src/assets/
+ * (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) в ./dev/assets/
  */
 
 function exportAssetsDev() {
@@ -577,7 +583,8 @@ function cleanAsset() {
 
 /**
  * Отслеживание изменений assets:
- * 1. Отслеживание всех файлов из ./src/assets/ (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) на все события (add, del, change)
+ * 1. Отслеживание всех файлов из ./src/assets/
+ * (кроме ./src/assets/sprite.png и ./src/assets/sprite.svg) на все события (add, del, change)
  */
 
 function watchAssets() {
@@ -587,7 +594,7 @@ function watchAssets() {
     `!${srcPath.assets.img.sprite.png}/**/*`,
     `!${srcPath.assets.img.sprite.svg}`,
     `!${srcPath.assets.img.sprite.svg}/**/*`,
-  ], series(cleanAsset, exportAssetsDev));
+  ], series(cleanAsset, exportAssetsDev, liveReload));
 }
 
 /**
@@ -633,7 +640,7 @@ function cleanFonts() {
  */
 
 function watchFonts() {
-  watch(`${srcPath.fonts}/*.ttf`, fontGeneration);
+  watch(`${srcPath.fonts}/*.ttf`, series(fontGeneration, liveReload));
 }
 
 const fontGeneration = series(
@@ -768,7 +775,6 @@ exports.serve = series(
   cleanDev,
   // общие задачи
   fontGeneration,
-  exportAssetsDev,
   // спрайты
   compileSvgSprite,
   compilePngSprite,
@@ -782,6 +788,8 @@ exports.serve = series(
   compileJsCommon,
   compileJsVendors,
   compileJsComponents,
+  // export
+  exportAssetsDev,
   // инициализация dev-сервера
   initDevServer,
 
