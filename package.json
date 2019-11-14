@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp serve",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,8 @@
     "IE 11"
   ],
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
     "autoprefixer": "^9.6.4",
     "browser-sync": "^2.26.7",
     "del": "^5.1.0",
@@ -34,6 +37,7 @@
     "eslint-plugin-react": "^7.16.0",
     "fs": "0.0.1-security",
     "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-eslint": "^6.0.0",
@@ -53,7 +57,6 @@
     "gulp-ttf2eot": "^1.1.2",
     "gulp-ttf2woff": "^1.1.1",
     "gulp-ttf2woff2": "^3.0.0",
-    "gulp-typograf": "^4.0.1",
     "gulp-uglify": "^3.0.2",
     "gulp.spritesmith": "^6.11.0",
     "gulp.spritesmith.3x": "^1.0.9",
