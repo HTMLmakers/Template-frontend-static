@@ -1,0 +1,50 @@
+
+.btn {
+  min-width: 352px;
+  margin: 0;
+  padding: 12px 25px 14px;
+  font-size: 20px;
+  font-family: $font-roboto-regular;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 0 $black;
+  user-select: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.8;
+  }
+
+  &--primary {
+    color: $black;
+    background-color: $amber;
+  }
+
+  &--secondary {
+    color: $white;
+    background-color: $guardsman-red;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--small {
+    min-width: 220px;
+    margin-top: 18px;
+    padding-top: 9px;
+    padding-bottom: 11px;
+  }
+}

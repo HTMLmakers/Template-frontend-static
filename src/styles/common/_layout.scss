@@ -3,6 +3,7 @@
 
   display: flex;
   flex-direction: column;
+  min-width: $body-min-width;
 
   &__header {
     min-height: $layout-header-min-height;
@@ -12,37 +13,13 @@
     min-height: $layout-footer-min-height;
   }
 
-  &__add {
-    min-height: $layout-add-min-height;
-  }
-
   &__base {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
   }
 
-  &__aside-primary {
-    flex: 0 0 $layout-aside-primary-width;
-  }
-
-  &__aside-secondary {
-    flex: 0 0 $layout-aside-secondary-width;
-  }
-
-  &__main {
-    flex-grow: 1;
-  }
-
-  &--viewport-height {
-
-    #{$root}__base {
-      height: calc(100vh - #{$layout-header-min-height} - #{$layout-footer-min-height} - #{$layout-add-min-height});
-    }
-
-    #{$root}__aside-primary,
-    #{$root}__aside-secondary,
-    #{$root}__aside-main {
-      overflow: auto;
-    }
+  &__section {
+    min-height: 150px;
   }
 }
