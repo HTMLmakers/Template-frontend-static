@@ -1,28 +1,33 @@
 <!doctype html>
-<html lang="en">
-  @@include('./pages/include/head.html')
-  <body class="layout layout--viewport-height">
-    @@include('./pages/include/svg-inline.html')
-    <header class="layout__header">
-      <div class="container"></div>
-    </header>
-    <main class="layout__base">
-      <div class="layout__section">
+<html lang="ru">
+@@include('./pages/include/head.html')
 
-      </div>
-      <div class="layout__section">
-
-      </div>
-      <div class="layout__section">
-
-      </div>
-      <div class="layout__section">
-
-      </div>
-    </main>
-    <footer class="layout__footer">
+<body class="layout"><!--layout--viewport-height-->
+  @@include('./pages/include/svg-inline.html')
+  <header class="layout__header">
+    <div class="container"></div><!--container-fluid-->
+    @@include('./components/core/header/header.html')
+  </header>
+  <div class="layout__add">
     <div class="container"></div>
-    </footer>
-    @@include('./pages/include/scripts.html')
-	</body>
+  </div>
+  <div class="layout__base">
+    <div class="container">
+      <aside class="layout__aside-primary"></aside>
+      <main class="layout__main"></main>
+      <aside class="layout__aside-secondary"></aside>
+    </div>
+  </div>
+  <div class="layout__add">
+    <div class="container"></div>
+  </div>
+  <footer class="layout__footer">
+    <div class="container"></div>
+    @@include('./components/core/footer/footer.html')
+  </footer>
+
+  <!--@@include('./components/features/popup-callback/popup-callback.html')-->
+
+  @@include('./pages/include/scripts.html')
+</body>
 </html>
