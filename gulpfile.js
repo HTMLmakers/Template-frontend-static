@@ -73,7 +73,6 @@ const srcPath = {
       root: `${srcRoot}/styles/dependencies`,
       mixins: `${srcRoot}/styles/dependencies/mixins`,
     },
-    uaKit: `${srcRoot}/styles/ua-kit`,
     vendors: `${srcRoot}/styles/vendors`,
   },
 };
