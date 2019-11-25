@@ -1,27 +1,45 @@
+// =============================================================================
+// Constants
+// =============================================================================
+
+// Colors
 
 $white:          #fff;
 $black:          #000;
+
 $bright-red:     #a60002;
-$guardsman-red:  #b70000;
-$silver:         #c1c1c1;
-$gray:           #818181;
-$scorpion:       #595959;
-$alto:           #dadada;
-$amber:          #ffbf02;
+
+// Fonts
 
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
+
 $font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
+
+$default-font-size: 16 px;
+
+// layout
+
+$layout-header-min-height: 120px;
+$layout-footer-min-height: 385px;
+
+
+// =============================================================================
+// Variables
+// =============================================================================
+
+// body
+
+$body-bg: $white;
+$body-color: $black;
+$body-font-family: $secure-fonts;
+$body-font-size: $default-font-size;
+
+
+// ?????????????????????
 
 $body-min-width: 1200px;
 $container-max-width: 1200px;
 $container-min-width: 1200px;
 
 $container-horizontal-padding: 15px;
-
-$layout-header-min-height: 120px;
-$layout-footer-min-height: 385px;
-
-$body-bg-color: $white;
-$body-color: $black;
-$body-font-family: $secure-fonts;
 
