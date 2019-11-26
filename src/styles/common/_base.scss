@@ -11,5 +11,7 @@ html {
 
 body {
   min-height: 100%;
-  background-color: $body-background-color;
+  color: $body-color;
+  font-family: $body-font-family;
+  background-color: $body-bg;
 }
