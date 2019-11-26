@@ -3,7 +3,42 @@
 
   display: flex;
   flex-direction: column;
-  min-width: $body-min-width;
+  min-width: map-get($container-max-widths, xs);
+
+  &__header,
+  &__footer,
+  &__add,
+  &__base,
+  &__section {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+
+  &__base-wrap {
+    @include make-row();
+  }
+
+  &__main,
+  &__aside-primary,
+  &__aside-secondary {
+    @include make-col-ready();
+  }
+
+  &__aside-primary {
+    @include make-col-fix(300px);
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
+
+  &__aside-secondary {
+    @include make-col(20, 100);
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
 
   &__header {
     min-height: $layout-header-min-height;
@@ -13,13 +48,24 @@
     min-height: $layout-footer-min-height;
   }
 
-  &__base {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+  &__add {
+    min-height: 100px;
   }
 
   &__section {
     min-height: 150px;
+  }
+
+  &--viewport-height {
+
+    #{$root}__base {
+      height: calc(100vh - 130px - 100px - 130px - 100px);
+    }
+
+    #{$root}__aside-primary,
+    #{$root}__aside-secondary,
+    #{$root}__main {
+      overflow: auto;
+    }
   }
 }

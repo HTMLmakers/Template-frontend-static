@@ -29,6 +29,8 @@
     box-shadow: 0 0 50px rgba($black, 0.35);
 
     &__close {
+      //@include sprite($icon-close);
+
       position: absolute;
       top: 8px;
       right: 16px;
