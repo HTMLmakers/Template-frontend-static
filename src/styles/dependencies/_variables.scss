@@ -1,25 +1,45 @@
-
-$white:          #fff;
-$black:          #000;
-$bright-red:     #a60002;
-$guardsman-red:  #b70000;
-$silver:         #c1c1c1;
-$gray:           #818181;
-$scorpion:       #595959;
-$alto:           #dadada;
-$amber:          #ffbf02;
+$white: #fff;
+$black: #000;
+$bright-red: #a60002;
+$guardsman-red: #b70000;
+$silver: #c1c1c1;
+$gray: #818181;
+$scorpion: #595959;
+$alto: #dadada;
+$amber: #ffbf02;
 
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
 $font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
 
-$body-min-width: 1200px;
-$container-max-width: 1200px;
-$container-min-width: 1200px;
+$body-background-color: $alto;
 
-$container-horizontal-padding: 15px;
-
+// Layout
+$layout-gutter-widths: (
+  sm: 30px,
+  xl: 60px
+);
 $layout-header-min-height: 120px;
 $layout-footer-min-height: 385px;
 
-$body-background-color: $alto;
+// Grid
+$enable-grid-classes: true;
+$grid-columns: 100;
+$grid-gutter-width: 0;
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+// Desktop-only version
+//$container-max-widths: (
+//  sm: 1200px
+//);
+// Responsive version
+$container-max-widths: (
+  xs: 320px,
+  sm: 520px,
+  xl: 1200px
+);

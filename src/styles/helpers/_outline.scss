@@ -1,5 +1,5 @@
 * {
-	margin: 0;
+  margin: 0;
 }
 
 .layout,
@@ -12,13 +12,13 @@
 .layout__main,
 .container,
 .container-fluid {
-	position: relative;
-	border-width: 3px;
+  position: relative;
+  border-width: 3px;
 }
 
 .layout {
-	border-style: dashed;
-	border-color: red;
+  border-style: dashed;
+  border-color: red;
 }
 
 .layout__header,
@@ -30,38 +30,38 @@
 .layout__main,
 .container,
 .container-fluid {
-	margin: 3px;
-	padding-top: 25px;
-	padding-bottom: 6px;
-	padding-right: 6px;
-	border-style: solid;
+  margin: 3px;
+  padding-top: 25px;
+  padding-bottom: 6px;
+  padding-right: 6px;
+  border-style: solid;
 }
 
 .layout__header,
 .layout__footer,
 .layout__base {
-	border-color: green;
+  border-color: green;
 }
 
 .layout__add {
-	border-color: blue;
+  border-color: blue;
 }
 
 .layout__aside-primary,
 .layout__aside-secondary {
-	border-color: orange;
+  border-color: orange;
 }
 
 .layout__main {
-	border-color: purple;
+  border-color: purple;
 }
 
 .container,
 .container-fluid {
-	border-style: dashed;
-	border-color: black;
-	padding-bottom: 0;
-	padding-right: 0;
+  border-style: dashed;
+  border-color: black;
+  padding-bottom: 0;
+  padding-right: 0;
 }
 
 .layout__header:before,
@@ -73,68 +73,76 @@
 .layout__main:before,
 .container:before,
 .container-fluid:before {
-	position: absolute;
-	left: 0;
-	top: 0;
-	padding: 6px 8px;
-	font-family: Arial, sans-serif;
-	font-size: 12px;
-	line-height: 1;
-	color: #fff;
-	z-index: 999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 6px 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  z-index: 999;
 }
 
 .layout__header:before,
 .layout__footer:before,
 .layout__base:before {
-	background-color: green;
+  background-color: green;
 }
 
 .layout__add:before {
-	background-color: blue;
+  background-color: blue;
 }
 
 .layout__aside-primary:before,
 .layout__aside-secondary:before {
-	background-color: orange;
+  background-color: orange;
 }
 
 .layout__main:before {
-	background-color: purple;
+  background-color: purple;
 }
 
 .container:before,
 .container-fluid:before {
-	background-color: black;
-	left: -3px;
-	top: -3px;
-	padding: 8px 10px;
+  background-color: black;
+  left: -3px;
+  top: -3px;
+  padding: 8px 10px;
 }
 
 .layout__header:before {
-	content: 'layout__header';
+  content: 'layout__header';
 }
+
 .layout__footer:before {
-	content: 'layout__footer';
+  content: 'layout__footer';
 }
+
 .layout__base:before {
-	content: 'layout__base';
+  content: 'layout__base';
 }
+
 .layout__add:before {
-	content: 'layout__add';
+  content: 'layout__add';
 }
+
 .layout__aside-primary:before {
-	content: 'layout__aside-primary';
+  content: 'layout__aside-primary';
 }
+
 .layout__aside-secondary:before {
-	content: 'layout__aside-secondary';
+  content: 'layout__aside-secondary';
 }
+
 .layout__main:before {
-	content: 'layout__main';
+  content: 'layout__main';
 }
+
 .container:before {
-	content: 'container';
+  content: 'container';
 }
+
 .container-fluid:before {
-	content: 'container-fluid';
+  content: 'container-fluid';
 }
