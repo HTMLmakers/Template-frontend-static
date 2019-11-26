@@ -1,5 +1,6 @@
 @include placeholder {
-  color: $scorpion;
+  color: $black;
+  font-family: $secure-fonts;
   font-style: italic;
   text-align: center;
   text-transform: uppercase;
@@ -18,6 +19,7 @@
   margin-bottom: 30px;
   padding: 15px 15px 14px;
   color: $black;
+  font-family: $secure-fonts;
   text-align: center;
   text-transform: uppercase;
   border: none;

@@ -1,0 +1,29 @@
+.components-library {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 50px;
+
+  &__heading {
+    margin-bottom: 50px;
+    font-size: 48px;
+  }
+
+  &__list {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    list-style: none;
+  }
+
+  &__item {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  &__link {
+    color: black;
+    text-decoration: none;
+  }
+}

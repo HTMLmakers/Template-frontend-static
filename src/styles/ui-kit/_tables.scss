@@ -3,6 +3,7 @@
   margin-bottom: 10px;
   color: $black;
   font-size: 24px;
+  font-family: $secure-fonts;
   text-align: right;
   text-transform: uppercase;
   border: none;
@@ -20,13 +21,6 @@
 
   td {
 
-    &:nth-child(2) {
-      width: 130px;
-      color: $white;
-      text-align: center;
-      text-transform: none;
-      background-color: $guardsman-red;
-    }
   }
 
   thead th {
@@ -35,28 +29,5 @@
 
   tbody td {
     background-color: $white;
-  }
-
-  &--reverse {
-    padding-right: 160px;
-
-    td {
-
-      &:nth-child(2) {
-        width: 50%;
-        color: $black;
-        text-align: left;
-        text-transform: uppercase;
-        background-color: $white;
-      }
-
-      &:nth-child(1) {
-        display: inline-block;
-        min-width: 130px;
-        color: $white;
-        text-align: right;
-        background-color: $guardsman-red;
-      }
-    }
   }
 }
