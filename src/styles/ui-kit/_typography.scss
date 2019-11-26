@@ -1,25 +1,26 @@
-//
+// =============================================================================
 // Headings
-//
+// =============================================================================
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin: 0;
-  color: $guardsman-red;
-  font-family: $font-segoeui-black;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
   line-height: normal;
-  text-align: center;
-  text-transform: uppercase;
 }
 
 h1,
 .h1 {
-  font-size: 72px;
+  font-size: 36px;
 }
 
 h2,
 .h2 {
-  font-size: 48px;
+  font-size: 30px;
 }
 
 h3,
@@ -29,28 +30,48 @@ h3,
 
 h4,
 .h4 {
-  font-size: inherit;
+  font-size: 18px;
 }
 
 h5,
 .h5 {
-  font-size: inherit;
+  font-size: 14px;
 }
 
 h6,
 .h6 {
-  font-size: inherit;
+  font-size: 12px;
 }
 
-//
+// =============================================================================
 // Text
-//
+// =============================================================================
 
+p,
 .desc {
-  margin-bottom: 0;
-  color: #000;
-  font-size: 23px;
-  font-family: $font-segoeui-regular;
-  line-height: normal;
-  text-align: center;
+  margin: 1.5em 0;
+  color: inherit;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+// =============================================================================
+// List
+// =============================================================================
+
+ul,
+ol,
+.list {
+  margin: 0;
+  color: inherit;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+
+  ul,
+  ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 }

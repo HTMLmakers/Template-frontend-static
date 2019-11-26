@@ -4,7 +4,7 @@
   margin: 0;
   padding: 12px 25px 14px;
   font-size: 20px;
-  font-family: $font-roboto-regular;
+  font-family: $secure-fonts;
   text-align: center;
   text-transform: uppercase;
   border: none;
@@ -28,12 +28,12 @@
 
   &--primary {
     color: $black;
-    background-color: $amber;
+    background-color: $black;
   }
 
   &--secondary {
     color: $white;
-    background-color: $guardsman-red;
+    background-color: $black;
   }
 
   &--block {

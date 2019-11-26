@@ -39,6 +39,7 @@ const urls = [];
 const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
+const libRoot = './library';
 
 const srcPath = {
   assets: {
@@ -65,6 +66,7 @@ const srcPath = {
   pages: {
     root: `${srcRoot}/pages`,
     include: `${srcRoot}/pages/include`,
+    lib:  `${srcRoot}/pages/library`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -99,6 +101,12 @@ const buildPath = {
   styles: `${buildRoot}/styles`,
 };
 
+const libPath = {
+  pages: `${libRoot}`,
+  js: `${libRoot}/js`,
+  styles: `${libRoot}/styles`,
+};
+
 /**
  * Servers
  * --------------------------------------------------------------------------
@@ -121,6 +129,15 @@ function initDevServer(done) {
     console.log('Tunnel Dev:', url);
     done();
   }));
+}
+
+function initLibServer(done) {
+  browserSync.init({
+    server: libRoot,
+    port: 8080,
+    browser: 'chrome',
+  });
+  done();
 }
 
 function initBuildServer(done) {
@@ -149,6 +166,7 @@ function liveReload(done) {
  * Очистка директорий:
  * 1. Очистка ./dev
  * 2. Очистка ./build
+ * 3. Очистка ./library
  */
 
 function cleanDev() {
@@ -157,6 +175,10 @@ function cleanDev() {
 
 function cleanBuild() {
   return del(`${buildRoot}`);
+}
+
+function cleanLib() {
+  return del(`${libRoot}`);
 }
 
 /**
@@ -197,6 +219,18 @@ function compileHtml() {
 }
 
 /**
+ * Сборка html для components-library:
+ * 1. Сборка всех инклудов в файлы .html
+ * 2. Сохранение собраных файлов .html в ./library/
+ */
+
+function compileHtmlLib() {
+  return src(`${srcPath.pages.lib}/*.html`)
+    .pipe(plumber())
+    .pipe(dest(`${libPath.pages}`));
+}
+
+/**
  * Очистка директории ./dev/ от всех файлов .html
  */
 
@@ -219,6 +253,18 @@ function watchHtml() {
     `${srcPath.components.root}/**/*.html`,
   ], { events: 'change' }, tasks);
   watch(`${srcPath.assets.img.sprite.root}/sprite.svg`, tasks);
+}
+
+/**
+ * Отслеживание изменений html для components-library:
+ * 1. Отслеживание всех файлов .html на изменения (change)
+ */
+
+function watchHtmlLib() {
+  watch([
+    `${srcPath.pages.lib}/*.html`,
+    `${srcPath.components.root}/**/*.html`,
+  ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
 
 /**
@@ -305,6 +351,55 @@ function compileCssComponents() {
 }
 
 /**
+ * Сборка и компиляция scss для components-library:
+ * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 4. Коплиляция .scss в .css
+ * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
+ * 4. Сохранение файла в ./library/styles/
+ */
+
+function compileCssGeneralLib() {
+  return src(`${srcPath.styles.root}/style.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(mediaQueriesGroup())
+    .pipe(
+      postcss([
+        autoprefixer(),
+      ]),
+    )
+    .pipe(dest(`${libPath.styles}`));
+}
+
+function compileCssVendorsLib() {
+  return src(`${srcPath.styles.root}/vendors.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(mediaQueriesGroup())
+    .pipe(
+      postcss([
+        autoprefixer(),
+      ]),
+    )
+    .pipe(dest(`${libPath.styles}`));
+}
+
+function compileCssComponentsLib() {
+  return src(`${srcPath.styles.root}/components.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(mediaQueriesGroup())
+    .pipe(
+      postcss([
+        autoprefixer(),
+      ]),
+    )
+    .pipe(dest(`${libPath.styles}`));
+}
+
+/**
  * Отслеживание изменений style
  * 1. Отслеживание всех .scss (.css) файлов в ./src/styles/** (кроме ./src/styles/vendors,
  * vendors.scss и components.scss) на изменения (change)
@@ -329,6 +424,18 @@ function watchCss() {
     `${srcPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(compileCssComponents, liveReload));
   watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssComponents, liveReload));
+}
+
+/**
+ * Отслеживание изменений style для components-library
+ * 1. Отслеживание всех .scss (.css) файлов на изменения (change)
+ */
+
+function watchCssLib() {
+  watch([
+    `${srcPath.styles.root}/**/*.scss`,
+    `${srcPath.components.root}/**/*.scss`,
+  ], { events: 'change' }, series(parallel(compileCssGeneralLib, compileCssVendorsLib, compileCssComponentsLib), liveReload));
 }
 
 /**
@@ -801,6 +908,30 @@ exports.serve = series(
     watchPngSprite();
     watchAssets();
     watchFonts();
+
+    done();
+  },
+);
+
+// список задач и вотчеров для создания components-library
+exports.lib = series(
+  // очистка
+  cleanLib,
+  // html
+  compileHtmlLib,
+  // css
+  compileCssGeneralLib,
+  compileCssVendorsLib,
+  compileCssComponentsLib,
+  // js
+
+  // инициализация lib-сервера
+  initLibServer,
+
+  // колбек с вотчерами
+  (done) => {
+    watchHtmlLib();
+    watchCssLib();
 
     done();
   },
