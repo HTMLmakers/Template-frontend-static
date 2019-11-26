@@ -3,7 +3,6 @@
   margin-bottom: 10px;
   color: $black;
   font-size: 24px;
-  font-family: $font-segoeui-bold;
   text-align: right;
   text-transform: uppercase;
   border: none;
@@ -24,7 +23,6 @@
     &:nth-child(2) {
       width: 130px;
       color: $white;
-      font-family: $font-segoeui-black;
       text-align: center;
       text-transform: none;
       background-color: $guardsman-red;
@@ -47,7 +45,6 @@
       &:nth-child(2) {
         width: 50%;
         color: $black;
-        font-family: $font-segoeui-bold;
         text-align: left;
         text-transform: uppercase;
         background-color: $white;
@@ -57,7 +54,6 @@
         display: inline-block;
         min-width: 130px;
         color: $white;
-        font-family: $font-segoeui-black;
         text-align: right;
         background-color: $guardsman-red;
       }
