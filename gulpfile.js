@@ -227,6 +227,7 @@ function compileHtml() {
 function compileHtmlLib() {
   return src(`${srcPath.pages.library}/*.html`)
     .pipe(plumber())
+    .pipe(fileInclude())
     .pipe(dest(`${libraryPath.pages}`));
 }
 
