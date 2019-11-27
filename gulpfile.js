@@ -39,7 +39,7 @@ const urls = [];
 const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
-const libRoot = './library';
+const libraryRoot = './library';
 
 const srcPath = {
   assets: {
@@ -66,7 +66,7 @@ const srcPath = {
   pages: {
     root: `${srcRoot}/pages`,
     include: `${srcRoot}/pages/include`,
-    lib:  `${srcRoot}/pages/library`,
+    library:  `${srcRoot}/pages/library`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -101,10 +101,10 @@ const buildPath = {
   styles: `${buildRoot}/styles`,
 };
 
-const libPath = {
-  pages: `${libRoot}`,
-  js: `${libRoot}/js`,
-  styles: `${libRoot}/styles`,
+const libraryPath = {
+  pages: `${libraryRoot}`,
+  js: `${libraryRoot}/js`,
+  styles: `${libraryRoot}/styles`,
 };
 
 /**
@@ -133,7 +133,7 @@ function initDevServer(done) {
 
 function initLibServer(done) {
   browserSync.init({
-    server: libRoot,
+    server: libraryRoot,
     port: 8080,
     browser: 'chrome',
   });
@@ -178,7 +178,7 @@ function cleanBuild() {
 }
 
 function cleanLib() {
-  return del(`${libRoot}`);
+  return del(`${libraryRoot}`);
 }
 
 /**
@@ -225,9 +225,9 @@ function compileHtml() {
  */
 
 function compileHtmlLib() {
-  return src(`${srcPath.pages.lib}/*.html`)
+  return src(`${srcPath.pages.library}/*.html`)
     .pipe(plumber())
-    .pipe(dest(`${libPath.pages}`));
+    .pipe(dest(`${libraryPath.pages}`));
 }
 
 /**
@@ -262,7 +262,7 @@ function watchHtml() {
 
 function watchHtmlLib() {
   watch([
-    `${srcPath.pages.lib}/*.html`,
+    `${srcPath.pages.library}/*.html`,
     `${srcPath.components.root}/**/*.html`,
   ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
@@ -370,7 +370,7 @@ function compileCssGeneralLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 function compileCssVendorsLib() {
@@ -383,7 +383,7 @@ function compileCssVendorsLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 function compileCssComponentsLib() {
@@ -396,7 +396,7 @@ function compileCssComponentsLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 /**
