@@ -1,0 +1,16 @@
+.sidebar-secondary {
+  $root: &;
+
+  background-color: red;
+
+  &__section {
+    min-height: 100px;
+    margin-bottom: 50px;
+    padding: 5px;
+    background-color: yellow;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -16,7 +16,7 @@
   }
 
   &__base-wrap-outer {
-    //@include make-container-max-widths();
+    @include make-container-max-widths();
   }
 
   &__base,

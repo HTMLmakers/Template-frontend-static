@@ -35,7 +35,7 @@
 .layout__base-wrap-outer,
 .layout__section {
   margin: 3px 0;
-  padding-top: 25px;
+  padding-top: 28px;
   padding-bottom: 6px;
   border-style: solid;
 }
@@ -154,15 +154,18 @@
 // Components
 // =============================================================================
 
-.header__container {
+.header__container,
+.footer__container {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
+  padding-top: 30px;
   border-style: dashed;
   border-width: 3px;
 }
 
-.header__container::before {
+.header__container::before,
+.footer__container::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -177,4 +180,8 @@
 
 .header__container::before {
   content: "header__container";
+}
+
+.footer__container::before {
+  content: "footer__container";
 }
