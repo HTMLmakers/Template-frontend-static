@@ -62,11 +62,12 @@ const srcPath = {
   js: {
     root: `${srcRoot}/js`,
     vendors: `${srcRoot}/js/vendors`,
+    uiKit: `${srcRoot}/js/ui-kit`,
   },
   pages: {
     root: `${srcRoot}/pages`,
     include: `${srcRoot}/pages/include`,
-    lib:  `${srcRoot}/pages/library`,
+    lib: `${srcRoot}/pages/library`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -207,6 +208,7 @@ function compileHtml() {
   return src(`${srcPath.pages.root}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       context: {
         svgSpriteExists,
@@ -476,6 +478,7 @@ function compileJsVendors() {
   return src(`${srcPath.js.root}/vendors.js`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       indent: true,
     }))
@@ -486,6 +489,19 @@ function compileJsComponents() {
   return src(`${srcPath.js.root}/components.js`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(eslint())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsUiKit() {
+  return src(`${srcPath.js.root}/ui-kit.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       indent: true,
     }))
@@ -516,6 +532,10 @@ function watchJs() {
     `${srcPath.js.root}/components.js`,
     `${srcPath.components.root}/**/*.js`,
   ], { events: 'change' }, series(compileJsComponents, liveReload));
+  watch([
+    `${srcPath.js.root}/ui-kit.js`,
+    `${srcPath.js.uiKit}/**/*.js`,
+  ], { events: 'change' }, series(compileJsUiKit, liveReload));
   watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
 }
 
@@ -531,6 +551,7 @@ function buildJs() {
     `${devPath.js}/vendors.js`,
     `${devPath.js}/common.js`,
     `${devPath.js}/components.js`,
+    `${devPath.js}/ui-kit.js`,
   ])
     .pipe(plumber())
     .pipe(babel({
@@ -894,6 +915,7 @@ exports.serve = series(
   compileJsCommon,
   compileJsVendors,
   compileJsComponents,
+  compileJsUiKit,
   // export
   exportAssetsDev,
   // инициализация dev-сервера
