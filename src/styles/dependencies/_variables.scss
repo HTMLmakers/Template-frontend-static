@@ -28,8 +28,8 @@ $layout-gutter-widths: (
   sm: 30px,
   xl: 60px
 );
-$layout-header-min-height: 120px;
-$layout-footer-min-height: 385px;
+$layout-header-min-height: 150px;
+$layout-footer-min-height: 300px;
 
 // Grid
 $enable-grid-classes: true;
@@ -43,10 +43,12 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 );
+
 // Desktop-only version
 //$container-max-widths: (
 //  sm: 1200px
 //);
+
 // Responsive version
 $container-max-widths: (
   xs: 320px,

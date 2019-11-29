@@ -1,27 +1,12 @@
 <!doctype html>
 <html lang="ru">
-@include('./pages/include/head.html')
+  @@include('./pages/include/head.html')
 
-<body class="layout"><!--layout--viewport-height-->
-  @include('./pages/include/svg-inline.html')
-  <header class="layout__header">
-    @include('./components/core/header/header.html')
-  </header>
-  <div class="layout__add"></div>
-  <div class="layout__base">
-    <div class="layout__base-wrap">
-      <aside class="layout__aside-primary"></aside>
-      <main class="layout__main"></main>
-      <aside class="layout__aside-secondary"></aside>
-    </div>
-  </div>
-  <div class="layout__add"></div>
-  <footer class="layout__footer">
-    <!--@include('./components/core/footer/footer.html')-->
-  </footer>
+<body class="layout">
+  @@include('./pages/include/svg-inline.html')
 
-  <!--@include('./components/features/popup-callback/popup-callback.html')-->
 
-  @include('./pages/include/scripts.html')
+  <!--@@include('./components/features/popup-callback/popup-callback.html')-->
+  @@include('./pages/include/scripts.html')
 </body>
 </html>

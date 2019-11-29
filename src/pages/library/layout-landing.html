@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Layout Standsrt + Components Core</title>
+  <title>Layout Landing + Components Core</title>
 
   <link href="./styles/style.css" rel="stylesheet">
   <link href="./styles/components.css" rel="stylesheet">
@@ -14,23 +14,19 @@
   <header class="layout__header">
     @@include('./../../components/core/header/header.html')
   </header>
-  <div class="layout__add"></div>
-  <div class="layout__base">
+  <main class="layout__base">
     <div class="layout__base-wrap-outer">
-      <div class="layout__base-wrap-inner">
-        <aside class="layout__">
-          @@include('./../../components/core/sidebar-primary/sidebar-primary.html')
-        </aside>
-        <main class="layout__main">
+      <div class="layout__section">
 
-        </main>
-        <aside class="layout__sidebar-secondary">
-          @@include('./../../components/core/sidebar-secondary/sidebar-secondary.html')
-        </aside>
+      </div>
+      <div class="layout__section">
+
+      </div>
+      <div class="layout__section">
+
       </div>
     </div>
-  </div>
-  <div class="layout__add"></div>
+  </main>
   <footer class="layout__footer">
     @@include('./../../components/core/footer/footer.html')
   </footer>
