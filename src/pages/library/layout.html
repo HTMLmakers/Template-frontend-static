@@ -12,27 +12,27 @@
 <body class="layout"><!-- layout--viewport-height -->
 
   <header class="layout__header">
-    @@include('./../../components/core/header/header.html')
+    @include('components/core/header/header.html')
   </header>
   <div class="layout__add"></div>
   <div class="layout__base">
     <div class="layout__base-wrap-outer">
       <div class="layout__base-wrap-inner">
-        <aside class="layout__">
-          @@include('./../../components/core/sidebar-primary/sidebar-primary.html')
+        <aside class="layout__sidebar-primary">
+          @include('components/core/sidebar-primary/sidebar-primary.html')
         </aside>
         <main class="layout__main">
 
         </main>
         <aside class="layout__sidebar-secondary">
-          @@include('./../../components/core/sidebar-secondary/sidebar-secondary.html')
+          @include('components/core/sidebar-secondary/sidebar-secondary.html')
         </aside>
       </div>
     </div>
   </div>
   <div class="layout__add"></div>
   <footer class="layout__footer">
-    @@include('./../../components/core/footer/footer.html')
+    @include('components/core/footer/footer.html')
   </footer>
 
 </body>
