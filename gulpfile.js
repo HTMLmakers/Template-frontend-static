@@ -67,7 +67,7 @@ const srcPath = {
   pages: {
     root: `${srcRoot}/pages`,
     include: `${srcRoot}/pages/include`,
-    library:  `${srcRoot}/pages/library`,
+    library: `${srcRoot}/pages/library`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -229,7 +229,11 @@ function compileHtml() {
 function compileHtmlLib() {
   return src(`${srcPath.pages.library}/*.html`)
     .pipe(plumber())
-    .pipe(fileInclude())
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
     .pipe(dest(`${libraryPath.pages}`));
 }
 
