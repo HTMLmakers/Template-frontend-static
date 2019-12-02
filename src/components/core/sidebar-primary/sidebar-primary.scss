@@ -1,0 +1,16 @@
+.sidebar-primary {
+  $root: &;
+
+  background-color: red;
+
+  &__section {
+    min-height: 50px;
+    margin-bottom: 50px;
+    padding: 5px;
+    background-color: yellow;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

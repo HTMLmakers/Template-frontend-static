@@ -39,7 +39,7 @@ const urls = [];
 const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
-const libRoot = './library';
+const libraryRoot = './library';
 
 const srcPath = {
   assets: {
@@ -62,11 +62,12 @@ const srcPath = {
   js: {
     root: `${srcRoot}/js`,
     vendors: `${srcRoot}/js/vendors`,
+    uiKit: `${srcRoot}/js/ui-kit`,
   },
   pages: {
     root: `${srcRoot}/pages`,
     include: `${srcRoot}/pages/include`,
-    lib:  `${srcRoot}/pages/library`,
+    library: `${srcRoot}/pages/library`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -101,10 +102,10 @@ const buildPath = {
   styles: `${buildRoot}/styles`,
 };
 
-const libPath = {
-  pages: `${libRoot}`,
-  js: `${libRoot}/js`,
-  styles: `${libRoot}/styles`,
+const libraryPath = {
+  pages: `${libraryRoot}`,
+  js: `${libraryRoot}/js`,
+  styles: `${libraryRoot}/styles`,
 };
 
 /**
@@ -133,7 +134,7 @@ function initDevServer(done) {
 
 function initLibServer(done) {
   browserSync.init({
-    server: libRoot,
+    server: libraryRoot,
     port: 8080,
     browser: 'chrome',
   });
@@ -178,7 +179,7 @@ function cleanBuild() {
 }
 
 function cleanLib() {
-  return del(`${libRoot}`);
+  return del(`${libraryRoot}`);
 }
 
 /**
@@ -207,6 +208,7 @@ function compileHtml() {
   return src(`${srcPath.pages.root}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       context: {
         svgSpriteExists,
@@ -225,9 +227,14 @@ function compileHtml() {
  */
 
 function compileHtmlLib() {
-  return src(`${srcPath.pages.lib}/*.html`)
+  return src(`${srcPath.pages.library}/*.html`)
     .pipe(plumber())
-    .pipe(dest(`${libPath.pages}`));
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(dest(`${libraryPath.pages}`));
 }
 
 /**
@@ -262,7 +269,7 @@ function watchHtml() {
 
 function watchHtmlLib() {
   watch([
-    `${srcPath.pages.lib}/*.html`,
+    `${srcPath.pages.library}/*.html`,
     `${srcPath.components.root}/**/*.html`,
   ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
@@ -370,7 +377,7 @@ function compileCssGeneralLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 function compileCssVendorsLib() {
@@ -383,7 +390,7 @@ function compileCssVendorsLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 function compileCssComponentsLib() {
@@ -396,7 +403,7 @@ function compileCssComponentsLib() {
         autoprefixer(),
       ]),
     )
-    .pipe(dest(`${libPath.styles}`));
+    .pipe(dest(`${libraryPath.styles}`));
 }
 
 /**
@@ -476,6 +483,7 @@ function compileJsVendors() {
   return src(`${srcPath.js.root}/vendors.js`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       indent: true,
     }))
@@ -486,6 +494,19 @@ function compileJsComponents() {
   return src(`${srcPath.js.root}/components.js`)
     .pipe(plumber())
     .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(eslint())
+    .pipe(dest(`${devPath.js}`));
+}
+
+function compileJsUiKit() {
+  return src(`${srcPath.js.root}/ui-kit.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      prefix: '@',
       basepath: `${srcRoot}`,
       indent: true,
     }))
@@ -516,6 +537,10 @@ function watchJs() {
     `${srcPath.js.root}/components.js`,
     `${srcPath.components.root}/**/*.js`,
   ], { events: 'change' }, series(compileJsComponents, liveReload));
+  watch([
+    `${srcPath.js.root}/ui-kit.js`,
+    `${srcPath.js.uiKit}/**/*.js`,
+  ], { events: 'change' }, series(compileJsUiKit, liveReload));
   watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
 }
 
@@ -531,6 +556,7 @@ function buildJs() {
     `${devPath.js}/vendors.js`,
     `${devPath.js}/common.js`,
     `${devPath.js}/components.js`,
+    `${devPath.js}/ui-kit.js`,
   ])
     .pipe(plumber())
     .pipe(babel({
@@ -894,6 +920,7 @@ exports.serve = series(
   compileJsCommon,
   compileJsVendors,
   compileJsComponents,
+  compileJsUiKit,
   // export
   exportAssetsDev,
   // инициализация dev-сервера
