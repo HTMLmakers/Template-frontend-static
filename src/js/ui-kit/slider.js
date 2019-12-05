@@ -1,2 +1,3 @@
-'use strict';
-console.log('slider');
+(($) => {
+  console.log('slider');
+})(jQuery);
