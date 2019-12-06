@@ -155,7 +155,10 @@
 // =============================================================================
 
 .header__container,
-.footer__container {
+.footer__container,
+.form__container,
+.form__row,
+.form__col {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -164,8 +167,25 @@
   border-width: 3px;
 }
 
+.header__container,
+.footer__container,
+.form__container {
+  border-color: black;
+}
+
+.form__row {
+  border-color: purple;
+}
+
+.form__col {
+  border-color: orange;
+}
+
 .header__container::before,
-.footer__container::before {
+.footer__container::before,
+.form__container::before,
+.form__row::before,
+.form__col::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -175,7 +195,20 @@
   font-size: 12px;
   font-family: Arial, sans-serif;
   line-height: 1;
+}
+
+.header__container::before,
+.footer__container::before,
+.form__container::before {
   background-color: black;
+}
+
+.form__row::before {
+  background-color: purple;
+}
+
+.form__col::before {
+  background-color: orange;
 }
 
 .header__container::before {
@@ -184,4 +217,16 @@
 
 .footer__container::before {
   content: "footer__container";
+}
+
+.form__container::before {
+  content: "form__container";
+}
+
+.form__row::before {
+  content: "form__row";
+}
+
+.form__col::before {
+  content: "form__col";
 }
