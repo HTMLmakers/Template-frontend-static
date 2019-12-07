@@ -489,8 +489,9 @@ function watchCssLib() {
 
 function buildCss() {
   return src([
-    `${devPath.styles}/vendors.css`,
     `${devPath.styles}/style.css`,
+    `${devPath.styles}/vendors.css`,
+    `${devPath.styles}/ui-kit.css`,
     `${devPath.styles}/components.css`,
   ])
     .pipe(plumber())
@@ -654,8 +655,8 @@ function buildJs() {
   return src([
     `${devPath.js}/vendors.js`,
     `${devPath.js}/common.js`,
-    `${devPath.js}/components.js`,
     `${devPath.js}/ui-kit.js`,
+    `${devPath.js}/components.js`,
   ])
     .pipe(plumber())
     .pipe(babel({
@@ -1019,8 +1020,8 @@ exports.serve = series(
   // js
   compileJsCommon,
   compileJsVendors,
-  compileJsComponents,
   compileJsUiKit,
+  compileJsComponents,
   // export
   exportAssetsDev,
   // инициализация dev-сервера
