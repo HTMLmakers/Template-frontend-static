@@ -475,8 +475,9 @@ function buildCss() {
  * Сборка js:
  * 1. Сборка всех файлов .js из ./src/js/vendors/ в vendors.js
  * 2. Сборка всех файлов .js из ./src/components/ в components.js
- * 3. Сохранение собраных файлов .js в ./dev/js/
- * 4. Перенос common.js в ./dev/js/
+ * 3. Сборка всех файлов .js из ./src/js/ui-kit/ в ui-kit.js
+ * 4. Сохранение собраных файлов .js в ./dev/js/
+ * 5. Перенос common.js в ./dev/js/
  */
 
 function compileJsVendors() {
@@ -522,6 +523,57 @@ function compileJsCommon() {
 }
 
 /**
+ * Сборка js для components-library::
+ * 1. Сборка всех файлов .js из ./src/js/vendors/ в vendors.js
+ * 2. Сборка всех файлов .js из ./src/components/ в components.js
+ * 3. Сборка всех файлов .js из ./src/js/ui-kit/ в ui-kit.js
+ * 4. Сохранение собраных файлов .js в ./library/js/
+ * 5. Перенос common.js в ./library/js/
+ */
+
+function compileJsVendorsLib() {
+  return src(`${srcPath.js.root}/vendors.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(dest(`${libraryPath.js}`));
+}
+
+function compileJsComponentsLib() {
+  return src(`${srcPath.js.root}/components.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(eslint())
+    .pipe(dest(`${libraryPath.js}`));
+}
+
+function compileJsUiKitLib() {
+  return src(`${srcPath.js.root}/ui-kit.js`)
+    .pipe(plumber())
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: `${srcRoot}`,
+      indent: true,
+    }))
+    .pipe(eslint())
+    .pipe(dest(`${libraryPath.js}`));
+}
+
+function compileJsCommonLib() {
+  return src(`${srcPath.js.root}/common.js`)
+    .pipe(plumber())
+    .pipe(eslint())
+    .pipe(dest(`${libraryPath.js}`));
+}
+
+/**
  * Отслеживание изменений js:
  * 1. Отслеживание файлов .js в ./src/js/vendors/ на изменение (change)
  * 2. Отслеживание файлов .js в ./src/components/ на изменение (change)
@@ -542,6 +594,18 @@ function watchJs() {
     `${srcPath.js.uiKit}/**/*.js`,
   ], { events: 'change' }, series(compileJsUiKit, liveReload));
   watch(`${srcPath.js.root}/common.js`, { events: 'change' }, series(compileJsCommon, liveReload));
+}
+
+/**
+ * Отслеживание изменений js для components-library
+ * 1. Отслеживание всех .js файлов на изменения (change)
+ */
+
+function watchJsLib() {
+  watch([
+    `${srcPath.js.root}/**/*.js`,
+    `${srcPath.components.root}/**/*.js`,
+  ], { events: 'change' }, series(parallel(compileJsVendorsLib, compileJsComponentsLib, compileJsUiKitLib, compileJsCommonLib), liveReload));
 }
 
 /**
@@ -951,7 +1015,10 @@ exports.lib = series(
   compileCssVendorsLib,
   compileCssComponentsLib,
   // js
-
+  compileJsVendorsLib,
+  compileJsComponentsLib,
+  compileJsUiKitLib,
+  compileJsCommonLib,
   // инициализация lib-сервера
   initLibServer,
 
@@ -959,7 +1026,7 @@ exports.lib = series(
   (done) => {
     watchHtmlLib();
     watchCssLib();
-
+    watchJsLib();
     done();
   },
 );
