@@ -301,10 +301,11 @@ function buildHtml() {
  * Сборка и компиляция scss:
  * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
  * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
- * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
- * 4. Коплиляция .scss в .css
- * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 6. Сохранение файла в ./dev/styles/
+ * 3. Сборка файлов .scss (.css) из ./src/styles/ui-kit/ в ui-kit.scss
+ * 4. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 5. Коплиляция .scss в .css
+ * 6. Post CSS трансформация: автопрефиксер, медиа-выражения
+ * 7. Сохранение файла в ./dev/styles/
  */
 
 const stylelintOptions = {
@@ -358,6 +359,19 @@ function compileCssComponents() {
     .pipe(dest(`${devPath.styles}`));
 }
 
+function compileCssUiKit() {
+  return src(`${srcPath.styles.root}/ui-kit.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(mediaQueriesGroup())
+    .pipe(
+      postcss([
+        autoprefixer(),
+      ]),
+    )
+    .pipe(stylelint(stylelintOptions))
+    .pipe(dest(`${devPath.styles}`));
+}
 /**
  * Сборка и компиляция scss для components-library:
  * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
@@ -365,7 +379,7 @@ function compileCssComponents() {
  * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
  * 4. Коплиляция .scss в .css
  * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 4. Сохранение файла в ./library/styles/
+ * 6. Сохранение файла в ./library/styles/
  */
 
 function compileCssGeneralLib() {
@@ -447,11 +461,11 @@ function watchCss() {
     `${srcPath.styles.root}/components.scss`,
     `${srcPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(compileCssComponents, liveReload));
-  // watch([
-  //   `${srcPath.styles.uiKit}/*`,
-  //   `${srcPath.styles.root}/ui-kit.scss`,
-  // ], { events: 'change' }, series(compileCssVendors, liveReload));
-  watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssComponents, liveReload));
+  watch([
+    `${srcPath.styles.uiKit}/*`,
+    `${srcPath.styles.root}/ui-kit.scss`,
+  ], { events: 'change' }, series(compileCssUiKit, liveReload));
+  watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssUiKit, compileCssComponents, liveReload));
 }
 
 /**
@@ -1000,6 +1014,7 @@ exports.serve = series(
   // css
   compileCssGeneral,
   compileCssVendors,
+  compileCssUiKit,
   compileCssComponents,
   // js
   compileJsCommon,
