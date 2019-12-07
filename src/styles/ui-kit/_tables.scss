@@ -1,33 +1,32 @@
 .table {
   width: 100%;
-  margin-bottom: 10px;
   color: $black;
-  font-size: 24px;
   font-family: $secure-fonts;
-  text-align: right;
-  text-transform: uppercase;
-  border: none;
-  border-collapse: separate;
-  border-spacing: 30px 10px;
 
-  caption {
+  &__title {
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  &__head {
     text-align: center;
+  }
+
+  &__body {
+
   }
 
   th,
   td {
-    padding: 5px 20px;
+    padding: 10px;
+    border: 1px solid $black;
+  }
+
+  th {
+    background-color: silver;
   }
 
   td {
 
-  }
-
-  thead th {
-    vertical-align: bottom;
-  }
-
-  tbody td {
-    background-color: $white;
   }
 }
