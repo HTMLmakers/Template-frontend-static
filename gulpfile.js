@@ -77,6 +77,7 @@ const srcPath = {
       mixins: `${srcRoot}/styles/dependencies/mixins`,
     },
     vendors: `${srcRoot}/styles/vendors`,
+    uiKit: `${srcRoot}/styles/ui-kit`,
   },
 };
 
@@ -406,12 +407,26 @@ function compileCssComponentsLib() {
     .pipe(dest(`${libraryPath.styles}`));
 }
 
+function compileCssUiKitLib() {
+  return src(`${srcPath.styles.root}/ui-kit.scss`)
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(mediaQueriesGroup())
+    .pipe(
+      postcss([
+        autoprefixer(),
+      ]),
+    )
+    .pipe(dest(`${libraryPath.styles}`));
+}
+
 /**
  * Отслеживание изменений style
  * 1. Отслеживание всех .scss (.css) файлов в ./src/styles/** (кроме ./src/styles/vendors,
  * vendors.scss и components.scss) на изменения (change)
  * 2. Отслеживание .scss файлов в ./src/styles/vendors/ и vendors.scss на изменения (change)
- * 3. Отслеживание .scss файлов в ./src/components/** и components.scss на изменения (change)
+ * 3. Отслеживание .scss файлов в ./src/styles/ui-kit/ и ui-kit.scss на изменения (change)
+ * 4. Отслеживание .scss файлов в ./src/components/** и components.scss на изменения (change)
  */
 
 function watchCss() {
@@ -419,8 +434,10 @@ function watchCss() {
     `${srcPath.styles.root}/**/*.scss`,
     `!${srcPath.styles.dependencies.root}/**/*`,
     `!${srcPath.styles.vendors}/*`,
+    `!${srcPath.styles.uiKit}/*`,
     `!${srcPath.styles.root}/vendors.scss`,
     `!${srcPath.styles.root}/components.scss`,
+    `!${srcPath.styles.root}/ui-kit.scss`,
   ], { events: 'change' }, series(compileCssGeneral, liveReload));
   watch([
     `${srcPath.styles.vendors}/*`,
@@ -430,6 +447,10 @@ function watchCss() {
     `${srcPath.styles.root}/components.scss`,
     `${srcPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(compileCssComponents, liveReload));
+  // watch([
+  //   `${srcPath.styles.uiKit}/*`,
+  //   `${srcPath.styles.root}/ui-kit.scss`,
+  // ], { events: 'change' }, series(compileCssVendors, liveReload));
   watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssComponents, liveReload));
 }
 
@@ -442,7 +463,7 @@ function watchCssLib() {
   watch([
     `${srcPath.styles.root}/**/*.scss`,
     `${srcPath.components.root}/**/*.scss`,
-  ], { events: 'change' }, series(parallel(compileCssGeneralLib, compileCssVendorsLib, compileCssComponentsLib), liveReload));
+  ], { events: 'change' }, series(parallel(compileCssGeneralLib, compileCssVendorsLib, compileCssUiKitLib, compileCssComponentsLib), liveReload));
 }
 
 /**
@@ -1013,12 +1034,13 @@ exports.lib = series(
   // css
   compileCssGeneralLib,
   compileCssVendorsLib,
+  compileCssUiKitLib,
   compileCssComponentsLib,
   // js
+  compileJsCommonLib,
   compileJsVendorsLib,
   compileJsComponentsLib,
   compileJsUiKitLib,
-  compileJsCommonLib,
   // инициализация lib-сервера
   initLibServer,
 
