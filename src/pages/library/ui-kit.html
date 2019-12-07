@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Layout + Components Core</title>
+  <title>Ui-kit Components</title>
 
   <link href="./styles/style.css" rel="stylesheet">
   <link href="./styles/components.css" rel="stylesheet">
@@ -11,57 +11,199 @@
 
 <body class="components-library">
   <main>
-    <h1 class="components-library__heading h1">Ui-kit Library</h1>
     <section class="components-library__section">
-      <h2 class="components-library__heading h2">Ui-kit Library</h2>
+      <h2 class="components-library__heading h2">Typography</h2>
+      <h3 class="components-library__heading h3">Headings</h3>
       <div class="components-library__content">
         <h1 class="h1">Heading h1</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid animi aperiam aut, consequatur consequuntur deleniti deserunt dignissimos id, incidunt nesciunt quam quia recusandae sint unde velit voluptatum? Delectus, necessitatibus!</p>
         <h2 class="h2">Heading h2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
         <h3 class="h3">Heading h3</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
         <h4 class="h4">Heading h4</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
         <h5 class="h5">Heading h5</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
         <h6 class="h6">Heading h6</h6>
+      </div>
+      <h3 class="components-library__heading h3">Text</h3>
+      <div class="components-library__content">
+        <p class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia
+                     rem totam
+            voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid animi aperiam aut, consequatur consequuntur deleniti deserunt dignissimos id, incidunt nesciunt quam quia recusandae sint unde velit voluptatum? Delectus, necessitatibus!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
+      </div>
+      <h3 class="components-library__heading h3">Lists</h3>
+      <div class="components-library__content">
+        <div class="components-library__row">
+          <div class="components-library__col">
+            <ul class="list">
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Integer molestie lorem at massa</li>
+              <li>Facilisis in pretium nisl aliquet</li>
+              <li>Nulla volutpat aliquam velit
+                <ul>
+                  <li>Phasellus iaculis neque</li>
+                  <li>Purus sodales ultricies</li>
+                  <li>Vestibulum laoreet porttitor sem</li>
+                  <li>Ac tristique libero volutpat at</li>
+                </ul>
+              </li>
+              <li>Faucibus porta lacus fringilla vel</li>
+              <li>Aenean sit amet erat nunc</li>
+              <li>Eget porttitor lorem</li>
+            </ul>
+          </div>
+          <div class="components-library__col">
+            <ol class="list">
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Integer molestie lorem at massa</li>
+              <li>Facilisis in pretium nisl aliquet</li>
+              <li>Nulla volutpat aliquam velit
+                <ol>
+                  <li>Phasellus iaculis neque</li>
+                  <li>Purus sodales ultricies</li>
+                  <li>Vestibulum laoreet porttitor sem</li>
+                  <li>Ac tristique libero volutpat at</li>
+                </ol>
+              </li>
+              <li>Faucibus porta lacus fringilla vel</li>
+              <li>Aenean sit amet erat nunc</li>
+              <li>Eget porttitor lorem</li>
+            </ol>
+          </div>
+          <div class="components-library__col">
+            <dl>
+              <dt>Термин 1</dt>
+              <dd>Определение термина 1</dd>
+              <dt>Термин 2</dt>
+              <dd>Определение термина 2</dd>
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
 
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Buttons</h2>
+      <div class="components-library__content">
+        <div class="components-library__row">
+          <button class="btn" type="button">Button</button>
+          <button class="btn btn--primary" type="button">Button primary</button>
+          <button class="btn btn--secondary" type="button">Button secondary</button>
+        </div>
+        <div class="components-library__row">
+          <button class="btn btn--block" type="button">Button block</button>
+        </div>
+      </div>
+    </section>
 
-  <h2 class="h2">Heading h2</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
-  <h3 class="h3">Heading h3</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
-  <h4 class="h4">Heading h4</h4>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
-  <h5 class="h5">Heading h5</h5>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
-  <h6 class="h6">Heading h6</h6>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ipsa minus molestias quas quia rem totam voluptatem? Beatae ipsam iure pariatur quaerat! Consequuntur incidunt inventore laborum officia omnis, perferendis possimus.</p>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Forms</h2>
+      <h3 class="components-library__heading h3">Form layout</h3>
+      <div class="components-library__content">
+        <form class="form" action="" method="">
+          <div class="form__container">
+            <div class="form__row">
+              <div class="form__col"></div>
+              <div class="form__col"></div>
+              <div class="form__col"></div>
+            </div>
+            <div class="form__row">
+              <div class="form__col"></div>
+              <div class="form__col"></div>
+            </div>
+            <div class="form__row">
 
-  <hr>
+            </div>
+          </div>
+        </form>
+      </div>
+      <h3 class="components-library__heading h3">Form elements</h3>
+      <div class="components-library__content">
+        <div class="components-library__row">
 
-  <ul class="list-unstyled">
-    <li>Lorem ipsum dolor sit amet</li>
-    <li>Consectetur adipiscing elit</li>
-    <li>Integer molestie lorem at massa</li>
-    <li>Facilisis in pretium nisl aliquet</li>
-    <li>Nulla volutpat aliquam velit
-      <ul>
-        <li>Phasellus iaculis neque</li>
-        <li>Purus sodales ultricies</li>
-        <li>Vestibulum laoreet porttitor sem</li>
-        <li>Ac tristique libero volutpat at</li>
-      </ul>
-    </li>
-    <li>Faucibus porta lacus fringilla vel</li>
-    <li>Aenean sit amet erat nunc</li>
-    <li>Eget porttitor lorem</li>
-  </ul>
+          <div class="form-field">
+            <label class="form-field__label">Label input text</label>
+            <input class="form-field__text" type="text" name="" value="" placeholder="Placeholder">
+            <span class="form-field__message">We'll never share your email with anyone else.</span>
+<!--            <span class="form-field__placeholder">My placeholder</span>-->
+          </div>
 
+        </div>
+        <div class="components-library__row">
+
+          <div class="form-field">
+            <label class="form-field__label">Label textarea</label>
+            <textarea class="form-field__text" name="" placeholder="Placeholder"></textarea>
+            <span class="form-field__message">We'll never share your email with anyone else.</span>
+<!--            <span class="form-field__placeholder">My placeholder</span>-->
+          </div>
+
+        </div>
+        <div class="components-library__row">
+
+          <div class="form-field">
+            <label class="form-field__label">Label select</label>
+            <select class="form-field__text" name="" placeholder="Placeholder">
+              <option>Сделайте выбор</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 2</option>
+            </select>
+            <span class="form-field__message">We'll never share your email with anyone else.</span>
+            <!--            <span class="form-field__placeholder">My placeholder</span>-->
+          </div>
+
+        </div>
+        <div class="components-library__row">
+          <div class="components-library__col">
+
+            <div class="form-field"><!-- form-field--check -->
+              <label class="form-field__label">Label checkbox</label>
+              <input class="form-field__checkbox" type="checkbox" name="" value="">
+            </div>
+
+          </div>
+          <div class="components-library__col">
+
+            <div class="form-field"><!-- form-field--check -->
+              <label class="form-field__label">Label radio</label>
+              <input class="form-field__radio" type="radio" name="" value="">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Tables</h2>
+      <div class="components-library__content">
+
+        <table class="table">
+          <caption class="table__title">Table caption</caption>
+          <thead class="table__head">
+            <tr>
+              <th>Col 1</th>
+              <th>Col 2</th>
+            </tr>
+          </thead>
+          <tbody class="table__body">
+            <tr>
+              <td>Value 1</td>
+              <td>Value 2</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </section>
   </main>
 </body>
 </html>

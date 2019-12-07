@@ -1,33 +1,75 @@
+// =============================================================================
+// Form layout
+// =============================================================================
+
+.form {
+  background-color: aquamarine;
+
+  &__container {
+    //@include make-container();
+  }
+
+  &__row {
+    @include make-row();
+  }
+
+  &__col {
+    @include make-col-ready();
+  }
+}
+
+// =============================================================================
+// Form elements
+// =============================================================================
+
+%field-text {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid silver;
+  resize: none;
+}
+
 @include placeholder {
   color: $black;
   font-family: $secure-fonts;
   font-style: italic;
-  text-align: center;
-  text-transform: uppercase;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 160px;
-}
-
-.form-input {
-  width: 100%;
-  margin-bottom: 30px;
-  padding: 15px 15px 14px;
+.form-field {
+  flex-grow: 1;
   color: $black;
   font-family: $secure-fonts;
-  text-align: center;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 10px;
 
-  &:focus,
-  &.focus {
-    outline: 0;
-    box-shadow: 0 0 10px rgba($black, 0.35);
+  &__text {
+    @extend %field-text;
+  }
+
+  &__checkbox {
+
+  }
+
+  &__radio {
+
+  }
+
+  &__label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  &__placeholder {
+
+  }
+
+  &__message {
+
   }
 }
+
+  //
+  //&:focus,
+  //&.focus {
+  //  outline: 0;
+  //  box-shadow: 0 0 10px rgba($black, 0.35);
+  //}
