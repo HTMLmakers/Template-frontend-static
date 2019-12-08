@@ -1,3 +1,3 @@
-(($) => {
-  console.log('popup');
-})(jQuery);
+$(document).ready(function() {
+  $(".fancybox").fancybox();
+});
