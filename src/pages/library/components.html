@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Components</title>
@@ -9,7 +9,18 @@
   <link href="./styles/ui-kit.css" rel="stylesheet">
   <link href="./styles/vendors.css" rel="stylesheet">
 </head>
-<body>
+
+<body class="components-library">
+  <main>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Logo</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/logo/logo.html')
+
+      </div>
+    </section>
+  </main>
 
   <script src="./js/vendors.js"></script>
   <script src="./js/common.js"></script>
