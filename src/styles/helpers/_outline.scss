@@ -156,9 +156,11 @@
 
 .header__container,
 .footer__container,
+.about__container,
 .form__container,
 .form__row,
-.form__col {
+.form__col,
+.nav-global__list {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -169,7 +171,9 @@
 
 .header__container,
 .footer__container,
-.form__container {
+.form__container,
+.about__container,
+.nav-global__list {
   border-color: black;
 }
 
@@ -184,8 +188,10 @@
 .header__container::before,
 .footer__container::before,
 .form__container::before,
+.about__container::before,
 .form__row::before,
-.form__col::before {
+.form__col::before,
+.nav-global__list::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -199,7 +205,9 @@
 
 .header__container::before,
 .footer__container::before,
-.form__container::before {
+.form__container::before,
+.about__container::before,
+.nav-global__list::before {
   background-color: black;
 }
 
@@ -219,6 +227,10 @@
   content: "footer__container";
 }
 
+.about__container::before {
+  content: "about__container";
+}
+
 .form__container::before {
   content: "form__container";
 }
@@ -229,4 +241,8 @@
 
 .form__col::before {
   content: "form__col";
+}
+
+.nav-global__list::before {
+  content: "nav-global__list";
 }
