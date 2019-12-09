@@ -1,0 +1,49 @@
+.nav-global {
+  $root: &;
+
+  width: 100%;
+  min-height: 50px;
+  font-size: 16px;
+  line-height: normal;
+  background-color: aqua;
+
+  &__list {
+    @include make-container();
+    //@include make-container-max-widths();
+
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  &__link {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    color: $black;
+    text-decoration: none;
+  }
+
+  &--vertical {
+    display: inline-flex;
+    width: auto;
+
+    #{$root}__list {
+      display: block;
+      text-align: left;
+    }
+
+    #{$root}__link {
+      justify-content: left;
+    }
+  }
+}
