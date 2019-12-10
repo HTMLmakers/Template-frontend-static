@@ -159,8 +159,7 @@
 .about__container,
 .form__container,
 .form__row,
-.form__col,
-.nav-global__list {
+.form__col {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -172,8 +171,7 @@
 .header__container,
 .footer__container,
 .form__container,
-.about__container,
-.nav-global__list {
+.about__container {
   border-color: black;
 }
 
@@ -190,8 +188,7 @@
 .form__container::before,
 .about__container::before,
 .form__row::before,
-.form__col::before,
-.nav-global__list::before {
+.form__col::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -206,8 +203,7 @@
 .header__container::before,
 .footer__container::before,
 .form__container::before,
-.about__container::before,
-.nav-global__list::before {
+.about__container::before {
   background-color: black;
 }
 
@@ -241,8 +237,4 @@
 
 .form__col::before {
   content: "form__col";
-}
-
-.nav-global__list::before {
-  content: "nav-global__list";
 }

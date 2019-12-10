@@ -8,11 +8,9 @@
   background-color: aqua;
 
   &__list {
-    @include make-container();
-    //@include make-container-max-widths();
-
     display: flex;
     justify-content: space-between;
+    min-height: inherit;
     margin: 0;
     padding: 0;
     list-style: none;
