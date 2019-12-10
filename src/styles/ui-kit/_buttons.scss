@@ -1,0 +1,44 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 350px;
+  min-height: 50px;
+  margin: 0 15px;
+  padding: 10px 25px;
+  color: $black;
+  font-size: 20px;
+  font-family: $secure-fonts;
+  background-color: silver;
+  border: none;
+  user-select: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.8;
+  }
+
+  &--primary {
+    color: $white;
+    background-color: red;
+  }
+
+  &--secondary {
+    color: $white;
+    background-color: green;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

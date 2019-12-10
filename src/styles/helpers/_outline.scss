@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+}
+
+// =============================================================================
+// Layout
+// =============================================================================
+
+.layout,
+.layout__header,
+.layout__footer,
+.layout__base,
+.layout__add,
+.layout__sidebar-primary,
+.layout__sidebar-secondary,
+.layout__main,
+.layout__base-wrap-outer,
+.layout__section {
+  position: relative;
+  border-width: 3px;
+}
+
+.layout {
+  border-color: red;
+  border-style: dashed;
+}
+
+.layout__header,
+.layout__footer,
+.layout__base,
+.layout__add,
+.layout__sidebar-primary,
+.layout__sidebar-secondary,
+.layout__main,
+.layout__base-wrap-outer,
+.layout__section {
+  margin: 3px 0;
+  padding-top: 28px;
+  padding-bottom: 6px;
+  border-style: solid;
+}
+
+.layout__header,
+.layout__footer,
+.layout__base {
+  border-color: green;
+}
+
+.layout__add {
+  border-color: blue;
+}
+
+.layout__sidebar-primary,
+.layout__sidebar-secondary {
+  border-color: orange;
+}
+
+.layout__main,
+.layout__section {
+  border-color: purple;
+}
+
+.layout__base-wrap-outer {
+  padding-right: 0;
+  padding-bottom: 0;
+  border-color: black;
+  border-style: dashed;
+}
+
+.layout__header::before,
+.layout__footer::before,
+.layout__base::before,
+.layout__add::before,
+.layout__sidebar-primary::before,
+.layout__sidebar-secondary::before,
+.layout__main::before,
+.layout__base-wrap-outer::before,
+.layout__section::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 6px 8px;
+  color: #fff;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+}
+
+.layout__header::before,
+.layout__footer::before,
+.layout__base::before {
+  background-color: green;
+}
+
+.layout__add::before {
+  background-color: blue;
+}
+
+.layout__sidebar-primary::before,
+.layout__sidebar-secondary::before {
+  background-color: orange;
+}
+
+.layout__main::before,
+.layout__section::before {
+  background-color: purple;
+}
+
+.layout__base-wrap-outer::before {
+  top: -3px;
+  left: -3px;
+  padding: 8px 10px;
+  background-color: black;
+}
+
+.layout__header::before {
+  content: "layout__header";
+}
+
+.layout__footer::before {
+  content: "layout__footer";
+}
+
+.layout__base::before {
+  content: "layout__base";
+}
+
+.layout__add::before {
+  content: "layout__add";
+}
+
+.layout__sidebar-primary::before {
+  content: "layout__sidebar-primary";
+}
+
+.layout__sidebar-secondary::before {
+  content: "layout__sidebar-secondary";
+}
+
+.layout__main::before {
+  content: "layout__main";
+}
+
+.layout__base-wrap-outer::before {
+  content: "layout__base-wrap-outer";
+}
+
+.layout__section::before {
+  content: "layout__section";
+}
+
+// =============================================================================
+// Components
+// =============================================================================
+
+.header__container,
+.footer__container,
+.form__container,
+.form__row,
+.form__col {
+  position: relative;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 30px;
+  border-style: dashed;
+  border-width: 3px;
+}
+
+.header__container,
+.footer__container,
+.form__container {
+  border-color: black;
+}
+
+.form__row {
+  border-color: purple;
+}
+
+.form__col {
+  border-color: orange;
+}
+
+.header__container::before,
+.footer__container::before,
+.form__container::before,
+.form__row::before,
+.form__col::before {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  z-index: 999;
+  padding: 8px 10px;
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+}
+
+.header__container::before,
+.footer__container::before,
+.form__container::before {
+  background-color: black;
+}
+
+.form__row::before {
+  background-color: purple;
+}
+
+.form__col::before {
+  background-color: orange;
+}
+
+.header__container::before {
+  content: "header__container";
+}
+
+.footer__container::before {
+  content: "footer__container";
+}
+
+.form__container::before {
+  content: "form__container";
+}
+
+.form__row::before {
+  content: "form__row";
+}
+
+.form__col::before {
+  content: "form__col";
+}

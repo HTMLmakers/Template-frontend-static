@@ -1,4 +1,7 @@
-node_modules
-design
-./**/*.sass-cache
+/node_modules
+/design
 .idea/
+/dev
+/library
+/build
+./**/*.sass-cache

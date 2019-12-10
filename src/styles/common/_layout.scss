@@ -1,0 +1,93 @@
+.layout {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: map-get($container-max-widths, xs);
+
+  &__header,
+  &__footer,
+  &__add,
+  &__base-wrap-outer {
+    @include make-container();
+    //@include make-container-with-layout-gutter();
+    //@include make-container-max-widths();
+  }
+
+  &__base-wrap-outer {
+    @include make-container-max-widths();
+  }
+
+  &__base,
+  &__base-wrap-outer,
+  &__section {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__base-wrap-outer {
+    flex-direction: column;
+  }
+
+  &__base-wrap-inner {
+    @include make-row();
+
+    flex-grow: 1;
+  }
+
+  &__main,
+  &__sidebar-primary,
+  &__sidebar-secondary {
+    @include make-col-ready();
+
+    flex-grow: 1;
+  }
+
+  &__sidebar-primary {
+    @include make-col-fix(300px);
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
+
+  &__sidebar-secondary {
+    @include make-col(30, 100);
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
+
+  &__header {
+    min-height: $layout-header-min-height;
+  }
+
+  &__footer {
+    min-height: $layout-footer-min-height;
+  }
+
+  &__add {
+    min-height: auto;
+  }
+
+  &__section {
+    min-height: auto;
+  }
+
+  &--viewport-height {
+
+    #{$root}__base-wrap-inner {
+      // Change it when you need to implement viewport-height modifier
+      height: calc(100vh - #{$layout-header-min-height} - #{$layout-footer-min-height});
+    }
+
+    #{$root}__sidebar-primary,
+    #{$root}__sidebar-secondary,
+    #{$root}__main {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
