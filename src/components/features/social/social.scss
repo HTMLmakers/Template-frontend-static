@@ -1,8 +1,5 @@
 .social {
-  width: 100%;
-  color: $black;
-  font-size: 16px;
-  font-style: normal;
+  $root: &;
 
   &__list {
     display: block;
@@ -14,7 +11,6 @@
   &__item {
     display: inline-flex;
     margin-right: 20px;
-    background-color: aqua;
 
     &:last-child {
       margin-right: 0;
@@ -28,14 +24,13 @@
     justify-content: center;
     width: 50px;
     height: 50px;
-    color: $black;
     text-decoration: none;
     text-indent: -9999px;
     background-color: aqua;
-    border-radius: 50%;
 
     &::after {
       //@include sprite($icon-instagram);
+
       position: absolute;
       width: 30px;
       height: 30px;

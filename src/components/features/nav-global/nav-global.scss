@@ -3,8 +3,6 @@
 
   width: 100%;
   min-height: 50px;
-  font-size: 16px;
-  line-height: normal;
   background-color: aqua;
 
   &__list {
@@ -37,7 +35,6 @@
 
     #{$root}__list {
       display: block;
-      text-align: left;
     }
 
     #{$root}__link {

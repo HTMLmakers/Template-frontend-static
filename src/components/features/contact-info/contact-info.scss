@@ -1,10 +1,10 @@
 .contact-info {
-  color: $black;
-  font-size: 16px;
+  $root: &;
 
   &__item {
     position: relative;
     display: inline-block;
+    margin-right: 20px;
     padding-left: 50px;
 
     &::before {
@@ -16,15 +16,22 @@
       border-radius: 50%;
       content: "";
     }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__title,
+  &__text {
+    display: block;
   }
 
   &__title {
-    display: block;
     font-weight: bold;
   }
 
   &__text {
-    color: $black;
     text-decoration: none;
   }
 }

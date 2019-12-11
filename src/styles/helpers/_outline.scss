@@ -159,7 +159,9 @@
 .about__container,
 .form__container,
 .form__row,
-.form__col {
+.form__col,
+.features__container,
+.reviews__container {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -171,7 +173,9 @@
 .header__container,
 .footer__container,
 .form__container,
-.about__container {
+.about__container,
+.features__container,
+.reviews__container {
   border-color: black;
 }
 
@@ -188,7 +192,9 @@
 .form__container::before,
 .about__container::before,
 .form__row::before,
-.form__col::before {
+.form__col::before,
+.features__container::before,
+.reviews__container::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -203,7 +209,9 @@
 .header__container::before,
 .footer__container::before,
 .form__container::before,
-.about__container::before {
+.about__container::before,
+.features__container::before,
+.reviews__container::before {
   background-color: black;
 }
 
@@ -237,4 +245,12 @@
 
 .form__col::before {
   content: "form__col";
+}
+
+.features__container::before {
+  content: "features__container";
+}
+
+.reviews__container::before {
+  content: "reviews__container";
 }

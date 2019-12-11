@@ -1,0 +1,65 @@
+.features {
+  $root: &;
+
+  min-height: 100px;
+
+  &__container {
+
+  }
+
+  &__header {
+
+  }
+
+  &__main {
+
+  }
+
+  &__heading {
+    margin-top: 0;
+  }
+
+  &__list {
+    @include make-row(50px);
+
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: -25px;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    //@include make-col-ready(50px);
+    @include make-col(33.33, 100, 50px);
+
+    position: relative;
+    min-height: 160px;
+    margin-bottom: 25px;
+    padding-top: 120px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      content: "";
+    }
+  }
+
+  &__title,
+  &__desc {
+    margin: 0;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__desc {
+
+  }
+}
