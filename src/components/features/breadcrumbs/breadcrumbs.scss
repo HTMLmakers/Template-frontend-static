@@ -1,0 +1,67 @@
+.breadcrumbs {
+  $root: &;
+
+  background-color: silver;
+
+  &__list {
+    display: inline-flex;
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    &::before {
+      margin-right: 8px;
+      content: "/";
+    }
+
+    &:first-child::before,
+    &:nth-child(2)::before {
+      margin-right: 0;
+      content: "";
+    }
+
+    &:first-child {
+      margin-right: 20px;
+
+      #{$root}__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        text-decoration: none;
+        text-indent: -9999px;
+        background-color: aqua;
+
+        &::after {
+          //@include sprite($icon-instagram);
+
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          background-color: red;
+          border-radius: 50%;
+          content: "";
+        }
+      }
+    }
+
+    &--active {
+
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
