@@ -1,0 +1,46 @@
+.fancybox-bg {
+  background: $popup-overlay-bg;
+}
+
+.fancybox-is-open {
+
+  .fancybox-bg {
+    opacity: $popup-overlay-opacity;
+  }
+}
+
+.popup {
+  position: relative;
+  display: none;
+  width: $popup-width;
+  text-align: center;
+
+  &__header {
+    margin-bottom: 20px;
+  }
+
+  &__main {
+    margin-bottom: 20px;
+  }
+
+  &__footer {
+
+  }
+
+  &__heading {
+    margin: 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px;
+    background-color: red;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+  }
+}

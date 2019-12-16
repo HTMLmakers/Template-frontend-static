@@ -55,3 +55,8 @@ $container-max-widths: (
   sm: 520px,
   xl: 1200px
 );
+
+// Popups
+$popup-overlay-bg: $bright-red;
+$popup-overlay-opacity: 0.5;
+$popup-width: 800px;
