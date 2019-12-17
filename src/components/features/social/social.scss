@@ -1,16 +1,19 @@
 .social {
   $root: &;
 
+  padding: 20px;
+  background-color: silver;
+
   &__list {
-    display: block;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   &__item {
-    display: inline-flex;
+    display: inline-block;
     margin-right: 20px;
+    vertical-align: top;
 
     &:last-child {
       margin-right: 0;
@@ -18,25 +21,38 @@
   }
 
   &__link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
     text-decoration: none;
+  }
+
+  &__icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
     text-indent: -9999px;
     background-color: aqua;
 
-    &::after {
-      //@include sprite($icon-instagram);
+    //&::after {
+    //  //@include sprite($icon-instagram);
+    //
+    //  position: absolute;
+    //  top: 50%;
+    //  left: 50%;
+    //  width: 30px;
+    //  height: 30px;
+    //  background-color: red;
+    //  border-radius: 50%;
+    //  transform: translate(-50%, -50%);
+    //  content: "";
+    //}
 
+    svg {
       position: absolute;
-      width: 30px;
-      height: 30px;
-      background-color: red;
-      border-radius: 50%;
-      content: "";
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: auto;
+      padding: 0;
+      transform: translate(-50%, -50%);
     }
   }
 }

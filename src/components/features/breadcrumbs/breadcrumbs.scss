@@ -1,18 +1,18 @@
 .breadcrumbs {
   $root: &;
 
+  display: flex;
+  align-items: center;
+  padding: 20px;
   background-color: silver;
 
   &__list {
-    display: inline-flex;
-    margin: 0;
-    padding: 20px;
+    padding: 0;
     list-style: none;
   }
 
   &__item {
-    display: flex;
-    align-items: center;
+    display: inline-block;
     margin-right: 10px;
 
     &::before {
@@ -20,40 +20,9 @@
       content: "/";
     }
 
-    &:first-child::before,
-    &:nth-child(2)::before {
+    &:first-child::before {
       margin-right: 0;
       content: "";
-    }
-
-    &:first-child {
-      margin-right: 20px;
-
-      #{$root}__link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        text-decoration: none;
-        text-indent: -9999px;
-        background-color: aqua;
-
-        &::after {
-          //@include sprite($icon-instagram);
-
-          position: absolute;
-          width: 30px;
-          height: 30px;
-          background-color: red;
-          border-radius: 50%;
-          content: "";
-        }
-      }
-    }
-
-    &--active {
-
     }
   }
 
@@ -63,5 +32,51 @@
     &:hover {
       text-decoration: underline;
     }
+
+    &--is-current,
+    &--is-current:hover {
+      text-decoration: none;
+    }
+
+    &--special {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      margin-right: 30px;
+      text-decoration: none;
+      text-indent: -9999px;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    background-color: aqua;
+
+    &::after {
+      //@include sprite($icon-instagram);
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      content: "";
+    }
+
+    //svg {
+    //  position: absolute;
+    //  top: 50%;
+    //  left: 50%;
+    //  width: 25px;
+    //  height: 100%;
+    //  padding: 0;
+    //  transform: translate(-50%, -50%);
+    //}
   }
 }
