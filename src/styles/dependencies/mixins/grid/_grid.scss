@@ -45,8 +45,13 @@
   flex-grow: 1;
   width: 100%;
   max-width: 100%;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+  @if ($grid-gutter-width == 0) {
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
+  } @else {
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+  }
 }
 
 @mixin make-col($size, $columns: $grid-columns, $gutter: 0px) {
@@ -55,15 +60,19 @@
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
   max-width: calc(#{percentage(($size / $columns))} - #{$gutter});
-  margin-right: $gutter / 2;
-  margin-left: $gutter / 2;
+  @if ($grid-gutter-width == 0) {
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
+  }
 }
 
 @mixin make-col-fix($size, $gutter: 0px) {
   flex: 0 0 $size - $gutter;
   width: $size - $gutter;
-  margin-right: $gutter / 2;
-  margin-left: $gutter / 2;
+  @if ($grid-gutter-width == 0) {
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
+  }
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {

@@ -1,0 +1,83 @@
+.contact-info {
+  $root: &;
+
+  font-style: normal;
+
+  &__list {
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-right: 30px;
+    vertical-align: top;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__pic {
+    margin-right: 10px;
+  }
+
+  &__body {
+
+  }
+
+  &__icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    background-color: aqua;
+
+    &::after {
+      //@include sprite($icon-instagram);
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      content: "";
+    }
+
+    //svg {
+    //  position: absolute;
+    //  top: 50%;
+    //  left: 50%;
+    //  width: 25px;
+    //  height: 100%;
+    //  padding: 0;
+    //  transform: translate(-50%, -50%);
+    //}
+  }
+
+  &__title {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+  }
+
+  &__text {
+
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

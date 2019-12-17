@@ -1,0 +1,15 @@
+.logo {
+  $root: &;
+
+  display: block;
+  width: 100px;
+  height: 100px;
+  text-decoration: none;
+  background-color: aqua;
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

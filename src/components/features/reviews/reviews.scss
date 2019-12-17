@@ -1,0 +1,86 @@
+.reviews {
+  $root: &;
+
+  min-height: 100px;
+
+  &__container {
+
+  }
+
+  &__header {
+  }
+
+  &__main {
+
+  }
+
+  &__heading {
+    margin-top: 0;
+  }
+
+  &__heading-desc {
+    margin-top: 0;
+  }
+
+  &__list {
+    @include make-row();
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    @include make-col-ready();
+
+    display: flex;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__pic {
+    flex-shrink: 0;
+    margin-right: 20px;
+  }
+
+  &__body {
+
+  }
+
+  &__userpic {
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__nick {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  &__text {
+    margin-bottom: 0;
+  }
+
+  &__date {
+    font-style: italic;
+  }
+}

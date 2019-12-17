@@ -32,6 +32,7 @@ const autoprefixer = require('autoprefixer');
 const htmlreplace = require('gulp-html-replace');
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
+const flexbugs = require('postcss-flexbugs-fixes');
 
 let buildUrl = '';
 const urls = [];
@@ -390,6 +391,7 @@ function compileCssGeneralLib() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(dest(`${libraryPath.styles}`));
@@ -403,6 +405,7 @@ function compileCssVendorsLib() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(dest(`${libraryPath.styles}`));
@@ -416,6 +419,7 @@ function compileCssComponentsLib() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(dest(`${libraryPath.styles}`));
@@ -429,6 +433,7 @@ function compileCssUiKitLib() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(dest(`${libraryPath.styles}`));

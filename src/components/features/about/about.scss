@@ -1,0 +1,25 @@
+.about {
+  $root: &;
+
+  min-height: 100px;
+
+  &__container {
+
+  }
+
+  &__header {
+
+  }
+
+  &__main {
+
+  }
+
+  &__heading {
+    margin-top: 0;
+  }
+
+  &__desc {
+
+  }
+}
