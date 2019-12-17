@@ -1,0 +1,67 @@
+.bx-wrapper {
+  margin-bottom: 20px;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+
+  .bx-loading {
+    background: none;
+  }
+}
+
+.slider {
+  position: relative;
+  padding: 0 50px;
+
+  &__item {
+    text-align: center;
+  }
+
+  &__prev,
+  &__next {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px;
+    background-color: red;
+    border: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__prev {
+    left: 0;
+  }
+
+  &__next {
+    right: 0;
+  }
+
+  &__pagination {
+    text-align: center;
+
+    .bx-pager-item {
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    .bx-pager-link {
+      display: block;
+      width: 10px;
+      height: 10px;
+      overflow: hidden;
+      text-indent: -9999px;
+      background-color: gray;
+      border-radius: 50%;
+
+      &.active {
+        background-color: red;
+      }
+    }
+  }
+}
