@@ -11,7 +11,7 @@ $bright-red:     #a60002;
 // Fonts
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
 $font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
-$default-font-size: 16 px;
+$default-font-size: 16px;
 
 // =============================================================================
 // Variables
@@ -55,3 +55,8 @@ $container-max-widths: (
   sm: 520px,
   xl: 1200px
 );
+
+// Popups
+$popup-overlay-bg: $bright-red;
+$popup-overlay-opacity: 0.5;
+$popup-width: 800px;

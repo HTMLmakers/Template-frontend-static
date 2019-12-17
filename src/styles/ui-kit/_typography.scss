@@ -61,7 +61,7 @@ p,
 .desc {
   margin: 1.5em 0;
   color: inherit;
-  font-size: 16px;
+  font-size: $default-font-size;
   font-family: inherit;
   line-height: 1.5;
 }
@@ -74,8 +74,9 @@ ul,
 ol,
 .list {
   margin: 0;
+  padding: 0;
   color: inherit;
-  font-size: 16px;
+  font-size: $default-font-size;
   font-family: inherit;
   line-height: 1.5;
 
@@ -83,5 +84,6 @@ ol,
   ol {
     margin-top: 1em;
     margin-bottom: 1em;
+    padding-left: 15px;
   }
 }
