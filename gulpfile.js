@@ -327,6 +327,7 @@ function compileCssGeneral() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(stylelint(stylelintOptions))
@@ -341,6 +342,7 @@ function compileCssVendors() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(dest(`${devPath.styles}`));
@@ -354,6 +356,7 @@ function compileCssComponents() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(stylelint(stylelintOptions))
@@ -368,6 +371,7 @@ function compileCssUiKit() {
     .pipe(
       postcss([
         autoprefixer(),
+        flexbugs(),
       ]),
     )
     .pipe(stylelint(stylelintOptions))
