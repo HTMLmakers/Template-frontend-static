@@ -35,7 +35,11 @@
 
   &__row {
     display: flex;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__col {
