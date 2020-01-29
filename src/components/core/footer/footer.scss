@@ -1,4 +1,10 @@
+/* ==========================================================================
+   Component FOOTER
+   ========================================================================== */
+
 .footer {
+  $root: &;
+
   display: flex;
   flex-direction: column;
   min-height: inherit;
@@ -9,12 +15,12 @@
 
     &:nth-child(1) {
       flex-grow: 1;
-      background-color: #ffbf02;
+      background-color: orange;
     }
 
     &:nth-child(2) {
       min-height: 50px;
-      background-color: #818181;
+      background-color: gray;
     }
   }
 
@@ -33,25 +39,27 @@
     @include make-col-ready();
 
     padding: 5px;
+  }
 
-    &:nth-child(1) {
-      //@include make-col-fix(150px);
+  &__component-name1 {
+    //@include media-breakpoint-down(md) {}
 
-      background-color: green;
-    }
+    background-color: green;
+  }
 
-    &:nth-child(2) {
-      background-color: yellow;
-    }
+  &__component-name2 {
+    background-color: yellow;
+  }
 
-    &:nth-child(3) {
-      //@include make-col(10, 100);
+  &__component-name3 {
+    background-color: blue;
+  }
 
-      background-color: blue;
-    }
+  &__component-name4 {
+    background-color: red;
+  }
 
-    &:nth-child(4) {
-      background-color: aquamarine;
-    }
+  &__component-name5 {
+    background-color: aqua;
   }
 }
