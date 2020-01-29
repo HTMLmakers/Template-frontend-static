@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Component HEADER
+   ========================================================================== */
+
 .header {
   $root: &;
 
@@ -11,19 +15,12 @@
 
     &:nth-child(1) {
       min-height: 100px;
-      background-color: #ffbf02;
+      background-color: orange;
     }
 
     &:nth-child(2) {
       min-height: 50px;
-      background-color: #818181;
-
-      #{$root}__col {
-
-        &:nth-child(1) {
-          @include make-col-fix(300px);
-        }
-      }
+      background-color: gray;
     }
   }
 
@@ -42,21 +39,33 @@
     @include make-col-ready();
 
     padding: 5px;
+  }
 
-    &:nth-child(1) {
-      @include make-col-fix(150px);
+  &__component-name1 {
+    //@include media-breakpoint-down(md) {}
 
-      background-color: green;
-    }
+    @include make-col-fix(150px);
 
-    &:nth-child(2) {
-      background-color: yellow;
-    }
+    background-color: green;
+  }
 
-    &:nth-child(3) {
-      @include make-col(10, 100);
+  &__component-name2 {
+    background-color: yellow;
+  }
 
-      background-color: blue;
-    }
+  &__component-name3 {
+    @include make-col(10, 100);
+
+    background-color: blue;
+  }
+
+  &__component-name4 {
+    @include make-col-fix(300px);
+
+    background-color: red;
+  }
+
+  &__component-name5 {
+    background-color: aqua;
   }
 }
