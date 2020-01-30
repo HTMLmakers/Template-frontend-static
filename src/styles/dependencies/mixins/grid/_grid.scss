@@ -67,8 +67,8 @@
 }
 
 @mixin make-col-fix($size, $gutter: 0px) {
-  flex: 0 0 $size - $gutter;
-  width: $size - $gutter;
+  flex: 0 1 $size;
+  width: $size;
   @if ($grid-gutter-width == 0) {
     margin-right: $gutter / 2;
     margin-left: $gutter / 2;
