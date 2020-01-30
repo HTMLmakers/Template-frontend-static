@@ -1,4 +1,4 @@
-.nav-global {
+.nav {
   $root: &;
 
   width: 100%;
@@ -19,6 +19,7 @@
     flex-grow: 1;
     justify-content: center;
     min-height: inherit;
+    margin: 0;
   }
 
   &__link {
