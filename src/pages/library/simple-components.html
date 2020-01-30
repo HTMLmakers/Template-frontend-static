@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Components</title>
+
+  <link href="./styles/style.css" rel="stylesheet">
+  <link href="./styles/vendors.css" rel="stylesheet">
+  <link href="./styles/ui-kit.css" rel="stylesheet">
+  <link href="./styles/components.css" rel="stylesheet">
+</head>
+
+<body class="components-library">
+  <main>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Logo</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/logo/logo.html')
+
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Nav</h2>
+      <div class="components-library__content">
+        <div class="components-library__row">
+
+          @include('./components/features/nav/nav.html')
+
+        </div>
+        <div class="components-library__row">
+
+          @include('./components/features/nav/nav-vertical.html')
+
+        </div>
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Contact-info</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/contact-info/contact-info.html')
+
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Breadcrumbs</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/breadcrumbs/breadcrumbs.html')
+
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Social</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/socials/socials.html')
+
+      </div>
+    </section>
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Pagination</h2>
+      <div class="components-library__content">
+
+        @include('./components/features/pagination/pagination.html')
+
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/vendors.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/ui-kit.js"></script>
+  <script src="./js/components.js"></script>
+</body>
+</html>
