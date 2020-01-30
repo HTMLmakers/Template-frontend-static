@@ -1,15 +1,22 @@
+/* ==========================================================================
+   Component -- contact-info
+   ========================================================================== */
+
 .contact-info {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   font-style: normal;
 
   &__list {
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   &__item {
     display: inline-block;
+    margin: 0;
     margin-right: 30px;
     vertical-align: top;
 
@@ -45,7 +52,7 @@
       left: 50%;
       width: 20px;
       height: 20px;
-      background-color: red;
+      background-color: darkviolet;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       content: "";
