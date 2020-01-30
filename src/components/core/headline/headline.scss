@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Component -- headline
+   ========================================================================== */
+
+.headline {
+  $root: &;
+
+  padding: 5px;
+  background-color: green;
+
+  &__section {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: silver;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
