@@ -174,6 +174,7 @@
 .preview__container,
 .about__container,
 .features__container,
+.statistics__container,
 .reviews__container,
 .form__container,
 .form__row,
@@ -191,6 +192,7 @@
 .preview__container,
 .about__container,
 .features__container,
+.statistics__container,
 .reviews__container,
 .form__container {
   border-color: black;
@@ -209,6 +211,7 @@
 .preview__container::before,
 .about__container::before,
 .features__container::before,
+.statistics__container::before,
 .reviews__container::before,
 .form__container::before,
 .form__row::before,
@@ -229,6 +232,7 @@
 .preview__container::before,
 .about__container::before,
 .features__container::before,
+.statistics__container::before,
 .reviews__container::before,
 .form__container::before {
   background-color: black;
@@ -260,6 +264,10 @@
 
 .features__container::before {
   content: "features__container";
+}
+
+.statistics__container::before {
+  content: "statistics__container";
 }
 
 .reviews__container::before {
