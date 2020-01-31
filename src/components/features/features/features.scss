@@ -7,9 +7,12 @@
   //@include media-breakpoint-down(md) {}
 
   min-height: 100px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   &__container {
-
+    //@include make-container-max-widths();
+    //@include make-container-with-layout-gutter();
   }
 
   &__header {
@@ -29,7 +32,6 @@
 
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     margin-bottom: -50px;
     padding: 0;
     list-style: none;
@@ -48,9 +50,9 @@
   }
 
   &__pic {
-    display: flex;
-    justify-content: center;
+    margin-right: auto;
     margin-bottom: 20px;
+    margin-left: auto;
   }
 
   &__body {
