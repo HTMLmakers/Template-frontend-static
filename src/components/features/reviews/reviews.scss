@@ -1,5 +1,10 @@
+/* ==========================================================================
+   Component -- reviews
+   ========================================================================== */
+
 .reviews {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   min-height: 100px;
 
@@ -56,7 +61,7 @@
   &__userpic {
     width: 100px;
     height: 100px;
-    background-color: aqua;
+    background-color: darkviolet;
 
     img {
       display: block;
