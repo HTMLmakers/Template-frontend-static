@@ -176,6 +176,8 @@
 .features__container,
 .statistics__container,
 .reviews__container,
+.news__container,
+.partners__container,
 .form__container,
 .form__row,
 .form__col {
@@ -194,6 +196,8 @@
 .features__container,
 .statistics__container,
 .reviews__container,
+.news__container,
+.partners__container,
 .form__container {
   border-color: black;
 }
@@ -213,6 +217,8 @@
 .features__container::before,
 .statistics__container::before,
 .reviews__container::before,
+.news__container::before,
+.partners__container::before,
 .form__container::before,
 .form__row::before,
 .form__col::before {
@@ -234,6 +240,8 @@
 .features__container::before,
 .statistics__container::before,
 .reviews__container::before,
+.news__container::before,
+.partners__container::before,
 .form__container::before {
   background-color: black;
 }
@@ -272,6 +280,14 @@
 
 .reviews__container::before {
   content: "reviews__container";
+}
+
+.news__container::before {
+  content: "news__container";
+}
+
+.partners__container::before {
+  content: "partners__container";
 }
 
 .form__container::before {
