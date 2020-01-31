@@ -171,12 +171,13 @@
 
 .header__container,
 .footer__container,
+.preview__container,
 .about__container,
+.features__container,
+.reviews__container,
 .form__container,
 .form__row,
-.form__col,
-.features__container,
-.reviews__container {
+.form__col {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -187,10 +188,11 @@
 
 .header__container,
 .footer__container,
-.form__container,
+.preview__container,
 .about__container,
 .features__container,
-.reviews__container {
+.reviews__container,
+.form__container {
   border-color: black;
 }
 
@@ -204,12 +206,13 @@
 
 .header__container::before,
 .footer__container::before,
-.form__container::before,
+.preview__container::before,
 .about__container::before,
-.form__row::before,
-.form__col::before,
 .features__container::before,
-.reviews__container::before {
+.reviews__container::before,
+.form__container::before,
+.form__row::before,
+.form__col::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -223,10 +226,11 @@
 
 .header__container::before,
 .footer__container::before,
-.form__container::before,
+.preview__container::before,
 .about__container::before,
 .features__container::before,
-.reviews__container::before {
+.reviews__container::before,
+.form__container::before {
   background-color: black;
 }
 
@@ -246,8 +250,20 @@
   content: "footer__container";
 }
 
+.preview__container::before {
+  content: "preview__container";
+}
+
 .about__container::before {
   content: "about__container";
+}
+
+.features__container::before {
+  content: "features__container";
+}
+
+.reviews__container::before {
+  content: "reviews__container";
 }
 
 .form__container::before {
@@ -260,12 +276,4 @@
 
 .form__col::before {
   content: "form__col";
-}
-
-.features__container::before {
-  content: "features__container";
-}
-
-.reviews__container::before {
-  content: "reviews__container";
 }
