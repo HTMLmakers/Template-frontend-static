@@ -16,15 +16,20 @@
   </header>
   <div class="layout__add"></div>
   <div class="layout__base">
-    <div class="layout__base-wrap-outer">
-      <div class="layout__base-wrap-inner">
-        <aside class="layout__sidebar-primary">
+    <div class="layout__base-container">
+      <div class="layout__base-row">
+        <div class="layout__headline layout__col">
+          @include('components/core/headline/headline.html')
+        </div>
+      </div>
+      <div class="layout__base-row">
+        <aside class="layout__sidebar-primary layout__col">
           @include('components/core/sidebar-primary/sidebar-primary.html')
         </aside>
-        <main class="layout__main">
+        <main class="layout__main layout__col">
 
         </main>
-        <aside class="layout__sidebar-secondary">
+        <aside class="layout__sidebar-secondary layout__col">
           @include('components/core/sidebar-secondary/sidebar-secondary.html')
         </aside>
       </div>

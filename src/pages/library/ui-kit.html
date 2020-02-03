@@ -107,7 +107,7 @@
               <li>Integer molestie lorem at massa</li>
               <li>Facilisis in pretium nisl aliquet</li>
               <li>Nulla volutpat aliquam velit
-                <ul>
+                <ul class="list">
                   <li>Phasellus iaculis neque</li>
                   <li>Purus sodales ultricies
                     <ul>
@@ -142,12 +142,26 @@
     </section>
 
     <section class="components-library__section">
+      <h2 class="components-library__heading h2">Lead (complex heading)</h2>
+      <div class="components-library__content">
+
+        <div class="lead">
+          <h1 class="lead__heading h1">Heading</h1>
+          <p class="lead__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet aperiam assumenda blanditiis commodi eligendi eveniet ex maxime modi molestiae, nemo nostrum numquam, optio quo recusandae sunt temporibus totam voluptas.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
       <h2 class="components-library__heading h2">Buttons</h2>
       <div class="components-library__content">
         <div class="components-library__row">
+
           <button class="btn" type="button">Button</button>
           <button class="btn btn--primary" type="button">Button primary</button>
           <button class="btn btn--secondary" type="button">Button secondary</button>
+
         </div>
         <div class="components-library__row">
           <button class="btn btn--block" type="button">Button block</button>
@@ -159,6 +173,7 @@
       <h2 class="components-library__heading h2">Forms</h2>
       <h3 class="components-library__heading h3">Form layout</h3>
       <div class="components-library__content">
+
         <form class="form" action="" method="">
           <div class="form__container">
             <div class="form__row">
@@ -175,14 +190,15 @@
             </div>
           </div>
         </form>
+
       </div>
       <h3 class="components-library__heading h3">Form elements</h3>
       <div class="components-library__content">
         <div class="components-library__row">
 
           <div class="form-field">
-            <label class="form-field__label">Label input text</label>
-            <input class="form-field__text" type="text" name="" value="" placeholder="Placeholder">
+            <label class="form-field__label" for="1">Label input text</label>
+            <input class="form-field__text" type="text" name="" id="1" value="" placeholder="Placeholder">
             <span class="form-field__message">We'll never share your email with anyone else.</span>
 <!--            <span class="form-field__placeholder">My placeholder</span>-->
           </div>
@@ -191,8 +207,8 @@
         <div class="components-library__row">
 
           <div class="form-field">
-            <label class="form-field__label">Label textarea</label>
-            <textarea class="form-field__text" name="" placeholder="Placeholder"></textarea>
+            <label class="form-field__label" for="2">Label textarea</label>
+            <textarea class="form-field__text" name="" id="2" placeholder="Placeholder"></textarea>
             <span class="form-field__message">We'll never share your email with anyone else.</span>
 <!--            <span class="form-field__placeholder">My placeholder</span>-->
           </div>
@@ -217,22 +233,23 @@
           <div class="components-library__col">
 
             <div class="form-field"><!-- form-field--check -->
-              <label class="form-field__label">Label checkbox</label>
-              <input class="form-field__checkbox" type="checkbox" name="" value="">
+              <label class="form-field__label" for="3">Label checkbox</label>
+              <input class="form-field__checkbox" type="checkbox" name="" id="3" value="">
             </div>
 
           </div>
           <div class="components-library__col">
 
             <div class="form-field"><!-- form-field--check -->
-              <label class="form-field__label">Label radio</label>
-              <input class="form-field__radio" type="radio" name="" value="">
+              <label class="form-field__label" for="4">Label radio</label>
+              <input class="form-field__radio" type="radio" name="" id="4" value="">
             </div>
 
           </div>
         </div>
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Tables</h2>
       <div class="components-library__content">
@@ -263,6 +280,44 @@
 
       </div>
     </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Control</h2>
+      <div class="components-library__content">
+
+        <div class="components-library__row">
+          <div class="components-library__col">
+
+            <a class="control-close">Close</a>
+            <!--<a class="control-close">Close
+              <svg>
+                <use xlink:href="#id" />
+              </svg>
+            </a>-->
+
+          </div>
+          <div class="components-library__col">
+
+            <a class="control-arrow control-arrow--prev">Prev</a>
+            <!--<a class="control-arrow control-arrow&#45;&#45;prev">Prev
+               <svg>
+                 <use xlink:href="#id" />
+               </svg>
+            </a>-->
+            <a class="control-arrow control-arrow--next">Next</a>
+            <!--<a class="control-arrow control-arrow&#45;&#45;next">Next
+              <svg>
+                <use xlink:href="#id" />
+              </svg>
+            </a>-->
+
+          </div>
+          <div class="components-library__col"></div>
+        </div>
+
+      </div>
+    </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Popup</h2>
       <div class="components-library__content">
@@ -271,12 +326,17 @@
         <button class="btn btn--secondary" type="button" data-uikit-popup-open="popup-2">Popup 2</button>
 
         <div class="popup popup-1" data-uikit-popup="popup-1">
+          <a class="popup__close control-close">Close</a>
+<!--          <a class="popup__close control-close">Close
+            <svg>
+              <use xlink:href="#id" />
+            </svg>
+          </a>-->
           <header class="popup__header">
-            <button class="popup__close" type="button">Close</button>
             <h2 class="h2 popup__heading popup-1__heading">Popup 1</h2>
           </header>
           <div class="popup__main">
-            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid dolor doloribus, enim et exercitationem facere fugit libero maiores odit optio, quaerat qui recusandae similique suscipit ut vitae! At id maiores quaerat qui quibusdam quisquam reiciendis. Alias asperiores assumenda cumque cupiditate dignissimos distinctio earum eius, eveniet, fugit harum, itaque laboriosam libero magnam necessitatibus neque non provident quae quaerat quas quasi recusandae sed sunt temporibus vel veniam! At, sit, voluptatem. Adipisci magni nulla repudiandae sapiente ullam! Deleniti, et, magnam! Iusto natus odit quam tempora unde vero? A animi consequuntur expedita fugit iure unde! Facere harum minima nisi, porro quis totam. Neque.</p>
+            <p class="popup__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid dolor doloribus, enim et exercitationem facere fugit libero maiores odit optio, quaerat qui recusandae similique suscipit ut vitae! At id maiores quaerat qui quibusdam quisquam reiciendis. Alias asperiores assumenda cumque cupiditate dignissimos distinctio earum eius, eveniet, fugit harum, itaque laboriosam libero magnam necessitatibus neque non provident quae quaerat quas quasi recusandae sed sunt temporibus vel veniam! At, sit, voluptatem. Adipisci magni nulla repudiandae sapiente ullam! Deleniti, et, magnam! Iusto natus odit quam tempora unde vero? A animi consequuntur expedita fugit iure unde! Facere harum minima nisi, porro quis totam. Neque.</p>
           </div>
           <footer class="popup__footer">
             <button class="btn btn--secondary" type="button" data-uikit-popup-open="popup-2">Popup</button>
@@ -284,8 +344,15 @@
         </div>
 
         <div class="popup popup-2" data-uikit-popup="popup-2">
-          <h2 class="h2 popup__heading popup-2__heading">Popup 2</h2>
+          <a class="popup__close control-close">Close</a>
+<!--          <a class="popup__close control-close">Close
+            <svg>
+              <use xlink:href="#id" />
+            </svg>
+          </a>-->
+          <p class="popup__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid dolor doloribus, enim et exercitationem facere fugit libero maiores odit optio, quaerat qui recusandae similique suscipit ut vitae! At id maiores quaerat qui quibusdam quisquam reiciendis.</p>
         </div>
+
       </div>
     </section>
 
@@ -293,25 +360,25 @@
       <h2 class="components-library__heading h2">Slider</h2>
       <div class="components-library__content">
 
-        <div class="slider">
-          <ul class="slider__list">
-            <li class="slider__item">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?
-            </li>
-            <li class="slider__item">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.
-            </li>
-            <li class="slider__item">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?
-            </li>
-            <li class="slider__item">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.
-            </li>
-          </ul>
-          <button class="slider__prev" type="button">Prev</button>
-          <button class="slider__next" type="button">Next</button>
-          <div class="slider__pagination"></div>
-        </div>
+<!--        <div class="slider">-->
+<!--          <ul class="slider__list">-->
+<!--            <li class="slider__item">-->
+<!--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?-->
+<!--            </li>-->
+<!--            <li class="slider__item">-->
+<!--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.-->
+<!--            </li>-->
+<!--            <li class="slider__item">-->
+<!--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?-->
+<!--            </li>-->
+<!--            <li class="slider__item">-->
+<!--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <button class="slider__prev" type="button">Prev</button>-->
+<!--          <button class="slider__next" type="button">Next</button>-->
+<!--          <div class="slider__pagination"></div>-->
+<!--        </div>-->
 
       </div>
     </section>

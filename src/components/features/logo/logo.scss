@@ -1,15 +1,20 @@
+/* ==========================================================================
+   Component -- logo
+   ========================================================================== */
+
 .logo {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   display: block;
   width: 100px;
   height: 100px;
   text-decoration: none;
-  background-color: aqua;
 
-  &__img {
+  img {
     display: block;
     width: 100%;
     height: 100%;
+    background-color: darkviolet;
   }
 }

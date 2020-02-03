@@ -11,10 +11,11 @@
 .layout__footer,
 .layout__base,
 .layout__add,
+.layout__headline,
 .layout__sidebar-primary,
 .layout__sidebar-secondary,
 .layout__main,
-.layout__base-wrap-outer,
+.layout__base-container,
 .layout__section {
   position: relative;
   border-width: 3px;
@@ -29,10 +30,11 @@
 .layout__footer,
 .layout__base,
 .layout__add,
+.layout__headline,
 .layout__sidebar-primary,
 .layout__sidebar-secondary,
 .layout__main,
-.layout__base-wrap-outer,
+.layout__base-container,
 .layout__section {
   margin: 3px 0;
   padding-top: 28px;
@@ -50,6 +52,10 @@
   border-color: blue;
 }
 
+.layout__headline {
+  border-color: aqua;
+}
+
 .layout__sidebar-primary,
 .layout__sidebar-secondary {
   border-color: orange;
@@ -60,7 +66,7 @@
   border-color: purple;
 }
 
-.layout__base-wrap-outer {
+.layout__base-container {
   padding-right: 0;
   padding-bottom: 0;
   border-color: black;
@@ -71,10 +77,11 @@
 .layout__footer::before,
 .layout__base::before,
 .layout__add::before,
+.layout__headline::before,
 .layout__sidebar-primary::before,
 .layout__sidebar-secondary::before,
 .layout__main::before,
-.layout__base-wrap-outer::before,
+.layout__base-container::before,
 .layout__section::before {
   position: absolute;
   top: 0;
@@ -97,6 +104,10 @@
   background-color: blue;
 }
 
+.layout__headline::before {
+  background-color: aqua;
+}
+
 .layout__sidebar-primary::before,
 .layout__sidebar-secondary::before {
   background-color: orange;
@@ -107,7 +118,7 @@
   background-color: purple;
 }
 
-.layout__base-wrap-outer::before {
+.layout__base-container::before {
   top: -3px;
   left: -3px;
   padding: 8px 10px;
@@ -130,6 +141,10 @@
   content: "layout__add";
 }
 
+.layout__headline::before {
+  content: "layout__headline";
+}
+
 .layout__sidebar-primary::before {
   content: "layout__sidebar-primary";
 }
@@ -142,8 +157,8 @@
   content: "layout__main";
 }
 
-.layout__base-wrap-outer::before {
-  content: "layout__base-wrap-outer";
+.layout__base-container::before {
+  content: "layout__base-container";
 }
 
 .layout__section::before {
@@ -156,12 +171,16 @@
 
 .header__container,
 .footer__container,
+.preview__container,
 .about__container,
+.features__container,
+.statistics__container,
+.reviews__container,
+.news__container,
+.partners__container,
 .form__container,
 .form__row,
-.form__col,
-.features__container,
-.reviews__container {
+.form__col {
   position: relative;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -172,10 +191,14 @@
 
 .header__container,
 .footer__container,
-.form__container,
+.preview__container,
 .about__container,
 .features__container,
-.reviews__container {
+.statistics__container,
+.reviews__container,
+.news__container,
+.partners__container,
+.form__container {
   border-color: black;
 }
 
@@ -189,12 +212,16 @@
 
 .header__container::before,
 .footer__container::before,
-.form__container::before,
+.preview__container::before,
 .about__container::before,
-.form__row::before,
-.form__col::before,
 .features__container::before,
-.reviews__container::before {
+.statistics__container::before,
+.reviews__container::before,
+.news__container::before,
+.partners__container::before,
+.form__container::before,
+.form__row::before,
+.form__col::before {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -208,10 +235,14 @@
 
 .header__container::before,
 .footer__container::before,
-.form__container::before,
+.preview__container::before,
 .about__container::before,
 .features__container::before,
-.reviews__container::before {
+.statistics__container::before,
+.reviews__container::before,
+.news__container::before,
+.partners__container::before,
+.form__container::before {
   background-color: black;
 }
 
@@ -231,8 +262,32 @@
   content: "footer__container";
 }
 
+.preview__container::before {
+  content: "preview__container";
+}
+
 .about__container::before {
   content: "about__container";
+}
+
+.features__container::before {
+  content: "features__container";
+}
+
+.statistics__container::before {
+  content: "statistics__container";
+}
+
+.reviews__container::before {
+  content: "reviews__container";
+}
+
+.news__container::before {
+  content: "news__container";
+}
+
+.partners__container::before {
+  content: "partners__container";
 }
 
 .form__container::before {
@@ -245,12 +300,4 @@
 
 .form__col::before {
   content: "form__col";
-}
-
-.features__container::before {
-  content: "features__container";
-}
-
-.reviews__container::before {
-  content: "reviews__container";
 }

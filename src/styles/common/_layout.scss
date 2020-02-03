@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Common -- layout
+   ========================================================================== */
+
 .layout {
   $root: &;
 
@@ -9,55 +13,24 @@
   &__header,
   &__footer,
   &__add,
-  &__base-wrap-outer {
+  &__base,
+  &__base-container {
     @include make-container();
     //@include make-container-with-layout-gutter();
     //@include make-container-max-widths();
   }
 
-  &__base-wrap-outer {
+  &__base-container {
     @include make-container-max-widths();
-  }
 
-  &__base,
-  &__base-wrap-outer,
-  &__section {
-    display: flex;
-    flex-grow: 1;
-  }
-
-  &__base-wrap-outer {
     flex-direction: column;
   }
 
-  &__base-wrap-inner {
-    @include make-row();
-
+  &__base,
+  &__section,
+  &__base-container {
+    display: flex;
     flex-grow: 1;
-  }
-
-  &__main,
-  &__sidebar-primary,
-  &__sidebar-secondary {
-    @include make-col-ready();
-
-    flex-grow: 1;
-  }
-
-  &__sidebar-primary {
-    @include make-col-fix(300px);
-
-    @include media-breakpoint-down(lg) {
-      @include make-col(100, 100);
-    }
-  }
-
-  &__sidebar-secondary {
-    @include make-col(30, 100);
-
-    @include media-breakpoint-down(lg) {
-      @include make-col(100, 100);
-    }
   }
 
   &__header {
@@ -76,6 +49,32 @@
     min-height: auto;
   }
 
+  &__base-row {
+    @include make-row();
+  }
+
+  &__col {
+    @include make-col-ready();
+  }
+
+  &__sidebar-primary {
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+
+    @include make-col-fix(300px);
+
+    padding-right: 50px;
+  }
+
+  &__sidebar-secondary {
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+
+    @include make-col(30, 100);
+  }
+
   &--viewport-height {
 
     #{$root}__base-wrap-inner {
@@ -83,9 +82,7 @@
       height: calc(100vh - #{$layout-header-min-height} - #{$layout-footer-min-height});
     }
 
-    #{$root}__sidebar-primary,
-    #{$root}__sidebar-secondary,
-    #{$root}__main {
+    #{$root}__col {
       height: 100%;
       overflow: auto;
     }

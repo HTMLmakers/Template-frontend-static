@@ -1,11 +1,27 @@
+/* ==========================================================================
+   Component -- about
+   ========================================================================== */
+
 .about {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   min-height: 100px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   &__container {
-
+    //@include make-container-max-widths();
+    //@include make-container-with-layout-gutter();
   }
+
+  //&__row {
+  //  @include make-row();
+  //}
+  //
+  //&__col {
+  //  @include make-col-ready();
+  //}
 
   &__header {
 

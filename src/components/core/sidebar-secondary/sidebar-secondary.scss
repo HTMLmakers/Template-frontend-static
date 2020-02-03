@@ -1,13 +1,18 @@
+/* ==========================================================================
+   Component -- sidebar-secondary
+   ========================================================================== */
+
 .sidebar-secondary {
   $root: &;
 
-  background-color: red;
+  padding: 5px;
+  background-color: blue;
 
   &__section {
     min-height: 100px;
     margin-bottom: 50px;
     padding: 5px;
-    background-color: yellow;
+    background-color: aqua;
 
     &:last-child {
       margin-bottom: 0;

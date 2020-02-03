@@ -1,18 +1,23 @@
+/* ==========================================================================
+   Component -- breadcrumbs
+   ========================================================================== */
+
 .breadcrumbs {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   display: flex;
   align-items: center;
-  padding: 20px;
-  background-color: silver;
 
   &__list {
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   &__item {
     display: inline-block;
+    margin: 0;
     margin-right: 10px;
 
     &::before {
@@ -35,6 +40,7 @@
 
     &--is-current,
     &--is-current:hover {
+      font-weight: bold;
       text-decoration: none;
     }
 
@@ -63,7 +69,7 @@
       left: 50%;
       width: 30px;
       height: 30px;
-      background-color: red;
+      background-color: darkviolet;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       content: "";

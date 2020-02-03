@@ -1,5 +1,10 @@
-.nav-global {
+/* ==========================================================================
+   Component -- nav
+   ========================================================================== */
+
+.nav {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   width: 100%;
   min-height: 50px;
@@ -19,6 +24,7 @@
     flex-grow: 1;
     justify-content: center;
     min-height: inherit;
+    margin: 0;
   }
 
   &__link {
