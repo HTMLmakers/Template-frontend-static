@@ -6,12 +6,6 @@
   $root: &;
   //@include media-breakpoint-down(md) {}
 
-  &__link {
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
   &__icon {
     position: relative;
     display: inline-block;
@@ -20,32 +14,28 @@
     text-indent: -9999px;
     background-color: aqua;
 
+    &::before,
     &::after {
-      //@include sprite($icon-instagram);
-
       position: absolute;
       top: 50%;
       left: 50%;
       width: 30px;
       height: 30px;
-      background-color: darkviolet;
+      //background-color: darkviolet;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       content: "";
     }
 
-    &--toggle {
-
-      &::after {
-
-      }
+    &::before {
+      //@include sprite($icon-instagram);
+      background-color: white;
     }
 
-    &--close {
-
-      &::after {
-
-      }
+    &::after {
+      //@include sprite($icon-instagram);
+      display: none;
+      background-color: green;
     }
 
     //svg {
@@ -69,12 +59,16 @@
 
   &--is-active {
 
-    #{$root}__icon--toggle {
-      display: none;
-    }
+    #{$root}__icon {
 
-    #{$root}__icon--close {
-      display: block;
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: block;
+        background-color: green;
+      }
     }
   }
 }
