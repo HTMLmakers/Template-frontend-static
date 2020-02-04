@@ -1,5 +1,10 @@
+/* ==========================================================================
+   Ui-kit component -- lead
+   ========================================================================== */
+
 .lead {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   position: relative;
   padding-bottom: 10px;

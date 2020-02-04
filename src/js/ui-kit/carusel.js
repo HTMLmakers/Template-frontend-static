@@ -2,37 +2,37 @@
   const options = {
     default: {
       arrows: false,
-      dots: true,
-      fade: true,
-      speed: 2000,
-      autoplay: true
+      dots: true
     },
-    'slider': {
+    'carusel': {
       ...this.default
+    },
+    'carusel-name-1': {
+      slidesToShow: 4
+    },
+    'carusel-name-2': {
+      slidesToShow: 2,
+      slidesToScroll: 2
     }
-    //,
-    //'slider-name-1': {
-    //
-    //}
   };
 
-  const $sliderContainer = $('[data-uikit-slider-container]');
+  const $caruselContainer = $('[data-uikit-carusel-container]');
 
-  $sliderContainer.each(function(index, el) {
+  $caruselContainer.each(function(index, el) {
     const $container = $(el);
-    const $slider = $container.find('[data-uikit-slider]');
+    const $carusel = $container.find('[data-uikit-carusel]');
     const $buttonPrev = $container.find('.control-arrow--prev');
     const $buttonNext = $container.find('.control-arrow--next');
     const $pagination = $container.find('.control-pagination');
 
     options.default.appendDots = $pagination;
-    $slider.slick({...options.default, ...options[$slider.data('uikit-slider')]});
+    $carusel.slick({...options.default, ...options[$carusel.data('uikit-carusel')]});
 
     $buttonNext.on('click', function () {
-      $slider.slick('slickNext');
+      $carusel.slick('slickNext');
     });
     $buttonPrev.on('click', function () {
-      $slider.slick('slickPrev');
+      $carusel.slick('slickPrev');
     });
 
   });

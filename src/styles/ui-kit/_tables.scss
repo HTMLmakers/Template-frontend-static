@@ -1,4 +1,11 @@
+/* ==========================================================================
+   Ui-kit component -- table
+   ========================================================================== */
+
 .table {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
   width: 100%;
   color: $black;
   font-family: $secure-fonts;

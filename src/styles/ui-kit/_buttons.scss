@@ -1,4 +1,11 @@
+/* ==========================================================================
+   Ui-kit component -- btn
+   ========================================================================== */
+
 .btn {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
