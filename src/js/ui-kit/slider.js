@@ -2,7 +2,10 @@
   const options = {
     default: {
       arrows: false,
-      dots: true
+      dots: true,
+      fade: true,
+      speed: 2000,
+      autoplay: true
     },
     'slider': {
       ...this.default
