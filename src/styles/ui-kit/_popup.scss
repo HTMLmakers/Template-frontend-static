@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Ui-kit component -- popup
+   ========================================================================== */
+
 .fancybox-bg {
   background: $popup-overlay-bg;
 }
@@ -10,6 +14,9 @@
 }
 
 .popup {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
   position: relative;
   display: none;
   width: $popup-width;
