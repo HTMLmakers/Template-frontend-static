@@ -4,6 +4,7 @@
 
 .headline {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   padding: 5px;
   background-color: green;
