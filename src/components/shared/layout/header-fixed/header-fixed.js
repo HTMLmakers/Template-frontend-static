@@ -1,15 +1,15 @@
 //  ==========================================================================
-//  Component header
+//  Component header-fixed
 //  ==========================================================================
 
 (($) => {
-  const $header = $('.header');
+  const $headerFixed = $('.header-fixed');
 
   $(window).on('scroll', function () {
-    if ($(this).scrollTop() > 0) {
-      $header.addClass('header--fixed');
+    if ($(this).scrollTop() > 100) {
+      $headerFixed.addClass('header-fixed--visible');
     } else {
-      $header.removeClass('header--fixed');
+      $headerFixed.removeClass('header-fixed--visible');
     }
   });
 

@@ -170,6 +170,7 @@
 // =============================================================================
 
 .header__container,
+.header-fixed__container,
 .footer__container,
 .preview__container,
 .about__container,
@@ -190,6 +191,7 @@
 }
 
 .header__container,
+.header-fixed__container,
 .footer__container,
 .preview__container,
 .about__container,
@@ -211,6 +213,7 @@
 }
 
 .header__container::before,
+.header-fixed__container::before,
 .footer__container::before,
 .preview__container::before,
 .about__container::before,
@@ -234,6 +237,7 @@
 }
 
 .header__container::before,
+.header-fixed__container::before,
 .footer__container::before,
 .preview__container::before,
 .about__container::before,
@@ -256,6 +260,10 @@
 
 .header__container::before {
   content: "header__container";
+}
+
+.header-fixed__container::before {
+  content: "header-fixed__container";
 }
 
 .footer__container::before {
