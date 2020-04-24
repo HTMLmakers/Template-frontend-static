@@ -15,7 +15,7 @@
 .layout__sidebar-primary,
 .layout__sidebar-secondary,
 .layout__main,
-.layout__base-container,
+.layout__container,
 .layout__section {
   position: relative;
   border-width: 3px;
@@ -34,7 +34,7 @@
 .layout__sidebar-primary,
 .layout__sidebar-secondary,
 .layout__main,
-.layout__base-container,
+.layout__container,
 .layout__section {
   margin: 3px 0;
   padding-top: 28px;
@@ -66,7 +66,7 @@
   border-color: purple;
 }
 
-.layout__base-container {
+.layout__container {
   padding-right: 0;
   padding-bottom: 0;
   border-color: black;
@@ -81,7 +81,7 @@
 .layout__sidebar-primary::before,
 .layout__sidebar-secondary::before,
 .layout__main::before,
-.layout__base-container::before,
+.layout__container::before,
 .layout__section::before {
   position: absolute;
   top: 0;
@@ -118,7 +118,7 @@
   background-color: purple;
 }
 
-.layout__base-container::before {
+.layout__container::before {
   top: -3px;
   left: -3px;
   padding: 8px 10px;
@@ -157,8 +157,8 @@
   content: "layout__main";
 }
 
-.layout__base-container::before {
-  content: "layout__base-container";
+.layout__container::before {
+  content: "layout__container";
 }
 
 .layout__section::before {
