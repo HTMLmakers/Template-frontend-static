@@ -56,8 +56,8 @@ const srcPath = {
   },
   components: {
     root: `${srcRoot}/components`,
-    core: `${srcRoot}/components/core`,
     features: `${srcRoot}/components/features`,
+    shared: `${srcRoot}/components/shared`,
   },
   fonts: `${srcRoot}/fonts`,
   js: {
@@ -670,6 +670,9 @@ function buildJs() {
     .pipe(plumber())
     .pipe(babel({
       presets: ['@babel/env'],
+      plugins: [
+        ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }]
+      ]
     }))
     .pipe(concat('script.js'))
     .pipe(dest(`${buildPath.js}`))

@@ -1,6 +1,15 @@
+/* ==========================================================================
+   Common -- base
+   ========================================================================== */
+
 html {
+  /*@media screen and (max-width: 1920px) {
+    font-size: 15px;
+  }*/
+
   box-sizing: border-box;
   height: 100%;
+  font-size: $default-font-size;
 }
 
 *,

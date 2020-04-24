@@ -4,9 +4,6 @@
       arrows: false,
       dots: true
     },
-    'carusel': {
-      ...this.default
-    },
     'carusel-name-1': {
       slidesToShow: 4
     },

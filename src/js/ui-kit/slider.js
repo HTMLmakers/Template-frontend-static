@@ -7,13 +7,10 @@
       speed: 2000,
       autoplay: true
     },
-    'slider': {
-      ...this.default
-    }
-    //,
-    //'slider-name-1': {
-    //
-    //}
+    // 'slider-name-1': {
+    //   dots: false,
+    //   fade: false
+    // }
   };
 
   const $sliderContainer = $('[data-uikit-slider-container]');

@@ -1,9 +1,9 @@
 @import "dependencies";
-@import "../components/core/header/header";
-@import "../components/core/footer/footer";
-@import "../components/core/headline/headline";
-@import "../components/core/sidebar-primary/sidebar-primary";
-@import "../components/core/sidebar-secondary/sidebar-secondary";
+@import "../components/shared/layout/header/header";
+@import "../components/shared/layout/footer/footer";
+@import "../components/shared/layout/headline/headline";
+@import "../components/shared/layout/sidebar-primary/sidebar-primary";
+@import "../components/shared/layout/sidebar-secondary/sidebar-secondary";
 @import "../components/features/logo/logo";
 @import "../components/features/nav/nav";
 @import "../components/features/contact-info/contact-info";
@@ -19,7 +19,6 @@
 @import "../components/features/features/features";
 @import "../components/features/statistics/statistics";
 @import "../components/features/news/news";
-@import "../components/features/partners/partners";
 @import "../components/features/partners/partners";
 @import "../components/features/toggle/toggle";
 
