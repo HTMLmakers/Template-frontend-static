@@ -172,6 +172,8 @@
 .header__container,
 .header-fixed__container,
 .footer__container,
+.add-primary__container,
+.add-secondary__container,
 .preview__container,
 .about__container,
 .features__container,
@@ -193,6 +195,8 @@
 .header__container,
 .header-fixed__container,
 .footer__container,
+.add-primary__container,
+.add-secondary__container,
 .preview__container,
 .about__container,
 .features__container,
@@ -215,6 +219,8 @@
 .header__container::before,
 .header-fixed__container::before,
 .footer__container::before,
+.add-primary__container::before,
+.add-secondary__container::before,
 .preview__container::before,
 .about__container::before,
 .features__container::before,
@@ -239,6 +245,8 @@
 .header__container::before,
 .header-fixed__container::before,
 .footer__container::before,
+.add-primary__container::before,
+.add-secondary__container::before,
 .preview__container::before,
 .about__container::before,
 .features__container::before,
@@ -268,6 +276,14 @@
 
 .footer__container::before {
   content: "footer__container";
+}
+
+.add-primary__container::before {
+  content: "add-primary__container";
+}
+
+.add-secondary__container::before {
+  content: "add-secondary__container";
 }
 
 .preview__container::before {

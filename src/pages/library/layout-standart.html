@@ -16,7 +16,9 @@
     @include('components/shared/layout/header/header.html')
     @include('components/shared/layout/header-fixed/header-fixed.html')
   </header>
-  <div class="layout__add"></div>
+  <div class="layout__add">
+    @include('components/shared/layout/add-primary/add-primary.html')
+  </div>
   <div class="layout__base">
     <div class="layout__container">
       <div class="layout__row">
@@ -37,7 +39,9 @@
       </div>
     </div>
   </div>
-  <div class="layout__add"></div>
+  <div class="layout__add">
+    @include('components/shared/layout/add-secondary/add-secondary.html')
+  </div>
   <footer class="layout__footer">
     @include('components/shared/layout/footer/footer.html')
   </footer>
