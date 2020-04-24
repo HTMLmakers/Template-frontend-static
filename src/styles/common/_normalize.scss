@@ -165,34 +165,34 @@ dfn {
  */
 
 h1 {
-  font-size: 2em;
   margin: 0.67em 0;
+  font-size: 2em;
 }
 
 @if $legacy_browser_support {
   h2 {
-    font-size: 1.5em;
     margin: 0.83em 0;
+    font-size: 1.5em;
   }
 
   h3 {
-    font-size: 1.17em;
     margin: 1em 0;
+    font-size: 1.17em;
   }
 
   h4 {
-    font-size: 1em;
     margin: 1.33em 0;
+    font-size: 1em;
   }
 
   h5 {
-    font-size: 0.83em;
     margin: 1.67em 0;
+    font-size: 0.83em;
   }
 
   h6 {
-    font-size: 0.67em;
     margin: 2.33em 0;
+    font-size: 0.67em;
   }
 }
 
@@ -201,13 +201,13 @@ h1 {
  */
 
 mark {
-  background: #ff0;
   color: #000;
+  background: #ff0;
 }
 
 @if $legacy_browser_support {
 
-  /**
+  /*
    * Addresses margins set differently in IE 6/7.
    */
 
@@ -228,9 +228,9 @@ mark {
    * Addresses `quotes` property not supported in Safari 4.
    */
 
-  q:before,
-  q:after {
-    content: '';
+  q::before,
+  q::after {
+    content: "";
     content: none;
   }
 }
@@ -249,9 +249,9 @@ small {
 
 sub,
 sup {
+  position: relative;
   font-size: 75%;
   line-height: 0;
-  position: relative;
   vertical-align: baseline;
 }
 
@@ -303,7 +303,6 @@ sub {
     *list-style: none;
     *list-style-image: none;
   }
-
 }
 
 /* Embedded content
@@ -366,11 +365,11 @@ code,
 kbd,
 pre,
 samp {
+  font-size: 1em;
   font-family: monospace, monospace;
   @if $legacy_browser_support {
-    _font-family: 'courier new', monospace;
+    _font-family: "courier new", monospace;
   }
-  font-size: 1em;
 }
 
 /* Forms
@@ -394,9 +393,9 @@ input,
 optgroup,
 select,
 textarea {
+  margin: 0; /* 3 */
   color: inherit; /* 1 */
   font: inherit; /* 2 */
-  margin: 0; /* 3 */
   @if $legacy_browser_support {
     vertical-align: baseline; /* 3 */
     *vertical-align: middle; /* 3 */
@@ -437,8 +436,8 @@ button,
 html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button; /* 2 */
   cursor: pointer; /* 3 */
+  -webkit-appearance: button; /* 2 */
   @if $legacy_browser_support {
     *overflow: visible; /* 4 */
   }
@@ -459,8 +458,8 @@ html input[disabled] {
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
   padding: 0;
+  border: 0;
 }
 
 /**
@@ -483,8 +482,8 @@ input[type="radio"] {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
   @if $legacy_browser_support {
-    *height: 13px; /* 3 */
     *width: 13px; /* 3 */
+    *height: 13px; /* 3 */
   }
 }
 
@@ -505,8 +504,8 @@ input[type="number"]::-webkit-outer-spin-button {
  */
 
 input[type="search"] {
-  -webkit-appearance: textfield; /* 1 */
   box-sizing: content-box; /* 2 */
+  -webkit-appearance: textfield; /* 1 */
 }
 
 /**
@@ -525,9 +524,9 @@ input[type="search"]::-webkit-search-decoration {
  */
 
 fieldset {
-  border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
+  border: 1px solid #c0c0c0;
 }
 
 /**
@@ -538,11 +537,11 @@ fieldset {
  */
 
 legend {
-  border: 0; /* 1 */
   padding: 0; /* 2 */
+  border: 0; /* 1 */
   @if $legacy_browser_support {
-    white-space: normal; /* 3 */
     *margin-left: -7px; /* 4 */
+    white-space: normal; /* 3 */
   }
 }
 
