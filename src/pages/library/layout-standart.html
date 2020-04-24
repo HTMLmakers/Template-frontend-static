@@ -11,33 +11,34 @@
 </head>
 
 <body class="layout"><!-- layout--viewport-height -->
+
   <header class="layout__header">
-    @include('components/core/header/header.html')
+    @include('components/shared/layout/header/header.html')
   </header>
   <div class="layout__add"></div>
   <div class="layout__base">
-    <div class="layout__base-container">
-      <div class="layout__base-row">
+    <div class="layout__container">
+      <div class="layout__row">
         <div class="layout__headline layout__col">
-          @include('components/core/headline/headline.html')
+          @include('components/shared/layout/headline/headline.html')
         </div>
       </div>
-      <div class="layout__base-row">
+      <div class="layout__row layout__row--gutter">
         <aside class="layout__sidebar-primary layout__col">
-          @include('components/core/sidebar-primary/sidebar-primary.html')
+          @include('components/shared/layout/sidebar-primary/sidebar-primary.html')
         </aside>
         <main class="layout__main layout__col">
 
         </main>
         <aside class="layout__sidebar-secondary layout__col">
-          @include('components/core/sidebar-secondary/sidebar-secondary.html')
+          @include('components/shared/layout/sidebar-secondary/sidebar-secondary.html')
         </aside>
       </div>
     </div>
   </div>
   <div class="layout__add"></div>
   <footer class="layout__footer">
-    @include('components/core/footer/footer.html')
+    @include('components/shared/layout/footer/footer.html')
   </footer>
 
   <script src="./js/vendors.js"></script>
