@@ -1,13 +1,27 @@
 /* ==========================================================================
-   Component -- headline
+   Component -- add-primary
    ========================================================================== */
 
-.headline {
+.add-primary {
   $root: &;
   //@include media-breakpoint-down(md) {}
 
-  padding: 5px;
-  background-color: green;
+  background-color: palevioletred;
+
+  &__container {
+    @include make-container();
+    //@include make-container-max-widths();
+  }
+
+  &__row {
+    @include make-row();
+  }
+
+  &__col {
+    @include make-col-ready();
+
+    padding: 5px;
+  }
 
   &__section {
     margin-bottom: 10px;

@@ -4,6 +4,7 @@
 
 .sidebar-secondary {
   $root: &;
+  //@include media-breakpoint-down(md) {}
 
   padding: 5px;
   background-color: blue;

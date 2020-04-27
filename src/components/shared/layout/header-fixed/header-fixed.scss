@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Component -- header-fixed
+   ========================================================================== */
+
+.header-fixed {
+  $root: &;
+
+  position: fixed;
+  top: -100%;
+  right: 0;
+  left: 0;
+  z-index: 9000;
+  display: flex;
+  min-height: 50px;
+  background-color: violet;
+
+  &__container {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+
+  &__row {
+    @include make-row();
+
+    min-height: inherit;
+  }
+
+  &__col {
+    @include make-col-ready();
+
+    padding: 5px;
+  }
+
+  &__component-name1 {
+
+    @include make-col-fix(150px);
+
+    background-color: green;
+  }
+
+  &__component-name2 {
+    background-color: yellow;
+  }
+
+  &__component-name3 {
+    background-color: blue;
+  }
+
+  &--visible {
+    top: 0;
+  }
+}
