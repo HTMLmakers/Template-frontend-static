@@ -10,8 +10,8 @@
   background-color: red;
 
   &__section {
-    min-height: 50px;
-    margin-bottom: 50px;
+    min-height: px-to-rem(50px);
+    margin-bottom: px-to-rem(50px);
     padding: 5px;
     background-color: yellow;
 
