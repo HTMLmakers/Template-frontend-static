@@ -24,7 +24,7 @@
     @include make-row();
 
     &--gutter {
-      @include make-row(30px);
+      @include make-row(px-to-rem(30px));
     }
   }
 
@@ -68,23 +68,23 @@
   }
 
   &__main {
-    @include make-col-ready(30px);
+    @include make-col-ready(px-to-rem(30px));
   }
 
   &__sidebar-primary {
     @include media-breakpoint-down(lg) {
-      @include make-col(100, 100, 30px);
+      @include make-col(100, 100, px-to-rem(30px));
     }
 
-    @include make-col-fix(300px, 30px);
+    @include make-col-fix(px-to-rem(300px), px-to-rem(30px));
   }
 
   &__sidebar-secondary {
     @include media-breakpoint-down(lg) {
-      @include make-col(100, 100, 30px);
+      @include make-col(100, 100, px-to-rem(30px));
     }
 
-    @include make-col(30, 100, 30px);
+    @include make-col(30, 100, px-to-rem(30px));
   }
 
   &--viewport-height {

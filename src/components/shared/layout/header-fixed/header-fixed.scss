@@ -11,7 +11,7 @@
   left: 0;
   z-index: 9000;
   display: flex;
-  min-height: 50px;
+  min-height: px-to-rem(50px);
   background-color: violet;
 
   &__container {
@@ -33,7 +33,7 @@
 
   &__component-name1 {
 
-    @include make-col-fix(150px);
+    @include make-col-fix(px-to-rem(150px));
 
     background-color: green;
   }

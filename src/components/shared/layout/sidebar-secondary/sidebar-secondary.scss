@@ -10,8 +10,8 @@
   background-color: blue;
 
   &__section {
-    min-height: 100px;
-    margin-bottom: 50px;
+    min-height: px-to-rem(100px);
+    margin-bottom: px-to-rem(50px);
     padding: 5px;
     background-color: aqua;
 

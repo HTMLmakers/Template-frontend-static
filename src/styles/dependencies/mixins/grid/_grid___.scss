@@ -32,8 +32,8 @@
 @mixin make-row($gutter: $grid-gutter-width) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: calc(-#{$gutter} / 2);
-  margin-left: calc(-#{$gutter} / 2);
+  margin-right: -$gutter / 2;
+  margin-left: -$gutter / 2;
 }
 
 @mixin make-col-ready($gutter: $grid-gutter-width) {
@@ -46,8 +46,8 @@
   width: 100%;
   max-width: 100%;
   @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
   } @else {
     padding-right: $gutter / 2;
     padding-left: $gutter / 2;
@@ -61,21 +61,21 @@
   // do not appear to require this.
   max-width: calc(#{percentage(($size / $columns))} - #{$gutter});
   @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
   }
 }
 
 @mixin make-col-fix($size, $gutter: 0px) {
-  flex: 0 0 calc(#{$size} - #{$gutter});
-  width: calc(#{$size} - #{$gutter});
+  flex: 0 1 $size;
+  width: $size;
   @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
   }
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
-  $num: calc(#{$size} / #{$columns});
+  $num: $size / $columns;
   margin-left: if($num == 0, 0, percentage($num));
 }

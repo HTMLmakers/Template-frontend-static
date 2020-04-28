@@ -14,12 +14,12 @@
   &__section {
 
     &:nth-child(1) {
-      min-height: 100px;
+      min-height: px-to-rem(100px);
       background-color: orange;
     }
 
     &:nth-child(2) {
-      min-height: 50px;
+      min-height: px-to-rem(50px);
       background-color: gray;
     }
   }
@@ -44,7 +44,7 @@
   &__component-name1 {
     //@include media-breakpoint-down(md) {}
 
-    @include make-col-fix(150px);
+    @include make-col-fix(px-to-rem(150px));
 
     background-color: green;
   }
@@ -64,7 +64,7 @@
       @include make-col(100, 100);
     }
 
-    @include make-col-fix(300px);
+    @include make-col-fix(px-to-rem(300px));
 
     background-color: red;
   }
