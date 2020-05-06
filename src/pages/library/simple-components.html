@@ -16,21 +16,46 @@
       <h2 class="components-library__heading h2">Logo</h2>
       <div class="components-library__content">
 
-        @include('./components/features/logo/logo.html')
+        @include('./components/shared/common/logo/logo.html', {
+          "modSmall": ""
+        })
+
+        @include('./components/shared/common/logo/logo.html', {
+          "modSmall": " logo--small"
+        })
 
       </div>
     </section>
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Nav</h2>
       <div class="components-library__content">
+        <!-- если одинаковая структура и одинаковое кол-во понктов горизонтального и вертикального меню -->
+<!--        <div class="components-library__row">-->
+
+<!--          @include('./components/shared/common/nav/nav.html', {-->
+<!--            "modVertical": ""-->
+<!--          })-->
+
+<!--        </div>-->
+<!--        <div class="components-library__row">-->
+
+<!--          @include('./components/shared/common/nav/nav.html', {-->
+<!--            "modVertical": " nav&#45;&#45;vertical"-->
+<!--          })-->
+
+<!--        </div>-->
+
+        <!-- если разная структура и разное кол-во понктов горизонтального и вертикального меню -->
         <div class="components-library__row">
 
-          @include('./components/features/nav/nav.html')
+          @include('./components/shared/common/nav/nav.html')
 
         </div>
         <div class="components-library__row">
 
-          @include('./components/features/nav/nav-vertical.html')
+          @include('./components/shared/common/nav/nav.html', {
+            "modVertical": "vertical"
+          })
 
         </div>
       </div>
@@ -39,7 +64,7 @@
       <h2 class="components-library__heading h2">Contact-info</h2>
       <div class="components-library__content">
 
-        @include('./components/features/contact-info/contact-info.html')
+        @include('./components/shared/common/contact-info/contact-info.html')
 
       </div>
     </section>
