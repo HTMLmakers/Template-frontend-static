@@ -1,4 +1,5 @@
 @import "dependencies";
+//shared layout components
 @import "../components/shared/layout/header/header";
 @import "../components/shared/layout/header-fixed/header-fixed";
 @import "../components/shared/layout/footer/footer";
@@ -7,9 +8,10 @@
 @import "../components/shared/layout/headline/headline";
 @import "../components/shared/layout/sidebar-primary/sidebar-primary";
 @import "../components/shared/layout/sidebar-secondary/sidebar-secondary";
-@import "../components/features/logo/logo";
-@import "../components/features/nav/nav";
-@import "../components/features/contact-info/contact-info";
+//shared common components
+@import "../components/shared/common/logo/logo";
+@import "../components/shared/common/nav/nav";
+@import "../components/shared/common/contact-info/contact-info";
 @import "../components/features/socials/socials";
 @import "../components/features/auth/auth";
 @import "../components/features/lg-select/lg-select";
