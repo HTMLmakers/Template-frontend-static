@@ -211,7 +211,7 @@ function compileHtml() {
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: '@file',
       context: {
         svgSpriteExists,
       },
