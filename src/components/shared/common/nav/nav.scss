@@ -7,7 +7,7 @@
   //@include media-breakpoint-down(md) {}
 
   width: 100%;
-  min-height: 50px;
+  min-height: px-to-rem(50px);
   background-color: silver;
 
   &__list {
