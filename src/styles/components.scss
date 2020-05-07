@@ -1,4 +1,5 @@
 @import "dependencies";
+//shared layout components
 @import "../components/shared/layout/header/header";
 @import "../components/shared/layout/header-fixed/header-fixed";
 @import "../components/shared/layout/footer/footer";
@@ -7,15 +8,20 @@
 @import "../components/shared/layout/headline/headline";
 @import "../components/shared/layout/sidebar-primary/sidebar-primary";
 @import "../components/shared/layout/sidebar-secondary/sidebar-secondary";
-@import "../components/features/logo/logo";
-@import "../components/features/nav/nav";
-@import "../components/features/contact-info/contact-info";
-@import "../components/features/socials/socials";
+//shared common components
+@import "../components/shared/common/icon/icon-svg/icon-svg";
+@import "../components/shared/common/icon/icon-png/icon-png";
+@import "../components/shared/common/logo/logo";
+@import "../components/shared/common/nav/nav";
+@import "../components/shared/common/contact-info/contact-info";
+@import "../components/shared/common/lg-select/lg-select";
+@import "../components/shared/common/breadcrumbs/breadcrumbs";
+@import "../components/shared/common/socials/socials";
+@import "../components/shared/common/pagination/pagination";
+@import "../components/shared/common/toggle/toggle";
+@import "../components/shared/common/back-to-top/back-to-top";
+//features components
 @import "../components/features/auth/auth";
-@import "../components/features/lg-select/lg-select";
-@import "../components/features/breadcrumbs/breadcrumbs";
-@import "../components/features/pagination/pagination";
-@import "../components/features/back-to-top/back-to-top";
 @import "../components/features/preview/preview";
 @import "../components/features/about/about";
 @import "../components/features/reviews/reviews";
@@ -23,7 +29,6 @@
 @import "../components/features/statistics/statistics";
 @import "../components/features/news/news";
 @import "../components/features/partners/partners";
-@import "../components/features/toggle/toggle";
 
 //@import "../components/features/services/services";
 //@import "../components/features/prices/prices";

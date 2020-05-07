@@ -308,6 +308,11 @@ sub {
 /* Embedded content
    ========================================================================== */
 
+img,
+svg {
+  display: block;
+}
+
 /**
  * 1. Remove border when inside `a` element in IE 8/9/10.
  * 2. Improves image quality when scaled in IE 7.

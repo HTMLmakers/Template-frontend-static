@@ -20,8 +20,7 @@ h6,
 .h6 {
   //@include media-breakpoint-down(md) {}
 
-  margin: 0;
-  margin-top: 1.5em;
+  margin-top: 0;
   margin-bottom: 1em;
   padding: 0;
   color: inherit;
@@ -65,7 +64,8 @@ h6,
 
 p,
 .desc {
-  margin: 1.5em 0;
+  margin-top: 0;
+  margin-bottom: 1.5em;
   color: inherit;
   font-size: $default-font-size;
   font-family: inherit;
@@ -90,6 +90,14 @@ a,
 /*
    Lists
    -------------------------------------------------------------------------- */
+
+ul,
+ol {
+
+  li {
+    margin: 0;
+  }
+}
 
 ul,
 ol,

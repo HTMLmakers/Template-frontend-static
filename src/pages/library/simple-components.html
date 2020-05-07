@@ -12,66 +12,130 @@
 
 <body class="components-library">
   <main>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Icon</h2>
+      <div class="components-library__row">
+        <div class="components-library__col">
+          <h3 class="components-library__heading h3">Icon svg</h3>
+        </div>
+        <div class="components-library__col">
+          <h3 class="components-library__heading h3">Icon png</h3>
+        </div>
+      </div>
+      <div class="components-library__content">
+        <div class="components-library__row">
+          <div class="components-library__col">
+
+            @include('./components/shared/common/icon/icon-svg/icon-svg.html', {
+              "modSize": "",
+              "name": "icon-name"
+            })
+
+          </div>
+          <div class="components-library__col">
+
+            @include('./components/shared/common/icon/icon-png/icon-png.html', {
+              "modName": "",
+              "modSize": ""
+            })
+
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Logo</h2>
       <div class="components-library__content">
 
-        @include('./components/features/logo/logo.html')
+        @include('./components/shared/common/logo/logo.html', {
+          "modSmall": ""
+        })
+
+        @include('./components/shared/common/logo/logo.html', {
+          "modSmall": " logo--small"
+        })
 
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Nav</h2>
       <div class="components-library__content">
+        <!-- если одинаковая структура и одинаковое кол-во понктов горизонтального и вертикального меню -->
+<!--        <div class="components-library__row">-->
+
+<!--          @include('./components/shared/common/nav/nav.html', {-->
+<!--            "modVertical": ""-->
+<!--          })-->
+
+<!--        </div>-->
+<!--        <div class="components-library__row">-->
+
+<!--          @include('./components/shared/common/nav/nav.html', {-->
+<!--            "modVertical": " nav&#45;&#45;vertical"-->
+<!--          })-->
+
+<!--        </div>-->
+
+        <!-- если разная структура и разное кол-во понктов горизонтального и вертикального меню -->
         <div class="components-library__row">
 
-          @include('./components/features/nav/nav.html')
+          @include('./components/shared/common/nav/nav.html')
 
         </div>
         <div class="components-library__row">
 
-          @include('./components/features/nav/nav-vertical.html')
+          @include('./components/shared/common/nav/nav.html', {
+            "modVertical": "vertical"
+          })
 
         </div>
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Contact-info</h2>
       <div class="components-library__content">
 
-        @include('./components/features/contact-info/contact-info.html')
+        @include('./components/shared/common/contact-info/contact-info.html')
 
       </div>
     </section>
-    <section class="components-library__section">
-      <h2 class="components-library__heading h2">Auth</h2>
-      <div class="components-library__content">
 
-        @include('./components/features/auth/auth.html')
-
-      </div>
-    </section>
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Lg-select</h2>
       <div class="components-library__content">
 
-        @include('./components/features/lg-select/lg-select.html')
+        @include('./components/shared/common/lg-select/lg-select.html')
 
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Breadcrumbs</h2>
       <div class="components-library__content">
 
-        @include('./components/features/breadcrumbs/breadcrumbs.html')
+        @include('./components/shared/common/breadcrumbs/breadcrumbs.html')
 
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Socials</h2>
       <div class="components-library__content">
 
-        @include('./components/features/socials/socials.html')
+        @include('./components/shared/common/socials/socials.html')
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Pagination</h2>
+      <div class="components-library__content">
+
+        @include('./components/shared/common/pagination/pagination.html')
 
       </div>
     </section>
@@ -80,18 +144,20 @@
       <h2 class="components-library__heading h2">Toggle</h2>
       <div class="components-library__content">
 
-        @include('./components/features/toggle/toggle.html')
+        @include('./components/shared/common/toggle/toggle.html')
 
       </div>
     </section>
+
     <section class="components-library__section">
       <h2 class="components-library__heading h2">Back-to-top</h2>
       <div class="components-library__content">
 
-        @include('./components/features/back-to-top/back-to-top.html')
+        @include('./components/shared/common/back-to-top/back-to-top.html')
 
       </div>
     </section>
+
   </main>
 
   <script src="./js/vendors.js"></script>
