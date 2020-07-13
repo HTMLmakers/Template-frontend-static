@@ -41,6 +41,7 @@ const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
 const libraryRoot = './library';
+const libraryDistRoot = './library/dist';
 
 const srcPath = {
   assets: {
@@ -105,9 +106,33 @@ const buildPath = {
 };
 
 const libraryPath = {
-  pages: `${libraryRoot}`,
-  js: `${libraryRoot}/js`,
-  styles: `${libraryRoot}/styles`,
+  pages: `${libraryRoot}/pages`,
+  components: {
+    root: `${libraryRoot}/components`,
+    features: `${libraryRoot}/components/features`,
+    shared: `${libraryRoot}/components/shared`,
+  },
+  js: {
+    root: `${libraryRoot}/js`,
+    vendors: `${libraryRoot}/js/vendors`,
+    uiKit: `${libraryRoot}/js/ui-kit`,
+  },
+  styles: {
+    root: `${libraryRoot}/styles`,
+    common: `${libraryRoot}/styles/common`,
+    dependencies: {
+      root: `${libraryRoot}/styles/dependencies`,
+      mixins: `${libraryRoot}/styles/dependencies/mixins`,
+    },
+    vendors: `${libraryRoot}/styles/vendors`,
+    uiKit: `${libraryRoot}/styles/ui-kit`,
+  },
+};
+
+const libraryDistPath = {
+  pages: `${libraryRoot}/dist`,
+  js: `${libraryRoot}/dist/js`,
+  styles: `${libraryRoot}/dist/styles`,
 };
 
 /**
@@ -136,7 +161,7 @@ function initDevServer(done) {
 
 function initLibServer(done) {
   browserSync.init({
-    server: libraryRoot,
+    server: libraryDistRoot,
     port: 8080,
     browser: 'chrome',
   });
@@ -181,7 +206,7 @@ function cleanBuild() {
 }
 
 function cleanLib() {
-  return del(`${libraryRoot}`);
+  return del(`${libraryDistRoot}`);
 }
 
 /**
@@ -229,14 +254,14 @@ function compileHtml() {
  */
 
 function compileHtmlLib() {
-  return src(`${srcPath.pages.library}/*.html`)
+  return src(`${libraryPath.pages}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: `${libraryRoot}`,
       indent: true,
     }))
-    .pipe(dest(`${libraryPath.pages}`));
+    .pipe(dest(`${libraryDistPath.pages}`));
 }
 
 /**
@@ -271,8 +296,8 @@ function watchHtml() {
 
 function watchHtmlLib() {
   watch([
-    `${srcPath.pages.library}/*.html`,
-    `${srcPath.components.root}/**/*.html`,
+    `${libraryPath.pages}/*.html`,
+    `${libraryPath.components.root}/**/*.html`,
   ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
 
@@ -284,7 +309,7 @@ function watchHtmlLib() {
 function buildHtml() {
   return src(`${devPath.pages}/*.html`)
     .pipe(htmlreplace({
-      css: 'styles/style.min.css',
+      css: 'styles-2/style.min.css',
       js: {
         src: null,
         tpl: '<script src="js/script.min.js" async></script>',
@@ -300,13 +325,13 @@ function buildHtml() {
 
 /**
  * Сборка и компиляция scss:
- * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
- * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
- * 3. Сборка файлов .scss (.css) из ./src/styles/ui-kit/ в ui-kit.scss
- * 4. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles-2/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss (.css) из ./src/styles-2/ui-kit/ в ui-kit.scss
+ * 4. Сборка файлов .scss из ./src/styles-2/components/ в components.scss
  * 5. Коплиляция .scss в .css
  * 6. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 7. Сохранение файла в ./dev/styles/
+ * 7. Сохранение файла в ./dev/styles-2/
  */
 
 const stylelintOptions = {
@@ -379,16 +404,16 @@ function compileCssUiKit() {
 }
 /**
  * Сборка и компиляция scss для components-library:
- * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
- * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
- * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles-2/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss из ./src/styles-2/components/ в components.scss
  * 4. Коплиляция .scss в .css
  * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 6. Сохранение файла в ./library/styles/
+ * 6. Сохранение файла в ./library/styles-2/
  */
 
 function compileCssGeneralLib() {
-  return src(`${srcPath.styles.root}/style.scss`)
+  return src(`${libraryPath.styles.root}/style.scss`)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -398,11 +423,11 @@ function compileCssGeneralLib() {
         flexbugs(),
       ]),
     )
-    .pipe(dest(`${libraryPath.styles}`));
+    .pipe(dest(`${libraryDistPath.styles}`));
 }
 
 function compileCssVendorsLib() {
-  return src(`${srcPath.styles.root}/vendors.scss`)
+  return src(`${libraryPath.styles.root}/vendors.scss`)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -412,11 +437,11 @@ function compileCssVendorsLib() {
         flexbugs(),
       ]),
     )
-    .pipe(dest(`${libraryPath.styles}`));
+    .pipe(dest(`${libraryDistPath.styles}`));
 }
 
 function compileCssComponentsLib() {
-  return src(`${srcPath.styles.root}/components.scss`)
+  return src(`${libraryPath.styles.root}/components.scss`)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -426,11 +451,11 @@ function compileCssComponentsLib() {
         flexbugs(),
       ]),
     )
-    .pipe(dest(`${libraryPath.styles}`));
+    .pipe(dest(`${libraryDistPath.styles}`));
 }
 
 function compileCssUiKitLib() {
-  return src(`${srcPath.styles.root}/ui-kit.scss`)
+  return src(`${libraryPath.styles.root}/ui-kit.scss`)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -440,15 +465,15 @@ function compileCssUiKitLib() {
         flexbugs(),
       ]),
     )
-    .pipe(dest(`${libraryPath.styles}`));
+    .pipe(dest(`${libraryDistPath.styles}`));
 }
 
 /**
  * Отслеживание изменений style
- * 1. Отслеживание всех .scss (.css) файлов в ./src/styles/** (кроме ./src/styles/vendors,
+ * 1. Отслеживание всех .scss (.css) файлов в ./src/styles-2/** (кроме ./src/styles-2/vendors,
  * vendors.scss и components.scss) на изменения (change)
- * 2. Отслеживание .scss файлов в ./src/styles/vendors/ и vendors.scss на изменения (change)
- * 3. Отслеживание .scss файлов в ./src/styles/ui-kit/ и ui-kit.scss на изменения (change)
+ * 2. Отслеживание .scss файлов в ./src/styles-2/vendors/ и vendors.scss на изменения (change)
+ * 3. Отслеживание .scss файлов в ./src/styles-2/ui-kit/ и ui-kit.scss на изменения (change)
  * 4. Отслеживание .scss файлов в ./src/components/** и components.scss на изменения (change)
  */
 
@@ -484,16 +509,16 @@ function watchCss() {
 
 function watchCssLib() {
   watch([
-    `${srcPath.styles.root}/**/*.scss`,
-    `${srcPath.components.root}/**/*.scss`,
+    `${libraryPath.styles.root}/**/*.scss`,
+    `${libraryPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(parallel(compileCssGeneralLib, compileCssVendorsLib, compileCssUiKitLib, compileCssComponentsLib), liveReload));
 }
 
 /**
  * Финальная сборка css:
  * 1. Сборка всех .css файлов в style.js
- * 2. Сохранение файла style.js в ./build/styles/
- * 3. Минификация и сохранение файла style.min.js в ./build/styles/
+ * 2. Сохранение файла style.js в ./build/styles-2/
+ * 3. Минификация и сохранение файла style.min.js в ./build/styles-2/
  */
 
 function buildCss() {
@@ -577,45 +602,45 @@ function compileJsCommon() {
  */
 
 function compileJsVendorsLib() {
-  return src(`${srcPath.js.root}/vendors.js`)
+  return src(`${libraryPath.js.root}/vendors.js`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: `${libraryRoot}`,
       indent: true,
     }))
-    .pipe(dest(`${libraryPath.js}`));
+    .pipe(dest(`${libraryDistPath.js}`));
 }
 
 function compileJsComponentsLib() {
-  return src(`${srcPath.js.root}/components.js`)
+  return src(`${libraryPath.js.root}/components.js`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: `${libraryRoot}`,
       indent: true,
     }))
     .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+    .pipe(dest(`${libraryDistPath.js}`));
 }
 
 function compileJsUiKitLib() {
-  return src(`${srcPath.js.root}/ui-kit.js`)
+  return src(`${libraryPath.js.root}/ui-kit.js`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: `${libraryRoot}`,
       indent: true,
     }))
     .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+    .pipe(dest(`${libraryDistPath.js}`));
 }
 
 function compileJsCommonLib() {
-  return src(`${srcPath.js.root}/common.js`)
+  return src(`${libraryPath.js.root}/common.js`)
     .pipe(plumber())
     .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+    .pipe(dest(`${libraryDistPath.js}`));
 }
 
 /**
@@ -648,8 +673,8 @@ function watchJs() {
 
 function watchJsLib() {
   watch([
-    `${srcPath.js.root}/**/*.js`,
-    `${srcPath.components.root}/**/*.js`,
+    `${libraryPath.js.root}/**/*.js`,
+    `${libraryPath.components.root}/**/*.js`,
   ], { events: 'change' }, series(parallel(compileJsVendorsLib, compileJsComponentsLib, compileJsUiKitLib, compileJsCommonLib), liveReload));
 }
 
@@ -671,8 +696,8 @@ function buildJs() {
     .pipe(babel({
       presets: ['@babel/env'],
       plugins: [
-        ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }]
-      ]
+        ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }],
+      ],
     }))
     .pipe(concat('script.js'))
     .pipe(dest(`${buildPath.js}`))
