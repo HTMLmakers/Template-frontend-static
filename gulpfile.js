@@ -130,9 +130,9 @@ const libraryPath = {
 };
 
 const libraryDistPath = {
-  pages: `${libraryRoot}/dist`,
-  js: `${libraryRoot}/dist/js`,
-  styles: `${libraryRoot}/dist/styles`,
+  pages: `${libraryDistRoot}`,
+  js: `${libraryDistRoot}/js`,
+  styles: `${libraryDistRoot}/styles`,
 };
 
 /**
@@ -344,8 +344,8 @@ const stylelintOptions = {
   ],
 };
 
-function compileCssGeneral() {
-  return src(`${srcPath.styles.root}/style.scss`)
+function compileCss(compilePath, destPath, isLinted, done) {
+  src(compilePath)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -355,52 +355,26 @@ function compileCssGeneral() {
         flexbugs(),
       ]),
     )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+    .pipe(gulpIf(isLinted, stylelint(stylelintOptions)))
+    .pipe(dest(destPath));
+
+  done();
 }
 
-function compileCssVendors() {
-  return src(`${srcPath.styles.root}/vendors.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${devPath.styles}`));
+function compileCssGeneral(done) {
+  compileCss(`${srcPath.styles.root}/style.scss`, `${devPath.styles}`, true, done);
 }
 
-function compileCssComponents() {
-  return src(`${srcPath.styles.root}/components.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+function compileCssVendors(done) {
+  compileCss(`${srcPath.styles.root}/vendors.scss`, `${devPath.styles}`, false, done);
 }
 
-function compileCssUiKit() {
-  return src(`${srcPath.styles.root}/ui-kit.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+function compileCssComponents(done) {
+  compileCss(`${srcPath.styles.root}/components.scss`, `${devPath.styles}`, true, done);
+}
+
+function compileCssUiKit(done) {
+  compileCss(`${srcPath.styles.root}/ui-kit.scss`, `${devPath.styles}`, true, done);
 }
 /**
  * Сборка и компиляция scss для components-library:
@@ -412,60 +386,20 @@ function compileCssUiKit() {
  * 6. Сохранение файла в ./library/styles-2/
  */
 
-function compileCssGeneralLib() {
-  return src(`${libraryPath.styles.root}/style.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryDistPath.styles}`));
+function compileCssGeneralLib(done) {
+  compileCss(`${libraryPath.styles.root}/style.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
-function compileCssVendorsLib() {
-  return src(`${libraryPath.styles.root}/vendors.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryDistPath.styles}`));
+function compileCssVendorsLib(done) {
+  compileCss(`${libraryPath.styles.root}/vendors.scss`, `${libraryDistPath.styles}`, false, done);
 }
 
-function compileCssComponentsLib() {
-  return src(`${libraryPath.styles.root}/components.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryDistPath.styles}`));
+function compileCssComponentsLib(done) {
+  compileCss(`${libraryPath.styles.root}/components.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
-function compileCssUiKitLib() {
-  return src(`${libraryPath.styles.root}/ui-kit.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryDistPath.styles}`));
+function compileCssUiKitLib(done) {
+  compileCss(`${libraryPath.styles.root}/ui-kit.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
 /**
@@ -550,46 +484,34 @@ function buildCss() {
  * 5. Перенос common.js в ./dev/js/
  */
 
-function compileJsVendors() {
-  return src(`${srcPath.js.root}/vendors.js`)
+function compileJs(compilePath, destPath, basepath, isLinted, done) {
+  src(compilePath)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath,
       indent: true,
     }))
-    .pipe(dest(`${devPath.js}`));
+    .pipe(gulpIf(isLinted, eslint()))
+    .pipe(dest(destPath));
+
+  done();
 }
 
-function compileJsComponents() {
-  return src(`${srcPath.js.root}/components.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsVendors(done) {
+  return compileJs(`${srcPath.js.root}/vendors.js`, `${devPath.js}`, `${srcRoot}`, false, done);
 }
 
-function compileJsUiKit() {
-  return src(`${srcPath.js.root}/ui-kit.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsComponents(done) {
+  return compileJs(`${srcPath.js.root}/components.js`, `${devPath.js}`, `${srcRoot}`, true, done);
 }
 
-function compileJsCommon() {
-  return src(`${srcPath.js.root}/common.js`)
-    .pipe(plumber())
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsUiKit(done) {
+  return compileJs(`${srcPath.js.root}/ui-kit.js`, `${devPath.js}`, `${srcRoot}`, true, done);
+}
+
+function compileJsCommon(done) {
+  return compileJs(`${srcPath.js.root}/common.js`, `${devPath.js}`, `${srcRoot}`, true, done);
 }
 
 /**
@@ -601,46 +523,20 @@ function compileJsCommon() {
  * 5. Перенос common.js в ./library/js/
  */
 
-function compileJsVendorsLib() {
-  return src(`${libraryPath.js.root}/vendors.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${libraryRoot}`,
-      indent: true,
-    }))
-    .pipe(dest(`${libraryDistPath.js}`));
+function compileJsVendorsLib(done) {
+  return compileJs(`${libraryPath.js.root}/vendors.js`, `${libraryDistPath.js}`, `${libraryRoot}`, false, done);
 }
 
-function compileJsComponentsLib() {
-  return src(`${libraryPath.js.root}/components.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${libraryRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${libraryDistPath.js}`));
+function compileJsComponentsLib(done) {
+  return compileJs(`${libraryPath.js.root}/components.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
-function compileJsUiKitLib() {
-  return src(`${libraryPath.js.root}/ui-kit.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${libraryRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${libraryDistPath.js}`));
+function compileJsUiKitLib(done) {
+  return compileJs(`${libraryPath.js.root}/ui-kit.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
-function compileJsCommonLib() {
-  return src(`${libraryPath.js.root}/common.js`)
-    .pipe(plumber())
-    .pipe(eslint())
-    .pipe(dest(`${libraryDistPath.js}`));
+function compileJsCommonLib(done) {
+  return compileJs(`${libraryPath.js.root}/common.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
 /**
@@ -696,7 +592,12 @@ function buildJs() {
     .pipe(babel({
       presets: ['@babel/env'],
       plugins: [
-        ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }],
+        ['@babel/plugin-proposal-object-rest-spread',
+          {
+            loose: true,
+            useBuiltIns: true,
+          },
+        ],
       ],
     }))
     .pipe(concat('script.js'))
@@ -1029,7 +930,6 @@ function exportFilesBuild() {
   ])
     .pipe(dest(`${buildPath.assets.root}`));
 }
-
 
 const buildAssets = series(exportImgBuild, exportFilesBuild);
 
