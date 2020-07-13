@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Component -- toggle
+   ========================================================================== */
+
+.toggle {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  &__icon {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    background-color: aqua;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      //background-color: darkviolet;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      content: "";
+    }
+
+    &::before {
+      //@include sprite($icon-instagram);
+      background-color: white;
+    }
+
+    &::after {
+      //@include sprite($icon-instagram);
+      display: none;
+      background-color: green;
+    }
+
+    //svg {
+    //  position: absolute;
+    //  top: 50%;
+    //  left: 50%;
+    //  width: 30px;
+    //  height: auto;
+    //  padding: 0;
+    //  transform: translate(-50%, -50%);
+    //}
+    //
+    //&-toggle {
+    //  background-color: white;
+    //}
+    //
+    //&-close {
+    //  background-color: green;
+    //}
+  }
+
+  &--is-active {
+
+    #{$root}__icon {
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: block;
+        background-color: green;
+      }
+    }
+  }
+}

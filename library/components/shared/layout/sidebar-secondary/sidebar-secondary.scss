@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Component -- sidebar-secondary
+   ========================================================================== */
+
+.sidebar-secondary {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  padding: 5px;
+  background-color: blue;
+
+  &__section {
+    min-height: px-to-rem(100px);
+    margin-bottom: px-to-rem(50px);
+    padding: 5px;
+    background-color: aqua;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

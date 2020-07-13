@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Component -- header
+   ========================================================================== */
+
+.header {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  overflow: hidden;
+  background-color: red;
+
+  &__section {
+
+    &:nth-child(1) {
+      min-height: px-to-rem(100px);
+      background-color: orange;
+    }
+
+    &:nth-child(2) {
+      min-height: px-to-rem(50px);
+      background-color: gray;
+    }
+  }
+
+  &__container {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+
+  &__row {
+    @include make-row();
+
+    min-height: inherit;
+  }
+
+  &__col {
+    @include make-col-ready();
+
+    padding: 5px;
+  }
+
+  &__component-name1 {
+    //@include media-breakpoint-down(md) {}
+
+    @include make-col-fix(px-to-rem(150px));
+
+    background-color: green;
+  }
+
+  &__component-name2 {
+    background-color: yellow;
+  }
+
+  &__component-name3 {
+    @include make-col(10, 100);
+
+    background-color: blue;
+  }
+
+  &__component-name4 {
+    @include media-breakpoint-down(md) {
+      @include make-col(100, 100);
+    }
+
+    @include make-col-fix(px-to-rem(300px));
+
+    background-color: red;
+  }
+
+  &__component-name5 {
+    @include media-breakpoint-down(md) {
+      @include make-col(100, 100);
+    }
+
+    background-color: aqua;
+  }
+
+  //&--fixed {
+  //  position: fixed;
+  //  right: 0;
+  //  left: 0;
+  //  z-index: 9000;
+  //}
+}

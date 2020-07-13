@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Component -- footer
+   ========================================================================== */
+
+.footer {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  overflow: hidden;
+  background-color: red;
+
+  &__section {
+    display: flex;
+
+    &:nth-child(1) {
+      flex-grow: 1;
+      background-color: orange;
+    }
+
+    &:nth-child(2) {
+      min-height: px-to-rem(50px);
+      background-color: gray;
+    }
+  }
+
+  &__container {
+    @include make-container();
+    @include make-container-max-widths();
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    @include make-row();
+
+    flex-grow: 1;
+    min-height: inherit;
+  }
+
+  &__col {
+    @include make-col-ready();
+
+    padding: 5px;
+  }
+
+  &__component-name1 {
+    background-color: green;
+  }
+
+  &__component-name2 {
+    background-color: yellow;
+  }
+
+  &__component-name3 {
+    background-color: blue;
+  }
+
+  &__component-name4 {
+    @include media-breakpoint-down(md) {
+      @include make-col(100, 100);
+    }
+
+    background-color: red;
+  }
+
+  &__component-name5 {
+    @include media-breakpoint-down(md) {
+      @include make-col(100, 100);
+    }
+
+    background-color: aqua;
+  }
+}

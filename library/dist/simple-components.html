@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple components</title>
+
+  <link href="./styles/style.css" rel="stylesheet">
+  <link href="./styles/vendors.css" rel="stylesheet">
+  <link href="./styles/ui-kit.css" rel="stylesheet">
+  <link href="./styles/components.css" rel="stylesheet">
+</head>
+
+<body class="components-library">
+  <main>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Icon</h2>
+      <div class="components-library__row">
+        <div class="components-library__col">
+          <h3 class="components-library__heading h3">Icon svg</h3>
+        </div>
+        <div class="components-library__col">
+          <h3 class="components-library__heading h3">Icon png</h3>
+        </div>
+      </div>
+      <div class="components-library__content">
+        <div class="components-library__row">
+          <div class="components-library__col">
+
+            <div class="icon-svg">
+              <svg>
+                <use xlink:href="#icon-name"/>
+              </svg>
+            </div>
+
+          </div>
+          <div class="components-library__col">
+
+            <div class="icon-png">Icon</div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Logo</h2>
+      <div class="components-library__content">
+
+        <a class="logo" href="">
+          <img src="./assets/img/logo.png" width="100" height="50" alt="">
+        </a>
+
+        <a class="logo logo--small" href="">
+          <img src="./assets/img/logo.png" width="100" height="50" alt="">
+        </a>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Nav</h2>
+      <div class="components-library__content">
+        <!-- если одинаковая структура и одинаковое кол-во понктов горизонтального и вертикального меню -->
+<!--        <div class="components-library__row">-->
+
+
+<!--            "modVertical": ""-->
+<!--          })-->
+
+<!--        </div>-->
+<!--        <div class="components-library__row">-->
+
+
+<!--            "modVertical": " nav&#45;&#45;vertical"-->
+<!--          })-->
+
+<!--        </div>-->
+
+        <!-- если разная структура и разное кол-во понктов горизонтального и вертикального меню -->
+        <div class="components-library__row">
+
+          <!-- если одинаковая структура и одинаковое кол-во пунктов горизонтального и вертикального меню -->
+
+          <!--<nav class="nav@modVertical">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="/">Page 1</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 2</a>
+              </li>
+              <li class="nav__item">
+                <span class="nav__link nav__link&#45;&#45;is-current" href="">Page 3</span>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 4</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 5</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 6</a>
+              </li>
+            </ul>
+          </nav>-->
+
+
+          <!-- если разная структура и разное кол-во пунктов горизонтального и вертикального меню -->
+          
+          <nav class="nav">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="/">Page 11</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 21</a>
+              </li>
+              <li class="nav__item">
+                <span class="nav__link nav__link--is-current" href="">Page 31</span>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 41</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 51</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 61</a>
+              </li>
+            </ul>
+          </nav>
+          
+
+          
+
+        </div>
+        <div class="components-library__row">
+
+          <!-- если одинаковая структура и одинаковое кол-во пунктов горизонтального и вертикального меню -->
+
+          <!--<nav class="navvertical">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="/">Page 1</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 2</a>
+              </li>
+              <li class="nav__item">
+                <span class="nav__link nav__link&#45;&#45;is-current" href="">Page 3</span>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 4</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 5</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 6</a>
+              </li>
+            </ul>
+          </nav>-->
+
+
+          <!-- если разная структура и разное кол-во пунктов горизонтального и вертикального меню -->
+          
+
+          
+          <nav class="nav nav--vertical">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="/">Page 12</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 22</a>
+              </li>
+              <li class="nav__item">
+                <span class="nav__link" href="">Page 32</span>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 42</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link nav__link--is-current" href="">Page 52</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 62</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 72</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="">Page 82</a>
+              </li>
+            </ul>
+          </nav>
+          
+
+        </div>
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Contact-info</h2>
+      <div class="components-library__content">
+
+        <address class="contact-info">
+          <ul class="contact-info__list">
+            <li class="contact-info__item">
+              <div class="contact-info__content">
+                <div class="contact-info__pic">
+                  <div class="icon-png">Icon</div>
+
+                  
+                </div>
+                <div class="contact-info__body">
+                  <p class="contact-info__title">Call Today:</p>
+                  <div class="contact-info__text">
+                    <a class="contact-info__link" href="tel:+79005948889">+7 (900) 594-88-89</a>;
+                    <a class="contact-info__link" href="tel:+79005948889">+7 (900) 594-88-89</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="contact-info__item">
+              <div class="contact-info__content">
+                <div class="contact-info__pic">
+                  <div class="icon-png">Icon</div>
+
+                  
+                </div>
+                <div class="contact-info__body">
+                  <p class="contact-info__title">Write Now:</p>
+                  <div class="contact-info__text">
+                    <a class="contact-info__link" href="mailto:exemple@gmail.com">exemple@gmail.com</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="contact-info__item">
+              <div class="contact-info__content">
+                <div class="contact-info__pic">
+                  <div class="icon-png">Icon</div>
+
+                  
+                </div>
+                <div class="contact-info__body">
+                  <p class="contact-info__title">Opening Hours:</p>
+                  <div class="contact-info__text">Mon–Fri: <span>9am–6pm</span>; Sun: 10am–1pm</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </address>
+
+        <br><br><br>
+
+        <address class="contact-info">
+          <div class="contact-info__content">
+            <div class="contact-info__pic">
+              
+
+              <div class="icon-svg">
+                <svg>
+                  <use xlink:href="#icon-name"/>
+                </svg>
+              </div>
+            </div>
+            <div class="contact-info__body">
+              <p class="contact-info__title">Call Today:</p>
+              <div class="contact-info__text">
+                <a class="contact-info__link" href="tel:+79005948889">+7 (900) 594-88-89</a>;
+                <a class="contact-info__link" href="tel:+79005948889">+7 (900) 594-88-89</a>
+              </div>
+            </div>
+          </div>
+        </address>
+
+        <br><br><br>
+
+        <address class="contact-info">
+          <div class="contact-info__content">
+            <a class="contact-info__link" href="tel:+79005948889">+7 (900) 594-88-89</a>
+          </div>
+        </address>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Lg-select</h2>
+      <div class="components-library__content">
+
+        <div class="lg-select">
+          <a class="lg-select__current">Ru
+            <div class="icon-png">Icon</div>
+
+            
+          </a>
+          <ul class="lg-select__list">
+            <li class="lg-select__item">
+              <a class="lg-select__link">Pl</a>
+            </li>
+            <li class="lg-select__item">
+              <a class="lg-select__link">Ru <span class="lg-select__mark">Beta</span></a>
+            </li>
+            <li class="lg-select__item">
+              <a class="lg-select__link">En
+                <div class="lg-select__icon">Icon</div>
+                <!--<div class="lg-select__icon lg-select__icon&#45;&#45;lock">
+                  <svg>
+                    <use xlink:href="#icon-lock"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+
+
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Breadcrumbs</h2>
+      <div class="components-library__content">
+
+        <nav class="breadcrumbs">
+          <a class="breadcrumbs__link breadcrumbs__link--special" href="#">
+            <div class="breadcrumbs__icon">Home</div>
+            <!--<div class="breadcrumbs__icon">
+              <svg>
+                <use xlink:href="#id"/>
+              </svg>
+            </div>-->
+          </a>
+          <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="#">Home</a>
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="#">Page 1</a>
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="#">Page 2</a>
+            </li>
+            <li class="breadcrumbs__item breadcrumbs__item--active">
+              <span class="breadcrumbs__link breadcrumbs__link--is-current">Page 3</span>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Socials</h2>
+      <div class="components-library__content">
+
+        <nav class="socials">
+          <ul class="socials__list">
+            <li class="socials__item">
+              <a href="/" class="socials__link">
+                <div class="socials__icon">facebook</div>
+                <!--<div class="socials__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+            <li class="socials__item">
+              <a href="/" class="socials__link">
+                <div class="socials__icon">twitter</div>
+                <!--<div class="socials__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+            <li class="socials__item">
+              <a href="/" class="socials__link">
+                <div class="socials__icon">google-plus</div>
+                <!--<div class="socials__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+            <li class="socials__item">
+              <a href="/" class="socials__link">
+                <div class="socials__icon">instagram</div>
+                <!--<div class="socials__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Pagination</h2>
+      <div class="components-library__content">
+
+        <nav class="pagination">
+          <ul class="pagination__list">
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--go-to-start" href="#">Go to start
+                <div class="pagination__icon">Go to start</div>
+                <!--<div class="pagination__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+            </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--prev" href="#">Prev
+                <div class="pagination__icon">Prev</div>
+                <!--<div class="pagination__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link" href="#">1</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link" href="#">2</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link" href="#">3</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link" href="#">4</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link" href="#">5</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--next" href="#">Next
+                <div class="pagination__icon">Next</div>
+                <!--<div class="pagination__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--go-to-end" href="#">Go to end
+                <div class="pagination__icon">Go to end</div>
+                <!--<div class="pagination__icon">
+                  <svg>
+                    <use xlink:href="#id"/>
+                  </svg>
+                </div>-->
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Toggle</h2>
+      <div class="components-library__content">
+
+        <div class="toggle"> <!-- toggle--is-active -->
+          <div class="toggle__icon">Icon</div>
+          <!--<div class="toggle__icon">
+            <svg class="toggle__icon-toggle">
+              <use xlink:href="#icon-toggle"/>
+            </svg>
+            <svg class="toggle__icon-close">
+              <use xlink:href="#icon-close"/>
+            </svg>
+          </div>-->
+        </div>
+
+      </div>
+    </section>
+
+    <section class="components-library__section">
+      <h2 class="components-library__heading h2">Back-to-top</h2>
+      <div class="components-library__content">
+
+        <a class="back-to-top">
+          <div class="back-to-top__icon">Icon</div>
+          <!--<div class="back-to-top__icon">
+            <svg>
+              <use xlink:href="#id"/>
+            </svg>
+          </div>-->
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="./js/vendors.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/ui-kit.js"></script>
+  <script src="./js/components.js"></script>
+</body>
+</html>
