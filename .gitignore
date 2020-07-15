@@ -2,6 +2,7 @@
 /design
 .idea/
 /dev
-/library
+/library/dist
 /build
+/library/dist
 ./**/*.sass-cache

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Common -- base
+   Common library -- base
    ========================================================================== */
 
 html {
@@ -7,7 +7,7 @@ html {
 
   box-sizing: border-box;
   height: 100%;
-  font-size: $default-font-size;
+  font-size: $body-font-size-library;
 }
 
 *,
@@ -18,8 +18,12 @@ html {
 
 body {
   min-height: 100%;
-  color: $body-color;
-  font-size: $body-font-size;
-  font-family: $body-font-family;
-  background-color: $body-bg;
+  color: $body-color-library;
+  font-size: inherit;
+  font-family: $body-font-family-library;
+  background-color: $body-bg-inner-library;
+
+  &.main {
+    background-color: $body-bg-library;
+  }
 }

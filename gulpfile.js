@@ -41,6 +41,7 @@ const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
 const libraryRoot = './library';
+const libraryDistRoot = './library/dist';
 
 const srcPath = {
   assets: {
@@ -105,9 +106,37 @@ const buildPath = {
 };
 
 const libraryPath = {
-  pages: `${libraryRoot}`,
-  js: `${libraryRoot}/js`,
-  styles: `${libraryRoot}/styles`,
+  pages: `${libraryRoot}/pages`,
+  components: {
+    root: `${libraryRoot}/components`,
+    features: `${libraryRoot}/components/features`,
+    shared: `${libraryRoot}/components/shared`,
+  },
+  fonts: `${libraryRoot}/fonts`,
+  assets: `${libraryRoot}/assets`,
+  js: {
+    root: `${libraryRoot}/js`,
+    vendors: `${libraryRoot}/js/vendors`,
+    uiKit: `${libraryRoot}/js/ui-kit`,
+  },
+  styles: {
+    root: `${libraryRoot}/styles`,
+    common: `${libraryRoot}/styles/common`,
+    dependencies: {
+      root: `${libraryRoot}/styles/dependencies`,
+      mixins: `${libraryRoot}/styles/dependencies/mixins`,
+    },
+    vendors: `${libraryRoot}/styles/vendors`,
+    uiKit: `${libraryRoot}/styles/ui-kit`,
+  },
+};
+
+const libraryDistPath = {
+  pages: `${libraryDistRoot}`,
+  fonts: `${libraryDistRoot}/fonts`,
+  assets: `${libraryDistRoot}/assets`,
+  js: `${libraryDistRoot}/js`,
+  styles: `${libraryDistRoot}/styles`,
 };
 
 /**
@@ -136,7 +165,7 @@ function initDevServer(done) {
 
 function initLibServer(done) {
   browserSync.init({
-    server: libraryRoot,
+    server: libraryDistRoot,
     port: 8080,
     browser: 'chrome',
   });
@@ -181,7 +210,7 @@ function cleanBuild() {
 }
 
 function cleanLib() {
-  return del(`${libraryRoot}`);
+  return del(`${libraryDistRoot}`);
 }
 
 /**
@@ -229,14 +258,14 @@ function compileHtml() {
  */
 
 function compileHtmlLib() {
-  return src(`${srcPath.pages.library}/*.html`)
+  return src(`${libraryPath.pages}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath: `${libraryRoot}`,
       indent: true,
     }))
-    .pipe(dest(`${libraryPath.pages}`));
+    .pipe(dest(`${libraryDistPath.pages}`));
 }
 
 /**
@@ -271,8 +300,8 @@ function watchHtml() {
 
 function watchHtmlLib() {
   watch([
-    `${srcPath.pages.library}/*.html`,
-    `${srcPath.components.root}/**/*.html`,
+    `${libraryPath.pages}/*.html`,
+    `${libraryPath.components.root}/**/*.html`,
   ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
 
@@ -284,7 +313,7 @@ function watchHtmlLib() {
 function buildHtml() {
   return src(`${devPath.pages}/*.html`)
     .pipe(htmlreplace({
-      css: 'styles/style.min.css',
+      css: 'styles-2/style.min.css',
       js: {
         src: null,
         tpl: '<script src="js/script.min.js" async></script>',
@@ -300,13 +329,13 @@ function buildHtml() {
 
 /**
  * Сборка и компиляция scss:
- * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
- * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
- * 3. Сборка файлов .scss (.css) из ./src/styles/ui-kit/ в ui-kit.scss
- * 4. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles-2/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss (.css) из ./src/styles-2/ui-kit/ в ui-kit.scss
+ * 4. Сборка файлов .scss из ./src/styles-2/components/ в components.scss
  * 5. Коплиляция .scss в .css
  * 6. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 7. Сохранение файла в ./dev/styles/
+ * 7. Сохранение файла в ./dev/styles-2/
  */
 
 const stylelintOptions = {
@@ -319,8 +348,8 @@ const stylelintOptions = {
   ],
 };
 
-function compileCssGeneral() {
-  return src(`${srcPath.styles.root}/style.scss`)
+function compileCss(compilePath, destPath, isLinted, done) {
+  src(compilePath)
     .pipe(plumber())
     .pipe(sass())
     .pipe(mediaQueriesGroup())
@@ -330,125 +359,59 @@ function compileCssGeneral() {
         flexbugs(),
       ]),
     )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+    .pipe(gulpIf(isLinted, stylelint(stylelintOptions)))
+    .pipe(dest(destPath));
+
+  done();
 }
 
-function compileCssVendors() {
-  return src(`${srcPath.styles.root}/vendors.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${devPath.styles}`));
+function compileCssGeneral(done) {
+  compileCss(`${srcPath.styles.root}/style.scss`, `${devPath.styles}`, true, done);
 }
 
-function compileCssComponents() {
-  return src(`${srcPath.styles.root}/components.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+function compileCssVendors(done) {
+  compileCss(`${srcPath.styles.root}/vendors.scss`, `${devPath.styles}`, false, done);
 }
 
-function compileCssUiKit() {
-  return src(`${srcPath.styles.root}/ui-kit.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(stylelint(stylelintOptions))
-    .pipe(dest(`${devPath.styles}`));
+function compileCssComponents(done) {
+  compileCss(`${srcPath.styles.root}/components.scss`, `${devPath.styles}`, true, done);
+}
+
+function compileCssUiKit(done) {
+  compileCss(`${srcPath.styles.root}/ui-kit.scss`, `${devPath.styles}`, true, done);
 }
 /**
  * Сборка и компиляция scss для components-library:
- * 1. Сборка файлов .scss (.css) из ./src/styles/ в style.scss
- * 2. Сборка файлов .scss (.css) из ./src/styles/vendors/ в vendors.scss
- * 3. Сборка файлов .scss из ./src/styles/components/ в components.scss
+ * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в style.scss
+ * 2. Сборка файлов .scss (.css) из ./src/styles-2/vendors/ в vendors.scss
+ * 3. Сборка файлов .scss из ./src/styles-2/components/ в components.scss
  * 4. Коплиляция .scss в .css
  * 5. Post CSS трансформация: автопрефиксер, медиа-выражения
- * 6. Сохранение файла в ./library/styles/
+ * 6. Сохранение файла в ./library/styles-2/
  */
 
-function compileCssGeneralLib() {
-  return src(`${srcPath.styles.root}/style.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryPath.styles}`));
+function compileCssGeneralLib(done) {
+  compileCss(`${libraryPath.styles.root}/style.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
-function compileCssVendorsLib() {
-  return src(`${srcPath.styles.root}/vendors.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryPath.styles}`));
+function compileCssVendorsLib(done) {
+  compileCss(`${libraryPath.styles.root}/vendors.scss`, `${libraryDistPath.styles}`, false, done);
 }
 
-function compileCssComponentsLib() {
-  return src(`${srcPath.styles.root}/components.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryPath.styles}`));
+function compileCssComponentsLib(done) {
+  compileCss(`${libraryPath.styles.root}/components.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
-function compileCssUiKitLib() {
-  return src(`${srcPath.styles.root}/ui-kit.scss`)
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(mediaQueriesGroup())
-    .pipe(
-      postcss([
-        autoprefixer(),
-        flexbugs(),
-      ]),
-    )
-    .pipe(dest(`${libraryPath.styles}`));
+function compileCssUiKitLib(done) {
+  compileCss(`${libraryPath.styles.root}/ui-kit.scss`, `${libraryDistPath.styles}`, true, done);
 }
 
 /**
  * Отслеживание изменений style
- * 1. Отслеживание всех .scss (.css) файлов в ./src/styles/** (кроме ./src/styles/vendors,
+ * 1. Отслеживание всех .scss (.css) файлов в ./src/styles-2/** (кроме ./src/styles-2/vendors,
  * vendors.scss и components.scss) на изменения (change)
- * 2. Отслеживание .scss файлов в ./src/styles/vendors/ и vendors.scss на изменения (change)
- * 3. Отслеживание .scss файлов в ./src/styles/ui-kit/ и ui-kit.scss на изменения (change)
+ * 2. Отслеживание .scss файлов в ./src/styles-2/vendors/ и vendors.scss на изменения (change)
+ * 3. Отслеживание .scss файлов в ./src/styles-2/ui-kit/ и ui-kit.scss на изменения (change)
  * 4. Отслеживание .scss файлов в ./src/components/** и components.scss на изменения (change)
  */
 
@@ -484,16 +447,16 @@ function watchCss() {
 
 function watchCssLib() {
   watch([
-    `${srcPath.styles.root}/**/*.scss`,
-    `${srcPath.components.root}/**/*.scss`,
+    `${libraryPath.styles.root}/**/*.scss`,
+    `${libraryPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(parallel(compileCssGeneralLib, compileCssVendorsLib, compileCssUiKitLib, compileCssComponentsLib), liveReload));
 }
 
 /**
  * Финальная сборка css:
  * 1. Сборка всех .css файлов в style.js
- * 2. Сохранение файла style.js в ./build/styles/
- * 3. Минификация и сохранение файла style.min.js в ./build/styles/
+ * 2. Сохранение файла style.js в ./build/styles-2/
+ * 3. Минификация и сохранение файла style.min.js в ./build/styles-2/
  */
 
 function buildCss() {
@@ -525,46 +488,34 @@ function buildCss() {
  * 5. Перенос common.js в ./dev/js/
  */
 
-function compileJsVendors() {
-  return src(`${srcPath.js.root}/vendors.js`)
+function compileJs(compilePath, destPath, basepath, isLinted, done) {
+  src(compilePath)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: `${srcRoot}`,
+      basepath,
       indent: true,
     }))
-    .pipe(dest(`${devPath.js}`));
+    .pipe(gulpIf(isLinted, eslint()))
+    .pipe(dest(destPath));
+
+  done();
 }
 
-function compileJsComponents() {
-  return src(`${srcPath.js.root}/components.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsVendors(done) {
+  return compileJs(`${srcPath.js.root}/vendors.js`, `${devPath.js}`, `${srcRoot}`, false, done);
 }
 
-function compileJsUiKit() {
-  return src(`${srcPath.js.root}/ui-kit.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsComponents(done) {
+  return compileJs(`${srcPath.js.root}/components.js`, `${devPath.js}`, `${srcRoot}`, true, done);
 }
 
-function compileJsCommon() {
-  return src(`${srcPath.js.root}/common.js`)
-    .pipe(plumber())
-    .pipe(eslint())
-    .pipe(dest(`${devPath.js}`));
+function compileJsUiKit(done) {
+  return compileJs(`${srcPath.js.root}/ui-kit.js`, `${devPath.js}`, `${srcRoot}`, true, done);
+}
+
+function compileJsCommon(done) {
+  return compileJs(`${srcPath.js.root}/common.js`, `${devPath.js}`, `${srcRoot}`, true, done);
 }
 
 /**
@@ -576,46 +527,20 @@ function compileJsCommon() {
  * 5. Перенос common.js в ./library/js/
  */
 
-function compileJsVendorsLib() {
-  return src(`${srcPath.js.root}/vendors.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(dest(`${libraryPath.js}`));
+function compileJsVendorsLib(done) {
+  return compileJs(`${libraryPath.js.root}/vendors.js`, `${libraryDistPath.js}`, `${libraryRoot}`, false, done);
 }
 
-function compileJsComponentsLib() {
-  return src(`${srcPath.js.root}/components.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+function compileJsComponentsLib(done) {
+  return compileJs(`${libraryPath.js.root}/components.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
-function compileJsUiKitLib() {
-  return src(`${srcPath.js.root}/ui-kit.js`)
-    .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: `${srcRoot}`,
-      indent: true,
-    }))
-    .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+function compileJsUiKitLib(done) {
+  return compileJs(`${libraryPath.js.root}/ui-kit.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
-function compileJsCommonLib() {
-  return src(`${srcPath.js.root}/common.js`)
-    .pipe(plumber())
-    .pipe(eslint())
-    .pipe(dest(`${libraryPath.js}`));
+function compileJsCommonLib(done) {
+  return compileJs(`${libraryPath.js.root}/common.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
 }
 
 /**
@@ -648,8 +573,8 @@ function watchJs() {
 
 function watchJsLib() {
   watch([
-    `${srcPath.js.root}/**/*.js`,
-    `${srcPath.components.root}/**/*.js`,
+    `${libraryPath.js.root}/**/*.js`,
+    `${libraryPath.components.root}/**/*.js`,
   ], { events: 'change' }, series(parallel(compileJsVendorsLib, compileJsComponentsLib, compileJsUiKitLib, compileJsCommonLib), liveReload));
 }
 
@@ -671,8 +596,13 @@ function buildJs() {
     .pipe(babel({
       presets: ['@babel/env'],
       plugins: [
-        ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }]
-      ]
+        ['@babel/plugin-proposal-object-rest-spread',
+          {
+            loose: true,
+            useBuiltIns: true,
+          },
+        ],
+      ],
     }))
     .pipe(concat('script.js'))
     .pipe(dest(`${buildPath.js}`))
@@ -796,7 +726,7 @@ function watchPngSprite() {
 }
 
 /**
- * Asset
+ * Assets
  * --------------------------------------------------------------------------
  */
 
@@ -818,11 +748,29 @@ function exportAssetsDev() {
 }
 
 /**
+ * Экспорт файлов для components-library:
+ * 1. Перенос всех файлов из ./library/assets/ в ./library/dist/assets/
+ */
+
+function exportAssetsLib() {
+  return src(`${libraryPath.assets}/**/*.*`)
+    .pipe(dest(`${libraryDistPath.assets}`));
+}
+
+/**
  * Очистка директории ./dev/assets/ от всех файлов
  */
 
 function cleanAsset() {
   return del(`${devPath.assets.root}`);
+}
+
+/**
+ * Очистка директории ./library/dist/assets/ от всех файлов
+ */
+
+function cleanAssetLib() {
+  return del(`${libraryDistPath.assets}`);
 }
 
 /**
@@ -842,6 +790,15 @@ function watchAssets() {
 }
 
 /**
+ * Отслеживание изменений assets для components-library:
+ * 1. Отслеживание всех файлов из ./library/assets/ на все события (add, del, change)
+ */
+
+function watchAssetsLib() {
+  watch(`${libraryPath.assets}/**/*.*`, series(cleanAssetLib, exportAssetsLib, liveReload));
+}
+
+/**
  * Fonts
  * --------------------------------------------------------------------------
  */
@@ -852,22 +809,72 @@ function watchAssets() {
  * 2. Сохранение сгенерированных шрифтов в ./dev/fonts/
  */
 
-function convertTTFToWOFF() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2woff())
+function convertTTF(compilePath, destPath, convertedType, done) {
+  src([compilePath])
+    .pipe(gulpIf(convertedType === 'woff', ttf2woff()))
+    .pipe(gulpIf(convertedType === 'woff2', ttf2woff2()))
+    .pipe(gulpIf(convertedType === 'eot', ttf2eot()))
+    .pipe(dest(destPath));
+
+  done();
+}
+
+function convertTTFToWOFF(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'woff', done);
+}
+
+function convertTTFToWOFF2(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'woff2', done);
+}
+
+function convertTTFToEOT(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'eot', done);
+}
+
+/**
+ * Генерация веб-шрифтов для components-library:
+ * 1. Из файлов .ttf в ./library/fonts/ генерируются файлы .woff, .woff2, .eot
+ * 2. Сохранение сгенерированных шрифтов в ./library/dist/fonts/
+ */
+
+function convertTTFToWOFFLib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'woff', done);
+}
+
+function convertTTFToWOFF2Lib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'woff2', done);
+}
+
+function convertTTFToEOTLib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'eot', done);
+}
+
+/**
+ * Перенос веб-шрифтов:
+ * 1. Перенос файлов .woff, .woff2, .eot из ./src/fonts/ в ./dev/fonts/
+ */
+
+function moveFonts() {
+  return src([
+    `${srcPath.fonts}/*.woff`,
+    `${srcPath.fonts}/*.woff2`,
+    `${srcPath.fonts}/*.eot`,
+  ])
     .pipe(dest([`${devPath.fonts}`]));
 }
 
-function convertTTFToWOFF2() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2woff2())
-    .pipe(dest([`${devPath.fonts}`]));
-}
+/**
+ * Перенос веб-шрифтов для components-library:
+ * 1. Перенос файлов .woff, .woff2, .eot из ./library/fonts/ в ./library/dist/fonts/
+ */
 
-function convertTTFToEOT() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2eot())
-    .pipe(dest([`${devPath.fonts}`]));
+function moveFontsLib() {
+  return src([
+    `${libraryPath.fonts}/*.woff`,
+    `${libraryPath.fonts}/*.woff2`,
+    `${libraryPath.fonts}/*.eot`,
+  ])
+    .pipe(dest([`${libraryDistPath.fonts}`]));
 }
 
 /**
@@ -879,17 +886,39 @@ function cleanFonts() {
 }
 
 /**
+ * Очистка директории ./library/dist/fonts/ от всех файлов
+ */
+
+function cleanFontsLib() {
+  return del(`${libraryDistPath.fonts}`);
+}
+
+/**
  * Отслеживание изменений fonts:
- * 1. Отслеживание файлов .ttf в ./src/fonts/ на все события (add, del, change)
+ * 1. Отслеживание файлов шрифтов в ./src/fonts/ на все события (add, del, change)
  */
 
 function watchFonts() {
-  watch(`${srcPath.fonts}/*.ttf`, series(fontGeneration, liveReload));
+  watch(`${srcPath.fonts}/*.*`, series(fontGeneration, liveReload));
 }
 
 const fontGeneration = series(
   cleanFonts,
-  parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
+  parallel(moveFonts, convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
+);
+
+/**
+ * Отслеживание изменений fonts для components-library:
+ * 1. Отслеживание файлов шрифтов в ./library/fonts/ на все события (add, del, change)
+ */
+
+function watchFontsLib() {
+  watch(`${libraryPath.fonts}/*.*`, series(fontGenerationLib, liveReload));
+}
+
+const fontGenerationLib = series(
+  cleanFontsLib,
+  parallel(moveFontsLib, convertTTFToWOFFLib, convertTTFToWOFF2Lib, convertTTFToEOTLib),
 );
 
 /**
@@ -1005,7 +1034,6 @@ function exportFilesBuild() {
     .pipe(dest(`${buildPath.assets.root}`));
 }
 
-
 const buildAssets = series(exportImgBuild, exportFilesBuild);
 
 /**
@@ -1057,6 +1085,8 @@ exports.serve = series(
 exports.lib = series(
   // очистка
   cleanLib,
+  // общие задачи
+  fontGenerationLib,
   // html
   compileHtmlLib,
   // css
@@ -1069,6 +1099,8 @@ exports.lib = series(
   compileJsVendorsLib,
   compileJsComponentsLib,
   compileJsUiKitLib,
+  // export
+  exportAssetsLib,
   // инициализация lib-сервера
   initLibServer,
 
@@ -1077,6 +1109,8 @@ exports.lib = series(
     watchHtmlLib();
     watchCssLib();
     watchJsLib();
+    watchFontsLib();
+    watchAssetsLib();
 
     done();
   },

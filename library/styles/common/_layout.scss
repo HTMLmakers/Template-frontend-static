@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Common -- layout
+   ========================================================================== */
+
+.layout {
+  $root: ".layout";
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: map-get($container-max-widths, xs);
+
+  &__base-container {
+    @include make-container();
+    //@include make-container-max-widths();
+    //@include make-container-with-layout-gutter();
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__row {
+    @include make-row();
+  }
+
+  &__col {
+    @include make-col-ready();
+  }
+
+  &__base {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__header {
+    min-height: px-to-rem(150px);
+  }
+
+  &__footer {
+    min-height: px-to-rem(300px);
+  }
+
+  &__add {
+    min-height: auto;
+  }
+
+  &__base {
+
+  }
+
+  &__section {
+    min-height: auto;
+  }
+
+  &__base,
+  &__section {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__headline {
+
+  }
+
+  &__main {
+    @include make-col-ready();
+  }
+
+  &__sidebar-primary {
+    @include make-col-fix(px-to-rem(300px));
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
+
+  &__sidebar-secondary {
+    @include make-col(30, 100);
+
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
+  }
+
+  &--viewport-height {
+
+    #{$root}__base-container {
+      // Change it when you need to implement viewport-height modifier
+      height: calc(100vh - 150px - 300px);
+    }
+
+    #{$root}__row {
+      overflow: hidden;
+    }
+
+    #{$root}__col {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
