@@ -44,7 +44,7 @@
   &__component-name1 {
     //@include media-breakpoint-down(md) {}
 
-    @include make-col-fix(px-to-rem(150px));
+    @include make-col-fix(px-to-rem(150px), 0px);
 
     background-color: green;
   }
@@ -64,7 +64,7 @@
       @include make-col(100, 100);
     }
 
-    @include make-col-fix(px-to-rem(300px));
+    @include make-col-fix(px-to-rem(300px), 0px);
 
     background-color: red;
   }

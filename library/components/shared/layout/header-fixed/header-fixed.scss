@@ -33,7 +33,7 @@
 
   &__component-name1 {
 
-    @include make-col-fix(px-to-rem(150px));
+    @include make-col-fix(px-to-rem(150px), 0px);
 
     background-color: green;
   }

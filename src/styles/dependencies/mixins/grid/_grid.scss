@@ -64,16 +64,9 @@
   margin-left: if($num == 0, 0, percentage($num));
 }
 
-@mixin make-col-fix($size) {
-  flex-basis: calc(#{$size});
+@mixin make-col-fix($size, $gutter: $grid-gutter-width) {
+  flex-basis: calc(#{$size} + #{$gutter});
   flex-grow: 0;
   flex-shrink: 0;
-  width: calc(#{$size});
+  width: calc(#{$size} + #{$gutter});
 }
-
-//@mixin make-col-fix($size) {
-//  flex-basis: calc(#{$size} - #{$gutter});
-//  flex-grow: 0;
-//  flex-shrink: 0;
-//  width: calc(#{$size} - #{$gutter});
-//}
