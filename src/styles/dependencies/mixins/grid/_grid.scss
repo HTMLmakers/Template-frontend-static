@@ -7,8 +7,8 @@
   min-height: inherit;
   margin-right: auto;
   margin-left: auto;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+  padding-right: calc(#{$gutter} / 2);
+  padding-left: calc(#{$gutter} / 2);
 }
 
 // For each breakpoint, define the maximum width of the container in a media query
@@ -45,18 +45,18 @@
   flex-grow: 1;
   width: 100%;
   max-width: 100%;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+  padding-right: calc(#{$gutter} / 2);
+  padding-left: calc(#{$gutter} / 2);
 }
 
-@mixin make-col($size, $columns: $grid-columns, $gutter: 0px) {
-  flex-basis: calc(#{percentage(($size / $columns))} - #{$gutter});
+@mixin make-col($size, $columns: $grid-columns) {
+  flex-basis: calc(#{percentage(($size / $columns))});
   flex-grow: 0;
   flex-shrink: 0;
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
-  max-width: calc(#{percentage(($size / $columns))} - #{$gutter});
+  max-width: calc(#{percentage(($size / $columns))});
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
@@ -64,9 +64,16 @@
   margin-left: if($num == 0, 0, percentage($num));
 }
 
-@mixin make-col-fix($size, $gutter: 0px) {
-  flex-basis: calc(#{$size} - #{$gutter});
+@mixin make-col-fix($size) {
+  flex-basis: calc(#{$size});
   flex-grow: 0;
   flex-shrink: 0;
-  width: calc(#{$size} - #{$gutter});
+  width: calc(#{$size});
 }
+
+//@mixin make-col-fix($size) {
+//  flex-basis: calc(#{$size} - #{$gutter});
+//  flex-grow: 0;
+//  flex-shrink: 0;
+//  width: calc(#{$size} - #{$gutter});
+//}

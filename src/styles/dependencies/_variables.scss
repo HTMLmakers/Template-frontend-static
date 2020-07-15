@@ -25,8 +25,8 @@ $body-font-size: $default-font-size;
 
 // Grid
 $enable-grid-classes: true;
-$grid-columns: 100;
-$grid-gutter-width: 32px;
+$grid-columns: 12;
+$grid-gutter-width: 0;
 
 $layout-gutter-widths: (
   sm: px-to-rem(30px - $grid-gutter-width),
