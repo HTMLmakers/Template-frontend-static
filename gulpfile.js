@@ -809,22 +809,26 @@ function watchAssetsLib() {
  * 2. Сохранение сгенерированных шрифтов в ./dev/fonts/
  */
 
-function convertTTFToWOFF() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2woff())
-    .pipe(dest([`${devPath.fonts}`]));
+function convertTTF(compilePath, destPath, convertedType, done) {
+  src([compilePath])
+    .pipe(gulpIf(convertedType === 'woff', ttf2woff()))
+    .pipe(gulpIf(convertedType === 'woff2', ttf2woff2()))
+    .pipe(gulpIf(convertedType === 'eot', ttf2eot()))
+    .pipe(dest(destPath));
+
+  done();
 }
 
-function convertTTFToWOFF2() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2woff2())
-    .pipe(dest([`${devPath.fonts}`]));
+function convertTTFToWOFF(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'woff', done);
 }
 
-function convertTTFToEOT() {
-  return src([`${srcPath.fonts}/*.ttf`])
-    .pipe(ttf2eot())
-    .pipe(dest([`${devPath.fonts}`]));
+function convertTTFToWOFF2(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'woff2', done);
+}
+
+function convertTTFToEOT(done) {
+  return convertTTF(`${srcPath.fonts}/*.ttf`, `${devPath.fonts}`, 'eot', done);
 }
 
 /**
@@ -833,22 +837,16 @@ function convertTTFToEOT() {
  * 2. Сохранение сгенерированных шрифтов в ./library/dist/fonts/
  */
 
-function convertTTFToWOFFLib() {
-  return src([`${libraryPath.fonts}/*.ttf`])
-    .pipe(ttf2woff())
-    .pipe(dest([`${libraryDistPath.fonts}`]));
+function convertTTFToWOFFLib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'woff', done);
 }
 
-function convertTTFToWOFF2Lib() {
-  return src([`${libraryPath.fonts}/*.ttf`])
-    .pipe(ttf2woff2())
-    .pipe(dest([`${libraryDistPath.fonts}`]));
+function convertTTFToWOFF2Lib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'woff2', done);
 }
 
-function convertTTFToEOTLib() {
-  return src([`${libraryPath.fonts}/*.ttf`])
-    .pipe(ttf2eot())
-    .pipe(dest([`${libraryDistPath.fonts}`]));
+function convertTTFToEOTLib(done) {
+  return convertTTF(`${libraryPath.fonts}/*.ttf`, `${libraryDistPath.fonts}`, 'eot', done);
 }
 
 /**
