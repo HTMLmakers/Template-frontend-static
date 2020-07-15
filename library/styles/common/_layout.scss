@@ -3,16 +3,16 @@
    ========================================================================== */
 
 .layout {
-  $root: &;
+  $root: ".layout";
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: map-get($container-max-widths, xs);
 
-  &__container {
+  &__base-container {
     @include make-container();
-    @include make-container-max-widths();
+    //@include make-container-max-widths();
     //@include make-container-with-layout-gutter();
 
     display: flex;
@@ -22,10 +22,6 @@
 
   &__row {
     @include make-row();
-
-    &--gutter {
-      @include make-row(px-to-rem(30px));
-    }
   }
 
   &__col {
@@ -68,28 +64,28 @@
   }
 
   &__main {
-    @include make-col-ready(px-to-rem(30px));
+    @include make-col-ready();
   }
 
   &__sidebar-primary {
-    @include media-breakpoint-down(lg) {
-      @include make-col(100, 100, px-to-rem(30px));
-    }
+    @include make-col-fix(px-to-rem(300px));
 
-    @include make-col-fix(px-to-rem(300px), px-to-rem(30px));
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
   }
 
   &__sidebar-secondary {
-    @include media-breakpoint-down(lg) {
-      @include make-col(100, 100, px-to-rem(30px));
-    }
+    @include make-col(30, 100);
 
-    @include make-col(30, 100, px-to-rem(30px));
+    @include media-breakpoint-down(lg) {
+      @include make-col(100, 100);
+    }
   }
 
   &--viewport-height {
 
-    #{$root}__container {
+    #{$root}__base-container {
       // Change it when you need to implement viewport-height modifier
       height: calc(100vh - 150px - 300px);
     }

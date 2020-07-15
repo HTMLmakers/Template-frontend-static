@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Common library -- base
+   ========================================================================== */
+
+html {
+  //@include media-breakpoint-down(lg) {}
+
+  box-sizing: border-box;
+  height: 100%;
+  font-size: $body-font-size-library;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100%;
+  color: $body-color-library;
+  font-size: inherit;
+  font-family: $body-font-family-library;
+  background-color: $body-bg-inner-library;
+
+  &.main {
+    background-color: $body-bg-library;
+  }
+}
