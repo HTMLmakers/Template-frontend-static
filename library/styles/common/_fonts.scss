@@ -1,0 +1,7 @@
+/* ==========================================================================
+   Common library -- fonts
+   ========================================================================== */
+
+// font-face mixin
+@include font-face(Incised-bold, fonts/Incised901BT, normal, normal, swap, eot woff2 woff);
+@include font-face(GeoSlab-regular, fonts/GeoSlab703BT, normal, normal, swap, eot woff2 woff);

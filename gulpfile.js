@@ -112,6 +112,8 @@ const libraryPath = {
     features: `${libraryRoot}/components/features`,
     shared: `${libraryRoot}/components/shared`,
   },
+  fonts: `${libraryRoot}/fonts`,
+  assets: `${libraryRoot}/assets`,
   js: {
     root: `${libraryRoot}/js`,
     vendors: `${libraryRoot}/js/vendors`,
@@ -131,6 +133,8 @@ const libraryPath = {
 
 const libraryDistPath = {
   pages: `${libraryDistRoot}`,
+  fonts: `${libraryDistRoot}/fonts`,
+  assets: `${libraryDistRoot}/assets`,
   js: `${libraryDistRoot}/js`,
   styles: `${libraryDistRoot}/styles`,
 };
@@ -722,7 +726,7 @@ function watchPngSprite() {
 }
 
 /**
- * Asset
+ * Assets
  * --------------------------------------------------------------------------
  */
 
@@ -744,11 +748,29 @@ function exportAssetsDev() {
 }
 
 /**
+ * Экспорт файлов для components-library:
+ * 1. Перенос всех файлов из ./library/assets/ в ./library/dist/assets/
+ */
+
+function exportAssetsLib() {
+  return src(`${libraryPath.assets}/**/*.*`)
+    .pipe(dest(`${libraryDistPath.assets}`));
+}
+
+/**
  * Очистка директории ./dev/assets/ от всех файлов
  */
 
 function cleanAsset() {
   return del(`${devPath.assets.root}`);
+}
+
+/**
+ * Очистка директории ./library/dist/assets/ от всех файлов
+ */
+
+function cleanAssetLib() {
+  return del(`${libraryDistPath.assets}`);
 }
 
 /**
@@ -765,6 +787,15 @@ function watchAssets() {
     `!${srcPath.assets.img.sprite.svg}`,
     `!${srcPath.assets.img.sprite.svg}/**/*`,
   ], series(cleanAsset, exportAssetsDev, liveReload));
+}
+
+/**
+ * Отслеживание изменений assets для components-library:
+ * 1. Отслеживание всех файлов из ./library/assets/ на все события (add, del, change)
+ */
+
+function watchAssetsLib() {
+  watch(`${libraryPath.assets}/**/*.*`, series(cleanAssetLib, exportAssetsLib, liveReload));
 }
 
 /**
@@ -797,6 +828,58 @@ function convertTTFToEOT() {
 }
 
 /**
+ * Генерация веб-шрифтов для components-library:
+ * 1. Из файлов .ttf в ./library/fonts/ генерируются файлы .woff, .woff2, .eot
+ * 2. Сохранение сгенерированных шрифтов в ./library/dist/fonts/
+ */
+
+function convertTTFToWOFFLib() {
+  return src([`${libraryPath.fonts}/*.ttf`])
+    .pipe(ttf2woff())
+    .pipe(dest([`${libraryDistPath.fonts}`]));
+}
+
+function convertTTFToWOFF2Lib() {
+  return src([`${libraryPath.fonts}/*.ttf`])
+    .pipe(ttf2woff2())
+    .pipe(dest([`${libraryDistPath.fonts}`]));
+}
+
+function convertTTFToEOTLib() {
+  return src([`${libraryPath.fonts}/*.ttf`])
+    .pipe(ttf2eot())
+    .pipe(dest([`${libraryDistPath.fonts}`]));
+}
+
+/**
+ * Перенос веб-шрифтов:
+ * 1. Перенос файлов .woff, .woff2, .eot из ./src/fonts/ в ./dev/fonts/
+ */
+
+function moveFonts() {
+  return src([
+    `${srcPath.fonts}/*.woff`,
+    `${srcPath.fonts}/*.woff2`,
+    `${srcPath.fonts}/*.eot`,
+  ])
+    .pipe(dest([`${devPath.fonts}`]));
+}
+
+/**
+ * Перенос веб-шрифтов для components-library:
+ * 1. Перенос файлов .woff, .woff2, .eot из ./library/fonts/ в ./library/dist/fonts/
+ */
+
+function moveFontsLib() {
+  return src([
+    `${libraryPath.fonts}/*.woff`,
+    `${libraryPath.fonts}/*.woff2`,
+    `${libraryPath.fonts}/*.eot`,
+  ])
+    .pipe(dest([`${libraryDistPath.fonts}`]));
+}
+
+/**
  * Очистка директории ./dev/fonts/ от всех файлов
  */
 
@@ -805,17 +888,39 @@ function cleanFonts() {
 }
 
 /**
+ * Очистка директории ./library/dist/fonts/ от всех файлов
+ */
+
+function cleanFontsLib() {
+  return del(`${libraryDistPath.fonts}`);
+}
+
+/**
  * Отслеживание изменений fonts:
- * 1. Отслеживание файлов .ttf в ./src/fonts/ на все события (add, del, change)
+ * 1. Отслеживание файлов шрифтов в ./src/fonts/ на все события (add, del, change)
  */
 
 function watchFonts() {
-  watch(`${srcPath.fonts}/*.ttf`, series(fontGeneration, liveReload));
+  watch(`${srcPath.fonts}/*.*`, series(fontGeneration, liveReload));
 }
 
 const fontGeneration = series(
   cleanFonts,
-  parallel(convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
+  parallel(moveFonts, convertTTFToWOFF, convertTTFToWOFF2, convertTTFToEOT),
+);
+
+/**
+ * Отслеживание изменений fonts для components-library:
+ * 1. Отслеживание файлов шрифтов в ./library/fonts/ на все события (add, del, change)
+ */
+
+function watchFontsLib() {
+  watch(`${libraryPath.fonts}/*.*`, series(fontGenerationLib, liveReload));
+}
+
+const fontGenerationLib = series(
+  cleanFontsLib,
+  parallel(moveFontsLib, convertTTFToWOFFLib, convertTTFToWOFF2Lib, convertTTFToEOTLib),
 );
 
 /**
@@ -982,6 +1087,8 @@ exports.serve = series(
 exports.lib = series(
   // очистка
   cleanLib,
+  // общие задачи
+  fontGenerationLib,
   // html
   compileHtmlLib,
   // css
@@ -994,6 +1101,8 @@ exports.lib = series(
   compileJsVendorsLib,
   compileJsComponentsLib,
   compileJsUiKitLib,
+  // export
+  exportAssetsLib,
   // инициализация lib-сервера
   initLibServer,
 
@@ -1002,6 +1111,8 @@ exports.lib = series(
     watchHtmlLib();
     watchCssLib();
     watchJsLib();
+    watchFontsLib();
+    watchAssetsLib();
 
     done();
   },
