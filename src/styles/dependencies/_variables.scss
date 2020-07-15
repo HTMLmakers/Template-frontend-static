@@ -2,58 +2,98 @@
 // Constants
 // =============================================================================
 
-// Colors
+/*
+   Colors
+   -------------------------------------------------------------------------- */
+
+// Colors Default
 $white:          #fff;
 $black:          #000;
 
+// Colors Brand
 $bright-red:     #a60002;
 
-// Fonts
+// Colors Gray
+
+// Colors Additional
+
+/*
+   Fonts
+   -------------------------------------------------------------------------- */
+
+// Fonts Secure
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
+
+// Fonts Brand
 $font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
+
+// Font size default
 $default-font-size: 16px;
 
 // =============================================================================
 // Variables
 // =============================================================================
 
-// body
+/*
+   Body
+   -------------------------------------------------------------------------- */
+
+// Grid Variables
 $body-bg: $white;
 $body-color: $black;
 $body-font-family: $secure-fonts;
 $body-font-size: $default-font-size;
 
-// Grid
+/*
+   Grid
+   -------------------------------------------------------------------------- */
+
+// Grid Variables
 $enable-grid-classes: true;
 $grid-columns: 12;
 $grid-gutter-width: 0;
 
-$layout-gutter-widths: (
-  sm: px-to-rem(30px - $grid-gutter-width),
-  xl: px-to-rem(60px - $grid-gutter-width),
-);
-
+// Grid Breakpoints
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
+  sm: 320px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px
+  lg: 1024px,
+  xl: 1440px,
+  xxl: 1920px
 );
 
-// Desktop-only version
+// Container Desktop-only version
 //$container-max-widths: (
 //  sm: 1200px
 //);
 
-// Responsive version
+// Container Responsive version
 $container-max-widths: (
   xs: 320px + $grid-gutter-width,
   sm: 520px + $grid-gutter-width,
   xl: 1000px + $grid-gutter-width
 );
 
-// Popups
+/*
+   Layout
+   -------------------------------------------------------------------------- */
+
+// Layout Gutter
+$layout-gutter-widths: (
+  sm: px-to-rem(30px - $grid-gutter-width),
+  xl: px-to-rem(60px - $grid-gutter-width),
+);
+
+// Layout min-height
+$layout-header-min-height: px-to-rem(128px);
+$layout-footer-min-height: px-to-rem(500px);
+
+/*
+   Popups
+   -------------------------------------------------------------------------- */
+
+// Popups Variables
 $popup-overlay-bg: $black;
 $popup-overlay-opacity: 0.8;
 $popup-width: 800px;
