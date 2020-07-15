@@ -38,11 +38,11 @@
   }
 
   &__header {
-    min-height: $layout-header-min-height;
+    min-height: px-to-rem(150px);
   }
 
   &__footer {
-    min-height: $layout-footer-min-height;
+    min-height: px-to-rem(300px);
   }
 
   &__add {
@@ -91,7 +91,7 @@
 
     #{$root}__container {
       // Change it when you need to implement viewport-height modifier
-      height: calc(100vh - #{$layout-header-min-height} - #{$layout-footer-min-height});
+      height: calc(100vh - 150px - 300px);
     }
 
     #{$root}__row {

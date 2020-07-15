@@ -41,41 +41,29 @@
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
-  flex-basis: 0;
-  flex-grow: 1;
   width: 100%;
-  max-width: 100%;
-  @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
-  } @else {
-    padding-right: $gutter / 2;
-    padding-left: $gutter / 2;
-  }
+  padding-right: $gutter / 2;
+  padding-left: $gutter / 2;
 }
 
 @mixin make-col($size, $columns: $grid-columns, $gutter: 0px) {
-  flex: 0 0 calc(#{percentage(($size / $columns))} - #{$gutter});
+  flex-basis: calc(#{percentage(($size / $columns))} - #{$gutter});
+  flex-grow: 0;
+  flex-shrink: 0;
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
   max-width: calc(#{percentage(($size / $columns))} - #{$gutter});
-  @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
-  }
-}
-
-@mixin make-col-fix($size, $gutter: 0px) {
-  flex: 0 0 calc(#{$size} - #{$gutter});
-  width: calc(#{$size} - #{$gutter});
-  @if ($grid-gutter-width == 0) {
-    margin-right: calc(#{$gutter} / 2);
-    margin-left: calc(#{$gutter} / 2);
-  }
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
-  $num: calc(#{$size} / #{$columns});
+  $num: $size / $columns;
   margin-left: if($num == 0, 0, percentage($num));
+}
+
+@mixin make-col-fix($size, $gutter: 0px) {
+  flex-basis: calc(#{$size} - #{$gutter});
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: calc(#{$size} - #{$gutter});
 }
