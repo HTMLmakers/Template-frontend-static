@@ -23,6 +23,7 @@ h6 {
 // --------------------------------------------------------------------------
 
 .heading {
+  $root: ".heading";
   //@include media-breakpoint-down(md) {}
 
   color: $black;
