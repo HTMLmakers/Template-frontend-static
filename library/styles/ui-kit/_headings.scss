@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Ui-kit component -- Headings
+   ========================================================================== */
+
+//
+// Default styles
+// --------------------------------------------------------------------------
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+//
+// Established styles
+// --------------------------------------------------------------------------
+
+.heading {
+  //@include media-breakpoint-down(md) {}
+
+  color: $black;
+  font-weight: normal;
+  font-family: $secure-fonts;
+
+  &__differ {
+
+  }
+
+  &__mark {
+
+  }
+
+  // h1
+
+  &--h1 {
+    @include h1--size;
+  }
+
+  // h2
+
+  &--h2 {
+    @include h2--size();
+  }
+
+  // h3
+
+  &--h3 {
+    @include h3--size();
+  }
+
+  // h4
+
+  &--h4 {
+    @include h4--size();
+  }
+
+  // h5
+
+  &--h5 {
+    @include h5--size();
+  }
+
+  // h6
+
+  &--h6 {
+    @include h6--size();
+  }
+
+  // ----------------------------------------
+
+  // h1 sizes
+
+  &--h1-size-1 {
+    @include h1--size-l;
+  }
+
+  &--h1-size-m {
+    @include h1--size-m;
+  }
+
+  &--h1-size-s {
+    @include h1--size-s;
+  }
+
+  // h2 sizes
+
+  &--h2-size-1 {
+    @include h2--size-l;
+  }
+
+  // h3 sizes
+
+  &--h3-size-1 {
+    @include h3--size-l;
+  }
+
+  // h4 sizes
+
+  &--h4-size-1 {
+    @include h4--size-l;
+  }
+
+  // h5 sizes
+
+  &--h5-size-1 {
+    @include h5--size-l;
+  }
+
+  // h6 sizes
+
+  &--h6-size-1 {
+    @include h6--size-l;
+  }
+}
