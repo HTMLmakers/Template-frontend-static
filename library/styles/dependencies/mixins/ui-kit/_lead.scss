@@ -1,0 +1,29 @@
+// ==========================================================================
+// Ui-kit mixins -- Lead (complex heading)
+// ==========================================================================
+
+// sizes
+@mixin lead--size-l {
+
+}
+
+@mixin lead--size-m {
+
+}
+
+@mixin lead--size-s {
+
+}
+
+// group
+@mixin lead--size {
+  @include lead--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include lead--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include lead--size-s;
+  }
+}

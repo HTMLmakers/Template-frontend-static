@@ -2,12 +2,16 @@
    Ui-kit component -- lead
    ========================================================================== */
 
+//
+// Established styles
+// --------------------------------------------------------------------------
+
 .lead {
-  $root: &;
+  $root: ".lead";
   //@include media-breakpoint-down(md) {}
 
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: px-to-rem(10px);
 
   &::after {
     position: absolute;
@@ -20,10 +24,26 @@
   }
 
   &__heading {
-    margin: 0 0 20px 0;
+    margin-bottom: px-to-rem(20px);
   }
 
   &__desc {
     margin: 0;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--lead-size-l {
+    @include lead--size-l;
+  }
+
+  &--lead-size-m {
+    @include lead--size-m;
+  }
+
+  &--lead-size-s {
+    @include lead--size-s;
   }
 }
