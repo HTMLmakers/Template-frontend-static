@@ -7,7 +7,6 @@
 // --------------------------------------------------------------------------
 
 .caption {
-  $root: ".caption";
   //@include media-breakpoint-down(md) {}
 
   margin-bottom: 1.5em;
@@ -21,15 +20,15 @@
 
   // sizes
 
-  &--caption-size-l {
+  &--size-l {
     @include caption--size-l;
   }
 
-  &--caption-size-m {
+  &--size-m {
     @include caption--size-m;
   }
 
-  &--caption-size-s {
+  &--size-s {
     @include caption--size-s;
   }
 }
