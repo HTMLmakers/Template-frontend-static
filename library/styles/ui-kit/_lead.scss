@@ -35,15 +35,15 @@
 
   // sizes
 
-  &--lead-size-l {
+  &--size-l {
     @include lead--size-l;
   }
 
-  &--lead-size-m {
+  &--size-m {
     @include lead--size-m;
   }
 
-  &--lead-size-s {
+  &--size-s {
     @include lead--size-s;
   }
 }
