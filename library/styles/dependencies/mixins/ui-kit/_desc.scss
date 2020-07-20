@@ -1,0 +1,29 @@
+// ==========================================================================
+// Ui-kit mixins -- Desc
+// ==========================================================================
+
+// sizes
+@mixin desc--size-l {
+
+}
+
+@mixin desc--size-m {
+
+}
+
+@mixin desc--size-s {
+
+}
+
+// group
+@mixin desc--size {
+  @include desc--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include desc--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include desc--size-s;
+  }
+}

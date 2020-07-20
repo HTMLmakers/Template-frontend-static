@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Ui-kit component -- Desc
+   ========================================================================== */
+
+//
+// Default styles
+// --------------------------------------------------------------------------
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+//
+// Established styles
+// --------------------------------------------------------------------------
+
+.desc {
+  $root: ".desc";
+  //@include media-breakpoint-down(md) {}
+
+  margin-bottom: 1.5em;
+  font-family: inherit;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--desc-size-l {
+    @include desc--size-l;
+  }
+
+  &--desc-size-m {
+    @include desc--size-m;
+  }
+
+  &--desc-size-s {
+    @include desc--size-s;
+  }
+}
