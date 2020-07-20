@@ -23,7 +23,6 @@ h6 {
 // --------------------------------------------------------------------------
 
 .heading {
-  $root: ".heading";
   //@include media-breakpoint-down(md) {}
 
   color: $black;
@@ -38,37 +37,37 @@ h6 {
 
   }
 
-  // h1
+  //----- h1
 
   &--h1 {
     @include h1--size;
   }
 
-  // h2
+  //----- h2
 
   &--h2 {
     @include h2--size();
   }
 
-  // h3
+  //----- h3
 
   &--h3 {
     @include h3--size();
   }
 
-  // h4
+  //----- h4
 
   &--h4 {
     @include h4--size();
   }
 
-  // h5
+  //----- h5
 
   &--h5 {
     @include h5--size();
   }
 
-  // h6
+  //----- h6
 
   &--h6 {
     @include h6--size();
@@ -76,7 +75,7 @@ h6 {
 
   // ----------------------------------------
 
-  // h1 sizes
+  //----- h1 sizes
 
   &--h1-size-l {
     @include h1--size-l;
@@ -90,31 +89,31 @@ h6 {
     @include h1--size-s;
   }
 
-  // h2 sizes
+  //----- h2 sizes
 
   &--h2-size-l {
     @include h2--size-l;
   }
 
-  // h3 sizes
+  //----- h3 sizes
 
   &--h3-size-l {
     @include h3--size-l;
   }
 
-  // h4 sizes
+  //----- h4 sizes
 
   &--h4-size-l {
     @include h4--size-l;
   }
 
-  // h5 sizes
+  //----- h5 sizes
 
   &--h5-size-l {
     @include h5--size-l;
   }
 
-  // h6 sizes
+  //----- h6 sizes
 
   &--h6-size-l {
     @include h6--size-l;
