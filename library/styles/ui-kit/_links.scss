@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Ui-kit component -- Links
+   ========================================================================== */
+
+//
+// Default styles
+// --------------------------------------------------------------------------
+
+a {
+
+}
+
+//
+// Established styles
+// --------------------------------------------------------------------------
+
+// Extends, mixins
+
+%link {
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+
+  }
+}
+
+@mixin link-mod {
+
+  &--disabled {
+    cursor: default;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+// Link primary
+
+.link-primary {
+  @extend %link;
+  @include link-mod;
+
+  &:hover {
+
+  }
+
+  &:active {
+
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include link-primary--size-l;
+  }
+
+  &--size-m {
+    @include link-primary--size-m;
+  }
+
+  &--size-s {
+    @include link-primary--size-s;
+  }
+}
+
+// Link secondary
+
+.link-secondary {
+  @extend %link;
+  @include link-mod;
+
+  &:hover {
+
+  }
+
+  &:active {
+
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include link-secondary--size-l;
+  }
+
+  &--size-m {
+    @include link-secondary--size-m;
+  }
+
+  &--size-s {
+    @include link-secondary--size-s;
+  }
+}
