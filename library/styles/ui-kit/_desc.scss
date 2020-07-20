@@ -32,15 +32,15 @@ p {
 
   // sizes
 
-  &--desc-size-l {
+  &--size-l {
     @include desc--size-l;
   }
 
-  &--desc-size-m {
+  &--size-m {
     @include desc--size-m;
   }
 
-  &--desc-size-s {
+  &--size-s {
     @include desc--size-s;
   }
 }
