@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Ui-kit component -- Сaptions
+   ========================================================================== */
+
+//
+// Established styles
+// --------------------------------------------------------------------------
+
+.caption {
+  $root: ".caption";
+  //@include media-breakpoint-down(md) {}
+
+  margin-bottom: 1.5em;
+  font-family: inherit;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--caption-size-l {
+    @include caption--size-l;
+  }
+
+  &--caption-size-m {
+    @include caption--size-m;
+  }
+
+  &--caption-size-s {
+    @include caption--size-s;
+  }
+}
