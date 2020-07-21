@@ -149,3 +149,30 @@ dl {
     @include numlist--size-s;
   }
 }
+
+.desclist {
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-bottom: px-to-rem(24px);
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include desclist--size-l;
+  }
+
+  &--size-m {
+    @include desclist--size-m;
+  }
+
+  &--size-s {
+    @include desclist--size-s;
+  }
+}
