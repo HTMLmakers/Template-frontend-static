@@ -1,55 +1,276 @@
 /* ==========================================================================
-   Ui-kit component -- btn
+   Ui-kit elements -- buttons
    ========================================================================== */
 
-.btn {
-  $root: &;
-  //@include media-breakpoint-down(md) {}
+/*
+   Default styles
+   -------------------------------------------------------------------------- */
 
+button {
+  text-decoration: none;
+  background: none;
+  border: none;
+  user-select: none;
+}
+
+/*
+   Established styles
+   -------------------------------------------------------------------------- */
+
+/* Extends, mixins */
+
+%button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 350px;
-  min-height: 50px;
-  margin: 0 30px 0 0;
-  padding: 10px 25px;
-  color: $black;
-  font-size: $default-font-size;
+  margin: 0 px-to-rem(24px) 0 0;
+  color: $white;
   font-family: $secure-fonts;
-  background-color: silver;
-  border: none;
-  user-select: none;
+  transition: all 0.2s;
 
   &:last-child {
     margin-right: 0;
   }
 
-  &:hover {
-    text-decoration: none;
-  }
-
   &:focus {
     outline: 0;
   }
+}
 
-  &:disabled {
-    opacity: 0.8;
+%button-primary-color {
+  @extend %button;
+
+  background-color: red;
+
+  &:hover {
+
   }
 
-  &--primary {
-    color: $white;
-    background-color: red;
+  &:active {
+
+  }
+}
+
+%button-secondary-color {
+  @extend %button;
+
+  background-color: green;
+
+  &:hover {
+
   }
 
-  &--secondary {
-    color: $white;
-    background-color: green;
+  &:active {
+
+  }
+}
+
+%button-disabled {
+  background-color: $gallery;
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Button-primary */
+
+.button-primary {
+  @extend %button-primary-color;
+
+  &--fullwidth {
+    @include button-fullwidth;
   }
 
-  &--block {
+  &--disabled {
+    @extend %button-disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include button-primary--size-l;
+  }
+
+  &--size-m {
+    @include button-primary--size-m;
+  }
+
+  &--size-s {
+    @include button-primary--size-s;
+  }
+}
+
+/* Button-secondary */
+
+.button-secondary {
+  @extend %button-secondary-color;
+
+  &--fullwidth {
+    @include button-fullwidth;
+  }
+
+  &--disabled {
+    @extend %button-disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include button-secondary--size-l;
+  }
+
+  &--size-m {
+    @include button-secondary--size-m;
+  }
+
+  &--size-s {
+    @include button-secondary--size-s;
+  }
+}
+
+/* Button-icon */
+
+.button-icon {
+  @extend %button;
+
+  margin-right: 0;
+  background-color: #1da1f2;
+
+  &--fullwidth {
+    @include button-fullwidth;
+  }
+
+  &--disabled {
+    @extend %button-disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include button-icon--size-l;
+  }
+
+  &--size-m {
+    @include button-icon--size-m;
+  }
+
+  &--size-s {
+    @include button-icon--size-s;
+  }
+}
+
+/* Button-complex */
+
+.button-complex {
+  @extend %button;
+
+  background-color: purple;
+
+  &__content,
+  &__icon {
     display: flex;
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
+  }
+
+  &__content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  &__icon {
+    align-items: center;
+  }
+
+  &__title {
+    white-space: nowrap;
+  }
+
+  &__desc {
+
+  }
+
+  &--fullwidth {
+    @include button-fullwidth;
+  }
+
+  &--disabled {
+    @extend %button-disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include button-complex--size-l;
+  }
+
+  &--size-m {
+    @include button-complex--size-m;
+  }
+
+  &--size-s {
+    @include button-complex--size-s;
+  }
+}
+
+/* Button-apps */
+
+.button-apps {
+  @extend %button;
+
+  background-color: purple;
+
+  &__content,
+  &__icon {
+    display: flex;
+  }
+
+  &__content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  &__icon {
+    align-items: center;
+  }
+
+  &__title {
+    white-space: nowrap;
+  }
+
+  &__desc {
+
+  }
+
+  &--fullwidth {
+    @include button-fullwidth;
+  }
+
+  &--disabled {
+    @extend %button-disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include button-apps--size-l;
+  }
+
+  &--size-m {
+    @include button-apps--size-m;
+  }
+
+  &--size-s {
+    @include button-apps--size-s;
   }
 }
