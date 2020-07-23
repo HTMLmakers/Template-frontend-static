@@ -6,13 +6,15 @@
   $root: &;
 
   position: fixed;
-  top: -100%;
+  top: 0;
   right: 0;
   left: 0;
   z-index: 9000;
   display: flex;
   min-height: px-to-rem(50px);
   background-color: violet;
+  transform: translateY(-100%);
+  transition: transform ease-out 0.2s;
 
   &__container {
     @include make-container();
@@ -27,26 +29,30 @@
 
   &__col {
     @include make-col-ready();
-
-    padding: 5px;
   }
 
   &__component-name1 {
+    @include make-col(2);
 
-    @include make-col-fix(px-to-rem(150px));
+    @include media-breakpoint-down(sm) {
+      @include make-col(2, 6);
+    }
 
     background-color: green;
+    background-clip: content-box;
   }
 
   &__component-name2 {
     background-color: yellow;
+    background-clip: content-box;
   }
 
   &__component-name3 {
     background-color: blue;
+    background-clip: content-box;
   }
 
   &--visible {
-    top: 0;
+    transform: translateY(0);
   }
 }

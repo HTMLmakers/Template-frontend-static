@@ -19,7 +19,5 @@
 
   &__col {
     @include make-col-ready();
-
-    padding: 5px;
   }
 }

@@ -3,10 +3,10 @@
 // =============================================================================
 
 // Colors
-$white:          #fff;
-$black:          #000;
+$white: #fff;
+$black: #000;
 
-$bright-red:     #a60002;
+$bright-red: #a60002;
 
 // Fonts
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
@@ -24,33 +24,45 @@ $body-font-family: $secure-fonts;
 $body-font-size: $default-font-size;
 
 // Grid
-$enable-grid-classes: true;
-$grid-columns: 100;
-$grid-gutter-width: 32px;
-
-$layout-gutter-widths: (
-  sm: px-to-rem(30px - $grid-gutter-width),
-  xl: px-to-rem(60px - $grid-gutter-width),
+$enable-grid-classes: false;
+$grid-columns-default: 12;
+$grid-columns: (
+  xs: 6,
+  sm: 6,
+  md: 8,
+  lg: 12,
+  xl: 12,
 );
-
+$grid-gutter-width: (
+  xs: 16px,
+  sm: 16px,
+  md: 32px,
+  lg: 16px,
+  xl: 32px,
+);
+$layout-gutter-widths: (
+  xs: 32px - map-get($grid-gutter-width, xs),
+  sm: 32px - map-get($grid-gutter-width, sm),
+  md: 64px - map-get($grid-gutter-width, md),
+);
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
+  sm: 320px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px
+  lg: 1024px,
+  xl: 1440px,
+  xxl: 1920px
 );
-
-// Desktop-only version
-//$container-max-widths: (
-//  sm: 1200px
-//);
-
-// Responsive version
 $container-max-widths: (
-  xs: 320px + $grid-gutter-width,
-  sm: 520px + $grid-gutter-width,
-  xl: 1000px + $grid-gutter-width
+  // Desktop-only version
+  //  sm: 1200px
+
+  // Responsive version
+  xs: 272px + map-get($grid-gutter-width, xs),
+  sm: 100%,
+  md: 624px + map-get($grid-gutter-width, md),
+  lg: 880px + map-get($grid-gutter-width, lg),
+  xl: 1168px + map-get($grid-gutter-width, xl)
 );
 
 // Popups

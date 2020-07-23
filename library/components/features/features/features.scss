@@ -39,7 +39,7 @@
 
   &__item {
     //@include make-col-ready(50px);
-    @include make-col(33.33, 100, 100px);
+    @include make-col(33.33, 100);
 
     margin-bottom: 50px;
   }
