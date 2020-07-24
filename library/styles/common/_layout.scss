@@ -79,12 +79,8 @@
       @include make-col(12);
     }
 
-    @include media-breakpoint-down(md) {
-      @include make-col(8);
-    }
-
     @include media-breakpoint-down(sm) {
-      @include make-col(6);
+      @include make-col(6, $grid-columns-6);
     }
   }
 
@@ -95,12 +91,8 @@
       @include make-col(12);
     }
 
-    @include media-breakpoint-down(md) {
-      @include make-col(8);
-    }
-
     @include media-breakpoint-down(sm) {
-      @include make-col(6);
+      @include make-col(6, $grid-columns-6);
     }
   }
 

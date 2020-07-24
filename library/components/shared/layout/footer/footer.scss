@@ -64,7 +64,7 @@
     @include make-col(2);
 
     @include media-breakpoint-down(md) {
-      @include make-col(8);
+      @include make-col(4, $grid-columns-6);
     }
 
     background-color: red;
@@ -75,7 +75,7 @@
     @include make-col(10);
 
     @include media-breakpoint-down(md) {
-      @include make-col(8);
+      @include make-col(4, $grid-columns-6);
     }
 
     background-color: aqua;

@@ -34,14 +34,14 @@
   }
 
   &__list {
-    @include make-row(60px);
+    @include make-row();
 
     padding: 0;
     list-style: none;
   }
 
   &__item {
-    @include make-col-ready(60px);
+    @include make-col-ready();
 
     margin-bottom: 0;
   }
@@ -82,8 +82,8 @@
       left: 50%;
       min-width: 100%;
       min-height: 100%;
-      transform: translate(-50%, -50%);
       background-color: darkviolet;
+      transform: translate(-50%, -50%);
     }
   }
 

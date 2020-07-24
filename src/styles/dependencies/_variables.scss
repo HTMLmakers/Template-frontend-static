@@ -25,26 +25,33 @@ $body-font-size: $default-font-size;
 
 // Grid
 $enable-grid-classes: false;
-$grid-columns-default: 12;
-$grid-columns: (
-  xs: 6,
-  sm: 6,
-  md: 8,
-  lg: 12,
-  xl: 12,
+$grid-columns-12: 12;
+$grid-columns-6: 6;
+$grid-columns: $grid-columns-12;
+$grid-gutter-width: 32px;
+$grid-columns-map: (
+  xs: $grid-columns-6,
+  sm: $grid-columns-6,
+  md: $grid-columns-6,
+  lg: $grid-columns-12,
+  xl: $grid-columns-12,
 );
-$grid-gutter-width: (
+$grid-gutter-width-map: (
   xs: 16px,
   sm: 16px,
   md: 32px,
   lg: 16px,
   xl: 32px,
 );
+
+// TODO: have to finish it soon
 $layout-gutter-widths: (
-  xs: 32px - map-get($grid-gutter-width, xs),
-  sm: 32px - map-get($grid-gutter-width, sm),
-  md: 64px - map-get($grid-gutter-width, md),
+  xs: 32px - map-get($grid-gutter-width-map, xs),
+  sm: 32px - map-get($grid-gutter-width-map, sm),
+  md: 64px - map-get($grid-gutter-width-map, md),
 );
+
+
 $grid-breakpoints: (
   xs: 0,
   sm: 320px,
@@ -56,13 +63,12 @@ $grid-breakpoints: (
 $container-max-widths: (
   // Desktop-only version
   //  sm: 1200px
-
   // Responsive version
-  xs: 272px + map-get($grid-gutter-width, xs),
+  xs: 272px + map-get($grid-gutter-width-map, xs),
   sm: 100%,
-  md: 624px + map-get($grid-gutter-width, md),
-  lg: 880px + map-get($grid-gutter-width, lg),
-  xl: 1168px + map-get($grid-gutter-width, xl)
+  md: 624px + map-get($grid-gutter-width-map, md),
+  lg: 880px + map-get($grid-gutter-width-map, lg),
+  xl: 1168px + map-get($grid-gutter-width-map, xl)
 );
 
 // Popups

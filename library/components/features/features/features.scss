@@ -28,7 +28,7 @@
   }
 
   &__list {
-    @include make-row(100px);
+    @include make-row();
 
     position: relative;
     //display: flex;
@@ -38,8 +38,8 @@
   }
 
   &__item {
-    //@include make-col-ready(50px);
-    @include make-col(33.33, 100);
+    //@include make-col-ready();
+    @include make-col(4);
 
     margin-bottom: 50px;
   }

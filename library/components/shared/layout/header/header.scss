@@ -44,8 +44,8 @@
 
     @include make-col(2);
 
-    @include media-breakpoint-down(sm) {
-      @include make-col(2, 6);
+    @include media-breakpoint-down(md) {
+      @include make-col(2, $grid-columns-6);
     }
 
     background-color: green;
@@ -60,8 +60,8 @@
   &__component-name3 {
     @include make-col(3);
 
-    @include media-breakpoint-down(sm) {
-      @include make-col(2, 6);
+    @include media-breakpoint-down(md) {
+      @include make-col(2, $grid-columns-6);
     }
 
     background-color: blue;
@@ -69,14 +69,10 @@
   }
 
   &__component-name4 {
-    @include make-col-fix(px-to-rem(300px));
+    @include make-col-fix(px-to-rem(350px));
 
     @include media-breakpoint-down(md) {
-      @include make-col(12);
-    }
-
-    @include media-breakpoint-down(sm) {
-      @include make-col(6, 6);
+      @include make-col(6, $grid-columns-6);
     }
 
     background-color: red;
@@ -88,8 +84,8 @@
       @include make-col(12);
     }
 
-    @include media-breakpoint-down(sm) {
-      @include make-col(6, 6);
+    @include media-breakpoint-down(md) {
+      @include make-col(6, $grid-columns-6);
     }
 
     background-color: aqua;
