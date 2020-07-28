@@ -17,8 +17,8 @@
   transition: transform ease-out 0.2s;
 
   &__container {
-    @include make-container();
-    @include make-container-max-widths();
+    @include make-container-with-sides();
+    @include make-container-with-sides-max-widths();
   }
 
   &__row {

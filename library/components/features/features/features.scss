@@ -11,8 +11,8 @@
   padding-bottom: 0;
 
   &__container {
-    //@include make-container-max-widths();
-    //@include make-container-with-layout-gutter();
+    //@include make-container-with-sides();
+    //@include make-container-with-sides-max-widths();
   }
 
   &__header {

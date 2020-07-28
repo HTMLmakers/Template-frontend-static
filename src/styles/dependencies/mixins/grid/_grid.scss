@@ -14,13 +14,13 @@
   @if $gutter == $grid-gutter-width {
     @each $breakpoint, $gutter in $grid-gutter-width-map {
       @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-        padding-right: calc(#{$gutter} / 2);
-        padding-left: calc(#{$gutter} / 2);
+        padding-right: $gutter / 2;
+        padding-left: $gutter / 2;
       }
     }
   } @else {
-    padding-right: calc(#{$gutter} / 2);
-    padding-left: calc(#{$gutter} / 2);
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
   }
 }
 
@@ -28,16 +28,24 @@
 @mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
   @each $breakpoint, $container-max-width in $max-widths {
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      max-width: $container-max-width;
+      max-width: calc(#{$container-max-width} + #{#{map-get($grid-gutter-width-map, $breakpoint)}});
     }
   }
 }
 
-// For each breakpoint, define the layout gutter for container
-@mixin make-container-with-layout-gutter($gutters: $layout-gutter-widths, $breakpoints: $grid-breakpoints) {
-  @each $breakpoint, $layout-gutter-width in $gutters {
+// For each breakpoint, define the sides for container
+@mixin make-container-with-sides($breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $sides-width in $grid-side-width-map {
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      @include make-container($layout-gutter-width);
+      @include make-container($sides-width);
+    }
+  }
+}
+
+@mixin make-container-with-sides-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      max-width: calc(#{$container-max-width} + #{map-get($grid-side-width-map, $breakpoint)});
     }
   }
 }
@@ -49,13 +57,13 @@
   @if $gutter == $grid-gutter-width {
     @each $breakpoint, $gutter in $grid-gutter-width-map {
       @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-        margin-right: calc(-#{$gutter} / 2);
-        margin-left: calc(-#{$gutter} / 2);
+        margin-right: -($gutter / 2);
+        margin-left: -($gutter / 2);
       }
     }
   } @else {
-    margin-right: calc(-#{$gutter} / 2);
-    margin-left: calc(-#{$gutter} / 2);
+    margin-right: -($gutter / 2);
+    margin-left: -($gutter / 2);
   }
 }
 
@@ -72,13 +80,13 @@
   @if $gutter == $grid-gutter-width {
     @each $breakpoint, $gutter in $grid-gutter-width-map {
       @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-        padding-right: calc(#{$gutter} / 2);
-        padding-left: calc(#{$gutter} / 2);
+        padding-right: $gutter / 2;
+        padding-left: $gutter / 2;
       }
     }
   } @else {
-    padding-right: calc(#{$gutter} / 2);
-    padding-left: calc(#{$gutter} / 2);
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
   }
 }
 
@@ -86,10 +94,10 @@
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
-  flex-basis: calc(#{percentage(($size / $columns))});
+  flex-basis: percentage($size / $columns);
   flex-grow: 0;
   flex-shrink: 0;
-  max-width: calc(#{percentage(($size / $columns))});
+  max-width: percentage($size / $columns);
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {

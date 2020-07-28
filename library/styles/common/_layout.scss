@@ -11,9 +11,9 @@
   min-width: map-get($container-max-widths, xs);
 
   &__base-container {
-    @include make-container();
-    @include make-container-max-widths();
-    //@include make-container-with-layout-gutter();
+    @include make-container-with-sides();
+    @include make-container-with-sides-max-widths();
+    //@include make-container-with-sides();
 
     display: flex;
     flex-direction: column;
