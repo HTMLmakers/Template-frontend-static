@@ -3,23 +3,6 @@
   @return ($size / $font-size) * 1rem;
 }
 
-// Math
-@function sum($numbers...) {
-  $sum: 0;
-  @each $number in $numbers {
-    $sum: $sum + $number;
-  }
-  @return $sum;
-}
-
-@function subtract($numbers...) {
-  $subtraction: 0;
-  @each $number in $numbers {
-    $subtraction: $subtraction - $number;
-  }
-  @return $subtraction;
-}
-
 // Other
 @function strip-unit($number) {
   @if type-of($number) == "number" and not unitless($number) {
