@@ -27,8 +27,8 @@
   }
 
   &__container {
-    @include make-container();
-    @include make-container-max-widths();
+    @include make-container-with-sides();
+    @include make-container-with-sides-max-widths();
 
     display: flex;
     flex-direction: column;
@@ -43,35 +43,42 @@
 
   &__col {
     @include make-col-ready();
-
-    padding: 5px;
   }
 
   &__component-name1 {
     background-color: green;
+    background-clip: content-box;
   }
 
   &__component-name2 {
     background-color: yellow;
+    background-clip: content-box;
   }
 
   &__component-name3 {
     background-color: blue;
+    background-clip: content-box;
   }
 
   &__component-name4 {
+    @include make-col(2);
+
     @include media-breakpoint-down(md) {
-      @include make-col(100, 100);
+      @include make-col(4, $grid-columns-6);
     }
 
     background-color: red;
+    background-clip: content-box;
   }
 
   &__component-name5 {
+    @include make-col(10);
+
     @include media-breakpoint-down(md) {
-      @include make-col(100, 100);
+      @include make-col(4, $grid-columns-6);
     }
 
     background-color: aqua;
+    background-clip: content-box;
   }
 }

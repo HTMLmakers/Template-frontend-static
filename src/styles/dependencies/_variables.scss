@@ -3,10 +3,10 @@
 // =============================================================================
 
 // Colors
-$white:          #fff;
-$black:          #000;
+$white: #fff;
+$black: #000;
 
-$bright-red:     #a60002;
+$bright-red: #a60002;
 
 // Fonts
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
@@ -24,33 +24,52 @@ $body-font-family: $secure-fonts;
 $body-font-size: $default-font-size;
 
 // Grid
-$enable-grid-classes: true;
-$grid-columns: 100;
+$enable-grid-classes: false;
+$grid-columns-12: 12;
+$grid-columns-6: 6;
+$grid-columns: $grid-columns-12;
 $grid-gutter-width: 32px;
+$grid-gutter-width-small: 16px;
+$grid-side-width: 192px;
 
-$layout-gutter-widths: (
-  sm: px-to-rem(30px - $grid-gutter-width),
-  xl: px-to-rem(60px - $grid-gutter-width),
+$grid-columns-map: (
+  xs: $grid-columns-6,
+  sm: $grid-columns-6,
+  md: $grid-columns-6,
+  lg: $grid-columns-12,
+  xl: $grid-columns-12,
 );
-
+$grid-gutter-width-map: (
+  xs: $grid-gutter-width-small,
+  sm: $grid-gutter-width-small,
+  md: $grid-gutter-width,
+  lg: $grid-gutter-width-small,
+  xl: $grid-gutter-width,
+);
+$grid-side-width-map: (
+  xs: 48px,
+  sm: 48px,
+  md: 96px,
+  lg: 120px,
+  xl: 192px,
+);
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
+  sm: 320px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px
+  lg: 1024px,
+  xl: 1440px,
+  xxl: 1920px
 );
-
-// Desktop-only version
-//$container-max-widths: (
-//  sm: 1200px
-//);
-
-// Responsive version
 $container-max-widths: (
-  xs: 320px + $grid-gutter-width,
-  sm: 520px + $grid-gutter-width,
-  xl: 1000px + $grid-gutter-width
+  // Desktop-only version
+  //  sm: 1200px
+  // Responsive version
+  xs: 272px,
+  sm: 100%,
+  md: 624px,
+  lg: 880px,
+  xl: 1168px
 );
 
 // Popups

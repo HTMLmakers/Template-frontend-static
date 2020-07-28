@@ -11,9 +11,9 @@
   min-width: map-get($container-max-widths, xs);
 
   &__base-container {
-    @include make-container();
-    //@include make-container-max-widths();
-    //@include make-container-with-layout-gutter();
+    @include make-container-with-sides();
+    @include make-container-with-sides-max-widths();
+    //@include make-container-with-sides();
 
     display: flex;
     flex-direction: column;
@@ -35,6 +35,7 @@
 
   &__header {
     min-height: px-to-rem(150px);
+    margin-bottom: px-to-rem(24px);
   }
 
   &__footer {
@@ -43,10 +44,11 @@
 
   &__add {
     min-height: auto;
+    margin-bottom: px-to-rem(24px);
   }
 
   &__base {
-
+    margin-bottom: px-to-rem(24px);
   }
 
   &__section {
@@ -60,26 +62,37 @@
   }
 
   &__headline {
-
+    margin-bottom: px-to-rem(24px);
   }
 
   &__main {
     @include make-col-ready();
+
+    background-color: peachpuff;
+    background-clip: content-box;
   }
 
   &__sidebar-primary {
-    @include make-col-fix(px-to-rem(300px));
+    @include make-col(3);
 
     @include media-breakpoint-down(lg) {
-      @include make-col(100, 100);
+      @include make-col(12);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include make-col(6, $grid-columns-6);
     }
   }
 
   &__sidebar-secondary {
-    @include make-col(30, 100);
+    @include make-col(2);
 
     @include media-breakpoint-down(lg) {
-      @include make-col(100, 100);
+      @include make-col(12);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include make-col(6, $grid-columns-6);
     }
   }
 

@@ -1,3 +1,6 @@
+// THIS BOOTSTRAP GRID SYSTEM IS UPDATED BY HTMLMAKERS (htmlmakers.com)
+// ADDED COLUMNS AND GUTTER WIDTHS DEPENDS ON BREAKPOINTS
+
 /// Grid system
 //
 // Generate semantic grid columns with these mixins.
@@ -7,24 +10,42 @@
   min-height: inherit;
   margin-right: auto;
   margin-left: auto;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+
+  @if $gutter == $grid-gutter-width {
+    @each $breakpoint, $gutter in $grid-gutter-width-map {
+      @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+        padding-right: $gutter / 2;
+        padding-left: $gutter / 2;
+      }
+    }
+  } @else {
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+  }
 }
 
 // For each breakpoint, define the maximum width of the container in a media query
 @mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
   @each $breakpoint, $container-max-width in $max-widths {
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      max-width: $container-max-width;
+      max-width: calc(#{$container-max-width} + #{map-get($grid-gutter-width-map, $breakpoint)});
     }
   }
 }
 
-// For each breakpoint, define the layout gutter for container
-@mixin make-container-with-layout-gutter($gutters: $layout-gutter-widths, $breakpoints: $grid-breakpoints) {
-  @each $breakpoint, $layout-gutter-width in $gutters {
+// For each breakpoint, define the sides for container
+@mixin make-container-with-sides($breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $sides-width in $grid-side-width-map {
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      @include make-container($layout-gutter-width);
+      @include make-container($sides-width);
+    }
+  }
+}
+
+@mixin make-container-with-sides-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      max-width: calc(#{$container-max-width} + #{map-get($grid-side-width-map, $breakpoint)});
     }
   }
 }
@@ -32,8 +53,18 @@
 @mixin make-row($gutter: $grid-gutter-width) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: calc(-#{$gutter} / 2);
-  margin-left: calc(-#{$gutter} / 2);
+
+  @if $gutter == $grid-gutter-width {
+    @each $breakpoint, $gutter in $grid-gutter-width-map {
+      @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+        margin-right: -($gutter / 2);
+        margin-left: -($gutter / 2);
+      }
+    }
+  } @else {
+    margin-right: -($gutter / 2);
+    margin-left: -($gutter / 2);
+  }
 }
 
 @mixin make-col-ready($gutter: $grid-gutter-width) {
@@ -45,28 +76,39 @@
   flex-grow: 1;
   width: 100%;
   max-width: 100%;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+
+  @if $gutter == $grid-gutter-width {
+    @each $breakpoint, $gutter in $grid-gutter-width-map {
+      @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+        padding-right: $gutter / 2;
+        padding-left: $gutter / 2;
+      }
+    }
+  } @else {
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+  }
 }
 
-@mixin make-col($size, $columns: $grid-columns, $gutter: 0px) {
-  flex-basis: calc(#{percentage(($size / $columns))} - #{$gutter});
-  flex-grow: 0;
-  flex-shrink: 0;
+@mixin make-col($size, $columns: $grid-columns) {
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
-  max-width: calc(#{percentage(($size / $columns))} - #{$gutter});
+  flex-basis: percentage($size / $columns);
+  flex-grow: 0;
+  flex-shrink: 0;
+  max-width: percentage($size / $columns);
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
   $num: $size / $columns;
+
   margin-left: if($num == 0, 0, percentage($num));
 }
 
-@mixin make-col-fix($size, $gutter: 0px) {
-  flex-basis: calc(#{$size} - #{$gutter});
+@mixin make-col-fix($size) {
+  flex-basis: $size;
   flex-grow: 0;
   flex-shrink: 0;
-  width: calc(#{$size} - #{$gutter});
+  width: $size;
 }

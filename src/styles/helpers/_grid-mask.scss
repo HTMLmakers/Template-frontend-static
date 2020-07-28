@@ -1,0 +1,49 @@
+@mixin make-grid-mask($max-width, $columns: $grid-columns, $gutter: $grid-gutter-width, $sides: $grid-side-width) {
+  $color-column: rgba(#fff5f5, 0.5);
+
+  max-width: calc(#{$max-width} + #{$sides});
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(#{$gutter} / 2),
+      $color-column calc(#{$gutter} / 2),
+      $color-column calc((100% / #{$columns}) - (#{$gutter} / 2)),
+      transparent calc((100% / #{$columns}) - (#{$gutter} / 2)),
+      transparent calc((100% / #{$columns}))
+    );
+  border-width: 0 calc(#{$sides / 2} - #{$gutter / 2});
+}
+
+.layout {
+  position: relative;
+
+  &::before {
+    @each $breakpoint, $max-width in $container-max-widths {
+      @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+        @include make-grid-mask(
+          $max-width,
+          map-get($grid-columns-map, $breakpoint),
+          map-get($grid-gutter-width-map, $breakpoint),
+          // If you need to use sides, use default side-width-map - $grid-side-width-map
+          map-get($grid-side-width-map, $breakpoint)
+          // If you donn't need to use sides, use gutter-width-map - $grid-gutter-width-map
+          // map-get($grid-gutter-width-map, $breakpoint),
+        );
+      }
+    }
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    margin: auto;
+    background-repeat: no-repeat;
+    border-color: transparent;
+    border-style: solid;
+    content: "";
+    pointer-events: none;
+  }
+}

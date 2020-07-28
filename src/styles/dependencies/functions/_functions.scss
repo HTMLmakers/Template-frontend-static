@@ -1,9 +1,9 @@
-// Перевод пикселей в rem
-@function px-to-rem ($size, $font-size: $default-font-size) {
+// Unit transform
+@function px-to-rem($size, $font-size: $default-font-size) {
   @return ($size / $font-size) * 1rem;
 }
 
-//
+// Other
 @function strip-unit($number) {
   @if type-of($number) == "number" and not unitless($number) {
     @return $number / ($number * 0 + 1);
