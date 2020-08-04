@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Ui-kit elements -- icons
+   ========================================================================== */
+
+/*
+   Default styles
+   -------------------------------------------------------------------------- */
+
+svg {
+
+}
+
+/*
+   Established styles
+   -------------------------------------------------------------------------- */
+
+/* Icons-svg */
+
+.icon-svg {
+  background-color: cyan;
+
+  &--disabled {
+
+  }
+
+  svg {
+    @include picture-fluid-position;
+
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+  &--size-xxxl {
+    @include icon--size-xxxl;
+  }
+
+  &--size-xxl {
+    @include icon--size-xxl;
+  }
+
+  &--size-xl {
+    @include icon--size-xl;
+  }
+
+  &--size-l {
+    @include icon--size-l;
+  }
+
+  &--size-m {
+    @include icon--size-m;
+  }
+
+  &--size-s {
+    @include icon--size-s;
+  }
+
+  &--size-xs {
+    @include icon--size-xs;
+  }
+}
+
+/* Icons-svg */
+
+.icon-png {
+  position: relative;
+  text-indent: -9999px;
+  background-color: cyan;
+
+  &::after {
+    @include picture-centring-position;
+    @include picture-fluid-position;
+
+    background-color: darkviolet;
+    border-radius: 50%;
+    content: "";
+  }
+
+  &--disabled {
+
+  }
+
+  //&--name {
+  //
+  //  &::after {
+  //    //@include sprite($icon-instagram);
+  //  }
+  //}
+
+  // ----------------------------------------
+
+  // sizes
+  &--size-xxxl {
+    @include icon--size-xxxl;
+  }
+
+  &--size-xxl {
+    @include icon--size-xxl;
+  }
+
+  &--size-xl {
+    @include icon--size-xl;
+  }
+
+  &--size-l {
+    @include icon--size-l;
+  }
+
+  &--size-m {
+    @include icon--size-m;
+  }
+
+  &--size-s {
+    @include icon--size-s;
+  }
+
+  &--size-xs {
+    @include icon--size-xs;
+  }
+}
