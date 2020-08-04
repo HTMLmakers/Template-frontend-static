@@ -3,5 +3,4 @@
 .idea/
 /dev
 /build
-/library/dist
 ./**/*.sass-cache
