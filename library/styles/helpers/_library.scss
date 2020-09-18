@@ -168,15 +168,6 @@
 
   &__col {
     @include make-col-ready(px-to-rem(30px));
-    @include make-col(4);
-
-    &--colors {
-      @include make-col(3);
-    }
-
-    &--icons {
-      @include make-col(14, 100);
-    }
   }
 
   &__heading {
