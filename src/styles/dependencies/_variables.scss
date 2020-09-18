@@ -2,28 +2,54 @@
 // Constants
 // =============================================================================
 
+//
 // Colors
-$white: #fff;
-$black: #000;
+// -----------------------------------------------------------------------------
 
-$bright-red: #a60002;
+// Colors Default
+$white:          #fff;
+$black:          #000;
 
+// Colors Brand
+$bright-red:     #a60002;
+
+// Colors Gray
+$silver:   #c0c0c0;
+
+// Colors Additional
+
+//
 // Fonts
+// -----------------------------------------------------------------------------
+
+// Fonts Secure
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
+
+// Fonts Brand
 $font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
+
+// Font size default
 $default-font-size: 16px;
 
 // =============================================================================
 // Variables
 // =============================================================================
 
-// body
+//
+// Body
+// -----------------------------------------------------------------------------
+
+// Grid Variables
 $body-bg: $white;
 $body-color: $black;
 $body-font-family: $secure-fonts;
 $body-font-size: $default-font-size;
 
+//
 // Grid
+// -----------------------------------------------------------------------------
+
+// Grid Variables
 $enable-grid-classes: false;
 $grid-columns-12: 12;
 $grid-columns-6: 6;
@@ -32,27 +58,7 @@ $grid-gutter-width: 32px;
 $grid-gutter-width-small: 16px;
 $grid-side-width: 192px;
 
-$grid-columns-map: (
-  xs: $grid-columns-6,
-  sm: $grid-columns-6,
-  md: $grid-columns-6,
-  lg: $grid-columns-12,
-  xl: $grid-columns-12,
-);
-$grid-gutter-width-map: (
-  xs: $grid-gutter-width-small,
-  sm: $grid-gutter-width-small,
-  md: $grid-gutter-width,
-  lg: $grid-gutter-width-small,
-  xl: $grid-gutter-width,
-);
-$grid-side-width-map: (
-  xs: 48px,
-  sm: 48px,
-  md: 96px,
-  lg: 120px,
-  xl: 192px,
-);
+// Grid Breakpoints
 $grid-breakpoints: (
   xs: 0,
   sm: 320px,
@@ -61,9 +67,36 @@ $grid-breakpoints: (
   xl: 1440px,
   xxl: 1920px
 );
+
+// Grid maps
+$grid-columns-map: (
+  xs: $grid-columns-6,
+  sm: $grid-columns-6,
+  md: $grid-columns-6,
+  lg: $grid-columns-12,
+  xl: $grid-columns-12,
+);
+
+$grid-gutter-width-map: (
+  xs: $grid-gutter-width-small,
+  sm: $grid-gutter-width-small,
+  md: $grid-gutter-width,
+  lg: $grid-gutter-width-small,
+  xl: $grid-gutter-width,
+);
+
+$grid-side-width-map: (
+  xs: 48px,
+  sm: 48px,
+  md: 96px,
+  lg: 120px,
+  xl: 192px,
+);
+
 $container-max-widths: (
   // Desktop-only version
   //  sm: 1200px
+
   // Responsive version
   xs: 272px,
   sm: 100%,
@@ -72,7 +105,11 @@ $container-max-widths: (
   xl: 1168px
 );
 
+//
 // Popups
+// -----------------------------------------------------------------------------
+
+// Popups Variables
 $popup-overlay-bg: $black;
 $popup-overlay-opacity: 0.8;
 $popup-width: 800px;

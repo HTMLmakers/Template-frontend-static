@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Ui-kit elements -- icons
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+svg {
+
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+// Extends, mixins
+
+%icon-disabled {
+  opacity: 0.5;
+
+  &::after {
+    opacity: 0.5;
+  }
+
+  &:hover {
+
+  }
+}
+
+/* ----- Icons-svg */
+
+.icon-svg {
+  flex-grow: 0;
+  flex-shrink: 0;
+  background-color: cyan;
+
+  &--disabled {
+    @extend %icon-disabled;
+  }
+
+  svg {
+    @include picture-fluid-position;
+
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+  &--size-xxxl {
+    @include icon--size-xxxl;
+  }
+
+  &--size-xxl {
+    @include icon--size-xxl;
+  }
+
+  &--size-xl {
+    @include icon--size-xl;
+  }
+
+  &--size-l {
+    @include icon--size-l;
+  }
+
+  &--size-m {
+    @include icon--size-m;
+  }
+
+  &--size-s {
+    @include icon--size-s;
+  }
+
+  &--size-xs {
+    @include icon--size-xs;
+  }
+}
+
+/* ----- Icons-png */
+
+.icon-png {
+  position: relative;
+  text-indent: -9999px;
+  background-color: cyan;
+
+  &::after {
+    @include picture-centring-position;
+    @include picture-fluid-position;
+
+    background-color: darkviolet;
+    border-radius: 50%;
+    content: "";
+  }
+
+  &--disabled {
+    @extend %icon-disabled;
+  }
+
+  //&--name {
+  //
+  //  &::after {
+  //    //@include sprite($icon-instagram);
+  //  }
+  //}
+
+  // ----------------------------------------
+
+  // sizes
+  &--size-xxxl {
+    @include icon--size-xxxl;
+  }
+
+  &--size-xxl {
+    @include icon--size-xxl;
+  }
+
+  &--size-xl {
+    @include icon--size-xl;
+  }
+
+  &--size-l {
+    @include icon--size-l;
+  }
+
+  &--size-m {
+    @include icon--size-m;
+  }
+
+  &--size-s {
+    @include icon--size-s;
+  }
+
+  &--size-xs {
+    @include icon--size-xs;
+  }
+}

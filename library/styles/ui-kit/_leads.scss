@@ -1,29 +1,44 @@
 /* ==========================================================================
-   Ui-kit component -- lead
+   Ui-kit component -- leads
    ========================================================================== */
 
+/* Established styles
+   -------------------------------------------------------------------------- */
+
 .lead {
-  $root: &;
   //@include media-breakpoint-down(md) {}
 
   position: relative;
-  padding-bottom: 10px;
 
   &::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 200px;
-    height: 5px;
     background-color: $black;
     content: "";
   }
 
   &__heading {
-    margin: 0 0 20px 0;
+    margin-bottom: px-to-rem(20px);
   }
 
   &__desc {
     margin: 0;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include lead--size-l;
+  }
+
+  &--size-m {
+    @include lead--size-m;
+  }
+
+  &--size-s {
+    @include lead--size-s;
   }
 }

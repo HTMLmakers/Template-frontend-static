@@ -1,0 +1,178 @@
+/* ==========================================================================
+   Ui-kit component -- lists
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+
+  ul,
+  ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+  }
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+/* Extends, mixins */
+
+%list {
+  font-family: inherit;
+
+  li {
+    margin-bottom: px-to-rem(10px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* ----- Unordered list */
+
+.list {
+  @extend %list;
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include list--size-l;
+  }
+
+  &--size-m {
+    @include list--size-m;
+  }
+
+  &--size-s {
+    @include list--size-s;
+  }
+}
+
+/* ----- Ordered list */
+
+.numlist {
+  @extend %list;
+
+  &--stylized-marker {
+    counter-reset: li;
+
+    > li {
+      position: relative;
+      padding-left: px-to-rem(35px);
+      list-style: none;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: px-to-rem(24px);
+        height: px-to-rem(24px);
+        color: $white;
+        background-color: $black;
+        content: counter(li);
+        counter-increment: li;
+      }
+    }
+
+    li {
+
+      span {
+        display: flex;
+        align-items: center;
+        min-height: px-to-rem(24px);
+      }
+    }
+
+    ol {
+      margin-left: 1em;
+    }
+  }
+
+  &--stylized-numbering {
+    counter-reset: li;
+
+    > li {
+      list-style: none;
+
+      &::before {
+        display: inline-block;
+        content: counters(li, ".") ".";
+        counter-increment: li;
+      }
+    }
+
+    li {
+
+      span {
+        padding-left: px-to-rem(4px);
+      }
+    }
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include numlist--size-l;
+  }
+
+  &--size-m {
+    @include numlist--size-m;
+  }
+
+  &--size-s {
+    @include numlist--size-s;
+  }
+}
+
+/* ----- Description list */
+
+.desclist {
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-bottom: px-to-rem(24px);
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include desclist--size-l;
+  }
+
+  &--size-m {
+    @include desclist--size-m;
+  }
+
+  &--size-s {
+    @include desclist--size-s;
+  }
+}

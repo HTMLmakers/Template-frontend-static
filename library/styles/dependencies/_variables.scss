@@ -4,13 +4,15 @@
 
 // Colors library
 $turbo:     #fbe601;
+$gray:      #808080;
+$gallery:   #eaeaea;
 
 // Fonts library
 $font-incised-bold: Incised-bold, $secure-fonts;
 $font-geoslab-regular: GeoSlab-regular, $secure-fonts;
 
 // Fonts size library
-$default-font-size-library: 16px;
+$default-font-size: 14px;
 
 // =============================================================================
 // Variables library
@@ -21,4 +23,7 @@ $body-bg-library: $turbo;
 $body-bg-inner-library: $white;
 $body-color-library: $black;
 $body-font-family-library: $secure-fonts;
-$body-font-size-library: $default-font-size-library;
+$body-font-size-library: $default-font-size;
+
+// Grid Variables
+$enable-grid-classes: true;
