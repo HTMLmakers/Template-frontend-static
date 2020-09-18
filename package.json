@@ -65,6 +65,7 @@
     "jquery": "^3.5.1",
     "jquery-migrate": "^3.3.1",
     "jquery-ui-dist": "^1.12.1",
+    "jquery-validation": "^1.19.2",
     "ngrok": "^3.2.5",
     "node-sass": "^4.14.1",
     "path": "^0.12.7",
@@ -76,5 +77,8 @@
     "stylelint-config-standard": "^19.0.0",
     "stylelint-order": "^3.1.1",
     "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "selectize": "^0.12.6"
   }
 }
