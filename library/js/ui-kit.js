@@ -2,3 +2,6 @@
 @include('./js/ui-kit/slider.js')
 @include('./js/ui-kit/carusel.js')
 @include('./js/ui-kit/go-to-section.js')
+@include('./js/ui-kit/form-placeholderl.js')
+@include('./js/ui-kit/form-validation.js')
+@include('./js/ui-kit/custom-select.js')

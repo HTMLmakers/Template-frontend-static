@@ -3,3 +3,5 @@
 @include('../node_modules/jquery-migrate/dist/jquery-migrate.min.js')
 @include('../node_modules/slick-carousel/slick/slick.min.js')
 @include('../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js')
+@include('../node_modules/jquery-validation/dist/jquery.validate.min.js')
+@include('../node_modules/selectize/dist/js/standalone/selectize.min.js')

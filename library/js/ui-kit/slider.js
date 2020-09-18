@@ -5,7 +5,7 @@
       dots: true,
       fade: true,
       speed: 2000,
-      autoplay: true
+      autoplay: true,
     },
     // 'slider-name-1': {
     //   dots: false,
