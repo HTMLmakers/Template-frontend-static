@@ -1,10 +1,9 @@
 /* ==========================================================================
-   Ui-kit component -- Lists
+   Ui-kit component -- lists
    ========================================================================== */
 
-//
-// Default styles
-// --------------------------------------------------------------------------
+/* Default styles
+   -------------------------------------------------------------------------- */
 
 ul,
 ol {
@@ -29,11 +28,10 @@ dl {
   }
 }
 
-//
-// Established styles
-// --------------------------------------------------------------------------
+/* Established styles
+   -------------------------------------------------------------------------- */
 
-// Extends, mixins
+/* Extends, mixins */
 
 %list {
   font-family: inherit;
@@ -47,7 +45,7 @@ dl {
   }
 }
 
-// Unordered list
+/* ----- Unordered list */
 
 .list {
   @extend %list;
@@ -69,7 +67,7 @@ dl {
   }
 }
 
-// Ordered list
+/* ----- Ordered list */
 
 .numlist {
   @extend %list;
@@ -149,6 +147,8 @@ dl {
     @include numlist--size-s;
   }
 }
+
+/* ----- Description list */
 
 .desclist {
 

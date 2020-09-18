@@ -1,75 +1,426 @@
 /* ==========================================================================
-   Ui-kit component -- form
+   Ui-kit component -- form > layout
    ========================================================================== */
 
-/*
-   Form layout
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+form {
+
+}
+
+/* Established styles
    -------------------------------------------------------------------------- */
 
 .form {
-  $root: &;
+  $root: ".form ";
   //@include media-breakpoint-down(md) {}
 
+  padding: 10px;
   background-color: aquamarine;
 
-  &__container {
-
-  }
-
   &__row {
-    @include make-row();
+    @include make-row(px-to-rem(24px));
+
+    margin-bottom: px-to-rem(24px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__col {
-    @include make-col-ready();
+    @include make-col-ready(px-to-rem(24px));
+
+    background-color: white;
+    background-clip: content-box;
+  }
+
+  &__col-7 {
+    @include make-col(5);
+  }
+
+  &__col-8 {
+    @include make-col(4);
+  }
+
+  &__col-9 {
+    @include make-col(3);
   }
 }
 
-/*
-   Form elements
+/* ==========================================================================
+   Ui-kit component -- form > elements
+   ========================================================================== */
+
+/* Default styles
    -------------------------------------------------------------------------- */
 
-%field-text {
-  display: block;
-  width: 100%;
-  padding: 5px 10px;
-  border: 1px solid silver;
-  resize: none;
+input {
+
 }
 
-@include placeholder {
+textarea {
+
+}
+
+select {
+
+}
+
+input[type="checkbox"] {
+
+}
+
+input[type="radio"] {
+
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+// Extends, mixins
+
+// Mixins
+
+@mixin field-placeholder {
   color: $black;
   font-family: $secure-fonts;
   font-style: italic;
+  opacity: 1;
+  transition: all 0.3s;
 }
 
-.form-field {
-  flex-grow: 1;
-  color: $black;
-  font-family: $secure-fonts;
+@mixin field-placeholder-active {
+  transform: translate(100%, -50%);
+  opacity: 0;
+}
 
-  &__text {
+// Extends
+
+%field {
+  border: 1px solid silver;
+}
+
+%field-text {
+  @include placeholder {
+    @include field-placeholder;
+  }
+
+  width: 100%;
+  //height: px-to-rem(32px);
+  //padding: 2px 10px;
+  color: $black;
+  border-radius: 0;
+  transition: all 0.2s;
+  //appearance: none;
+  resize: none;
+
+  &:hover {
+    @include placeholder {
+
+    }
+  }
+
+  &:focus,
+  &:focus:hover {
+
+    @include placeholder {
+
+    }
+
+    outline: none;
+  }
+
+  &:-webkit-autofill {
+    display: none;
+    background: none;
+    border: 0;
+    box-shadow: 0 0 0 0 red inset;
+    transition-delay: 0s;
+  }
+}
+
+// --------------------------------------------------
+
+/* ----- Form field  */
+
+.form-field {
+  $root: ".form-field";
+
+  position: relative;
+  user-select: none;
+
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  &__input,
+  &__textarea {
+    @extend %field;
+    @extend %field-text;
+  }
+
+  &__input {
+    @extend %field-text;
+  }
+
+  &__textarea {
+    @extend %field-text;
+  }
+
+  &__select {
     @extend %field-text;
   }
 
   &__checkbox {
-
+    @extend %field-text;
   }
 
   &__radio {
-
+    @extend %field-text;
   }
 
-  &__label {
-    display: inline-block;
-    margin-bottom: 5px;
+  &__custom-placeholder {
+    @include field-placeholder;
+
+    position: absolute;
+    top: 50%;
+    left: px-to-rem(10px);
+    transform: translate(0, -50%);
+    pointer-events: none;
   }
 
-  &__placeholder {
+  &__custom-toggle {
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s;
 
+    &::before {
+      //@extend %field-toggle;
+
+      display: inline-block;
+      width: px-to-rem(32px);
+      height: px-to-rem(32px);
+      margin-right: 0.5em;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+      transition: all 0.2s;
+      content: "";
+    }
+  }
+
+  &__message,
+  &__info {
+    display: block;
+    margin-top: px-to-rem(8px);
+    font-size: px-to-rem(12px);
   }
 
   &__message {
 
+
+    &--error {
+      color: red;
+    }
+
+    &--success {
+      color: green;
+    }
+  }
+
+  &__info {
+    color: grey;
+  }
+
+  // состояния полей формы
+
+  &--is-focused {
+    input:-webkit-autofill {
+      background: none;
+      border: 0;
+      box-shadow: 0 0 0 0px red inset;
+      transition-delay: 0s;
+      display: none;
+    }
+  }
+
+  &--is-filled {
+
+  }
+
+  &--is-focused,
+  &--is-filled {
+
+    #{$root}__custom-placeholder {
+      transform: translate(100%, -50%);
+      opacity: 0;
+    }
+  }
+
+  // виды полей формы
+
+  &--input {
+
+  }
+
+  &--textarea {
+
+    textarea {
+      min-height: px-to-rem(96px);
+      padding-top: px-to-rem(8px);
+    }
+  }
+
+  &--select {
+
+    #{$root}__area {
+      position: unset;
+      width: unset;
+      height: unset;
+      padding: 0;
+      border-width: 0;
+    }
+  }
+
+  &--file-upload {
+
+    #{$root}__label > #{$root}__file-upload {
+      display: none;
+    }
+
+    #{$root}__custom-file-upload {
+      display: inline-block;
+      background-color: #a60002;
+    }
+  }
+
+  &--checkbox,
+  &--radio {
+
+    #{$root}__label {
+      display: inline-block;
+      margin-bottom: 0;
+    }
+
+    #{$root}__area {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+
+      // поведение toggle при наведении (не находящегося в состоянии checked и disabled)
+      &:not(:disabled):not(:checked) {
+        ~ #{$root}__custom-toggle {
+
+          &:hover {
+            color: green;
+
+            &::before {
+              border-color: green;
+            }
+          }
+        }
+      }
+
+      // поведение toggle при нажатии (не находящегося в состоянии disabled)
+      &:not(:disabled):active {
+        ~ #{$root}__custom-toggle {
+
+          &::before {
+            background-color: #b3d7ff;
+            border-color: #b3d7ff;
+          }
+        }
+      }
+
+      // поведение toggle при фокусе
+      &:not(:disabled):focus {
+        ~ #{$root}__custom-toggle {
+
+          &::before {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          }
+        }
+      }
+
+      // поведение toggle при фокусе (не находящегося в состоянии checked)
+      &:not(:disabled):focus:not(:checked) {
+        ~ #{$root}__custom-toggle {
+
+          &::before {
+            border-color: #80bdff;
+          }
+        }
+      }
+
+      // поведение toggle в состоянии checked
+      &:checked {
+        ~ #{$root}__custom-toggle {
+
+          &::before {
+            background-color: #0b76ef;
+            border-color: #0b76ef;
+          }
+        }
+      }
+    }
+  }
+
+  &--checkbox {
+
+    // поведение checkbox в состоянии checked
+    #{$root}__area:checked {
+
+      ~ #{$root}__custom-toggle {
+
+        &::before {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+        }
+      }
+    }
+  }
+
+  &--radio {
+
+    // поведение radio в состоянии checked
+    #{$root}__area:checked {
+
+      ~ #{$root}__custom-toggle {
+
+        &::before {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+        }
+      }
+    }
+
+    #{$root}__custom-toggle {
+
+      &::before {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--checkbox {
+
+    #{$root}--checkbox-size-l {
+      @include button-primary--size-l;
+    }
+
+    &--size-m {
+      @include button-primary--size-m;
+    }
+
+    &--size-s {
+      @include button-primary--size-s;
+    }
   }
 }

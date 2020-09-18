@@ -1,20 +1,18 @@
 /* ==========================================================================
-   Ui-kit component -- Links
+   Ui-kit component -- links
    ========================================================================== */
 
-//
-// Default styles
-// --------------------------------------------------------------------------
+/* Default styles
+   -------------------------------------------------------------------------- */
 
 a {
 
 }
 
-//
-// Established styles
-// --------------------------------------------------------------------------
+/* Established styles
+   -------------------------------------------------------------------------- */
 
-// Extends, mixins
+/* Extends, mixins */
 
 %link {
   font-family: inherit;
@@ -37,7 +35,7 @@ a {
   pointer-events: none;
 }
 
-// Link primary
+/* ----- Link primary */
 
 .link-primary {
   @extend %link;
@@ -71,7 +69,7 @@ a {
   }
 }
 
-// Link secondary
+/* ----- Link secondary */
 
 .link-secondary {
   @extend %link;

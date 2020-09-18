@@ -2,8 +2,7 @@
    Ui-kit elements -- buttons
    ========================================================================== */
 
-/*
-   Default styles
+/* Default styles
    -------------------------------------------------------------------------- */
 
 button {
@@ -13,8 +12,7 @@ button {
   user-select: none;
 }
 
-/*
-   Established styles
+/* Established styles
    -------------------------------------------------------------------------- */
 
 /* Extends, mixins */
@@ -72,7 +70,7 @@ button {
   pointer-events: none;
 }
 
-/* Button-primary */
+/* ----- Button-primary */
 
 .button-primary {
   @extend %button-primary-color;
@@ -102,7 +100,7 @@ button {
   }
 }
 
-/* Button-secondary */
+/* ----- Button-secondary */
 
 .button-secondary {
   @extend %button-secondary-color;
@@ -132,7 +130,7 @@ button {
   }
 }
 
-/* Button-icon */
+/* ----- Button-icon */
 
 .button-icon {
   @extend %button;
@@ -165,7 +163,7 @@ button {
   }
 }
 
-/* Button-complex */
+/* ----- Button-complex */
 
 .button-complex {
   @extend %button;
@@ -220,34 +218,37 @@ button {
   }
 }
 
-/* Button-apps */
+/* ----- Button-apps */
 
 .button-apps {
   @extend %button;
 
   background-color: purple;
 
-  &__content,
-  &__icon {
-    display: flex;
-  }
+  .button-complex {
 
-  &__content {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
+    &__content,
+    &__icon {
+      display: flex;
+    }
 
-  &__icon {
-    align-items: center;
-  }
+    &__content {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
 
-  &__title {
-    white-space: nowrap;
-  }
+    &__icon {
+      align-items: center;
+    }
 
-  &__desc {
+    &__title {
+      white-space: nowrap;
+    }
 
+    &__desc {
+
+    }
   }
 
   &--fullwidth {

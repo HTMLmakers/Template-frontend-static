@@ -2,25 +2,39 @@
    Ui-kit elements -- icons
    ========================================================================== */
 
-/*
-   Default styles
+/* Default styles
    -------------------------------------------------------------------------- */
 
 svg {
 
 }
 
-/*
-   Established styles
+/* Established styles
    -------------------------------------------------------------------------- */
 
-/* Icons-svg */
+// Extends, mixins
+
+%icon-disabled {
+  opacity: 0.5;
+
+  &::after {
+    opacity: 0.5;
+  }
+
+  &:hover {
+
+  }
+}
+
+/* ----- Icons-svg */
 
 .icon-svg {
+  flex-grow: 0;
+  flex-shrink: 0;
   background-color: cyan;
 
   &--disabled {
-
+    @extend %icon-disabled;
   }
 
   svg {
@@ -62,7 +76,7 @@ svg {
   }
 }
 
-/* Icons-svg */
+/* ----- Icons-png */
 
 .icon-png {
   position: relative;
@@ -79,7 +93,7 @@ svg {
   }
 
   &--disabled {
-
+    @extend %icon-disabled;
   }
 
   //&--name {

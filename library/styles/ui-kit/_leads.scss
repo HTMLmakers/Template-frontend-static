@@ -1,23 +1,19 @@
 /* ==========================================================================
-   Ui-kit component -- lead
+   Ui-kit component -- leads
    ========================================================================== */
 
-//
-// Established styles
-// --------------------------------------------------------------------------
+/* Established styles
+   -------------------------------------------------------------------------- */
 
 .lead {
   //@include media-breakpoint-down(md) {}
 
   position: relative;
-  padding-bottom: px-to-rem(10px);
 
   &::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 200px;
-    height: 5px;
     background-color: $black;
     content: "";
   }

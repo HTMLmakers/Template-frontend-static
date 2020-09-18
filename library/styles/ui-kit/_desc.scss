@@ -1,10 +1,9 @@
 /* ==========================================================================
-   Ui-kit component -- Desc
+   Ui-kit component -- desc, captions
    ========================================================================== */
 
-//
-// Default styles
-// --------------------------------------------------------------------------
+/* Default styles
+   -------------------------------------------------------------------------- */
 
 p {
   margin-top: 0;
@@ -13,19 +12,25 @@ p {
   padding-bottom: 0;
 }
 
-//
-// Established styles
-// --------------------------------------------------------------------------
+/* Established styles
+   -------------------------------------------------------------------------- */
 
-.desc {
-  //@include media-breakpoint-down(md) {}
+// Extends, mixins
 
+%desc {
   margin-bottom: 1.5em;
-  font-family: inherit;
 
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+/* ----- Desc */
+
+.desc {
+  //@include media-breakpoint-down(md) {}
+
+  @extend %desc;
 
   // ----------------------------------------
 
@@ -41,5 +46,58 @@ p {
 
   &--size-s {
     @include desc--size-s;
+  }
+}
+
+/* ----- Desc icon */
+
+.desc-icon {
+  @extend %desc;
+  @include desc-icon--size;
+
+  display: flex;
+  align-items: center;
+
+  &__icon {
+
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include desc-icon--size-l;
+  }
+
+  &--size-m {
+    @include desc-icon--size-m;
+  }
+
+  &--size-s {
+    @include desc-icon--size-s;
+  }
+}
+
+/* ----- Captions */
+
+.caption {
+
+  @extend %desc;
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include caption--size-l;
+  }
+
+  &--size-m {
+    @include caption--size-m;
+  }
+
+  &--size-s {
+    @include caption--size-s;
   }
 }
