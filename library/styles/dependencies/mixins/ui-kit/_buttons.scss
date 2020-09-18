@@ -2,6 +2,8 @@
 // Ui-kit mixins -- buttons
 // ==========================================================================
 
+// Common mixins
+
 @mixin button-fullwidth() {
   width: 100%;
 }
@@ -288,10 +290,10 @@ $button-apps--size-l: (
   padding-horizontal: px-to-rem(40px),
   font-size: px-to-rem(16px),
   line-height: 1.76,
-  content-padding-right: px-to-rem(32px),
+  content-padding-right: 0,
   content-padding-left: 0,
   icon-height: px-to-rem(100px),
-  icon-padding-right: 0,
+  icon-padding-right: px-to-rem(16px),
   icon-padding-left: 0,
   title-font-size: px-to-rem(18px),
   title-line-height: 1.76,

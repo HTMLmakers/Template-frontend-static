@@ -1,0 +1,44 @@
+// ==========================================================================
+// Ui-kit mixins -- typography
+// ==========================================================================
+
+//
+// Main text
+// --------------------------------------------------------------------------
+
+// sizes
+@mixin main-text--size-l {
+  font-size: px-to-rem(10px);
+  line-height: 2;
+}
+
+@mixin main-text--size-m {
+
+}
+
+@mixin main-text--size-s {
+
+}
+
+@mixin main-text--size-s-bold {
+  @include main-text--size-s;
+
+  font-weight: bold;
+}
+
+//
+// Captions text
+// --------------------------------------------------------------------------
+
+// sizes
+@mixin caption-text--size-l {
+
+}
+
+@mixin caption-text--size-m {
+
+}
+
+@mixin caption-text--size-s {
+
+}

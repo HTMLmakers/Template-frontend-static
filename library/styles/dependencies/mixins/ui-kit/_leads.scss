@@ -1,0 +1,73 @@
+// ==========================================================================
+// Ui-kit mixins -- leads (complex headings)
+// ==========================================================================
+
+@mixin lead-size($properties) {
+  padding-bottom: map-get($properties, padding-bottom);
+
+  &::after {
+    width: map-get($properties, width-mark);
+    height: map-get($properties, height-mark);
+  }
+
+  &__heading {
+    margin-bottom: map-get($properties, margin-bottom-heading);
+    font-size: map-get($properties, font-size-heading);
+    line-height: map-get($properties, line-height-heading);
+  }
+
+  &__desc {
+    font-size: map-get($properties, font-size-desc);
+    line-height: map-get($properties, line-height-desc);
+  }
+}
+
+//
+// lead
+// --------------------------------------------------------------------------
+
+// variables
+$lead--size-l: (
+  padding-bottom: px-to-rem(10px),
+  margin-bottom-heading: px-to-rem(20px),
+  font-size-heading: px-to-rem(30px),
+  line-height-heading: 1.4,
+  font-size-desc: px-to-rem(12px),
+  line-height-desc: 1.6,
+  width-mark: px-to-rem(200px),
+  height-mark: px-to-rem(5px),
+);
+
+$lead--size-m: (
+
+);
+
+$lead--size-s: (
+
+);
+
+// sizes
+@mixin lead--size-l {
+  @include lead-size($lead--size-l);
+}
+
+@mixin lead--size-m {
+  @include lead-size($lead--size-m);
+}
+
+@mixin lead--size-s {
+  @include lead-size($lead--size-s);
+}
+
+// group
+@mixin lead--size {
+  @include lead--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include lead--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include lead--size-s;
+  }
+}

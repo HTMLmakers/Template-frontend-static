@@ -1,22 +1,41 @@
 // ==========================================================================
-// Ui-kit mixins -- Headings
+// Ui-kit mixins -- headings
 // ==========================================================================
+
+@mixin heading-size($properties) {
+  font-size: map-get($properties, font-size);
+  line-height: map-get($properties, line-height);
+}
 
 //
 // h1
 // --------------------------------------------------------------------------
 
+// variables
+$h1--size-l: (
+  //font-size: px-to-rem(20px),
+  //line-height: 1.4,
+);
+
+$h1--size-m: (
+
+);
+
+$h1--size-s: (
+
+);
+
 // sizes
 @mixin h1--size-l {
-
+  @include heading-size($h1--size-l);
 }
 
 @mixin h1--size-m {
-
+  @include heading-size($h1--size-m);
 }
 
 @mixin h1--size-s {
-
+  @include heading-size($h1--size-s);
 }
 
 // group
@@ -36,28 +55,87 @@
 // h2
 // --------------------------------------------------------------------------
 
+// variables
+$h2--size-l: (
+
+);
+
+$h2--size-m: (
+
+);
+
+$h2--size-s: (
+
+);
+
 // sizes
 @mixin h2--size-l {
+  @include heading-size($h2--size-l);
+}
 
+@mixin h2--size-m {
+  @include heading-size($h2--size-m);
+}
+
+@mixin h2--size-s {
+  @include heading-size($h2--size-s);
 }
 
 // group
 @mixin h2--size {
+  @include h2--size-l;
 
+  @include media-breakpoint-down(lg) {
+    @include h2--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include h2--size-s;
+  }
 }
 
 //
 // h3
 // --------------------------------------------------------------------------
 
+// variables
+$h3--size-l: (
+  //font-size: px-to-rem(20px),
+  //line-height: 1.4,
+);
+
+$h3--size-m: (
+
+);
+
+$h3--size-s: (
+
+);
+
 // sizes
 @mixin h3--size-l {
+  @include heading-size($h3--size-l);
+}
 
+@mixin h3--size-m {
+  @include heading-size($h3--size-m);
+}
+
+@mixin h3--size-s {
+  @include heading-size($h3--size-s);
 }
 
 // group
 @mixin h3--size {
+  @include h3--size-l;
 
+  @include media-breakpoint-down(lg) {
+    @include h3--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include h3--size-s;
+  }
 }
 
 //
