@@ -1,0 +1,24 @@
+//
+// Size properties
+// --------------------------------------------------------------------------
+@function prop-filter($p, $important) {
+  @return if($p, $p $important, null);
+}
+
+//
+// Unit transform
+// --------------------------------------------------------------------------
+@function px-to-rem($size, $font-size: $default-font-size) {
+  @return ($size / $font-size) * 1rem;
+}
+
+//
+// Other
+// --------------------------------------------------------------------------
+@function max($numbers...) {
+  @return m#{a}x(#{$numbers});
+}
+
+@function min($numbers...) {
+  @return m#{i}n(#{$numbers});
+}

@@ -1,0 +1,85 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- Typography -- links
+// ==========================================================================
+
+//
+// Link primary
+// --------------------------------------------------------------------------
+
+$size-l--link-primary: (
+  font-size: px-to-rem(24px),
+  line-height: 1.4,
+);
+
+$size-m--link-primary: (
+  font-size: px-to-rem(16px),
+  line-height: 1.3,
+);
+
+$size-s--link-primary: (
+  font-size: px-to-rem(8px),
+  line-height: 1.2,
+);
+
+//
+// Link secondary
+// --------------------------------------------------------------------------
+
+$size-l--link-secondary: (
+  font-size: px-to-rem(32px),
+  line-height: 1.4,
+);
+
+$size-m--link-secondary: (
+  font-size: px-to-rem(24px),
+  line-height: 1.3,
+);
+
+$size-s--link-secondary: (
+  font-size: px-to-rem(16px),
+  line-height: 1.2,
+);
+
+// ==========================================================================
+// Ui-kit mixins-- Size -- Typography -- links
+// ==========================================================================
+
+// $p - properties
+// $dp - default properties
+// $important - !important state
+@mixin size-link($p, $important: null) {
+  font-size: prop-filter(map-get($p, font-size), $important);
+  line-height: prop-filter(map-get($p, line-height), $important);
+}
+
+//
+// Link primary
+// --------------------------------------------------------------------------
+
+@mixin size-l--link-primary($important: null) {
+  @include size-link($size-l--link-primary, $important);
+}
+
+@mixin size-m--link-primary($important: null) {
+  @include size-link($size-m--link-primary, $important);
+}
+
+@mixin size-s--link-primary($important: null) {
+  @include size-link($size-s--link-primary, $important);
+}
+
+//
+// Link secondary
+// --------------------------------------------------------------------------
+
+@mixin size-l--link-secondary($important: null) {
+  @include size-link($size-l--link-secondary, $important);
+}
+
+@mixin size-m--link-secondary($important: null) {
+  @include size-link($size-m--link-secondary, $important);
+}
+
+@mixin size-s--link-secondary($important: null) {
+  @include size-link($size-s--link-secondary, $important);
+}

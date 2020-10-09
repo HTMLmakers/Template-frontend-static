@@ -6,6 +6,8 @@
    -------------------------------------------------------------------------- */
 
 button {
+  margin: 0;
+  text-align: left;
   text-decoration: none;
   background: none;
   border: none;
@@ -15,72 +17,79 @@ button {
 /* Established styles
    -------------------------------------------------------------------------- */
 
-/* Extends, mixins */
+// Dependencies
 
 %button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 px-to-rem(24px) 0 0;
-  color: $white;
+  min-width: auto;
+  color: $color-white;
   font-family: $secure-fonts;
   transition: all 0.2s;
 
   &:last-child {
     margin-right: 0;
   }
-
-  &:focus {
-    outline: 0;
-  }
 }
 
-%button-primary-color {
-  @extend %button;
-
-  background-color: red;
-
-  &:hover {
-
-  }
-
-  &:active {
-
-  }
+%button-state--focus {
+  outline: 0;
 }
 
-%button-secondary-color {
-  @extend %button;
-
-  background-color: green;
-
-  &:hover {
-
-  }
-
-  &:active {
-
-  }
+%button-state--hover,
+%button-state--active {
+  cursor: pointer;
 }
 
-%button-disabled {
-  background-color: $gallery;
+%button-state--disabled {
   cursor: default;
-  opacity: 0.5;
+  opacity: 0.2;
   pointer-events: none;
 }
 
-/* ----- Button-primary */
+//
+// Button primary
+// --------------------------------------------------------------------------
 
 .button-primary {
-  @extend %button-primary-color;
+  @extend %button;
+  @include size-l--button-primary;
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--button-primary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--button-primary;
+  }
+
+  background-color: green;
+
+  &:hover,
+  &--hover {
+    @extend %button-state--hover;
+
+    background-color: red;
+  }
+
+  &:active,
+  &--active {
+    @extend %button-state--active;
+
+    opacity: 0.5;
+  }
+
+  &:focus {
+    @extend %button-state--focus;
+  }
 
   &--fullwidth {
-    @include button-fullwidth;
+    @include fullwidth;
   }
 
   &--disabled {
-    @extend %button-disabled;
+    @extend %button-state--disabled;
   }
 
   // ----------------------------------------
@@ -88,62 +97,61 @@ button {
   // sizes
 
   &--size-l {
-    @include button-primary--size-l;
+    @include size-l--button-primary(!important);
   }
 
   &--size-m {
-    @include button-primary--size-m;
+    @include size-m--button-primary(!important);
   }
 
   &--size-s {
-    @include button-primary--size-s;
+    @include size-s--button-primary(!important);
   }
 }
 
-/* ----- Button-secondary */
+//
+// Button secondary
+// --------------------------------------------------------------------------
 
 .button-secondary {
-  @extend %button-secondary-color;
-
-  &--fullwidth {
-    @include button-fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include button-secondary--size-l;
-  }
-
-  &--size-m {
-    @include button-secondary--size-m;
-  }
-
-  &--size-s {
-    @include button-secondary--size-s;
-  }
-}
-
-/* ----- Button-icon */
-
-.button-icon {
   @extend %button;
+  @include size-l--button-secondary;
 
-  margin-right: 0;
-  background-color: #1da1f2;
+  @include media-breakpoint-down(lg) {
+    @include size-m--button-secondary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--button-secondary;
+  }
+
+  text-transform: uppercase;
+  background-color: cornflowerblue;
+
+  &:hover,
+  &--hover {
+    @extend %button-state--hover;
+
+    background-color: dodgerblue;
+  }
+
+  &:active,
+  &--active {
+    @extend %button-state--active;
+
+    opacity: 0.5;
+  }
+
+  &:focus {
+    @extend %button-state--focus;
+  }
 
   &--fullwidth {
-    @include button-fullwidth;
+    @include fullwidth;
   }
 
   &--disabled {
-    @extend %button-disabled;
+    @extend %button-state--disabled;
   }
 
   // ----------------------------------------
@@ -151,54 +159,173 @@ button {
   // sizes
 
   &--size-l {
-    @include button-icon--size-l;
+    @include size-l--button-secondary(!important);
   }
 
   &--size-m {
-    @include button-icon--size-m;
+    @include size-m--button-secondary(!important);
   }
 
   &--size-s {
-    @include button-icon--size-s;
+    @include size-s--button-secondary(!important);
   }
 }
 
-/* ----- Button-complex */
+//
+// Button complex
+// --------------------------------------------------------------------------
 
 .button-complex {
+  $root: ".button-complex";
+
   @extend %button;
+  @include size-l--button-complex($root);
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--button-complex($root);
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--button-complex($root);
+  }
 
   background-color: purple;
 
-  &__content,
-  &__icon {
-    display: flex;
+  &:hover,
+  &--hover {
+    @extend %button-state--hover;
+
+    background-color: mediumpurple;
+  }
+
+  &:active,
+  &--active {
+    @extend %button-state--active;
+
+    opacity: 0.5;
+  }
+
+  &:focus {
+    @extend %button-state--focus;
   }
 
   &__content {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
   }
 
-  &__icon {
-    align-items: center;
+  &__title,
+  &__desc {
+    white-space: nowrap;
   }
 
-  &__title {
+  &--fullwidth {
+    @include fullwidth;
+  }
+
+  &--disabled {
+    @extend %button-state--disabled;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include size-l--button-complex($root, !important);
+  }
+
+  &--size-m {
+    @include size-m--button-complex($root, !important);
+  }
+
+  &--size-s {
+    @include size-s--button-complex($root, !important);
+  }
+}
+
+//
+// Button apps
+// --------------------------------------------------------------------------
+
+.button-apps {
+  $root: ".button-apps";
+
+  @extend %button;
+  @include size-l--button-apps($root);
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--button-apps($root);
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--button-apps($root);
+  }
+
+  background-color: purple;
+
+  &:hover,
+  &--hover {
+    @extend %button-state--hover;
+
+    background-color: mediumpurple;
+  }
+
+  &:active,
+  &--active {
+    @extend %button-state--active;
+
+    opacity: 0.5;
+  }
+
+  &:focus {
+    @extend %button-state--focus;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title,
+  &__desc {
     white-space: nowrap;
   }
 
   &__desc {
+    @include size-l--caption;
 
+    @include media-breakpoint-down(lg) {
+      @include size-m--caption;
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include size-s--caption;
+    }
+  }
+
+  &__title {
+    @include size-l--h6;
+
+    @include media-breakpoint-down(lg) {
+      @include size-m--h6;
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include size-s--h6;
+    }
+
+    margin-bottom: 0 !important;
+    color: inherit;
   }
 
   &--fullwidth {
-    @include button-fullwidth;
+    @include fullwidth;
   }
 
   &--disabled {
-    @extend %button-disabled;
+    @extend %button-state--disabled;
   }
 
   // ----------------------------------------
@@ -206,72 +333,14 @@ button {
   // sizes
 
   &--size-l {
-    @include button-complex--size-l;
+    @include size-l--button-apps($root, !important);
   }
 
   &--size-m {
-    @include button-complex--size-m;
+    @include size-m--button-apps($root, !important);
   }
 
   &--size-s {
-    @include button-complex--size-s;
-  }
-}
-
-/* ----- Button-apps */
-
-.button-apps {
-  @extend %button;
-
-  background-color: purple;
-
-  .button-complex {
-
-    &__content,
-    &__icon {
-      display: flex;
-    }
-
-    &__content {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    &__icon {
-      align-items: center;
-    }
-
-    &__title {
-      white-space: nowrap;
-    }
-
-    &__desc {
-
-    }
-  }
-
-  &--fullwidth {
-    @include button-fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include button-apps--size-l;
-  }
-
-  &--size-m {
-    @include button-apps--size-m;
-  }
-
-  &--size-s {
-    @include button-apps--size-s;
+    @include size-s--button-apps($root, !important);
   }
 }

@@ -1,0 +1,29 @@
+// =============================================================================
+// Constants library
+// =============================================================================
+
+// Colors library
+$turbo:     #fbe601;
+$gray:      #808080;
+$gallery:   #eaeaea;
+
+// Fonts library
+$font-incised-bold: Incised-bold, $secure-fonts;
+$font-geoslab-regular: GeoSlab-regular, $secure-fonts;
+
+// Fonts size library
+$default-font-size: 14px;
+
+// =============================================================================
+// Variables library
+// =============================================================================
+
+// body
+$body-bg-library: $turbo;
+$body-bg-inner-library: $color-white;
+$body-color-library: $color-black;
+$body-font-family-library: $secure-fonts;
+$body-font-size-library: $default-font-size;
+
+// Grid Variables
+$enable-grid-classes: true;

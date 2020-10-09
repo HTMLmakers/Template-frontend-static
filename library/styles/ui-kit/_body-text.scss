@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Ui-kit elements -- body-text
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  &:first-child,
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+// Dependencies
+
+%body-text {
+  display: flex;
+  align-items: center;
+}
+
+//
+// Body text
+// --------------------------------------------------------------------------
+
+.body-text {
+  //@include media-breakpoint-down(md) {}
+
+  @extend %body-text;
+  @include size-l--body-text;
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--body-text;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--body-text;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include size-l--body-text(!important);
+  }
+
+  &--size-m {
+    @include size-m--body-text(!important);
+  }
+
+  &--size-s {
+    @include size-s--body-text(!important);
+  }
+}

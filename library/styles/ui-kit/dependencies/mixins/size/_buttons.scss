@@ -1,0 +1,236 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- buttons
+// ==========================================================================
+
+//
+// Button primary
+// --------------------------------------------------------------------------
+
+$size-l--button-primary: (
+  height: px-to-rem(96px),
+  padding-right: px-to-rem(32px),
+  padding-left: px-to-rem(32px),
+  border-radius: px-to-rem(16px),
+  font-size: px-to-rem(18px),
+  line-height: 1.76,
+);
+
+$size-m--button-primary: (
+  height: px-to-rem(80px),
+  padding-right: px-to-rem(32px),
+  padding-left: px-to-rem(32px),
+  border-radius: px-to-rem(14px),
+  font-size: px-to-rem(16px),
+  line-height: 1.52,
+);
+
+$size-s--button-primary: (
+  height: px-to-rem(72px),
+  padding-right: px-to-rem(24px),
+  padding-left: px-to-rem(24px),
+  border-radius: px-to-rem(12px),
+  font-size: px-to-rem(14px),
+  line-height: 1.68,
+);
+
+//
+// Button secondary
+// --------------------------------------------------------------------------
+
+$size-l--button-secondary: (
+  height: px-to-rem(64px),
+  padding-right: px-to-rem(24px),
+  padding-left: px-to-rem(24px),
+  border-radius: px-to-rem(32px),
+  font-size: px-to-rem(14px),
+  line-height: 1.76,
+);
+
+$size-m--button-secondary: (
+  height: px-to-rem(56px),
+  padding-right: px-to-rem(16px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(28px),
+  font-size: px-to-rem(12px),
+  line-height: 1.52,
+);
+
+$size-s--button-secondary: (
+  height: px-to-rem(48px),
+  padding-right: px-to-rem(16px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(24px),
+  font-size: px-to-rem(10px),
+  line-height: 1.4,
+);
+
+//
+// Button complex
+// --------------------------------------------------------------------------
+
+$size-l--button-complex: (
+  height: px-to-rem(56px),
+  margin-right-content: px-to-rem(8px),
+  padding-right: px-to-rem(16px),
+  padding-right-content: px-to-rem(12px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(28px),
+  font-size-title: px-to-rem(16px),
+  font-size-description: px-to-rem(12px),
+  line-height: 1.2,
+);
+
+$size-m--button-complex: (
+  height: px-to-rem(48px),
+  margin-right-content: px-to-rem(8px),
+  padding-right: px-to-rem(16px),
+  padding-right-content: px-to-rem(12px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(24px),
+  font-size-title: px-to-rem(14px),
+  font-size-description: px-to-rem(10px),
+  line-height: 1.3,
+);
+
+$size-s--button-complex: (
+  height: px-to-rem(40px),
+  margin-right-content: px-to-rem(8px),
+  padding-right: px-to-rem(16px),
+  padding-right-content: px-to-rem(12px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(20px),
+  font-size-title: px-to-rem(12px),
+  font-size-description: px-to-rem(8px),
+  line-height: 1.25,
+);
+
+//
+// Button apps
+// --------------------------------------------------------------------------
+
+$size-l--button-apps: (
+  height: px-to-rem(56px),
+  padding-right: px-to-rem(16px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(28px),
+  line-height: 1.2,
+);
+
+$size-m--button-apps: (
+  height: px-to-rem(48px),
+  padding-right: px-to-rem(16px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(24px),
+  line-height: 1.3,
+);
+
+$size-s--button-apps: (
+  height: px-to-rem(40px),
+  padding-right: px-to-rem(16px),
+  padding-left: px-to-rem(16px),
+  border-radius: px-to-rem(20px),
+  line-height: 1.25,
+);
+
+// ==========================================================================
+// Ui-kit mixins-- Size -- buttons
+// ==========================================================================
+
+// $root - root class
+// $p - properties
+// $dp - default properties
+// $important - !important state
+
+@mixin size-button($p, $important: null) {
+  height: prop-filter(map-get($p, height), $important);
+  padding-top: prop-filter(map-get($p, padding-top), $important);
+  padding-right: prop-filter(map-get($p, padding-right), $important);
+  padding-bottom: prop-filter(map-get($p, padding-bottom), $important);
+  padding-left: prop-filter(map-get($p, padding-left), $important);
+  font-size: prop-filter(map-get($p, font-size), $important);
+  line-height: prop-filter(map-get($p, line-height), $important);
+  border-radius: prop-filter(map-get($p, border-radius), $important);
+}
+
+@mixin size-button-complex($root, $p, $important: null) {
+  @include size-button($p, $important);
+
+  #{$root}__content {
+    margin-right: prop-filter(map-get($p, margin-right-content), $important);
+    margin-left: prop-filter(map-get($p, margin-left-content), $important);
+    padding-right: prop-filter(map-get($p, padding-right-content), $important);
+    padding-left: prop-filter(map-get($p, padding-left-content), $important);
+  }
+
+  #{$root}__title {
+    font-size: prop-filter(map-get($p, font-size-title), $important);
+  }
+
+  #{$root}__desc {
+    font-size: prop-filter(map-get($p, font-size-description), $important);
+  }
+}
+
+//
+// Button primary
+// --------------------------------------------------------------------------
+
+@mixin size-l--button-primary($important: null) {
+  @include size-button($size-l--button-primary, $important);
+}
+
+@mixin size-m--button-primary($important: null) {
+  @include size-button($size-m--button-primary, $important);
+}
+
+@mixin size-s--button-primary($important: null) {
+  @include size-button($size-s--button-primary, $important);
+}
+
+//
+// Button secondary
+// --------------------------------------------------------------------------
+
+@mixin size-l--button-secondary($important: null) {
+  @include size-button($size-l--button-secondary, $important);
+}
+
+@mixin size-m--button-secondary($important: null) {
+  @include size-button($size-m--button-secondary, $important);
+}
+
+@mixin size-s--button-secondary($important: null) {
+  @include size-button($size-s--button-secondary, $important);
+}
+
+//
+// Button complex
+// --------------------------------------------------------------------------
+
+@mixin size-l--button-complex($root, $important: null) {
+  @include size-button-complex($root, $size-l--button-complex, $important);
+}
+
+@mixin size-m--button-complex($root, $important: null) {
+  @include size-button-complex($root, $size-m--button-complex, $important);
+}
+
+@mixin size-s--button-complex($root, $important: null) {
+  @include size-button-complex($root, $size-s--button-complex, $important);
+}
+
+//
+// Button apps
+// --------------------------------------------------------------------------
+
+@mixin size-l--button-apps($root, $important: null) {
+  @include size-button-complex($root, $size-l--button-apps, $important);
+}
+
+@mixin size-m--button-apps($root, $important: null) {
+  @include size-button-complex($root, $size-m--button-apps, $important);
+}
+
+@mixin size-s--button-apps($root, $important: null) {
+  @include size-button-complex($root, $size-s--button-apps, $important);
+}

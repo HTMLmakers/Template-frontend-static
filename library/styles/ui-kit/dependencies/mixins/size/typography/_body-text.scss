@@ -1,0 +1,42 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- Typography -- body-text
+// ==========================================================================
+
+$size-l--body-text: (
+  font-size: px-to-rem(16px),
+  line-height: 1.4,
+);
+
+$size-m--body-text: (
+  font-size: px-to-rem(14px),
+  line-height: 1.3,
+);
+
+$size-s--body-text: (
+  font-size: px-to-rem(12px),
+  line-height: 1.2,
+);
+
+// ==========================================================================
+// Ui-kit mixins-- Size -- Typography -- body-text
+// ==========================================================================
+
+// $p - properties
+// $dp - default properties
+// $important - !important state
+@mixin size-body-text($p, $important: null) {
+  font-size: prop-filter(map-get($p, font-size), $important);
+  line-height: prop-filter(map-get($p, line-height), $important);
+}
+
+@mixin size-l--body-text($important: null) {
+  @include size-body-text($size-l--body-text, $important);
+}
+
+@mixin size-m--body-text($important: null) {
+  @include size-body-text($size-m--body-text, $important);
+}
+
+@mixin size-s--body-text($important: null) {
+  @include size-body-text($size-s--body-text, $important);
+}

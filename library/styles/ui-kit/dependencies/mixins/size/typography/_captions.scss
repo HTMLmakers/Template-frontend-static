@@ -1,0 +1,42 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- Typography -- captions
+// ==========================================================================
+
+$size-l--caption: (
+  font-size: px-to-rem(12px),
+  line-height: 1.4,
+);
+
+$size-m--caption: (
+  font-size: px-to-rem(10px),
+  line-height: 1.3,
+);
+
+$size-s--caption: (
+  font-size: px-to-rem(8px),
+  line-height: 1.2,
+);
+
+// ==========================================================================
+// Ui-kit mixins-- Size -- Typography -- captions
+// ==========================================================================
+
+// $p - properties
+// $dp - default properties
+// $important - !important state
+@mixin size-caption($p, $important: null) {
+  font-size: prop-filter(map-get($p, font-size), $important);
+  line-height: prop-filter(map-get($p, line-height), $important);
+}
+
+@mixin size-l--caption($important: null) {
+  @include size-caption($size-l--caption, $important);
+}
+
+@mixin size-m--caption($important: null) {
+  @include size-caption($size-m--caption, $important);
+}
+
+@mixin size-s--caption($important: null) {
+  @include size-caption($size-s--caption, $important);
+}

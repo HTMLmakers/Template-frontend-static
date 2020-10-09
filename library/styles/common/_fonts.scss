@@ -5,3 +5,11 @@
 // font-face mixin
 @include font-face(Incised-bold, fonts/Incised901BT, normal, normal, swap, eot woff2 woff);
 @include font-face(GeoSlab-regular, fonts/GeoSlab703BT, normal, normal, swap, eot woff2 woff);
+
+@font-face {
+  font-weight: normal;
+  font-family: "Incised-bold";
+  font-style: normal;
+  font-display: swap;
+  src: "./fonts/Incised901BT";
+}

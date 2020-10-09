@@ -68,8 +68,7 @@ const srcPath = {
   },
   pages: {
     root: `${srcRoot}/pages`,
-    include: `${srcRoot}/pages/include`,
-    library: `${srcRoot}/pages/library`,
+    partials: `${srcRoot}/pages/partials`,
   },
   styles: {
     root: `${srcRoot}/styles`,
@@ -106,7 +105,10 @@ const buildPath = {
 };
 
 const libraryPath = {
-  pages: `${libraryRoot}/pages`,
+  pages: {
+    root: `${libraryRoot}/pages`,
+    partials: `${libraryRoot}/pages/partials`,
+  },
   components: {
     root: `${libraryRoot}/components`,
     features: `${libraryRoot}/components/features`,
@@ -240,7 +242,7 @@ function compileHtml() {
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
-      basepath: '@file',
+      basepath: `${srcRoot}`,
       context: {
         svgSpriteExists,
       },
@@ -258,7 +260,7 @@ function compileHtml() {
  */
 
 function compileHtmlLib() {
-  return src(`${libraryPath.pages}/*.html`)
+  return src(`${libraryPath.pages.root}/*.html`)
     .pipe(plumber())
     .pipe(fileInclude({
       prefix: '@',
@@ -279,7 +281,7 @@ function cleanHtml() {
 /**
  * Отслеживание изменений html:
  * 1. Отслеживание директории ./src/pages/ на все события (add, del, change)
- * 2. Отслеживание файлов .html в ./src/components/ и ./src/pages/include/ на изменения (change)
+ * 2. Отслеживание файлов .html в ./src/components/ и ./src/pages/partials/ на изменения (change)
  */
 
 function watchHtml() {
@@ -287,7 +289,7 @@ function watchHtml() {
 
   watch(`${srcPath.pages.root}/*.html`, tasks);
   watch([
-    `${srcPath.pages.include}/*.html`,
+    `${srcPath.pages.partials}/**/*.html`,
     `${srcPath.components.root}/**/*.html`,
   ], { events: 'change' }, tasks);
   watch(`${srcPath.assets.img.sprite.root}/sprite.svg`, tasks);
@@ -300,7 +302,8 @@ function watchHtml() {
 
 function watchHtmlLib() {
   watch([
-    `${libraryPath.pages}/*.html`,
+    `${libraryPath.pages.root}/*.html`,
+    `${libraryPath.pages.partials}/**/*.html`,
     `${libraryPath.components.root}/**/*.html`,
   ], { events: 'change' }, series(compileHtmlLib, liveReload));
 }
@@ -420,7 +423,7 @@ function watchCss() {
     `${srcPath.styles.root}/**/*.scss`,
     `!${srcPath.styles.dependencies.root}/**/*`,
     `!${srcPath.styles.vendors}/*`,
-    `!${srcPath.styles.uiKit}/*`,
+    `!${srcPath.styles.uiKit}/**/*.scss`,
     `!${srcPath.styles.root}/vendors.scss`,
     `!${srcPath.styles.root}/components.scss`,
     `!${srcPath.styles.root}/ui-kit.scss`,
@@ -434,7 +437,7 @@ function watchCss() {
     `${srcPath.components.root}/**/*.scss`,
   ], { events: 'change' }, series(compileCssComponents, liveReload));
   watch([
-    `${srcPath.styles.uiKit}/*`,
+    `${srcPath.styles.uiKit}/**/*.scss`,
     `${srcPath.styles.root}/ui-kit.scss`,
   ], { events: 'change' }, series(compileCssUiKit, liveReload));
   watch(`${srcPath.styles.dependencies.root}/**/*.scss`, { events: 'change' }, series(compileCssGeneral, compileCssUiKit, compileCssComponents, liveReload));

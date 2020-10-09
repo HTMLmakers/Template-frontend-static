@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Ui-kit component -- links
+   Ui-kit elements -- links
    ========================================================================== */
 
 /* Default styles
@@ -12,44 +12,59 @@ a {
 /* Established styles
    -------------------------------------------------------------------------- */
 
-/* Extends, mixins */
+// Dependencies
 
 %link {
+  display: inline-flex;
+  align-items: center;
   font-family: inherit;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &:active {
-
-  }
 }
 
-%link-disabled {
+%link-state--hover {
+  text-decoration: underline;
+}
+
+%link-state--active {
+  color: blue;
+}
+
+%link-state--disabled {
   cursor: default;
   opacity: 0.3;
   pointer-events: none;
 }
 
-/* ----- Link primary */
+//
+// Link primary
+// --------------------------------------------------------------------------
 
 .link-primary {
   @extend %link;
+  @include size-l--link-primary;
 
-  &:hover {
-
+  @include media-breakpoint-down(lg) {
+    @include size-m--link-primary;
   }
 
-  &:active {
+  @include media-breakpoint-down(sm) {
+    @include size-s--link-primary;
+  }
 
+  &:hover,
+  &--hover {
+    @extend %link-state--hover;
+  }
+
+  &:active,
+  &--active {
+    @extend %link-state--active;
   }
 
   &--disabled {
-    @extend %link-disabled;
+    @extend %link-state--disabled;
   }
 
   // ----------------------------------------
@@ -57,15 +72,15 @@ a {
   // sizes
 
   &--size-l {
-    @include link-primary--size-l;
+    @include size-l--link-primary(!important);
   }
 
   &--size-m {
-    @include link-primary--size-m;
+    @include size-m--link-primary(!important);
   }
 
   &--size-s {
-    @include link-primary--size-s;
+    @include size-s--link-primary(!important);
   }
 }
 
@@ -73,17 +88,28 @@ a {
 
 .link-secondary {
   @extend %link;
+  @include size-l--link-secondary;
 
-  &:hover {
-
+  @include media-breakpoint-down(lg) {
+    @include size-m--link-secondary;
   }
 
-  &:active {
+  @include media-breakpoint-down(sm) {
+    @include size-s--link-secondary;
+  }
 
+  &:hover,
+  &--hover {
+    @extend %link-state--hover;
+  }
+
+  &:active,
+  &--active {
+    @extend %link-state--active;
   }
 
   &--disabled {
-    @extend %link-disabled;
+    @extend %link-state--disabled;
   }
 
   // ----------------------------------------
@@ -91,14 +117,14 @@ a {
   // sizes
 
   &--size-l {
-    @include link-secondary--size-l;
+    @include size-l--link-secondary(!important);
   }
 
   &--size-m {
-    @include link-secondary--size-m;
+    @include size-m--link-secondary(!important);
   }
 
   &--size-s {
-    @include link-secondary--size-s;
+    @include size-s--link-secondary(!important);
   }
 }

@@ -1,0 +1,96 @@
+// ==========================================================================
+// Ui-kit mixins-- links
+// ==========================================================================
+
+@mixin size-link($properties) {
+  font-size: map-get($properties, font-size);
+  line-height: map-get($properties, line-height);
+}
+
+//
+// Link primary
+// --------------------------------------------------------------------------
+
+// variables
+$size-l--link-primary: (
+  //font-size: px-to-rem(8px),
+  //line-height: 1.4,
+);
+
+$size-m--link-primary: (
+
+);
+
+$size-s--link-primary: (
+
+);
+
+// sizes
+@mixin size-l--link-primary {
+  @include size-link($size-l--link-primary);
+}
+
+@mixin size-m--link-primary {
+  @include size-link($size-m--link-primary);
+}
+
+@mixin size-s--link-primary {
+  @include size-link($size-s--link-primary);
+}
+
+// group
+@mixin size--link-primary {
+  @include size-l--link-primary;
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--link-primary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--link-primary;
+  }
+}
+
+//
+// Link secondary
+// --------------------------------------------------------------------------
+
+// variables
+$size-l--link-secondary: (
+  //font-size: px-to-rem(8px),
+  //line-height: 1.4,
+);
+
+$size-m--link-secondary: (
+
+);
+
+$size-s--link-secondary: (
+
+);
+
+// sizes
+@mixin size-l--link-secondary {
+  @include size-link($size-l--link-secondary);
+}
+
+@mixin size-m--link-secondary {
+  @include size-link($size-m--link-secondary);
+}
+
+@mixin size-s--link-secondary {
+  @include size-link($size-s--link-secondary);
+}
+
+// group
+@mixin size--link-secondary {
+  @include size-l--link-secondary;
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--link-secondary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--link-secondary;
+  }
+}

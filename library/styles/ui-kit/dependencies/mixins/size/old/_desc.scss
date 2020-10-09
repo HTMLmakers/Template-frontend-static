@@ -1,0 +1,166 @@
+// ==========================================================================
+// Ui-kit mixins-- desc, captions
+// ==========================================================================
+
+@mixin desc-size($properties) {
+  font-size: map-get($properties, font-size);
+  line-height: map-get($properties, line-height);
+}
+
+@mixin desc-icon-size($properties) {
+
+  &__icon {
+    //margin-right: map-get($properties, margin-right-icon);
+
+    &--left {
+      margin-right: map-get($properties, margin-right-icon);
+    }
+
+    &--right {
+      margin-left: map-get($properties, margin-left-icon);
+    }
+  }
+}
+
+//
+// Desc icon
+// --------------------------------------------------------------------------
+
+// variables
+$desc-icon--size-l: (
+  margin-right-icon: px-to-rem(20px),
+  margin-left-icon: px-to-rem(20px),
+);
+
+$desc-icon--size-m: (
+  margin-right-icon: px-to-rem(20px),
+  margin-left-icon: px-to-rem(20px),
+);
+
+$desc-icon--size-s: (
+  margin-right-icon: px-to-rem(20px),
+  margin-left-icon: px-to-rem(20px),
+);
+
+// sizes
+@mixin desc-icon--size-l {
+  @include desc-icon-size($desc-icon--size-l);
+
+  &__icon {
+    @include icon--size-xl;
+  }
+}
+
+@mixin desc-icon--size-m {
+  @include desc-icon-size($desc-icon--size-m);
+}
+
+@mixin desc-icon--size-s {
+  @include desc-icon-size($desc-icon--size-s);
+}
+
+// group
+@mixin desc-icon--size {
+  @include desc-icon--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include desc-icon--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include desc-icon--size-s;
+  }
+}
+
+//
+// Captions
+// --------------------------------------------------------------------------
+
+// variables
+$caption--size-l: (
+  font-size: px-to-rem(12px),
+  line-height: 1.4,
+);
+
+$caption--size-m: (
+
+);
+
+$caption--size-s: (
+
+);
+
+// sizes
+@mixin caption--size-l {
+  @include desc-size($caption--size-l);
+}
+
+@mixin caption--size-m {
+  @include desc-size($caption--size-m);
+}
+
+@mixin caption--size-s {
+  @include desc-size($caption--size-s);
+}
+
+// group
+@mixin caption--size {
+  @include caption--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include caption--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include caption--size-s;
+  }
+}
+
+
+
+
+
+
+//
+// Desc
+// --------------------------------------------------------------------------
+
+// variables
+$desc--size-l: (
+  //font-size: px-to-rem(20px),
+  //line-height: 1.4,
+);
+
+$desc--size-m: (
+
+);
+
+$desc--size-s: (
+
+);
+
+// sizes
+@mixin desc--size-l {
+  @include desc-size($desc--size-l);
+}
+
+@mixin desc--size-m {
+  @include desc-size($desc--size-m);
+}
+
+@mixin desc--size-s {
+  @include desc-size($desc--size-s);
+}
+
+// group
+@mixin desc--size {
+  @include desc--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include desc--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include desc--size-s;
+  }
+}

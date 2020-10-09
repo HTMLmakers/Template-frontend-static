@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Ui-kit component -- captions
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+small {
+  font-size: inherit;
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+// Dependencies
+
+%caption {
+  display: flex;
+  align-items: center;
+}
+
+//
+// Caption
+// --------------------------------------------------------------------------
+
+.caption {
+  //@include media-breakpoint-down(md) {}
+
+  @extend %caption;
+  @include size-l--caption;
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--caption;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--caption;
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include size-l--caption(!important);
+  }
+
+  &--size-m {
+    @include size-m--caption(!important);
+  }
+
+  &--size-s {
+    @include size-s--caption(!important);
+  }
+}

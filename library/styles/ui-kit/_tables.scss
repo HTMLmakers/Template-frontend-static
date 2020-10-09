@@ -7,7 +7,7 @@
   //@include media-breakpoint-down(md) {}
 
   width: 100%;
-  color: $black;
+  color: $color-black;
   font-family: $secure-fonts;
 
   &__title {
@@ -26,7 +26,7 @@
   th,
   td {
     padding: 10px;
-    border: 1px solid $black;
+    border: 1px solid $color-black;
   }
 
   th {

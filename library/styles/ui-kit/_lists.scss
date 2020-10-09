@@ -89,8 +89,8 @@ dl {
         justify-content: center;
         width: px-to-rem(24px);
         height: px-to-rem(24px);
-        color: $white;
-        background-color: $black;
+        color: $color-white;
+        background-color: $color-black;
         content: counter(li);
         counter-increment: li;
       }

@@ -1,0 +1,94 @@
+// ==========================================================================
+// Ui-kit mixins-- icons
+// ==========================================================================
+
+@mixin icon-size($properties) {
+  width: map-get($properties, width);
+  height: map-get($properties, height);
+}
+
+//
+// Icons
+// --------------------------------------------------------------------------
+
+// variables
+$icon--size-xxxl: (
+  width: px-to-rem(80px),
+  height: px-to-rem(80px),
+);
+
+$icon--size-xxl: (
+  width: px-to-rem(64px),
+  height: px-to-rem(64px),
+);
+
+$icon--size-xl: (
+  width: px-to-rem(48px),
+  height: px-to-rem(48px),
+);
+
+$icon--size-l: (
+  width: px-to-rem(40px),
+  height: px-to-rem(40px),
+);
+
+$icon--size-m: (
+  width: px-to-rem(32px),
+  height: px-to-rem(32px),
+);
+
+$icon--size-s: (
+  width: px-to-rem(24px),
+  height: px-to-rem(24px),
+);
+
+$icon--size-xs: (
+  width: px-to-rem(16px),
+  height: px-to-rem(16px),
+);
+
+// sizes
+@mixin icon--size-xxxl {
+  @include icon-size($icon--size-xxxl);
+}
+
+@mixin icon--size-xxl {
+  @include icon-size($icon--size-xxl);
+}
+
+@mixin icon--size-xl {
+  @include icon-size($icon--size-xl);
+}
+
+@mixin icon--size-l {
+  @include icon-size($icon--size-l);
+}
+
+@mixin icon--size-m {
+  @include icon-size($icon--size-m);
+}
+
+@mixin icon--size-s {
+  @include icon-size($icon--size-s);
+}
+
+@mixin icon--size-xs {
+  @include icon-size($icon--size-xs);
+}
+
+// group
+@mixin icon--size {
+  @include icon--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include icon--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include icon--size-s;
+  }
+}
+
+//
+// Icons-svg, Icons-png
+// --------------------------------------------------------------------------

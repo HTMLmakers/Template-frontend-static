@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Ui-kit component -- body-text
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+p {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+// Dependencies
+
+%body-text {
+}
+
+/* ----- Desc */
+
+.desc {
+  //@include media-breakpoint-down(md) {}
+
+  @extend %desc;
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include size-l--body-text(!important);
+  }
+
+  &--size-m {
+    @include size-m--body-text(!important);
+  }
+
+  &--size-s {
+    @include size-s--body-text(!important);
+  }
+}
+
+/* ----- Desc icon */
+
+.desc-icon {
+  @extend %desc;
+  @include desc-icon--size;
+
+  display: flex;
+  align-items: center;
+
+  &__icon {
+
+  }
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include desc-icon--size-l;
+  }
+
+  &--size-m {
+    @include desc-icon--size-m;
+  }
+
+  &--size-s {
+    @include desc-icon--size-s;
+  }
+}
+
+/* ----- Captions */
+
+.caption {
+
+  @extend %desc;
+
+  // ----------------------------------------
+
+  // sizes
+
+  &--size-l {
+    @include caption--size-l;
+  }
+
+  &--size-m {
+    @include caption--size-m;
+  }
+
+  &--size-s {
+    @include caption--size-s;
+  }
+}

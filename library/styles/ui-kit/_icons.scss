@@ -12,33 +12,28 @@ svg {
 /* Established styles
    -------------------------------------------------------------------------- */
 
-// Extends, mixins
+// Dependencies
 
-%icon-disabled {
+%icon-state--disabled {
   opacity: 0.5;
-
-  &::after {
-    opacity: 0.5;
-  }
-
-  &:hover {
-
-  }
 }
 
-/* ----- Icons-svg */
+//
+// Icon svg
+// --------------------------------------------------------------------------
 
 .icon-svg {
+  display: inline-flex;
   flex-grow: 0;
   flex-shrink: 0;
   background-color: cyan;
 
   &--disabled {
-    @extend %icon-disabled;
+    @extend %icon-state--disabled;
   }
 
   svg {
-    @include picture-fluid-position;
+    @include full-fit;
 
     background-color: red;
     border-radius: 50%;
@@ -48,52 +43,56 @@ svg {
 
   // sizes
   &--size-xxxl {
-    @include icon--size-xxxl;
+    @include size-xxxl--icon;
   }
 
   &--size-xxl {
-    @include icon--size-xxl;
+    @include size-xxl--icon;
   }
 
   &--size-xl {
-    @include icon--size-xl;
+    @include size-xl--icon;
   }
 
   &--size-l {
-    @include icon--size-l;
+    @include size-l--icon;
   }
 
   &--size-m {
-    @include icon--size-m;
+    @include size-m--icon;
   }
 
   &--size-s {
-    @include icon--size-s;
+    @include size-s--icon;
   }
 
   &--size-xs {
-    @include icon--size-xs;
+    @include size-xs--icon;
   }
 }
 
-/* ----- Icons-png */
+//
+// Icon png
+// --------------------------------------------------------------------------
 
 .icon-png {
   position: relative;
+  display: inline-flex;
   text-indent: -9999px;
   background-color: cyan;
 
   &::after {
-    @include picture-centring-position;
-    @include picture-fluid-position;
+    @include centring-position-absolute;
+    @include full-fit;
 
     background-color: darkviolet;
     border-radius: 50%;
     content: "";
   }
 
-  &--disabled {
-    @extend %icon-disabled;
+  &--disabled,
+  &--disabled::after {
+    @extend %icon-state--disabled;
   }
 
   //&--name {
@@ -107,30 +106,30 @@ svg {
 
   // sizes
   &--size-xxxl {
-    @include icon--size-xxxl;
+    @include size-xxxl--icon;
   }
 
   &--size-xxl {
-    @include icon--size-xxl;
+    @include size-xxl--icon;
   }
 
   &--size-xl {
-    @include icon--size-xl;
+    @include size-xl--icon;
   }
 
   &--size-l {
-    @include icon--size-l;
+    @include size-l--icon;
   }
 
   &--size-m {
-    @include icon--size-m;
+    @include size-m--icon;
   }
 
   &--size-s {
-    @include icon--size-s;
+    @include size-s--icon;
   }
 
   &--size-xs {
-    @include icon--size-xs;
+    @include size-xs--icon;
   }
 }
