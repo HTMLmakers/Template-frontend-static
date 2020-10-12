@@ -2,6 +2,7 @@ const {
   src, dest, series, watch, parallel,
 } = require('gulp');
 
+const webpack = require('webpack-stream');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
@@ -492,12 +493,13 @@ function buildCss() {
  */
 
 function compileJs(compilePath, destPath, basepath, isLinted, done) {
+  const filename = compilePath.split('/').pop();
+
   src(compilePath)
     .pipe(plumber())
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath,
-      indent: true,
+    .pipe(webpack({
+      entry: compilePath,
+      output: { filename },
     }))
     .pipe(gulpIf(isLinted, eslint()))
     .pipe(dest(destPath));
