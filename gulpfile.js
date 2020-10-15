@@ -2,7 +2,7 @@ const {
   src, dest, series, watch, parallel,
 } = require('gulp');
 
-const webpack = require('webpack-stream');
+const gulpWebpack = require('webpack-stream');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const fileInclude = require('gulp-file-include');
@@ -27,7 +27,7 @@ const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
 const psi = require('psi');
 const ngrok = require('ngrok');
-const path = require('path');
+const gulpPath = require('path');
 const tap = require('gulp-tap');
 const autoprefixer = require('autoprefixer');
 const htmlreplace = require('gulp-html-replace');
@@ -492,35 +492,64 @@ function buildCss() {
  * 5. Перенос common.js в ./dev/js/
  */
 
-function compileJs(compilePath, destPath, basepath, isLinted, done) {
-  const filename = compilePath.split('/').pop();
+function compileJs(path, isLinted, done) {
+  const filename = path.compile.split('/').pop();
 
-  src(compilePath)
+  src(path.compile)
     .pipe(plumber())
-    .pipe(webpack({
-      entry: compilePath,
+    .pipe(gulpWebpack({
+      entry: path.compile,
       output: { filename },
+      mode: 'development',
     }))
     .pipe(gulpIf(isLinted, eslint()))
-    .pipe(dest(destPath));
+    .pipe(dest(path.dest));
 
   done();
 }
 
 function compileJsVendors(done) {
-  return compileJs(`${srcPath.js.root}/vendors.js`, `${devPath.js}`, `${srcRoot}`, false, done);
+  return compileJs(
+    {
+      compile: `${srcPath.js.root}/vendors.js`,
+      dest: `${devPath.js}`,
+      base: `${srcRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsComponents(done) {
-  return compileJs(`${srcPath.js.root}/components.js`, `${devPath.js}`, `${srcRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${srcPath.js.root}/components.js`,
+      dest: `${devPath.js}`,
+      base: `${srcRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsUiKit(done) {
-  return compileJs(`${srcPath.js.root}/ui-kit.js`, `${devPath.js}`, `${srcRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${srcPath.js.root}/ui-kit.js`,
+      dest: `${devPath.js}`,
+      base: `${srcRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsCommon(done) {
-  return compileJs(`${srcPath.js.root}/common.js`, `${devPath.js}`, `${srcRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${srcPath.js.root}/common.js`,
+      dest: `${devPath.js}`,
+      base: `${srcRoot}`,
+    }, false,
+    done,
+  );
 }
 
 /**
@@ -533,19 +562,47 @@ function compileJsCommon(done) {
  */
 
 function compileJsVendorsLib(done) {
-  return compileJs(`${libraryPath.js.root}/vendors.js`, `${libraryDistPath.js}`, `${libraryRoot}`, false, done);
+  return compileJs(
+    {
+      compile: `${libraryPath.js.root}/vendors.js`,
+      dest: `${libraryDistPath.js}`,
+      base: `${libraryRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsComponentsLib(done) {
-  return compileJs(`${libraryPath.js.root}/components.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${libraryPath.js.root}/components.js`,
+      dest: `${libraryDistPath.js}`,
+      base: `${libraryRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsUiKitLib(done) {
-  return compileJs(`${libraryPath.js.root}/ui-kit.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${libraryPath.js.root}/ui-kit.js`,
+      dest: `${libraryDistPath.js}`,
+      base: `${libraryRoot}`,
+    }, false,
+    done,
+  );
 }
 
 function compileJsCommonLib(done) {
-  return compileJs(`${libraryPath.js.root}/common.js`, `${libraryDistPath.js}`, `${libraryRoot}`, true, done);
+  return compileJs(
+    {
+      compile: `${libraryPath.js.root}/common.js`,
+      dest: `${libraryDistPath.js}`,
+      base: `${libraryRoot}`,
+    }, false,
+    done,
+  );
 }
 
 /**
@@ -952,7 +1009,7 @@ function getAllBuildUrls() {
   return src(`${buildRoot}/*.html`)
     .pipe(
       tap((file) => {
-        const filename = path.basename(file.path);
+        const filename = gulpPath.basename(file.path);
         const url = `${buildUrl}/${filename}`;
 
         urls.push(url);

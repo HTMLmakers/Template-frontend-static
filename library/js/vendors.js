@@ -1,7 +1,10 @@
-@include('../node_modules/jquery/dist/jquery.min.js')
-@include('../node_modules/jquery-ui-dist/jquery-ui.min.js')
-@include('../node_modules/jquery-migrate/dist/jquery-migrate.min.js')
-@include('../node_modules/slick-carousel/slick/slick.min.js')
-@include('../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js')
-@include('../node_modules/jquery-validation/dist/jquery.validate.min.js')
-@include('../node_modules/selectize/dist/js/standalone/selectize.min.js')
+/* eslint-disable */
+import $ from 'jquery';
+window.jQuery = $; window.$ = $;
+
+// require('jquery-migrate');
+require('slick-carousel');
+require('@fancyapps/fancybox');
+// require('jquery-ui/ui/...');
+require('jquery-validation');
+require('selectize');

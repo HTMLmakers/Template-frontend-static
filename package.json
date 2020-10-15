@@ -28,7 +28,6 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@fancyapps/fancybox": "^3.5.7",
     "autoprefixer": "^9.8.5",
     "browser-sync": "^2.26.7",
     "del": "^5.1.0",
@@ -37,6 +36,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
+    "expose-loader": "^1.0.1",
     "fs": "0.0.1-security",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -62,16 +62,11 @@
     "gulp-uglify": "^3.0.2",
     "gulp.spritesmith": "^6.11.0",
     "gulp.spritesmith.3x": "^1.0.9",
-    "jquery": "^3.5.1",
-    "jquery-migrate": "^3.3.1",
-    "jquery-ui-dist": "^1.12.1",
-    "jquery-validation": "^1.19.2",
     "ngrok": "^3.2.5",
     "node-sass": "^4.14.1",
     "path": "^0.12.7",
     "postcss-flexbugs-fixes": "^4.2.1",
     "psi": "^3.1.0",
-    "slick-carousel": "^1.8.1",
     "stylelint": "^11.1.1",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^19.0.0",
@@ -79,6 +74,12 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "selectize": "^0.12.6"
+    "jquery": "^3.5.1",
+    "jquery-migrate": "^3.3.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-validation": "^1.19.2",
+    "selectize": "^0.12.6",
+    "slick-carousel": "^1.8.1",
+    "@fancyapps/fancybox": "^3.5.7"
   }
 }
