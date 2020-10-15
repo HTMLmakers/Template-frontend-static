@@ -12,9 +12,12 @@ $(document).ready(() => {
 
     defaultOptions.appendDots = $container.find('.control-pagination');
 
-    const slider = new SliderSlick($slider, { ...defaultOptions, ...options });
-    slider.init();
+    const slider = new SliderSlick(
+      $slider,
+      { ...defaultOptions, ...options },
+    );
 
+    slider.init();
     $buttonNext.on('click', () => {
       slider.next();
     });
