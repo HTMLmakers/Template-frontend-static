@@ -6,11 +6,11 @@ $(document).ready(() => {
   $sliderContainer.each((index, el) => {
     const $container = $(el);
     const $slider = $container.find('[data-ui-kit--slider-list]');
-    const $buttonPrev = $container.find('.control-arrow--prev');
-    const $buttonNext = $container.find('.control-arrow--next');
+    const $buttonNext = $container.find('[data-ui-kit--slider-next-button]');
+    const $buttonPrev = $container.find('[data-ui-kit--slider-prev-button]');
     const options = $slider.data('ui-kit--slider-options');
 
-    defaultOptions.appendDots = $container.find('.control-pagination');
+    defaultOptions.appendDots = $container.find('[data-ui-kit--slider-pagination]');
 
     const slider = new SliderSlick(
       $slider,

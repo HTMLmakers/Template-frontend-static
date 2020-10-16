@@ -2,10 +2,8 @@
 //  Component header
 //  ==========================================================================
 
-(($) => {
+$(document).ready(() => {
   const $header = $('.header');
-
-  console.log('header');
 
   $(window).on('scroll', () => {
     if ($(this).scrollTop() > 0) {
@@ -14,4 +12,4 @@
       $header.removeClass('header--fixed');
     }
   });
-})(jQuery);
+});

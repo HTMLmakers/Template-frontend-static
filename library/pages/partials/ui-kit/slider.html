@@ -4,5 +4,36 @@
 
     @include('./components/features/slider-slick/slider-slick.html')
 
+    <div class="slider"
+         data-ui-kit--slider-container>
+      <ul class="slider__list"
+          data-ui-kit--slider-list
+          data-ui-kit--slider-options='{ "dots": true, "fade": false, "autoplay": false }'>
+        <li class="slider__item"
+            style="background-color: greenyellow;">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?
+        </li>
+        <li class="slider__item"
+            style="background-color: blue;">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi
+          sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.
+        </li>
+        <li class="slider__item"
+            style="background-color: orangered;">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, fugit?
+        </li>
+        <li class="slider__item"
+            style="background-color: green;">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque fugit perferendis! At atque esse nam nisi
+          sequi. Doloribus et eum ex facere libero mollitia porro quod ratione repellendus similique.
+        </li>
+      </ul>
+      <a class="slider-arrow__prev control-arrow control-arrow--prev"
+         data-ui-kit--slider-next-button>Prev</a>
+      <a class="slider-arrow__next control-arrow control-arrow--next"
+         data-ui-kit--slider-next-button>Next</a>
+      <div class="slider__pagination control-pagination"
+           data-ui-kit--slider-pagination></div>
+    </div>
   </div>
 </section>
