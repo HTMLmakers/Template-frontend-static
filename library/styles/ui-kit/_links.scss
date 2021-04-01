@@ -21,6 +21,21 @@ a {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s;
+
+  &:hover,
+  &[data-state="disabled"] {
+    @extend %link-state--hover;
+  }
+
+  &:active,
+  &[data-state="active"] {
+    @extend %link-state--active;
+  }
+
+  &[disabled],
+  &[data-state="disabled"] {
+    @extend %link-state--disabled;
+  }
 }
 
 %link-state--hover {
@@ -42,89 +57,33 @@ a {
 // --------------------------------------------------------------------------
 
 .link-primary {
+  $root: &;
   @extend %link;
-  @include size-l--link-primary;
+  @include links-sizes($root, "link-primary");
+  @include link-primary--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--link-primary;
+    @include link-primary--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--link-primary;
-  }
-
-  &:hover,
-  &--hover {
-    @extend %link-state--hover;
-  }
-
-  &:active,
-  &--active {
-    @extend %link-state--active;
-  }
-
-  &--disabled {
-    @extend %link-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--link-primary(!important);
-  }
-
-  &--size-m {
-    @include size-m--link-primary(!important);
-  }
-
-  &--size-s {
-    @include size-s--link-primary(!important);
+    @include link-primary--size($root, "s");
   }
 }
 
 /* ----- Link secondary */
 
 .link-secondary {
+  $root: &;
   @extend %link;
-  @include size-l--link-secondary;
+  @include links-sizes($root, "link-secondary");
+  @include link-secondary--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--link-secondary;
+    @include link-secondary--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--link-secondary;
-  }
-
-  &:hover,
-  &--hover {
-    @extend %link-state--hover;
-  }
-
-  &:active,
-  &--active {
-    @extend %link-state--active;
-  }
-
-  &--disabled {
-    @extend %link-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--link-secondary(!important);
-  }
-
-  &--size-m {
-    @include size-m--link-secondary(!important);
-  }
-
-  &--size-s {
-    @include size-s--link-secondary(!important);
+    @include link-secondary--size($root, "s");
   }
 }

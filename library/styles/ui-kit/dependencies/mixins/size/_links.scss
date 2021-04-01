@@ -1,0 +1,58 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- links
+// ==========================================================================
+
+//
+// Link primary
+// --------------------------------------------------------------------------
+
+@mixin link-primary--size($root, $size, $important: null) {
+  @if $size == "l" {
+    font-size: px-to-rem(24px);
+    line-height: 1.4;
+  }
+  @if $size == "m" {
+    font-size: px-to-rem(16px);
+    line-height: 1.3;
+  }
+  @if $size == "s" {
+    font-size: px-to-rem(8px);
+    line-height: 1.2;
+  }
+}
+
+//
+// Link secondary
+// --------------------------------------------------------------------------
+
+@mixin link-secondary--size($root, $size, $important: null) {
+  @if $size == "l" {
+    font-size: px-to-rem(32px);
+    line-height: 1.4;
+  }
+  @if $size == "m" {
+    font-size: px-to-rem(24px);
+    line-height: 1.3;
+  }
+  @if $size == "s" {
+    font-size: px-to-rem(16px);
+    line-height: 1.2;
+  }
+}
+
+//
+// Sizes
+// --------------------------------------------------------------------------
+
+@mixin links-sizes($root, $name) {
+  @each $key in $sizes {
+    &[data-size="#{$key}"] {
+      @if $name == "link-primary" {
+        @include link-primary--size($root, $key, !important);
+      }
+      @if $name == "link-secondary" {
+        @include link-secondary--size($root, $key, !important);
+      }
+    }
+  }
+}

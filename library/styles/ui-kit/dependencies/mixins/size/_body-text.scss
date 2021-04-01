@@ -1,0 +1,26 @@
+@mixin body-text--size($root, $size, $important: null) {
+  @if $size == "l" {
+    font-size: px-to-rem(16px);
+    line-height: 1.4;
+  }
+  @if $size == "m" {
+    font-size: px-to-rem(14px);
+    line-height: 1.3;
+  }
+  @if $size == "s" {
+    font-size: px-to-rem(12px);
+    line-height: 1.2;
+  }
+}
+
+//
+// Sizes
+// --------------------------------------------------------------------------
+
+@mixin body-text-sizes($root, $name: null) {
+  @each $key in $sizes {
+    &[data-size="#{$key}"] {
+      @include body-text--size($root, $key, !important);
+    }
+  }
+}

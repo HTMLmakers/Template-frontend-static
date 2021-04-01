@@ -35,31 +35,16 @@ p {
 
 .body-text {
   //@include media-breakpoint-down(md) {}
-
+  $root: &;
   @extend %body-text;
-  @include size-l--body-text;
+  @include body-text-sizes($root);
+  @include body-text--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--body-text;
+    @include body-text--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--body-text;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--body-text(!important);
-  }
-
-  &--size-m {
-    @include size-m--body-text(!important);
-  }
-
-  &--size-s {
-    @include size-s--body-text(!important);
+    @include body-text--size($root, "s");
   }
 }

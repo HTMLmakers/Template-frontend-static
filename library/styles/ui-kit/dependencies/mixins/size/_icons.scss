@@ -1,102 +1,74 @@
-// ==========================================================================
-// Ui-kit properties -- Size -- icons
-// ==========================================================================
-
-$size-xxxl--icon: (
-  width: px-to-rem(80px),
-  height: px-to-rem(80px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-xxl--icon: (
-  width: px-to-rem(64px),
-  height: px-to-rem(64px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-xl--icon: (
-  width: px-to-rem(48px),
-  height: px-to-rem(48px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-l--icon: (
-  width: px-to-rem(40px),
-  height: px-to-rem(40px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-m--icon: (
-  width: px-to-rem(32px),
-  height: px-to-rem(32px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-s--icon: (
-  width: px-to-rem(24px),
-  height: px-to-rem(24px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-$size-xs--icon: (
-  width: px-to-rem(16px),
-  height: px-to-rem(16px),
-  margin-right: px-to-rem(8px),
-  margin-left: px-to-rem(8px),
-);
-
-// ==========================================================================
-// Ui-kit mixins-- Size -- icons
-// ==========================================================================
-
-// $p - properties
-// $dp - default properties
-// $important - !important state
-@mixin size-icon($p, $important: null) {
-  width: prop-filter(map-get($p, width), $important);
-  height: prop-filter(map-get($p, height), $important);
-  margin-right: prop-filter(map-get($p, margin-right), $important);
-  margin-left: prop-filter(map-get($p, margin-left), $important);
+@mixin icon--size($root, $size, $important: null) {
+  @if $size == "xxxl" {
+    width: px-to-rem(80px) $important;
+    height: px-to-rem(80px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "xxl" {
+    width: px-to-rem(64px) $important;
+    height: px-to-rem(64px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "xl" {
+    width: px-to-rem(48px) $important;
+    height: px-to-rem(48px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "l" {
+    width: px-to-rem(40px) $important;
+    height: px-to-rem(40px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "m" {
+    width: px-to-rem(32px) $important;
+    height: px-to-rem(32px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "s" {
+    width: px-to-rem(24px) $important;
+    height: px-to-rem(24px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
+  @if $size == "xs" {
+    width: px-to-rem(16px) $important;
+    height: px-to-rem(16px) $important;
+    margin-right: px-to-rem(8px) $important;
+    margin-left: px-to-rem(8px) $important;
+  }
 
   &:first-child {
-    margin-left: 0;
+    margin-left: 0 $important;
   }
 
   &:last-child {
-    margin-right: 0;
+    margin-right: 0 $important;
   }
 }
 
-@mixin size-xxxl--icon($important: null) {
-  @include size-icon($size-xxxl--icon, $important);
-}
+//
+// Sizes
+// --------------------------------------------------------------------------
 
-@mixin size-xxl--icon($important: null) {
-  @include size-icon($size-xxl--icon, $important);
-}
+$sizes: (
+  "xxxl",
+  "xxl",
+  "xl",
+  "l",
+  "m",
+  "s",
+  "xs",
+);
 
-@mixin size-xl--icon($important: null) {
-  @include size-icon($size-xl--icon, $important);
-}
-
-@mixin size-l--icon($important: null) {
-  @include size-icon($size-l--icon, $important);
-}
-
-@mixin size-m--icon($important: null) {
-  @include size-icon($size-m--icon, $important);
-}
-
-@mixin size-s--icon($important: null) {
-  @include size-icon($size-s--icon, $important);
-}
-
-@mixin size-xs--icon($important: null) {
-  @include size-icon($size-xs--icon, $important);
+@mixin icons-sizes($root, $name: null) {
+  @each $key in $sizes {
+    &[data-size="#{$key}"] {
+      @include icon--size($root, $key, !important);
+    }
+  }
 }

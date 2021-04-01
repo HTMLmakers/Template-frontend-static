@@ -26,10 +26,35 @@ button {
   min-width: auto;
   color: $color-white;
   font-family: $secure-fonts;
+  text-decoration: none;
   transition: all 0.2s;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  &:focus,
+  &[data-state="focus"] {
+    @extend %button-state--focus;
+  }
+
+  &:hover,
+  &[data-state="hover"] {
+    @extend %button-state--hover;
+  }
+
+  &:active,
+  &[data-state="active"] {
+    @extend %button-state--active;
+  }
+
+  &[disabled],
+  &[data-state="disabled"] {
+    @extend %button-state--disabled;
+  }
+
+  &[data-width="fullwidth"] {
+    @include fullwidth;
   }
 }
 
@@ -53,59 +78,30 @@ button {
 // --------------------------------------------------------------------------
 
 .button-primary {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %button;
-  @include size-l--button-primary;
+  @include buttons-sizes($root, "button-primary");
+  @include button-primary--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--button-primary;
+    @include button-primary--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--button-primary;
+    @include button-primary--size($root, "s");
   }
 
   background-color: green;
 
   &:hover,
-  &--hover {
-    @extend %button-state--hover;
-
+  &[data-state="hover"] {
     background-color: red;
   }
 
   &:active,
-  &--active {
-    @extend %button-state--active;
-
+  &[data-state="active"] {
     opacity: 0.5;
-  }
-
-  &:focus {
-    @extend %button-state--focus;
-  }
-
-  &--fullwidth {
-    @include fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--button-primary(!important);
-  }
-
-  &--size-m {
-    @include size-m--button-primary(!important);
-  }
-
-  &--size-s {
-    @include size-s--button-primary(!important);
   }
 }
 
@@ -114,60 +110,31 @@ button {
 // --------------------------------------------------------------------------
 
 .button-secondary {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %button;
-  @include size-l--button-secondary;
+  @include buttons-sizes($root, "button-secondary");
+  @include button-secondary--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--button-secondary;
+    @include button-secondary--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--button-secondary;
+    @include button-secondary--size($root, "s");
   }
 
   text-transform: uppercase;
   background-color: cornflowerblue;
 
   &:hover,
-  &--hover {
-    @extend %button-state--hover;
-
+  &[data-state="hover"] {
     background-color: dodgerblue;
   }
 
   &:active,
-  &--active {
-    @extend %button-state--active;
-
+  &[data-state="active"] {
     opacity: 0.5;
-  }
-
-  &:focus {
-    @extend %button-state--focus;
-  }
-
-  &--fullwidth {
-    @include fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--button-secondary(!important);
-  }
-
-  &--size-m {
-    @include size-m--button-secondary(!important);
-  }
-
-  &--size-s {
-    @include size-s--button-secondary(!important);
   }
 }
 
@@ -176,37 +143,30 @@ button {
 // --------------------------------------------------------------------------
 
 .button-complex {
-  $root: ".button-complex";
-
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %button;
-  @include size-l--button-complex($root);
+  @include buttons-sizes($root, "button-complex");
+  @include button-complex--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--button-complex($root);
+    @include button-complex--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--button-complex($root);
+    @include button-complex--size($root, "s");
   }
 
   background-color: purple;
 
   &:hover,
-  &--hover {
-    @extend %button-state--hover;
-
+  &[data-state="hover"] {
     background-color: mediumpurple;
   }
 
   &:active,
-  &--active {
-    @extend %button-state--active;
-
+  &[data-state="active"] {
     opacity: 0.5;
-  }
-
-  &:focus {
-    @extend %button-state--focus;
   }
 
   &__content {
@@ -219,30 +179,6 @@ button {
   &__desc {
     white-space: nowrap;
   }
-
-  &--fullwidth {
-    @include fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--button-complex($root, !important);
-  }
-
-  &--size-m {
-    @include size-m--button-complex($root, !important);
-  }
-
-  &--size-s {
-    @include size-s--button-complex($root, !important);
-  }
 }
 
 //
@@ -250,37 +186,30 @@ button {
 // --------------------------------------------------------------------------
 
 .button-apps {
-  $root: ".button-apps";
-
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %button;
-  @include size-l--button-apps($root);
+  @include buttons-sizes($root, "button-apps");
+  @include button-apps--size($root, "l");
 
   @include media-breakpoint-down(lg) {
-    @include size-m--button-apps($root);
+    @include button-apps--size($root, "m");
   }
 
   @include media-breakpoint-down(sm) {
-    @include size-s--button-apps($root);
+    @include button-apps--size($root, "s");
   }
 
-  background-color: purple;
+  background-color: cadetblue;
 
   &:hover,
-  &--hover {
-    @extend %button-state--hover;
-
-    background-color: mediumpurple;
+  &[data-state="hover"] {
+    background-color: skyblue;
   }
 
   &:active,
-  &--active {
-    @extend %button-state--active;
-
+  &[data-state="active"] {
     opacity: 0.5;
-  }
-
-  &:focus {
-    @extend %button-state--focus;
   }
 
   &__content {
@@ -306,41 +235,17 @@ button {
   }
 
   &__title {
-    @include size-l--h6;
+    @include h6--size($root, "l");
 
     @include media-breakpoint-down(lg) {
-      @include size-m--h6;
+      @include h6--size($root, "m");
     }
 
     @include media-breakpoint-down(sm) {
-      @include size-s--h6;
+      @include h6--size($root, "s");
     }
 
     margin-bottom: 0 !important;
     color: inherit;
-  }
-
-  &--fullwidth {
-    @include fullwidth;
-  }
-
-  &--disabled {
-    @extend %button-state--disabled;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include size-l--button-apps($root, !important);
-  }
-
-  &--size-m {
-    @include size-m--button-apps($root, !important);
-  }
-
-  &--size-s {
-    @include size-s--button-apps($root, !important);
   }
 }

@@ -18,7 +18,7 @@ $default-font-size: 14px;
 // Variables library
 // =============================================================================
 
-// body
+// Body
 $body-bg-library: $turbo;
 $body-bg-inner-library: $color-white;
 $body-color-library: $color-black;
@@ -27,3 +27,16 @@ $body-font-size-library: $default-font-size;
 
 // Grid Variables
 $enable-grid-classes: true;
+
+//
+// Sizes
+// -----------------------------------------------------------------------------
+$sizes: (
+  "xxxl",
+  "xxl",
+  "xl",
+  "l",
+  "m",
+  "s",
+  "xs",
+);

@@ -14,6 +14,14 @@ svg {
 
 // Dependencies
 
+%icon {
+
+  &[data-state="disabled"],
+  &[data-state="disabled"]::after {
+    @extend %icon-state--disabled;
+  }
+}
+
 %icon-state--disabled {
   opacity: 0.5;
 }
@@ -23,51 +31,20 @@ svg {
 // --------------------------------------------------------------------------
 
 .icon-svg {
+  $root: &;
+  @extend %icon;
+  @include icons-sizes($root);
+
   display: inline-flex;
   flex-grow: 0;
   flex-shrink: 0;
   background-color: cyan;
-
-  &--disabled {
-    @extend %icon-state--disabled;
-  }
 
   svg {
     @include full-fit;
 
     background-color: red;
     border-radius: 50%;
-  }
-
-  // ----------------------------------------
-
-  // sizes
-  &--size-xxxl {
-    @include size-xxxl--icon;
-  }
-
-  &--size-xxl {
-    @include size-xxl--icon;
-  }
-
-  &--size-xl {
-    @include size-xl--icon;
-  }
-
-  &--size-l {
-    @include size-l--icon;
-  }
-
-  &--size-m {
-    @include size-m--icon;
-  }
-
-  &--size-s {
-    @include size-s--icon;
-  }
-
-  &--size-xs {
-    @include size-xs--icon;
   }
 }
 
@@ -76,6 +53,10 @@ svg {
 // --------------------------------------------------------------------------
 
 .icon-png {
+  $root: &;
+  @extend %icon;
+  @include icons-sizes($root);
+
   position: relative;
   display: inline-flex;
   text-indent: -9999px;
@@ -88,48 +69,5 @@ svg {
     background-color: darkviolet;
     border-radius: 50%;
     content: "";
-  }
-
-  &--disabled,
-  &--disabled::after {
-    @extend %icon-state--disabled;
-  }
-
-  //&--name {
-  //
-  //  &::after {
-  //    //@include sprite($icon-instagram);
-  //  }
-  //}
-
-  // ----------------------------------------
-
-  // sizes
-  &--size-xxxl {
-    @include size-xxxl--icon;
-  }
-
-  &--size-xxl {
-    @include size-xxl--icon;
-  }
-
-  &--size-xl {
-    @include size-xl--icon;
-  }
-
-  &--size-l {
-    @include size-l--icon;
-  }
-
-  &--size-m {
-    @include size-m--icon;
-  }
-
-  &--size-s {
-    @include size-s--icon;
-  }
-
-  &--size-xs {
-    @include size-xs--icon;
   }
 }

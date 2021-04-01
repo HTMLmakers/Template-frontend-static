@@ -38,9 +38,14 @@ dl {
 
   li {
     margin-bottom: px-to-rem(10px);
+    list-style-position: inside;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    > span {
+      display: inline;
     }
   }
 }
@@ -48,36 +53,46 @@ dl {
 /* ----- Unordered list */
 
 .list {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %list;
+  @include body-text-sizes($root);
+  @include body-text--size($root, "l");
 
-  // ----------------------------------------
-
-  // sizes
-
-  &--size-l {
-    @include list--size-l;
+  @include media-breakpoint-down(lg) {
+    @include body-text--size($root, "m");
   }
 
-  &--size-m {
-    @include list--size-m;
-  }
-
-  &--size-s {
-    @include list--size-s;
+  @include media-breakpoint-down(sm) {
+    @include body-text--size($root, "s");
   }
 }
 
 /* ----- Ordered list */
 
 .numlist {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
   @extend %list;
+  @include size-l--list;
+  @include body-text-sizes($root);
+  @include body-text--size($root, "l");
+
+  @include media-breakpoint-down(lg) {
+    @include size-m--list;
+    @include body-text--size($root, "m");
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include size-s--list;
+    @include body-text--size($root, "s");
+  }
 
   &--stylized-marker {
     counter-reset: li;
 
     > li {
       position: relative;
-      padding-left: px-to-rem(35px);
       list-style: none;
 
       &::before {
@@ -87,21 +102,10 @@ dl {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: px-to-rem(24px);
-        height: px-to-rem(24px);
         color: $color-white;
         background-color: $color-black;
         content: counter(li);
         counter-increment: li;
-      }
-    }
-
-    li {
-
-      span {
-        display: flex;
-        align-items: center;
-        min-height: px-to-rem(24px);
       }
     }
 
@@ -122,13 +126,6 @@ dl {
         counter-increment: li;
       }
     }
-
-    li {
-
-      span {
-        padding-left: px-to-rem(4px);
-      }
-    }
   }
 
   // ----------------------------------------
@@ -136,15 +133,15 @@ dl {
   // sizes
 
   &--size-l {
-    @include numlist--size-l;
+    @include size-l--list(!important);
   }
 
   &--size-m {
-    @include numlist--size-m;
+    @include size-m--list(!important);
   }
 
   &--size-s {
-    @include numlist--size-s;
+    @include size-s--list(!important);
   }
 }
 
@@ -165,14 +162,14 @@ dl {
   // sizes
 
   &--size-l {
-    @include desclist--size-l;
+    //@include desclist--size-l;
   }
 
   &--size-m {
-    @include desclist--size-m;
+    //@include desclist--size-m;
   }
 
   &--size-s {
-    @include desclist--size-s;
+    //@include desclist--size-s;
   }
 }
