@@ -1,0 +1,18 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonBurger
+   ========================================================================== */
+
+.button-burger {
+  $root: &;
+
+  @include button-burger-sizes($root);
+  @include button-burger-color-themes($root);
+  @include button-burger--size($root, "l");
+  @include button-burger--color-theme($root, "white", !important);
+
+  @include media-breakpoint-down(md) {
+    @include button-burger--size($root, "m");
+  }
+}

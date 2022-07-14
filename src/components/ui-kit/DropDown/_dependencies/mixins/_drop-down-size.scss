@@ -1,0 +1,156 @@
+// =============================================================================
+// Mixins -- DropDown size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin drop-down--size($root, $size, $important: null) {
+
+  #{$root}__area {
+    padding-top: px-to-rem(12px) !important;
+  }
+
+  .drop-down-nav {
+    max-width: px-to-rem(480px) !important;
+    min-width: px-to-rem(240px) !important;
+
+    &__section {
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    &__title {
+      @include desc--size($root, "s");
+
+      margin-bottom: 0 !important;
+    }
+
+    &__control {
+      @include link-primary--size($root, "l");
+    }
+
+    &__item {
+      margin-bottom: px-to-rem(8px) !important;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  @if $size == "l" {
+
+    &[data-drag] {
+
+      .drop-down-nav {
+
+        &__item-content {
+          padding-right: px-to-rem(56px) !important;
+        }
+
+        &__icon-drag {
+          right: px-to-rem(8px) !important;
+          padding: px-to-rem(8px) !important;
+        }
+      }
+    }
+
+    .drop-down-nav {
+      @include section-primary-size-l;
+
+      &__section {
+        margin-bottom: px-to-rem(16px) !important;
+      }
+
+      &__header {
+        margin-bottom: px-to-rem(16px) !important;
+      }
+
+      &__title {
+        margin-right: px-to-rem(40px) !important;
+      }
+
+      &__search {
+        margin-bottom: px-to-rem(16px) !important;
+      }
+
+      &__item-content {
+        @include section-secondary-size-l;
+
+        padding-top: px-to-rem(12px) !important;
+        padding-bottom: px-to-rem(12px) !important;
+      }
+
+    }
+  }
+
+  @if $size == "m" {
+
+    &[data-drag] {
+
+      .drop-down-nav {
+
+        &__item-content {
+          padding-right: px-to-rem(40px) !important;
+        }
+
+        &__icon-drag {
+          right: px-to-rem(12px) !important;
+        }
+      }
+    }
+
+    .drop-down-nav {
+      @include section-primary-size-m;
+
+      &__section {
+        margin-bottom: px-to-rem(12px) !important;
+      }
+
+      &__header {
+        margin-bottom: px-to-rem(8px) !important;
+      }
+
+      &__title {
+        margin-right: px-to-rem(24px) !important;
+      }
+
+      &__search {
+        margin-bottom: px-to-rem(8px) !important;
+      }
+
+      &__item-content {
+        @include section-secondary-size-m;
+
+        padding-top: px-to-rem(8px) !important;
+        padding-bottom: px-to-rem(8px) !important;
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$dropDownSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin drop-down-sizes($root) {
+  @each $key in $dropDownSizes {
+    &[data-size="#{$key}"] {
+      @include drop-down--size($root, $key, !important);
+    }
+  }
+}

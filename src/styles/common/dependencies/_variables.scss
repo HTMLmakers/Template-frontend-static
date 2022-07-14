@@ -7,16 +7,69 @@
 // -----------------------------------------------------------------------------
 
 // Colors Default
-$color-white: #fff;
-$color-black: #000;
+$color-white:        #fff;
+$color-black:        #000;
 
-// Colors Brand
+// Colors Brand Scale
+$color-blue-primary:            #4A51E5;
+$color-blue-secondary:          #4349CE;
+$color-blue-tertiary:           #3C42B9;
+$color-blue-quaternary:         #363BA7;
+$color-blue-quinary:            #313596;
+$color-blue-senary:             #535BF6;
+
+$color-blue-light-primary:      #878DF2;
+$color-blue-light-secondary:    #7A7FDA;
+$color-blue-light-tertiary:     #6D72C4;
+$color-blue-light-quaternary:   #6267B0;
+$color-blue-light-quinary:      #595D9F;
+
+$color-blue-dark-primary:       #21268A;
+$color-blue-dark-secondary:     #0F1139;
+
+// Colors Gray Scale
+$color-gray-primary:            #8284A4;
+$color-gray-secondary:          #D5DAEA;
+$color-gray-tertiary:           #F1F3F9;
+$color-gray-quaternary:         #F8F9FC;
+
+// Colors Additional Scale
+$color-orange-primary:          #FF8A00;
+$color-orange-secondary:        #E57C00;
+$color-orange-tertiary:         #CF7000;
+$color-orange-quaternary:       #BA6500;
+$color-orange-quinary:          #A75B00;
+
+$color-yellow-primary:          #FFC700;
+$color-yellow-secondary:        #E5B300;
+$color-yellow-tertiary:         #CFA100;
+$color-yellow-quaternary:       #BA9100;
+$color-yellow-quinary:          #A78300;
+
+$color-green-primary:           #00C97C;
+$color-green-secondary:         #00B570;
+$color-green-tertiary:          #00A364;
+$color-green-quaternary:        #00935A;
+$color-green-quinary:           #008451;
 
 
-// Colors Gray
+$color-azure-primary:           #0ABBF2;
+$color-azure-secondary:         #09A8DA;
+$color-azure-tertiary:          #0897C4;
+$color-azure-quaternary:        #0788B0;
+$color-azure-quinary:           #077B9F;
 
+$color-velvet-primary:          #AE6EE1;
+$color-velvet-secondary:        #9D63CB;
+$color-velvet-tertiary:         #8D59B6;
+$color-velvet-quaternary:       #7F50A4;
+$color-velvet-quinary:          #724894;
 
-// Colors Additional
+$color-red-primary:             #F85A50;
+$color-red-secondary:           #DF5148;
+$color-red-tertiary:            #C94941;
+$color-red-quaternary:          #B5423A;
+$color-red-quinary:             #A33B34;
 
 //
 // Fonts
@@ -26,7 +79,7 @@ $color-black: #000;
 $secure-fonts: Arial, Helvetica, "Nimbus Sans", Sans-serif;
 
 // Fonts Brand
-$font-segoeui-regular: SegoeUI-Regular, $secure-fonts;
+$font-manrope: 'Manrope', $secure-fonts;
 
 // Font size default
 $default-font-size: 16px;
@@ -41,8 +94,8 @@ $default-font-size: 16px;
 
 // Grid Variables
 $body-bg: $color-white;
-$body-color: $color-black;
-$body-font-family: $secure-fonts;
+$body-color: $color-blue-dark-secondary;
+$body-font-family: $font-manrope;
 $body-font-size: $default-font-size;
 
 //
@@ -54,71 +107,88 @@ $enable-grid-classes: false;
 $grid-columns-12: 12;
 $grid-columns-6: 6;
 $grid-columns: $grid-columns-12;
-$grid-gutter-width: 32px;
-$grid-gutter-width-small: 16px;
-$grid-side-width: 192px;
+$grid-gutter-width: 0px;
+$grid-gutter-width-small: 0px;
+$grid-side-width: 0px;
 
 // Grid Breakpoints
 $grid-breakpoints: (
-  xs: 0,
-  sm: 320px,
-  md: 768px,
-  lg: 1024px,
-  xl: 1440px,
-  xxl: 1920px
+  xs:    0,
+  sm:    360px,
+  md:    568px,
+  lg:    768px,
+  xl:    1024px,
+  xxl:   1280px,
+  xxxl:   1366px,
+  xxxxl:  1440px,
+  xxxxxl: 1680px,
+  xxxxxxl: 1920px
 );
 
 // Grid maps
 $grid-columns-map: (
-  xs: $grid-columns-6,
-  sm: $grid-columns-6,
-  md: $grid-columns-6,
-  lg: $grid-columns-12,
-  xl: $grid-columns-12,
+  xs:    $grid-columns-12,
+  sm:    $grid-columns-12,
+  md:    $grid-columns-12,
+  lg:    $grid-columns-12,
+  xl:    $grid-columns-12,
+  xxl:   $grid-columns-12,
+  xxxl:   $grid-columns-12,
+  xxxxl:  $grid-columns-12,
+  xxxxxl: $grid-columns-12,
+  xxxxxxl: $grid-columns-12
 );
 
 $grid-gutter-width-map: (
-  xs: $grid-gutter-width-small,
-  sm: $grid-gutter-width-small,
-  md: $grid-gutter-width,
-  lg: $grid-gutter-width-small,
-  xl: $grid-gutter-width,
+  xs:    $grid-gutter-width,
+  sm:    $grid-gutter-width,
+  md:    $grid-gutter-width,
+  lg:    $grid-gutter-width,
+  xl:    $grid-gutter-width,
+  xxl:   $grid-gutter-width,
+  xxxl:   $grid-gutter-width,
+  xxxxl:  $grid-gutter-width,
+  xxxxxl: $grid-gutter-width,
+  xxxxxxl: $grid-gutter-width
 );
 
 $grid-side-width-map: (
-  xs: 48px,
-  sm: 48px,
-  md: 96px,
-  lg: 120px,
-  xl: 192px,
+  xs:    $grid-side-width,
+  sm:    $grid-side-width,
+  md:    $grid-side-width,
+  lg:    $grid-side-width,
+  xl:    $grid-side-width,
+  xxl:   $grid-side-width,
+  xxxl:   $grid-side-width,
+  xxxxl:  $grid-side-width,
+  xxxxxl: $grid-side-width,
+  xxxxxxl: $grid-side-width
 );
 
 $container-max-widths: (
-  // Desktop-only version
-  //  sm: 1200px
+  //Desktop-only version
+  //xs: 1440px
 
   // Responsive version
-  xs: 272px,
-  sm: 100%,
-  md: 624px,
-  lg: 880px,
-  xl: 1168px
+  xs:    360px,
+  sm:    100%,
+  md:    100%,
+  lg:    100%,
+  xl:    100%,
+  xxl:   100%,
+  xxxl:   100%,
+  xxxxl:  100%,
+  xxxxxl: 100%,
+  xxxxxxl: 100%
 );
 
-/*//
-// Sizes
-// -----------------------------------------------------------------------------
-$sizes: (
-  "l",
-  "m",
-  "s",
-);*/
-
 //
-// Popups
+// Other
 // -----------------------------------------------------------------------------
 
-// Popups Variables
-$popup-overlay-bg: $color-black;
-$popup-overlay-opacity: 0.8;
-$popup-width: 800px;
+// Transition
+$transition-primary: all 0.3s ease-in-out;
+$transition-secondary: all 0.5s ease-in-out;
+
+// Overlay
+$overlay-bg-primary: rgba($color-blue-dark-primary, 0.1);

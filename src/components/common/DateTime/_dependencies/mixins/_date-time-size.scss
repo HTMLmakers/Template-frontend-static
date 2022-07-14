@@ -1,0 +1,48 @@
+// =============================================================================
+// Mixins -- DateTime size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin date-time--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include desc--size($root, "m");
+  }
+
+  @if $size == "m" {
+    @include desc--size($root, "s");
+  }
+
+  @if $size == "s" {
+    @include desc--size($root, "xs");
+  }
+
+  #{$root}__date {
+    margin-right: px-to-rem(4px);
+
+    &:only-child {
+      margin-right: 0;
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$dateTimeSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin date-time-sizes($root) {
+  @each $key in $dateTimeSizes {
+    &[data-size="#{$key}"] {
+      @include date-time--size($root, $key, !important);
+    }
+  }
+}

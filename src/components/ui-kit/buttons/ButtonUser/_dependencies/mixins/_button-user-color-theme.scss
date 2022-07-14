@@ -1,0 +1,62 @@
+// =============================================================================
+// Mixins -- ButtonUser color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-user--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+    color:$color-gray-primary;
+    background-color: $color-white;
+    border: 1px solid $color-white;
+
+    #{$root}__text-primary{
+      @include heading--color-theme($root, "default");
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"] {
+      border-color: $color-gray-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$buttonUserColorThemes: (
+  "default"
+);
+
+@mixin button-user-color-themes($root) {
+  @each $key in $buttonUserColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-user--color-theme($root, $key);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+// =============================================================================
+// Mixins -- Scroll color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin scroll--color-theme($root, $color-theme, $important: null) {
+
+  //gray-secondary (default)
+  @if $color-theme == "gray-secondary" {
+
+    .ScrollbarsCustom-Track {
+      background: $color-gray-tertiary !important;
+    }
+
+    .ScrollbarsCustom-Thumb {
+      background: $color-gray-secondary !important;
+    }
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$scrollThemes: (
+  "gray-secondary",
+);
+
+@mixin scroll-color-themes($root) {
+  @each $key in $scrollThemes {
+    &[data-color-theme="#{$key}"] {
+      @include scroll--color-theme($root, $key);
+    }
+  }
+}

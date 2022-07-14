@@ -1,0 +1,33 @@
+@import "../../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Checkbox
+   ========================================================================== */
+
+.checkbox {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %field-check;
+  @include checkbox-sizes($root);
+  @include checkbox--size($root, "l");
+  @include checkbox-color-themes($root);
+  @include checkbox--color-theme($root, "default");
+  @include field-check($root);
+
+  &__custom {
+    border-radius: px-to-rem(4px);
+  }
+
+  input:checked + #{$root}__custom,
+  input[checked] + #{$root}__custom,
+  &[data-state="checked"] #{$root}__custom {
+    &:before {
+      background-image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='%234A51E5' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M13.7348 4.32172C14.1094 4.72755 14.0841 5.3602 13.6783 5.73481L7.1783 11.7348C6.80559 12.0788 6.23434 12.0894 5.84923 11.7593L2.34923 8.75926C1.9299 8.39984 1.88134 7.76854 2.24076 7.34921C2.60018 6.92989 3.23148 6.88133 3.65081 7.24075L6.4754 9.66182L12.3217 4.2652C12.7276 3.8906 13.3602 3.9159 13.7348 4.32172Z' /></svg>");
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include checkbox--size($root, "m");
+  }
+}

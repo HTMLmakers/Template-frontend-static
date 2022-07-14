@@ -1,0 +1,82 @@
+// =============================================================================
+// Mixins -- NotificationSecondary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin notification-secondary--size($root, $size, $important: null) {
+
+  @include fullwidth;
+  @include desc--size($root, "s");
+
+  @if $size == "l" {
+    @include section-secondary-size-l;
+
+    #{$root}__pic {
+      margin-right: px-to-rem(16px);
+    }
+
+    #{$root}__content {
+      padding-right: px-to-rem(32px);
+    }
+
+    #{$root}__date {
+      margin-top: px-to-rem(16px);
+    }
+
+    #{$root}__close {
+      right: px-to-rem(16px);
+      top: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "m" {
+    @include section-secondary-size-m;
+
+    #{$root}__pic {
+      margin-right: px-to-rem(12px);
+    }
+
+    #{$root}__content {
+      padding-right: px-to-rem(28px);
+    }
+
+    #{$root}__date {
+      margin-top: px-to-rem(12px);
+    }
+
+    #{$root}__close {
+      right: px-to-rem(12px);
+      top: px-to-rem(12px);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+  &[data-group="primary"],
+  &[data-group="tertiary"] {
+    border-radius: px-to-rem(12px);
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$notificationSecondarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin notification-secondary-sizes($root) {
+  @each $key in $notificationSecondarySizes {
+    &[data-size="#{$key}"] {
+      @include notification-secondary--size($root, $key, !important);
+    }
+  }
+}

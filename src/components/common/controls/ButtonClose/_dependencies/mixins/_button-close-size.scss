@@ -1,0 +1,47 @@
+// =============================================================================
+// Mixins -- ButtonClose size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-close--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    .button-primary {
+      @include button-primary--size($root, "l", !important);
+    }
+  }
+
+  @if $size == "m" {
+
+    .button-primary {
+      @include button-primary--size($root, "m", !important);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonCloseSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin button-close-sizes($root) {
+  @each $key in $buttonCloseSizes {
+    &[data-size="#{$key}"] {
+      @include button-close--size($root, $key, !important);
+    }
+  }
+}

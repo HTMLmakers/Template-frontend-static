@@ -1,0 +1,55 @@
+// =============================================================================
+// Mixins -- table primary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin table-primary--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    #{$root}__mobile-desc {
+      color: $color-gray-primary;
+    }
+
+    #{$root}__name-caption {
+      color:$color-blue-dark-secondary;
+    }
+
+    tr {
+
+      //Временный цвет ячеек
+      td, th {
+        background-color: $color-white;
+
+        // Цвет горизонтальной полосы
+        &::after {
+          background-color: $color-gray-secondary;
+        }
+      }
+      //Цвет текста в ячейках
+      td {
+        color:$color-gray-primary;
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$tablePrimaryColorThemes: (
+  "default",
+);
+
+@mixin table-primary-color-themes($root) {
+  @each $key in $tablePrimaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include table-primary--color-theme($root, $key);
+    }
+  }
+}

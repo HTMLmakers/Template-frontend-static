@@ -1,0 +1,27 @@
+// =============================================================================
+// Mixins -- PageNav color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin page-nav--color-theme($root, $color-theme, $important: null) {
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$pageNavColorThemes: (
+
+);
+
+@mixin page-nav-color-themes($root) {
+  @each $key in $pageNavColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include page-nav--color-theme($root, $key);
+    }
+  }
+}

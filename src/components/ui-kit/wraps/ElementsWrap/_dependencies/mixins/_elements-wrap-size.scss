@@ -1,0 +1,121 @@
+// =============================================================================
+// Mixins -- ElementsWrap size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin elements-wrap--size($root, $size, $important: null) {
+
+  @if $size == "xl" {
+
+    &[data-direction="horizontal"] {
+      margin-right: px-to-rem(-16px) !important;
+      margin-bottom: px-to-rem(-16px) !important;
+
+      > * {
+        margin-right: px-to-rem(16px) !important;
+        margin-bottom: px-to-rem(16px) !important;
+      }
+    }
+
+    &[data-direction="vertical"] {
+      > * {
+        margin-right: 0 !important;
+        margin-bottom: px-to-rem(16px) !important;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  }
+
+  @if $size == "l" {
+
+    &[data-direction="horizontal"] {
+      margin-right: px-to-rem(-12px) !important;
+      margin-bottom: px-to-rem(-12px) !important;
+
+      > * {
+        margin-right: px-to-rem(12px) !important;
+        margin-bottom: px-to-rem(12px) !important;
+      }
+    }
+
+    &[data-direction="vertical"] {
+      > * {
+        margin-right: 0 !important;
+        margin-bottom: px-to-rem(12px) !important;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  }
+
+  @if $size == "m" {
+
+    &[data-direction="horizontal"] {
+      margin-right: px-to-rem(-8px) !important;
+      margin-bottom: px-to-rem(-8px) !important;
+
+      > * {
+        margin-right: px-to-rem(8px) !important;
+        margin-bottom: px-to-rem(8px) !important;
+      }
+    }
+
+    &[data-direction="vertical"] {
+      > * {
+        margin-right: 0 !important;
+        margin-bottom: px-to-rem(8px) !important;
+
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+
+  }
+
+  @if $size == "s" {
+
+  }
+
+  > * {
+    margin-left: 0 !important;
+  }
+
+  &[data-nowrap] {
+    margin-bottom: 0 !important;
+
+    > * {
+      margin-bottom: 0 !important;
+    }
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$elementsWrapSizes: (
+  "xl",
+  "l",
+  "m",
+  "s",
+);
+
+@mixin elements-wrap-sizes($root) {
+  @each $key in $elementsWrapSizes {
+    &[data-size="#{$key}"] {
+      @include elements-wrap--size($root, $key, !important);
+    }
+  }
+}

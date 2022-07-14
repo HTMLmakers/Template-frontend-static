@@ -1,0 +1,43 @@
+// =============================================================================
+// Mixins -- DateTime color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin date-time--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "gray-primary" {
+    color: $color-gray-primary;
+  }
+
+  //dark-secondary
+  @if $color-theme == "blue-dark-secondary" {
+    color: $color-blue-dark-secondary;
+  }
+
+  //inherit
+  @if $color-theme == "inherit" {
+    color: inherit;
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$dateTimeColorThemes: (
+  "gray-primary",
+  "blue-dark-secondary",
+  "inherit",
+);
+
+@mixin date-time-color-themes($root) {
+  @each $key in $dateTimeColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include date-time--color-theme($root, $key);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonTab
+   ========================================================================== */
+
+.button-tab {
+  $root: &;
+
+  @extend %button;
+  @include button-tab-sizes($root);
+  @include button-tab-color-themes($root);
+  @include button-tab--size($root, "l");
+  @include button-tab--color-theme($root, "default");
+
+  flex-shrink: 0;
+  font-weight: 800;
+  line-height: 1.3;
+
+  .icon-svg {
+    margin-right: 0 !important;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include button-tab--size($root, "m");
+  }
+}
+
+

@@ -1,0 +1,31 @@
+// =============================================================================
+// Mixins -- SectionPrimary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin section-primary--color-theme($root, $color-theme, $important: null) {
+
+  //grey-quaternary
+  @if $color-theme == "grey-quaternary" {
+    @include section-primary-color;
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$sectionPrimaryColorThemes: (
+  "grey-quaternary",
+);
+
+@mixin section-primary-color-themes($root) {
+  @each $key in $sectionPrimaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include section-primary--color-theme($root, $key);
+    }
+  }
+}

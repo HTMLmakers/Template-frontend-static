@@ -1,0 +1,22 @@
+@import "../../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Textarea
+   ========================================================================== */
+
+.textarea {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %field-text;
+  @include textarea-sizes($root);
+  @include textarea--size($root, "l");
+  @include textarea-color-themes($root);
+  @include textarea--color-theme($root, "default");
+
+  display: flex;
+
+  @include media-breakpoint-down(md) {
+    @include textarea--size($root, "m");
+  }
+}

@@ -1,0 +1,41 @@
+@import "../../../../../../styles/dependencies";
+
+
+/* ==========================================================================
+   Ui-kit elements -- checkbox
+   ========================================================================== */
+
+.toggle {
+  $root: ".toggle";
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %field-check;
+  @include toggle-sizes($root);
+  @include toggle--size($root, "l");
+  @include toggle--color-theme($root, "default");
+  @include field-check-default($root);
+
+  &__custom {
+    @include transition-primary;
+
+    position: absolute;
+    display: inline-block;
+    flex-shrink: 0;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      border-style: solid;
+      transition: inherit;
+    }
+
+    &:before {
+
+    }
+
+    &:after {
+
+    }
+  }
+}

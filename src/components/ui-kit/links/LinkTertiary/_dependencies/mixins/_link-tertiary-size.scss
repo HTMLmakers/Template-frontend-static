@@ -1,0 +1,53 @@
+// =============================================================================
+// Mixins -- LinkTertiary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin link-tertiary--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include h7--size($root, "l");
+
+    #{$root}__text {
+      margin-top: px-to-rem(-1px);
+      padding-right: px-to-rem(16px);
+    }
+
+    .icon-svg {
+      @include icon--size($root, "m", !important);
+    }
+
+    .mark-primary {
+      @include mark-primary--size($root, "m", !important);
+    }
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$linkTertiarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin link-tertiary-sizes($root) {
+  @each $key in $linkTertiarySizes {
+    &[data-size="#{$key}"] {
+      @include link-tertiary--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- SectionPrimary
+   ========================================================================== */
+
+.section-primary {
+  $root: &;
+
+  @include section-primary-sizes($root);
+  @include section-primary-color-themes($root);
+  @include section-primary--size($root, "l");
+  @include section-primary--color-theme($root, "grey-quaternary");
+
+  @include media-breakpoint-down(md) {
+    @include section-primary--size($root, "m");
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ElementsList
+   ========================================================================== */
+
+.elements-list {
+  $root: ".elements-list";
+  //@include media-breakpoint-down(sm) {}
+
+  @include elements-list-sizes($root);
+  @include elements-list-color-themes($root);
+  @include elements-list--size($root, "l");
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,42 @@
+// =============================================================================
+// Mixins -- HelpWidget color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin help-widget--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+    @include section-secondary-color;
+
+    color: $color-blue-dark-secondary;
+
+    #{$root}__desc {
+      color: $color-gray-primary;
+    }
+
+    &[data-size="s"] {
+      background-color: transparent;
+    }
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$helpWidgetColorThemes: (
+  "white",
+);
+
+@mixin help-widget-color-themes($root) {
+  @each $key in $helpWidgetColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include help-widget--color-theme($root, $key);
+    }
+  }
+}

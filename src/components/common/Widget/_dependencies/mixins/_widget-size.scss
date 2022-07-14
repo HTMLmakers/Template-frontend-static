@@ -1,0 +1,116 @@
+// =============================================================================
+// Mixins -- Widget size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin widget--size($root, $size, $important: null) {
+
+  min-width: px-to-rem(432px);
+  padding: 0 !important;
+
+  #{$root}__desc {
+    margin-top: px-to-rem(4px);
+
+    .desc {
+      @include desc--size($root, "s");
+    }
+  }
+
+  #{$root}__place {
+    padding-top: px-to-rem(12px);
+  }
+
+  @if $size == "l" {
+    @include section-secondary-size-l;
+
+    min-height: px-to-rem(145px);
+
+    #{$root}__main {
+      min-width: px-to-rem(200px);
+      padding: px-to-rem(16px);
+    }
+
+    #{$root}__heading {
+
+      .heading {
+        @include h6--size($root, "l");
+      }
+    }
+
+    #{$root}__icon {
+      padding-right: px-to-rem(16px);
+      padding-bottom: px-to-rem(16px);
+    }
+
+    #{$root}__image {
+      max-height: px-to-rem(140px);
+    }
+
+    .elements-wrap {
+      @include elements-wrap--size($root, "xl")
+    }
+
+  }
+
+  @if $size == "m" {
+    @include section-secondary-size-m;
+
+    min-height: px-to-rem(127px);
+
+    #{$root}__main {
+      padding: px-to-rem(12px) px-to-rem(8px) px-to-rem(12px) px-to-rem(12px);
+    }
+
+    #{$root}__heading {
+
+      .heading {
+        @include h7--size($root, "l");
+      }
+    }
+
+    #{$root}__icon {
+      padding-right: px-to-rem(12px);
+      padding-bottom: px-to-rem(12px);
+    }
+
+    #{$root}__image {
+      max-height: px-to-rem(122px);
+    }
+
+    .elements-wrap {
+      @include elements-wrap--size($root, "m")
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+  .elements-wrap {
+
+    &[data-size="m"] {
+      @include elements-wrap--size($root, "m", !important);
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$widgetSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin widget-sizes($root) {
+  @each $key in $widgetSizes {
+    &[data-size="#{$key}"] {
+      @include widget--size($root, $key, !important);
+    }
+  }
+}

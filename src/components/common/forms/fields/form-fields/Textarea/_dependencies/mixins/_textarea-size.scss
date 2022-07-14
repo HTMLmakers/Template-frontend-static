@@ -1,0 +1,52 @@
+// =============================================================================
+// Mixins -- Textarea size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin textarea--size($root, $size, $important: null) {
+
+  height:px-to-rem(70px) ;
+
+  @if $size == "l" {
+
+    textarea {
+      @include field-padding-default-l;
+    }
+  }
+
+  @if $size == "m" {
+
+    textarea {
+      @include field-padding-default-m;
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+  &[data-color-theme="opacity"] {
+    @include field-size-opacity;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$textareaSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin textarea-sizes($root) {
+  @each $key in $textareaSizes {
+    &[data-size="#{$key}"] {
+      @include textarea--size($root, $key, !important);
+    }
+  }
+}

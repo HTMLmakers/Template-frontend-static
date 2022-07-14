@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- comments-form color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-form--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+    background-color: $color-gray-quaternary;
+
+    #{$root}__button {
+      svg {
+        fill: $color-white;
+      }
+    }
+
+    #{$root}__field {
+      background-color: $color-white;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$commentsFormColorThemes: (
+  "default",
+);
+
+@mixin comments-form-color-themes($root) {
+  @each $key in $commentsFormColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include comments-form--color-theme($root, $key);
+    }
+  }
+}

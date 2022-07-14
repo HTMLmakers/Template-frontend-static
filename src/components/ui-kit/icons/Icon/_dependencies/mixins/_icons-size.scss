@@ -1,0 +1,70 @@
+// =============================================================================
+// Mixins -- Icon size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin icon--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    width: px-to-rem(40px) !important;
+    height: px-to-rem(40px) !important;
+    margin-right: px-to-rem(16px) !important;
+    margin-left: px-to-rem(16px) !important;
+  }
+
+  @if $size == "m" {
+    width: px-to-rem(24px) !important;
+    height: px-to-rem(24px) !important;
+    margin-right: px-to-rem(12px) !important;
+    margin-left: px-to-rem(12px) !important;
+  }
+
+  @if $size == "s" {
+    width: px-to-rem(16px) !important;
+    height: px-to-rem(16px) !important;
+    margin-right: px-to-rem(10px) !important;
+    margin-left: px-to-rem(10px) !important;
+  }
+
+  @if $size == "xs" {
+    width: px-to-rem(8px) !important;
+    height: px-to-rem(8px) !important;
+    margin-right: px-to-rem(8px) !important;
+    margin-left: px-to-rem(8px) !important;
+  }
+
+  &:first-child {
+    margin-left: 0 !important;
+  }
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+
+  &:only-child {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$iconSizes: (
+  "l",
+  "m",
+  "s",
+  "xs",
+);
+
+@mixin icon-sizes($root) {
+  @each $key in $iconSizes {
+    &[data-size="#{$key}"] {
+      @include icon--size($root, $key, !important);
+    }
+  }
+}

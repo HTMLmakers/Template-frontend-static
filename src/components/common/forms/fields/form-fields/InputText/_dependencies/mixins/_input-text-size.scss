@@ -1,0 +1,110 @@
+// =============================================================================
+// Mixins -- input-text size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin input-text--size($root, $size, $important: null) {
+
+  #{$root}__place-before,
+  #{$root}__place-after {
+
+    p {
+      margin: 0;
+    }
+
+    & > * {
+      margin-right: px-to-rem(8px) !important;
+
+      &:last-child {
+        margin-right: 0!important;
+      }
+    }
+  }
+
+  @if $size == "l" {
+    @include field-height-default-l;
+
+    input {
+      @include field-padding-default-l;
+    }
+
+    #{$root}__place-before {
+      padding-left: px-to-rem(14px);
+    }
+
+    #{$root}__place-after {
+      padding-right: px-to-rem(14px);
+    }
+
+    &[data-color-theme="opacity"] {
+      #{$root}__place-before {
+        padding-right: px-to-rem(14px);
+        padding-left: 0;
+      }
+
+      #{$root}__place-after {
+        padding-right: 0;
+        padding-left: px-to-rem(14px);
+      }
+    }
+  }
+
+  @if $size == "m" {
+    @include field-height-default-m;
+
+    input {
+      @include field-padding-default-m;
+    }
+
+    #{$root}__place-before {
+      padding-left: px-to-rem(12px);
+    }
+
+    #{$root}__place-after {
+      padding-right: px-to-rem(12px);
+    }
+
+    &[data-color-theme="opacity"] {
+      #{$root}__place-before {
+        padding-right: px-to-rem(12px);
+        padding-left: 0;
+      }
+
+      #{$root}__place-after {
+        padding-right: 0;
+        padding-left: px-to-rem(12px);
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+  &[data-color-theme="opacity"] {
+    @include field-size-opacity;
+
+    height: auto !important;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$inputTextSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin input-text-sizes($root) {
+  @each $key in $inputTextSizes {
+    &[data-size="#{$key}"] {
+      @include input-text--size($root, $key, !important);
+    }
+  }
+}

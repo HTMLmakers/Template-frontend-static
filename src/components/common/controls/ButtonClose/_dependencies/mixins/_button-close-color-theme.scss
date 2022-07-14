@@ -1,0 +1,59 @@
+// =============================================================================
+// Mixins -- ButtonClose color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-close--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+
+    .button-primary {
+      @include button-primary--color-theme($root, "white-primary", !important);
+    }
+  }
+
+  //blue-senary
+  @if $color-theme == "blue-senary" {
+
+    .button-primary {
+      background-color: $color-blue-senary;
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-white !important;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-white !important;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonCloseColorThemes: (
+  "white",
+  "blue-senary",
+);
+
+@mixin button-close-color-themes($root) {
+  @each $key in $buttonCloseColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-close--color-theme($root, $key);
+    }
+  }
+}

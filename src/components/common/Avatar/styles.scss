@@ -1,0 +1,77 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Avatar
+   ========================================================================== */
+
+.avatar {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include avatar-sizes($root);
+  @include avatar-color-themes($root);
+  @include image-fit;
+
+  display: inline-flex;
+  flex-shrink: 0;
+  font-weight: 500;
+  overflow: hidden;
+  border-radius: 50%;
+
+  img {
+
+  }
+
+  &__plug {
+    @include fluid-position;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'><g opacity='0.2'><path d='M0 0H33L0 33V0Z' fill='white'/><path d='M26.7868 26.7868C21.1607 32.4129 18 40.0435 18 48H48V18C40.0435 18 32.4129 21.1607 26.7868 26.7868Z' fill='white'/></g></svg>");
+    background-repeat: no-repeat;
+    background-position: top left;
+  }
+
+  &[data-bg="rotate-0"] {
+
+    #{$root}__plug {
+      transform: rotate(0);
+    }
+  }
+
+  &[data-bg="rotate-90"] {
+
+    #{$root}__plug {
+      transform: rotate(90deg);
+    }
+
+    #{$root}__name {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &[data-bg="rotate-180"] {
+
+    #{$root}__plug {
+      transform: rotate(180deg);
+    }
+
+    #{$root}__name {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &[data-bg="rotate-270"] {
+
+    #{$root}__plug {
+      transform: rotate(270deg);
+    }
+
+    #{$root}__name {
+      transform: rotate(-270deg);
+    }
+  }
+}
+
+

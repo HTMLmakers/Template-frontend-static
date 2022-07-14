@@ -1,0 +1,26 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- MarkPrimary
+   ========================================================================== */
+
+.mark-primary {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include mark-primary-sizes($root);
+  @include mark-primary-color-themes($root);
+  @include mark-primary--size($root, "m");
+  @include mark-primary--color-theme($root, "gray-primary");
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: $transition-primary;
+
+  &[data-mark-notice="true"] {
+    @extend %mark-notice;
+  }
+}

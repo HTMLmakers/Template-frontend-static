@@ -1,0 +1,145 @@
+// =============================================================================
+// Mixins -- form-fields
+// =============================================================================
+
+@mixin field-font($root) {
+  @include desc--size($root, "s");
+  font-weight: 500;
+}
+
+@mixin field-placeholder {
+  @include transition-primary;
+
+  color: $color-gray-primary;
+  opacity: 1;
+}
+
+@mixin field-placeholder-active {
+  opacity: 0;
+}
+
+//field size
+@mixin field-height-default-l {
+  height: px-to-rem(48px);
+}
+
+@mixin field-height-default-m {
+  height: px-to-rem(40px);
+}
+
+@mixin field-padding-default-l {
+  padding: px-to-rem(14px);
+}
+
+@mixin field-padding-default-m {
+  padding: px-to-rem(12px);
+}
+
+@mixin field-size-opacity {
+
+  input,
+  textarea {
+    padding: 0 !important;
+  }
+}
+
+//check
+@mixin field-check($root) {
+  @include field-check-default($root);
+
+  #{$root}__custom {
+
+    &:before {
+      @include transition-primary;
+      content: '';
+      position: absolute;
+      background-repeat: no-repeat;
+      opacity: 0;
+    }
+  }
+
+  input:checked + #{$root}__custom,
+  input[checked] + #{$root}__custom,
+  &[data-state="checked"] #{$root}__custom {
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin field-check-default($root) {
+  display: inline-block;
+  flex-grow: 0;
+
+  #{$root}__wrap {
+    display: block;
+    cursor: pointer;
+  }
+
+  #{$root}__custom {
+    @include transition-primary;
+
+    position: absolute;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  input {
+    display: none;
+  }
+
+  .label {
+    display: inline-block;
+  }
+}
+
+//check size
+@mixin field-size-check($root) {
+  @include field-label-check;
+
+  min-width: px-to-rem(24px);
+  min-height: px-to-rem(24px);
+
+  #{$root}__custom {
+    width: px-to-rem(24px);
+    height: px-to-rem(24px);
+
+    &:before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@mixin field-label-check {
+  .label {
+    //margin-top: px-to-rem(3px);
+    font-weight: 600;
+  }
+}
+
+@mixin field-padding-check-l {
+  padding-left: px-to-rem(40px);
+}
+
+@mixin field-padding-check-m {
+  padding-left: px-to-rem(36px);
+}
+
+//check color
+@mixin field-default-check($root) {
+
+  #{$root}__custom {
+    @extend %field-border-color-default;
+    @extend %field-border-default;
+  }
+
+  &:hover,
+  &[data-state="hover"] {
+
+    #{$root}__custom {
+      @extend %field-border-color-default-active;
+    }
+  }
+}

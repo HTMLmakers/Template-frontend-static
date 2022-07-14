@@ -1,0 +1,61 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ControlBar
+   ========================================================================== */
+
+.control-bar {
+  $root: ".control-bar";
+  //@include media-breakpoint-down(sm) {}
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //padding-top: px-to-rem(16px);
+  //padding-bottom: px-to-rem(16px);
+
+  &__section {
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      #{$root}__info {
+        margin-left: px-to-rem(16px);
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &:last-child {
+      #{$root}__info {
+        text-align: right;
+        margin-right: px-to-rem(24px);
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        span {
+          display: block;
+        }
+      }
+    }
+
+    & > * {
+      margin: 0 px-to-rem(8px) 0 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__info {
+    @include desc--size($root, "s");
+
+    font-weight: 500;
+    color: $color-gray-primary;
+  }
+}

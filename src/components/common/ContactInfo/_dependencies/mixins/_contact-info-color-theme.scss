@@ -1,0 +1,27 @@
+// =============================================================================
+// Mixins -- ContactInfo color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin contact-info--color-theme($root, $color-theme, $important: null) {
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$contactInfoColorThemes: (
+
+);
+
+@mixin contacts-info-color-themes($root) {
+  @each $key in $contactInfoColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include contact-info--color-theme($root, $key);
+    }
+  }
+}

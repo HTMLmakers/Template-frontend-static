@@ -1,0 +1,17 @@
+@import "../../../../../styles/dependencies";
+
+
+/* ==========================================================================
+   Ui-kit elements -- label
+   ========================================================================== */
+
+.label {
+  $root: ".label";
+  //@include media-breakpoint-down(sm) {}
+
+  @include label-sizes($root);
+  @include label-color-themes($root);
+  @include label--size($root, "l");
+  @include label--color-theme($root, "gray-primary");
+
+}

@@ -1,0 +1,31 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- CommentsList
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.comments-list {
+
+  $root: '.comments-list';
+
+  @include comments-list-sizes($root);
+  @include comments-list-color-themes($root);
+  @include comments-list--size($root, "l");
+  @include comments-list--color-theme($root, "default");
+
+  @include media-breakpoint-down(md) {
+    @include comments-list--size($root, "m");
+  }
+
+  border-radius: px-to-rem(12px);
+
+  &__item {
+    border-radius: px-to-rem(6px);
+  }
+}

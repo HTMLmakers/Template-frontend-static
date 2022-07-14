@@ -1,0 +1,15 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Copyright
+   ========================================================================== */
+
+.copyright {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include copyright-sizes($root);
+  @include copyright-color-themes($root);
+  @include copyright--size($root, "m");
+  @include copyright--color-theme($root, "gray-primary");
+}

@@ -1,0 +1,47 @@
+// =============================================================================
+// Extends
+// =============================================================================
+
+//
+// transition
+// --------------------------------------------------------------------------
+
+%transition-primary {
+  transition: $transition-primary;
+}
+
+%transition-secondary {
+  transition: $transition-secondary;
+}
+
+//
+// mark-notice
+// --------------------------------------------------------------------------
+
+%mark-notice {
+
+  &::after {
+    position: absolute;
+    width: px-to-rem(8px);
+    height: px-to-rem(8px);
+    background-color: $color-orange-primary;
+    border-radius: 50%;
+    content: "";
+  }
+}
+
+//
+// overlay
+// --------------------------------------------------------------------------
+
+%overlay-primary {
+  background-color: $overlay-bg-primary !important;
+}
+
+//
+// box-shadow
+// --------------------------------------------------------------------------
+
+%box-shadow-primary {
+  box-shadow: 0 px-to-rem(20px) px-to-rem(100px) px-to-rem(40px) rgba($color-blue-dark-primary, 0.1);
+}

@@ -1,0 +1,30 @@
+// =============================================================================
+// Mixins -- Copyright color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin copyright--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "gray-primary" {
+    color: $color-gray-primary;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$copyrightColorThemes: (
+  "gray-primary",
+);
+
+@mixin copyright-color-themes($root) {
+  @each $key in $copyrightColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include copyright--color-theme($root, $key);
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- DropDown
+   ========================================================================== */
+
+.drop-down {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include drop-down-sizes($root);
+  @include drop-down-color-themes($root);
+  @include drop-down--size($root, "l");
+  @include drop-down--color-theme($root, "default");
+
+  @include media-breakpoint-down(md) {
+    @include drop-down--size($root, "m");
+  }
+
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+
+    #{$root}__area {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  }
+
+  &[data-position="left"] {
+
+    #{$root}__area {
+      left: 0;
+    }
+  }
+
+  &[data-position="right"] {
+
+    #{$root}__area {
+      right: 0;
+    }
+  }
+
+  &[data-position="center"] {
+
+    #{$root}__area {
+      left: 50%;
+    }
+  }
+
+  &__trigger {
+    z-index: 991;
+  }
+
+  &__area {
+    @extend %transition-primary;
+
+    position: absolute;
+    z-index: 990;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.drop-down-nav {
+  $root: ".drop-down-nav";
+  //@include media-breakpoint-down(sm) {}
+
+  width: max-content;
+
+  &__section {
+
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__body {
+
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  &__control {
+
+  }
+
+  &__search {
+
+  }
+
+  &__list {
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__item-content {
+    @extend %transition-primary;
+
+    display: flex;
+    flex-grow: 1;
+    border-width: px-to-rem(1px);
+    border-style: solid;
+  }
+
+  &__icon-drag {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+  }
+}

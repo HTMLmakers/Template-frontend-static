@@ -1,0 +1,40 @@
+// =============================================================================
+// Mixins -- comments-form size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-form--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    padding: px-to-rem(16px);
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$commentsFormSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin comments-form-sizes($root) {
+  @each $key in $commentsFormSizes {
+    &[data-size="#{$key}"] {
+      @include comments-form--size($root, $key, !important);
+    }
+  }
+}

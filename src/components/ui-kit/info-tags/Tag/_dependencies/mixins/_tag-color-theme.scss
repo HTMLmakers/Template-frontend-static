@@ -1,0 +1,116 @@
+// =============================================================================
+// Mixins -- Tag color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin tag--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "gray-tertiary" {
+    background-color: $color-gray-tertiary;
+    color: $color-gray-primary;
+  }
+
+  @if $color-theme == "gray-tertiary-light" {
+    color: $color-gray-primary;
+    border: 1px solid $color-gray-tertiary;
+  }
+
+  @if $color-theme == "blue-primary-light" {
+    color: $color-blue-primary;
+    border: 1px solid $color-blue-primary;
+
+    .mark-primary {
+      background-color: $color-blue-primary;
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-blue-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-blue-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  @if $color-theme == "red-primary-light" {
+    color: $color-red-primary;
+    border: 1px solid $color-red-primary;
+
+    .mark-primary {
+      background-color: $color-red-primary;
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-red-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-red-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  @if $color-theme == "green-primary" {
+    color: $color-white;
+    background: $color-green-primary;
+
+    .mark-primary {
+      color: $color-white;
+      background-color: $color-green-quaternary;
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-white;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-white;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$tagColorThemes: (
+  "gray-tertiary",
+  "gray-tertiary-light",
+  "blue-primary-light",
+  "red-primary-light",
+  "green-primary",
+);
+
+@mixin tag-color-themes($root) {
+  @each $key in $tagColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include tag--color-theme($root, $key);
+    }
+  }
+}

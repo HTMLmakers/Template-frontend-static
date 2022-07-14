@@ -1,0 +1,37 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- WorkerInfoBar
+   ========================================================================== */
+
+.worker-info-bar {
+  $root: ".worker-info-bar";
+  //@include media-breakpoint-down(sm) {}
+
+  @include worker-info-bar-sizes($root);
+  @include worker-info-bar-color-themes($root);
+  @include worker-info-bar--size($root, "l");
+  @include worker-info-bar--color-theme($root, "default");
+
+  display: flex;
+  border-radius: px-to-rem(6px);
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  @include media-breakpoint-down(sm) {
+    &__content {
+      flex-direction: column;
+    }
+  }
+}
+
+

@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- ContextMenu color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin context-menu--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "white" {
+
+    .button-primary {
+      @include button-primary--color-theme($root, "white-primary", !important);
+    }
+  }
+
+  @if $color-theme == "gray-quaternary" {
+
+    .button-primary {
+      @include button-primary--color-theme($root, "gray-quaternary", !important);
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$contextMenuColorThemes: (
+  "white",
+  "gray-quaternary",
+);
+
+@mixin context-menu-color-themes($root) {
+  @each $key in $contextMenuColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include context-menu--color-theme($root, $key);
+    }
+  }
+}

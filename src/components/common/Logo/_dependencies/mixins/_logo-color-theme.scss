@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- Logo color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin logo--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "blue-primary" {
+
+    svg {
+      fill: $color-blue-primary;
+    }
+  }
+
+  @if $color-theme == "white" {
+
+    svg {
+      fill: $color-white;
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$logoColorThemes: (
+  "blue-primary",
+  "white",
+);
+
+@mixin logo-color-themes($root) {
+  @each $key in $logoColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include logo--color-theme($root, $key);
+    }
+  }
+}

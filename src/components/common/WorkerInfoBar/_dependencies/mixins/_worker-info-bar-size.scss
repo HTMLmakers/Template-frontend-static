@@ -1,0 +1,104 @@
+// =============================================================================
+// Mixins -- WorketBarInfo size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin worker-info-bar--size($root, $size, $important: null) {
+
+  .elements-list {
+    margin-top: auto;
+  }
+
+  #{$root}__controls {
+    margin-left: auto;
+    margin-top: auto;
+  }
+
+  @if $size == "l" {
+    padding: px-to-rem(16px);
+
+    #{$root}__wrap {
+      padding-right: px-to-rem(24px);
+    }
+
+    .avatar {
+      @include avatar--size($root, "xxxl");
+    }
+
+    .heading {
+      @include h5--size($root, "l");
+
+      margin-bottom: 0;
+    }
+
+    .desc {
+      @include desc--size($root, "s");
+
+      margin-bottom: 0;
+      margin-top: px-to-rem(4px);
+    }
+
+    .elements-list {
+      padding-top: px-to-rem(24px);
+    }
+  }
+
+  @if $size == "m" {
+    padding: px-to-rem(12px);
+
+    #{$root}__wrap {
+      padding-right: px-to-rem(12px);
+    }
+
+    .avatar {
+      @include avatar--size($root, "xl");
+
+      margin-right: px-to-rem(12px);
+
+      @include media-breakpoint-down(sm) {
+        margin-right: 0;
+        margin-bottom: px-to-rem(12px);
+      }
+    }
+
+    .heading {
+      @include h7--size($root, "l");
+    }
+
+    .desc {
+      @include desc--size($root, "s");
+
+      margin-bottom: 0;
+      margin-top: px-to-rem(4px);
+    }
+
+    .elements-list {
+      padding-top: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$workerBarInfoSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin worker-info-bar-sizes($root) {
+  @each $key in $workerBarInfoSizes {
+    &[data-size="#{$key}"] {
+      @include worker-info-bar--size($root, $key, !important);
+    }
+  }
+}

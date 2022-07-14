@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- SectionPrimary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin section-primary--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include section-primary-size-l;
+  }
+
+  @if $size == "m" {
+    @include section-primary-size-m;
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$sectionPrimarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin section-primary-sizes($root) {
+  @each $key in $sectionPrimarySizes {
+    &[data-size="#{$key}"] {
+      @include section-primary--size($root, $key, !important);
+    }
+  }
+}

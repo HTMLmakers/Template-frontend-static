@@ -1,0 +1,80 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Component -- UserBox
+   ========================================================================== */
+
+.user-box {
+  $root: ".user-box";
+  //@include media-breakpoint-down(md) {}
+  @include section-secondary-size-l;
+  @include section-secondary-color;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: px-to-rem(28px) 0 px-to-rem(24px);
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: px-to-rem(24px);
+    padding: px-to-rem(16px) 0;
+    border-top: 1px solid $color-gray-tertiary;
+    border-bottom: 1px solid $color-gray-tertiary;
+
+    .button-primary {
+      @include button-primary--size($root, "l");
+
+      @include media-breakpoint-down(md) {
+        @include button-primary--size($root, "m");
+      }
+    }
+
+    .mark-primary {
+      @include mark-primary--size($root, "xxxl");
+
+      margin-left: 0 !important;
+
+      @include media-breakpoint-down(md) {
+        @include mark-primary--size($root, "xxl");
+
+        margin-left: 0 !important;
+      }
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: px-to-rem(16px);
+      padding: px-to-rem(12px) 0;
+    }
+  }
+
+  &__date {
+    @include desc--size($root, "s");
+    @include desc--color-theme($root, "gray-primary");
+
+    .date-time {
+      display: inline-block;
+      margin-left: px-to-rem(2px);
+    }
+  }
+
+  .user-info {
+    $root: ".user-info";
+
+    @include user-info--size($root, "xl");
+
+    margin-bottom: px-to-rem(24px);
+
+    @include media-breakpoint-down(md) {
+      @include user-info--size($root, "l");
+
+      margin-bottom: px-to-rem(16px);
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: px-to-rem(12px) 0 px-to-rem(16px);
+  }
+}

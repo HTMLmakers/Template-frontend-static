@@ -1,0 +1,28 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- LinkSecondary
+   ========================================================================== */
+
+.link-secondary {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %link;
+  @include link-secondary-sizes($root);
+  @include link-secondary-color-themes($root);
+  @include link-secondary--size($root, "l");
+  @include link-secondary--color-theme($root, "gray-primary");
+
+  display: inline-flex;
+  align-items: flex-start;
+
+  &__text {
+    flex-shrink: 1 !important;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include link-secondary--size($root, "m");
+  }
+
+}

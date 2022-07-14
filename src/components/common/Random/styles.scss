@@ -1,0 +1,69 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Random
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.random {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include random-sizes($root);
+  @include random--size($root, "l");
+  @include random-color-themes($root);
+
+  display: inline-flex;
+  align-items: center;
+
+  &__place-pic {
+    line-height: 0;
+  }
+
+  &__wrap {
+    white-space: pre;
+  }
+
+  &__title {
+    font-weight: 800;
+
+    > * {
+      font-weight: 800;
+    }
+  }
+
+  &__desc {
+    display: inline-flex;
+    position: relative;
+    font-weight: 500;
+
+    &::before {
+      content: "/";
+      position: absolute;
+    }
+
+    &:last-child {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__place-desc-before {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .link-primary {
+    font-weight: 500;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include random--size($root, "m");
+  }
+}

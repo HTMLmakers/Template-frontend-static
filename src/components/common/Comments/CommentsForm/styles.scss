@@ -1,0 +1,61 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- CommentsForm
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.comments-form {
+  //@include media-breakpoint-down(md) {}
+  $root: '.comments-form';
+
+  @include comments-form-sizes($root);
+  @include comments-form-color-themes($root);
+  @include comments-form--size($root, "l");
+  @include comments-form--color-theme($root, "default");
+
+  display: flex;
+
+  &__form {
+    @include fullwidth;
+  }
+
+  &__form-container {
+    display: flex;
+  }
+
+  &__field {
+    @include fullwidth;
+
+    margin-right: px-to-rem(16px);
+    padding: px-to-rem(12px) px-to-rem(14px);
+    height: auto;
+    min-height: px-to-rem(48px);
+    border-radius: px-to-rem(6px);
+  }
+
+  &__textarea {
+    @include fullwidth;
+
+    display: flex;
+
+    textarea {
+      padding-right: px-to-rem(16px);
+      width: 100%;
+      height: px-to-rem(24px);
+      resize: none;
+      border: none;
+      outline: none;
+      overflow: hidden;
+    }
+  }
+
+  &__action {
+    display: inline-flex;
+  }
+}

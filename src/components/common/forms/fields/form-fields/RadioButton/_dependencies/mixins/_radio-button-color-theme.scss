@@ -1,0 +1,39 @@
+// =============================================================================
+// Mixins -- RadioButton color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin radio-button--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    @include field-default-check($root);
+
+    #{$root}__custom {
+
+      &:before {
+        background-color: $color-blue-primary;
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$radioButtonColorThemes: (
+  "default",
+);
+
+@mixin radio-button-color-themes($root) {
+  @each $key in $radioButtonColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include radio-button--color-theme($root, $key);
+    }
+  }
+}

@@ -41,6 +41,7 @@ const urls = [];
 const srcRoot = './src';
 const devRoot = './dev';
 const buildRoot = './build';
+const libraryNewRoot = './Template-frontend-library';
 const libraryRoot = './library';
 const libraryDistRoot = './library/dist';
 
@@ -140,6 +141,19 @@ const libraryDistPath = {
   assets: `${libraryDistRoot}/assets`,
   js: `${libraryDistRoot}/js`,
   styles: `${libraryDistRoot}/styles`,
+};
+
+const libraryNewPath = {
+  components: {
+    root: `${libraryNewRoot}/src/common/components`,
+    common: `${libraryNewRoot}/src/common/components/common`,
+    layout: `${libraryNewRoot}/src/common/components/layout`,
+    uiKit: `${libraryNewRoot}/src/common/components/ui-kit`,
+  },
+  styles: {
+    root: `${libraryNewRoot}/src/common/styles`,
+    common: `${libraryNewRoot}/src/common/styles/common`,
+  },
 };
 
 /**
@@ -317,7 +331,7 @@ function watchHtmlLib() {
 function buildHtml() {
   return src(`${devPath.pages}/*.html`)
     .pipe(htmlreplace({
-      css: 'styles-2/style.min.css',
+      css: 'styles-2/styles.min.css',
       js: {
         src: null,
         tpl: '<script src="js/script.min.js" async></script>',
@@ -333,7 +347,7 @@ function buildHtml() {
 
 /**
  * Сборка и компиляция scss:
- * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в style.scss
+ * 1. Сборка файлов .scss (.css) из ./src/styles-2/ в styles.scss
  * 2. Сборка файлов .scss (.css) из ./src/styles-2/vendors/ в vendors.scss
  * 3. Сборка файлов .scss (.css) из ./src/styles-2/ui-kit/ в ui-kit.scss
  * 4. Сборка файлов .scss из ./src/styles-2/components/ в components.scss
@@ -370,7 +384,7 @@ function compileCss(compilePath, destPath, isLinted, done) {
 }
 
 function compileCssGeneral(done) {
-  compileCss(`${srcPath.styles.root}/style.scss`, `${devPath.styles}`, true, done);
+  compileCss(`${srcPath.styles.root}/styles.scss`, `${devPath.styles}`, true, done);
 }
 
 function compileCssVendors(done) {
@@ -465,13 +479,13 @@ function watchCssLib() {
 
 function buildCss() {
   return src([
-    `${devPath.styles}/style.css`,
+    `${devPath.styles}/styles.css`,
     `${devPath.styles}/vendors.css`,
     `${devPath.styles}/ui-kit.css`,
     `${devPath.styles}/components.css`,
   ])
     .pipe(plumber())
-    .pipe(concat('style.css'))
+    .pipe(concat('styles.css'))
     .pipe(dest(`${buildPath.styles}`))
     .pipe(csso())
     .pipe(rename({ suffix: '.min' }))
@@ -994,6 +1008,21 @@ function buildFonts() {
 }
 
 /**
+ * Library initialization
+ * --------------------------------------------------------------------------
+ */
+
+function exportLibraryComponents() {
+  return src(`${libraryNewPath.components.root}/**/*.*`)
+    .pipe(dest(`${srcPath.components.root}`));
+}
+
+function exportLibraryStyles() {
+  return src(`${libraryNewPath.styles.common}/**/*.*`)
+    .pipe(dest(`${srcPath.styles.common}`));
+}
+
+/**
  * Optimization reports
  * --------------------------------------------------------------------------
  */
@@ -1099,7 +1128,7 @@ function exportFilesBuild() {
 const buildAssets = series(exportImgBuild, exportFilesBuild);
 
 /**
- * Exports
+ * Tasks
  * --------------------------------------------------------------------------
  */
 
@@ -1141,6 +1170,13 @@ exports.serve = series(
 
     done();
   },
+);
+
+// список задач и вотчеров для создания components-library
+exports.initlib = series(
+  // export
+  exportLibraryComponents,
+  exportLibraryStyles,
 );
 
 // список задач и вотчеров для создания components-library

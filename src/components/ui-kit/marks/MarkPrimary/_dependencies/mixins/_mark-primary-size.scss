@@ -1,0 +1,177 @@
+// =============================================================================
+// Mixins -- MarkPrimary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin mark-primary--size($root, $size, $important: null) {
+
+  @include desc--size($root, "xs");
+
+  @if $size == "xxxl" {
+    @include desc--size($root, "s");
+
+    min-width: px-to-rem(48px) !important;
+    height: px-to-rem(48px) !important;
+    margin-right: px-to-rem(16px) !important;
+    margin-left: px-to-rem(16px) !important;
+    padding-left: px-to-rem(12px) !important;
+    padding-right: px-to-rem(12px) !important;
+    border-radius: px-to-rem(48px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(4px) !important;
+        right: px-to-rem(2px) !important;
+      }
+    }
+  }
+
+  @if $size == "xxl" {
+    @include desc--size($root, "s");
+
+    min-width: px-to-rem(40px) !important;
+    height: px-to-rem(40px) !important;
+    margin-right: px-to-rem(16px) !important;
+    margin-left: px-to-rem(16px) !important;
+    padding-left: px-to-rem(8px) !important;
+    padding-right: px-to-rem(8px) !important;
+    border-radius: px-to-rem(40px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(4px) !important;
+        right: px-to-rem(1px) !important;
+      }
+    }
+  }
+
+  @if $size == "xl" {
+    min-width: px-to-rem(32px) !important;
+    height: px-to-rem(32px) !important;
+    margin-right: px-to-rem(12px) !important;
+    margin-left: px-to-rem(12px) !important;
+    padding-left: px-to-rem(5px) !important;
+    padding-right: px-to-rem(5px) !important;
+    border-radius: px-to-rem(32px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(3px) !important;
+        right: 0 !important;
+      }
+    }
+  }
+
+  @if $size == "l" {
+    min-width: px-to-rem(24px) !important;
+    height: px-to-rem(24px) !important;
+    margin-right: px-to-rem(12px) !important;
+    margin-left: px-to-rem(12px) !important;
+    padding-left: px-to-rem(5px) !important;
+    padding-right: px-to-rem(5px) !important;
+    border-radius: px-to-rem(24px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(2px) !important;
+        right: px-to-rem(-1px) !important;
+      }
+    }
+  }
+
+  @if $size == "m" {
+    min-width: px-to-rem(20px) !important;
+    height: px-to-rem(20px) !important;
+    margin-right: px-to-rem(10px) !important;
+    margin-left: px-to-rem(10px) !important;
+    padding-left: px-to-rem(5px) !important;
+    padding-right: px-to-rem(5px) !important;
+    border-radius: px-to-rem(20px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(1px) !important;
+        right: px-to-rem(-2px) !important;
+      }
+    }
+  }
+
+  @if $size == "s" {
+    min-width: px-to-rem(18px) !important;
+    height: px-to-rem(18px) !important;
+    margin-right: px-to-rem(8px) !important;
+    margin-left: px-to-rem(8px) !important;
+    padding-left: px-to-rem(5px) !important;
+    padding-right: px-to-rem(5px) !important;
+    border-radius: px-to-rem(18px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: 0 !important;
+        right: px-to-rem(-2px) !important;
+      }
+    }
+  }
+
+  @if $size == "xs" {
+    min-width: px-to-rem(15px) !important;
+    height: px-to-rem(15px) !important;
+    margin-right: px-to-rem(6px) !important;
+    margin-left: px-to-rem(6px) !important;
+    padding-left: px-to-rem(3px) !important;
+    padding-right: px-to-rem(3px) !important;
+    border-radius: px-to-rem(13px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(-2px) !important;
+        right: px-to-rem(-2px) !important;
+      }
+    }
+  }
+
+  &:first-child {
+    margin-left: 0 !important;
+  }
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+
+  &:only-child {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$markPrimarySizes: (
+  "xxxl",
+  "xxl",
+  "xl",
+  "l",
+  "m",
+  "s",
+  "xs",
+);
+
+@mixin mark-primary-sizes($root) {
+  @each $key in $markPrimarySizes {
+    &[data-size="#{$key}"] {
+      @include mark-primary--size($root, $key, !important);
+    }
+  }
+}

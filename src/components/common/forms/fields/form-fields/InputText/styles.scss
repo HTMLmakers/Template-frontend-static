@@ -1,0 +1,33 @@
+@import "../../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- InputText
+   ========================================================================== */
+
+.input-text {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %field-text;
+  @include input-text-sizes($root);
+  @include input-text--size($root, "l");
+  @include input-text-color-themes($root);
+  @include input-text--color-theme($root, "default");
+
+  display: flex;
+  align-items: center;
+
+  &__place-before,
+  &__place-after {
+    display: flex;
+    align-items: center;
+
+    .desc {
+      flex-shrink: 0;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include input-text--size($root, "m");
+  }
+}

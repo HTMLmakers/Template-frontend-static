@@ -1,0 +1,24 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ContactInfo
+   ========================================================================== */
+
+.contact-info {
+  $root: &;
+
+  @include contact-info-sizes($root);
+  @include contact-info--size($root, "l");
+
+  font-style: normal;
+
+  &__phone,
+  &__mail {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include contact-info--size($root, "m");
+  }
+}

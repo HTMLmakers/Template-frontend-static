@@ -1,0 +1,40 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Priority
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.priority {
+  $root: &;
+
+  @extend %info-tags;
+  @include priority-sizes($root);
+  @include priority-color-themes($root);
+  @include priority--size($root, "l");
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  font-weight: 500;
+
+  &__icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include priority--size($root, "m");
+  }
+}
+
+

@@ -1,0 +1,60 @@
+// =============================================================================
+// Mixins -- UserInfo color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin user-info--color-theme($root, $color-theme, $important: null) {
+
+  //blue-dark-secondary
+  @if $color-theme == "blue-dark-secondary" {
+
+    #{$root}__avatar {
+      border-color: $color-gray-quaternary;
+    }
+
+    #{$root}__name {
+      color: $color-blue-dark-secondary;
+    }
+
+    #{$root}__status {
+      color: $color-gray-primary;
+    }
+  }
+
+  //white-primary
+  @if $color-theme == "white" {
+
+    #{$root}__avatar {
+      border-color: rgba($color-white, 0.05);
+    }
+
+    #{$root}__name,
+    #{$root}__status {
+      color: $color-white;
+    }
+
+    #{$root}__status {
+      opacity: 0.5;
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$userInfoColorThemes: (
+  "blue-dark-secondary",
+  "white",
+);
+
+@mixin user-info-color-themes($root) {
+  @each $key in $userInfoColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include user-info--color-theme($root, $key);
+    }
+  }
+}

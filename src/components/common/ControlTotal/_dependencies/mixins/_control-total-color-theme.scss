@@ -1,0 +1,36 @@
+// =============================================================================
+// Mixins -- ControlTotal color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin control-total--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    #{$root}__total {
+      .desc {
+        @include desc--color-theme($root, "gray-primary")
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$controlTotalColorThemes: (
+  "default",
+);
+
+@mixin control-total-color-themes($root) {
+  @each $key in $controlTotalColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include control-total--color-theme($root, $key);
+    }
+  }
+}

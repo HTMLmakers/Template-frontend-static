@@ -1,0 +1,63 @@
+// =============================================================================
+// Mixins -- Tooltip size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin tooltip--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    padding: px-to-rem(16px);
+    border-radius: px-to-rem(8px);
+
+    &[data-behavior="hover"] {
+      max-width: px-to-rem(240px);
+      min-width: px-to-rem(140px);
+    }
+
+    &[data-behavior="click"] {
+      max-width: px-to-rem(350px);
+      min-width: px-to-rem(200px);
+      min-height: px-to-rem(56px);
+
+      #{$root}__content {
+        padding-right: px-to-rem(40px);
+      }
+
+      .button-icon {
+        top: px-to-rem(16px);
+        right: px-to-rem(16px);
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$tooltipSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin tooltip-sizes($root) {
+  @each $key in $tooltipSizes {
+    &[data-size="#{$key}"] {
+      @include tooltip--size($root, $key, !important);
+    }
+  }
+}

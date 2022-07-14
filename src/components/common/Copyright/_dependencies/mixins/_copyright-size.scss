@@ -1,0 +1,40 @@
+// =============================================================================
+// Mixins -- Copyright size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin copyright--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+  }
+
+  @if $size == "m" {
+    @include desc--size("root", "xs")
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$copyrightSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin copyright-sizes($root) {
+  @each $key in $copyrightSizes {
+    &[data-size="#{$key}"] {
+      @include copyright--size($root, $key, !important);
+    }
+  }
+}

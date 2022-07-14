@@ -1,0 +1,60 @@
+// =============================================================================
+// Mixins -- Search size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin search--size($root, $size, $important: null) {
+
+  width: 100%;
+
+  #{$root}__input {
+    border-radius: px-to-rem(40px);
+  }
+
+  @if $size == "l" {
+
+    #{$root}__input {
+      @include input-text--size(root, "l");
+
+      input {
+        @include field-padding-default-m;
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__input {
+      @include input-text--size(root, "m");
+
+      input {
+        @include desc--size(root, "xs")
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$searchSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin search-sizes($root) {
+  @each $key in $searchSizes {
+    &[data-size="#{$key}"] {
+      @include search--size($root, $key, !important);
+    }
+  }
+}

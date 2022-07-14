@@ -1,0 +1,66 @@
+// =============================================================================
+// Mixins -- Widget color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin widget--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+    @include section-secondary-color;
+
+    #{$root}__heading {
+      & > * {
+        color: $color-black;
+      }
+    }
+
+    #{$root}__desc {
+      color: $color-gray-primary;
+    }
+
+    #{$root}__content {
+      color: $color-gray-primary;
+    }
+  }
+
+  //blue-light-secondary
+  @if $color-theme == "blue-light-secondary" {
+    color: $color-white;
+    background-color: $color-blue-light-secondary;
+
+    #{$root}__heading{
+      & > * {
+        color: $color-white;
+      }
+    }
+
+    #{$root}__desc {
+      color: $color-gray-secondary;
+    }
+
+    #{$root}__content {
+      color: $color-white;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$widgetColorThemes: (
+  "white",
+  "blue-light-secondary",
+);
+
+@mixin widget-color-themes($root) {
+  @each $key in $widgetColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include widget--color-theme($root, $key);
+    }
+  }
+}

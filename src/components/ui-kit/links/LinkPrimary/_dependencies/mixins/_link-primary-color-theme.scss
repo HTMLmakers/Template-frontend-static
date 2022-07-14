@@ -1,0 +1,153 @@
+// =============================================================================
+// Mixins -- LinkPrimary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin link-primary--color-theme($root, $color-theme, $important: null) {
+
+  //blue-light-primary
+  @if $color-theme == "blue-light-primary" {
+    color: $color-blue-light-primary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-blue-light-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-blue-light-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &[data-underline] {
+
+      &:hover,
+      &[data-state="hover"],
+      &:active,
+      &[data-state="active"] {
+        text-decoration: underline;
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-primary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-primary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+
+    }
+  }
+
+  //gray-primary
+  @if $color-theme == "gray-primary" {
+    color: $color-gray-primary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &[data-underline] {
+
+      &:hover,
+      &[data-state="hover"],
+      &:active,
+      &[data-state="active"] {
+        text-decoration: underline;
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-dark-secondary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$linkPrimaryColorThemes: (
+  "blue-light-primary",
+  "gray-primary",
+);
+
+@mixin link-primary-color-themes($root) {
+  @each $key in $linkPrimaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include link-primary--color-theme($root, $key);
+    }
+  }
+}

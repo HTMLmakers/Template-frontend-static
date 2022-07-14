@@ -1,0 +1,47 @@
+// =============================================================================
+// Mixins -- Random color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin random--color-theme($root, $color-theme, $important: null) {
+
+  #{$root}__desc {
+    color: $color-gray-primary;
+  }
+
+  //gray-primary
+  @if $color-theme == "gray-primary" {
+
+    #{$root}__title {
+      color: $color-gray-primary;
+    }
+  }
+
+  //black-primary
+  @if $color-theme == "blue-dark-secondary" {
+
+    #{$root}__title {
+      color: $color-blue-dark-secondary;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$randomColorThemes: (
+  "gray-primary",
+  "blue-dark-secondary",
+);
+
+@mixin random-color-themes($root) {
+  @each $key in $randomColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include random--color-theme($root, $key);
+    }
+  }
+}

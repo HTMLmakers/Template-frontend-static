@@ -7,6 +7,7 @@
     "start": "gulp serve",
     "build": "gulp build",
     "lib": "gulp lib",
+    "initlib": "git clone git@github.com:HTMLmakers/Template-frontend-library.git && gulp initlib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,9 +30,9 @@
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "autoprefixer": "^9.8.5",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.5",
     "del": "^5.1.0",
-    "eslint": "^6.5.1",
+    "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
@@ -60,7 +61,7 @@
     "gulp-ttf2woff": "^1.1.1",
     "gulp-ttf2woff2": "^3.0.0",
     "gulp-uglify": "^3.0.2",
-    "gulp.spritesmith": "^6.11.0",
+    "gulp.spritesmith": "^6.12.1",
     "gulp.spritesmith.3x": "^1.0.9",
     "ngrok": "^3.2.5",
     "node-sass": "^4.14.1",
@@ -71,15 +72,16 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-order": "^3.1.1",
-    "webpack-stream": "^5.2.1"
+    "webpack-stream": "^5.2.1",
+    "pug": "^3.0.2"
   },
   "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
     "jquery": "^3.5.1",
     "jquery-migrate": "^3.3.1",
     "jquery-ui": "^1.12.1",
-    "jquery-validation": "^1.19.2",
+    "jquery-validation": "^1.19.3",
     "selectize": "^0.12.6",
-    "slick-carousel": "^1.8.1",
-    "@fancyapps/fancybox": "^3.5.7"
+    "slick-carousel": "^1.8.1"
   }
 }

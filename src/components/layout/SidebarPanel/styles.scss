@@ -1,0 +1,64 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- SidebarDrop
+   ========================================================================== */
+
+.sidebar-drop {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include sidebar-drop-sizes($root);
+  @include sidebar-drop--size($root, "l");
+  @extend %box-shadow-primary;
+  @include section-primary;
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  //background: $color-gray-quaternary;
+  //border-radius: 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__header-section {
+    display: flex;
+    align-items: center;
+    margin-right: px-to-rem(16px);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__body,
+  &__footer {
+    margin-top: px-to-rem(16px);
+  }
+
+  &__body {
+    flex-grow: 1;
+  }
+
+  &__title {
+    @include h5--size($root, "l");
+
+    margin: 0;
+  }
+
+  &__desc {
+    @include desc--size($root, "s");
+
+    color: $color-gray-primary;
+  }
+
+
+
+  @include media-breakpoint-down(md) {
+    @include logo--size($root, "m");
+  }
+}

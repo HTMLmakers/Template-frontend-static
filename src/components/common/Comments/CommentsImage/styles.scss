@@ -1,0 +1,67 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- CommentsImage
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.comments-image {
+
+
+  $root: '.comments-image';
+
+  @include comments-image-sizes($root);
+  @include comments-image-color-themes($root);
+  @include comments-image--size($root, "l");
+  @include comments-image--color-theme($root, "default");
+
+  @include media-breakpoint-down(lg) {
+    @include comments-image--size($root, "m");
+  }
+
+  @include media-breakpoint-down(md) {
+    @include comments-image--size($root, "s");
+
+    //&__action {
+    //  display: none;
+    //}
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__pic {
+    @include image-fit();
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: px-to-rem(6px);
+
+    &:hover {
+      #{$root}__action {
+        opacity: 1;
+        transition: all .3s ease-out;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__action {
+    opacity: 0;
+    position: absolute;
+    bottom: px-to-rem(8px);
+    right: px-to-rem(8px);
+    z-index: 10;
+  }
+}

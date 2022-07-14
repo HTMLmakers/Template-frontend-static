@@ -1,0 +1,171 @@
+// =============================================================================
+// Mixins -- Heading size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+// h1 ----------
+
+@mixin h1--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(40px);
+    line-height: 1.2;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h2 ----------
+
+@mixin h2--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(35px);
+    line-height: 1.2;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h3 ----------
+
+@mixin h3--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(30px);
+    line-height: 1.2;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h4 ----------
+
+@mixin h4--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(25px);
+    line-height: 1.2;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h5 ----------
+
+@mixin h5--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(20px);
+    line-height: 1.4;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h6 ----------
+
+@mixin h6--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(16px);
+    line-height: 1.4;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+// h7 ----------
+
+@mixin h7--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    font-size: px-to-rem(14px);
+    line-height: 1.4;
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$headingSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin heading-sizes($root, $name) {
+  @each $key in $headingSizes {
+    &[data-size="#{$key}"] {
+      @if $name == "h1" {
+        @include h1--size($root, $key, !important);
+      }
+      @if $name == "h2" {
+        @include h2--size($root, $key, !important);
+      }
+      @if $name == "h3" {
+        @include h3--size($root, $key, !important);
+      }
+      @if $name == "h4" {
+        @include h4--size($root, $key, !important);
+      }
+      @if $name == "h5" {
+        @include h5--size($root, $key, !important);
+      }
+      @if $name == "h6" {
+        @include h6--size($root, $key, !important);
+      }
+      @if $name == "h7" {
+        @include h7--size($root, $key, !important);
+      }
+    }
+  }
+}

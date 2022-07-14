@@ -1,0 +1,27 @@
+// =============================================================================
+// Mixins -- ButtonIcon icon size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-icon--size($root, $size, $important: null) {
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonIconSizes: (
+
+);
+
+@mixin button-icon-sizes($root) {
+  @each $key in $buttonIconSizes {
+    &[data-size="#{$key}"] {
+      @include button-icon--size($root, $key, !important);
+    }
+  }
+}

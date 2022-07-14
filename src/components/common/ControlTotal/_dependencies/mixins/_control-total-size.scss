@@ -1,0 +1,62 @@
+// =============================================================================
+// Mixins -- ControlTotal size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin control-total--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    #{$root}__controls {
+      @include elements-wrap--size($root, "m")
+    }
+
+    .desc {
+      @include desc--size($root, "s")
+    }
+
+    #{$root}__link {
+      margin-left: px-to-rem(16px);
+
+      &::before {
+        @include desc--size($root, "m");
+
+        top: px-to-rem(1px);
+        left: px-to-rem(-10px);
+      }
+    }
+
+    #{$root}__total {
+      margin-left: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$controlTotalSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin control-total-sizes($root) {
+  @each $key in $controlTotalSizes {
+    &[data-size="#{$key}"] {
+      @include control-total--size($root, $key, !important);
+    }
+  }
+}

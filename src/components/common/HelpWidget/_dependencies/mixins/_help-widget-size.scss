@@ -1,0 +1,73 @@
+// =============================================================================
+// Mixins -- HelpWidget size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin help-widget--size($root, $size, $important: null) {
+
+  .desc {
+    margin: 0;
+  }
+
+  #{$root}__info {
+    margin-top: px-to-rem(24px);
+  }
+
+  @if $size == "l" {
+
+    @include section-secondary-size-l;
+
+    #{$root}__wrap {
+      padding-right: px-to-rem(40px);
+    }
+
+    #{$root}__title {
+      margin-bottom: px-to-rem(4px);
+    }
+
+    #{$root}__desc {
+      @include desc--size($root, "s");
+    }
+  }
+
+  @if $size == "m" {
+
+    @include section-secondary-size-m;
+
+    #{$root}__wrap {
+      padding-right: px-to-rem(32px);
+    }
+
+    #{$root}__desc {
+      @include desc--size($root, "xs");
+    }
+  }
+
+  @if $size == "s" {
+    display: inline-flex;
+    padding: 0;
+    border-radius: 0;
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$helpWidgetSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin help-widget-sizes($root) {
+  @each $key in $helpWidgetSizes {
+    &[data-size="#{$key}"] {
+      @include help-widget--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,48 @@
+// =============================================================================
+// Mixins -- LinkPrimary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin link-primary--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    .icon-svg {
+      @include icon--size($root, "s", $important);
+    }
+  }
+
+  @if $size == "m" {
+    @include desc--size($root, "xs");
+
+    .icon-svg {
+      display: none;
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$linkPrimarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin link-primary-sizes($root) {
+  @each $key in $linkPrimarySizes {
+    &[data-size="#{$key}"] {
+      @include link-primary--size($root, $key, !important);
+    }
+  }
+}

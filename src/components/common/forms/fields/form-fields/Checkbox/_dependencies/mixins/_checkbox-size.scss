@@ -1,0 +1,56 @@
+// =============================================================================
+// Mixins -- Checkbox text size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin checkbox--size($root, $size, $important: null) {
+
+  @include field-size-check($root);
+
+  @if $size == "l" {
+
+    #{$root}__custom {
+
+      &:before {
+        width: px-to-rem(16px);
+        height: px-to-rem(16px);
+      }
+    }
+
+    .label {
+      @include field-padding-check-l;
+    }
+  }
+
+  @if $size == "m" {
+
+    .label {
+      @include field-padding-check-m;
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$checkboxSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin checkbox-sizes($root) {
+  @each $key in $checkboxSizes {
+    &[data-size="#{$key}"] {
+      @include checkbox--size($root, $key, !important);
+    }
+  }
+}

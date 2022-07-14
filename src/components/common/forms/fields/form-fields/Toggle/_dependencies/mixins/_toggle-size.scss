@@ -1,0 +1,95 @@
+// =============================================================================
+// Mixins -- toggle text size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin toggle--size($root, $size, $important: null) {
+
+  @include field-label-check;
+
+  min-width: px-to-rem(42px);
+  min-height: px-to-rem(24px);
+
+  &__custom {
+    width: px-to-rem(42px);
+    height: px-to-rem(24px);
+    border-radius: px-to-rem(20px);
+
+    &:before,
+    &:after {
+      border-radius: 50%;
+      border-width: px-to-rem(1px);
+    }
+
+    &:before {
+      top: px-to-rem(4px);
+      left: px-to-rem(4px);
+      width: px-to-rem(16px);
+      height: px-to-rem(16px);
+    }
+
+    &:after {
+      top: px-to-rem(9px);
+      right: px-to-rem(9px);
+      width: px-to-rem(6px);
+      height: px-to-rem(6px);
+    }
+  }
+
+  input:checked + #{$root}__custom,
+  input[checked] + #{$root}__custom,
+  &[data-state="checked"] #{$root}__custom {
+
+    &:before {
+      top: px-to-rem(9px);
+      left: px-to-rem(9px);
+      width: px-to-rem(6px);
+      height: px-to-rem(6px);
+    }
+
+    &:after {
+      top: px-to-rem(4px);
+      right: px-to-rem(4px);
+      width: px-to-rem(16px);
+      height: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "l" {
+
+    .label {
+      padding-left: px-to-rem(58px);
+    }
+  }
+
+  @if $size == "m" {
+    .label {
+      padding-left: px-to-rem(54px);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$toggleSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin toggle-sizes($root) {
+  @each $key in $toggleSizes {
+    &[data-size="#{$key}"] {
+      @include toggle--size($root, $key, !important);
+    }
+  }
+}

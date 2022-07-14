@@ -1,0 +1,92 @@
+// =============================================================================
+// Mixins -- MainNav color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin main-nav--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+
+    #{$root}__item {
+      @include section-secondary-color;
+    }
+  }
+
+  //blue-dark-primary
+  @if $color-theme == "blue-dark-primary" {
+    background-color: $color-blue-dark-primary;
+
+    #{$root}__item {
+      background: transparent;
+      overflow: hidden;
+
+      .icon-svg {
+        &[data-type="fill"] {
+          svg {
+            fill: rgba($color-blue-senary, 0.8);
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: rgba($color-blue-senary, 0.9);
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+    #{$root}__link.active,
+    #{$root}__link:hover {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-white;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-white;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+    #{$root}__link.active {
+      background-color: $color-blue-primary;
+
+      &:hover {
+        background-color: $color-blue-primary;
+      }
+    }
+
+    #{$root}__link:hover {
+      background-color: rgba($color-blue-primary, 0.3);
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$mainNavColorThemes: (
+  "white",
+  "blue-dark-primary",
+);
+
+@mixin main-nav-color-themes($root) {
+  @each $key in $mainNavColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include main-nav--color-theme($root, $key);
+    }
+  }
+}

@@ -1,0 +1,195 @@
+@import "../../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- DatePicker
+   ========================================================================== */
+
+.date-picker {
+  $root: ".date-picker";
+  //@include media-breakpoint-down(sm) {}
+
+  width: 100%;
+
+  .react-datepicker-wrapper {
+    width: inherit;
+  }
+
+  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+    border-bottom-color: transparent;
+  }
+
+  .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before,
+  .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::after {
+    border-top-color: $color-gray-quaternary;
+  }
+
+  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before,
+  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::after {
+    border-bottom-color: $color-gray-quaternary;
+  }
+
+
+  .react-datepicker {
+    $root: ".react-datepicker";
+
+    @include desc--size($root, "s");
+    @include section-primary;
+    @extend %box-shadow-primary;
+
+    color: $color-blue-dark-secondary;
+    font-weight: 500;
+    border: none;
+
+    @include media-breakpoint-down(md) {
+      @include desc--size($root, "xs");
+    }
+
+    &__month-container,
+    &__time-container {
+      float: none;
+      width: auto;
+    }
+
+    &__header {
+      border: none;
+    }
+
+    &__header,
+    &__month,
+    &__time {
+
+      margin: 0 0 px-to-rem(16px) 0;
+
+      @include media-breakpoint-down(md) {
+        margin-bottom: px-to-rem(8px);
+      }
+    }
+
+    &__time-box {
+      width: auto !important;
+      margin: 0;
+    }
+
+    &__time-list-item {
+      height: auto;
+
+      &--selected {
+        background-color: $color-blue-primary !important;
+
+        &:hover {
+          background-color: $color-blue-primary !important;
+        }
+      }
+    }
+
+    &__header,
+    &__month,
+    &__footer {
+      @include section-secondary;
+    }
+
+    &__footer {
+      text-align: right;
+    }
+
+    &__control {
+      display: flex;
+      justify-content: space-between !important;
+      padding-right: px-to-rem(8px);
+      padding-left: px-to-rem(8px);
+
+      #{$root}__selects {
+
+        select {
+          margin-right: px-to-rem(16px);
+          font-weight: 600;
+          border: none;
+          outline: none;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &__day-names {
+      display: flex;
+      justify-content: space-between;
+      margin-top: px-to-rem(8px);
+
+      #{$root}__day-name {
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    &__week {
+
+      > * {
+        &:first-child {
+          margin-left: 0 !important;
+        }
+
+        &:last-child {
+          margin-right: 0 !important;
+        }
+      }
+    }
+
+    &__day {
+      margin-right: px-to-rem(16px);
+      margin-left: px-to-rem(16px);
+
+      &--outside-month {
+        color: $color-gray-primary !important;
+      }
+
+      &--keyboard-selected,
+      &--selected {
+        color: $color-white;
+        background-color: $color-blue-primary;
+
+        &:hover {
+          background-color: $color-blue-primary !important;
+        }
+      }
+
+      @include media-breakpoint-down(md) {
+        margin-right: px-to-rem(4px);
+        margin-left: px-to-rem(4px);
+      }
+    }
+
+    &__day,
+    &__day-name,
+    &__time-name {
+      @include transition-primary;
+
+      width: px-to-rem(32px);
+      line-height: px-to-rem(32px);
+      border-radius: 50%;
+
+      @include media-breakpoint-down(md) {
+        width: px-to-rem(24px);
+        line-height: px-to-rem(24px);
+      }
+
+      &:hover {
+        background-color: $color-gray-tertiary;
+      }
+    }
+  }
+
+  .react-datepicker-time {
+    $root: ".react-datepicker-time";
+
+    &__header {
+      @include desc--size($root, "s");
+
+      color: $color-blue-dark-secondary;
+    }
+  }
+}

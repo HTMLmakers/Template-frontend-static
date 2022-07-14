@@ -1,0 +1,31 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- LinkTertiary
+   ========================================================================== */
+
+.link-tertiary {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %link;
+  @include link-tertiary-sizes($root);
+  @include link-tertiary-color-themes($root);
+  @include link-tertiary--size($root, "l");
+  @include link-tertiary--color-theme($root, "blue-dark-secondary");
+
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  font-weight: 800;
+
+  &__text {
+    flex-shrink: 1;
+  }
+
+  &__place-after {
+    line-height: 0;
+  }
+}

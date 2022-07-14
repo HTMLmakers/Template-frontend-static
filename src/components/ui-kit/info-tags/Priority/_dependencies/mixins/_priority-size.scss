@@ -1,0 +1,68 @@
+// =============================================================================
+// Mixins -- Priority size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin priority--size($root, $size, $important: null) {
+
+  min-width: px-to-rem(32px) !important;
+  height: px-to-rem(32px) !important;
+  border-width: px-to-rem(1px);
+  border-radius: px-to-rem(20px) !important;
+
+  #{$root}__icon-wrap {
+    width: px-to-rem(20px) !important;
+    height: px-to-rem(20px) !important;
+  }
+
+  .icon-svg {
+    @include icon--size($root, "s", !important);
+  }
+
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    padding-right: px-to-rem(12px) !important;
+    padding-left: px-to-rem(6px) !important;
+
+    #{$root}__text {
+      display: inline-block !important;
+      margin-left: px-to-rem(8px) !important;
+    }
+  }
+
+  @if $size == "m" {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+
+    #{$root}__text {
+      display: none !important;
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$prioritySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin priority-sizes($root) {
+  @each $key in $prioritySizes {
+    &[data-size="#{$key}"] {
+      @include priority--size($root, $key, !important);
+    }
+  }
+}

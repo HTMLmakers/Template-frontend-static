@@ -1,0 +1,26 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- LinkPrimary
+   ========================================================================== */
+
+.link-primary {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %link;
+  @include link-primary-color-themes($root);
+  @include link-primary-sizes($root);
+
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  &__text {
+    flex-shrink: 1 !important;
+  }
+
+  .icon-svg {
+    margin-top: px-to-rem(2px);
+  }
+}

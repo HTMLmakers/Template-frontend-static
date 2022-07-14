@@ -1,0 +1,52 @@
+// =============================================================================
+// Mixins -- ElementsList size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin elements-list--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    .mark-primary {
+      margin-left: px-to-rem(8px) !important;
+    }
+
+    #{$root}__item {
+      margin-right: px-to-rem(8px) !important;
+      margin-bottom: px-to-rem(8px);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$elementsListSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin elements-list-sizes($root) {
+  @each $key in $elementsListSizes {
+    &[data-size="#{$key}"] {
+      @include elements-list--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "../../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- radio-button
+   ========================================================================== */
+
+.radio-button {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %field-check;
+  @include radio-button-sizes($root);
+  @include radio-button--size($root, "l");
+  @include radio-button-color-themes($root);
+  @include radio-button--color-theme($root, "default");
+  @include field-check($root);
+
+  &__custom {
+    border-radius: 50%;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include radio-button--size($root, "m");
+  }
+}

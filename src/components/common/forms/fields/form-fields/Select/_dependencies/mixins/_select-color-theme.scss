@@ -1,0 +1,36 @@
+// =============================================================================
+// Mixins -- label color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin label--color-theme($root, $color-theme, $important: null) {
+
+  //$color-gray-primary (default)
+  @if $color-theme == "gray-primary" {
+    color: $color-gray-primary;
+  }
+
+  //$color-blue-dark-secondary
+  @if $color-theme == "blue-dark-secondary" {
+    color: $color-blue-dark-secondary;
+  }
+}
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$labelColorThemes: (
+  "gray-primary",
+  "blue-dark-secondary",
+);
+
+@mixin label-color-themes($root) {
+  @each $key in $labelColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include label--color-theme($root, $key);
+    }
+  }
+}

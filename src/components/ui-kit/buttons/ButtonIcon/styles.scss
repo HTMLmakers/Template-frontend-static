@@ -1,0 +1,16 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonIcon
+   ========================================================================== */
+
+.button-icon {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %button;
+  @include button-icon-color-themes($root);
+  @include button-icon--color-theme($root, "default");
+
+  padding: 0;
+}

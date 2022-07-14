@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- ButtonUser size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-user--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    height: px-to-rem(48px) !important;
+    padding-right: px-to-rem(16px) !important;
+    padding-left: px-to-rem(4px) !important;
+    border-radius: px-to-rem(60px) !important;
+
+    #{$root}__content{
+      margin-right: px-to-rem(8px) !important;
+    }
+
+    #{$root}__text-primary{
+      @include h7--size($root, "l");
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonUserSizes: (
+  "l",
+);
+
+@mixin button-user-sizes($root) {
+  @each $key in $buttonUserSizes {
+    &[data-size="#{$key}"] {
+      @include button-user--size($root, $key, !important);
+    }
+  }
+}

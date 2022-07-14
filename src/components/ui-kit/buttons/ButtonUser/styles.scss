@@ -1,0 +1,37 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonUser
+   ========================================================================== */
+
+.button-user {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %button;
+  @include button-user-sizes($root);
+  @include button-user-color-themes($root);
+  @include button-user--size($root, "l");
+  @include button-user--color-theme($root, "default");
+
+  &__avatar{
+    flex-shrink: 0;
+    background-color: $color-orange-secondary;
+    border-radius: 50%;
+  }
+
+  &__content{
+    flex-grow: 1;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  &__text-primary{
+    display: block;
+    font-weight: 800;
+  }
+
+  .icon-svg {
+    margin-left: 0 !important;
+  }
+}

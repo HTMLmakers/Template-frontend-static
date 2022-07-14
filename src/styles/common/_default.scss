@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Common -- default
+   ========================================================================== */
+
+/* headings
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:only-child {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* paragraph
+   ========================================================================== */
+
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:only-child {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+
+/* button
+   ========================================================================== */
+
+button {
+  margin: 0 px-to-rem(8px) 0 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: none;
+  user-select: none;
+
+  &:last-child,
+  &:only-child {
+    margin-right: 0;
+  }
+}
+
+/* svg
+   ========================================================================== */
+
+svg {
+
+}
+
+/* lists
+   ========================================================================== */
+
+ul, ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* links
+   ========================================================================== */
+
+a {
+  text-decoration: none;
+}

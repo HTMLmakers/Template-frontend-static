@@ -1,0 +1,269 @@
+// =============================================================================
+// Mixins -- table primary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+
+@mixin table-primary--size($root, $size, $important: null) {
+
+  @include fullwidth;
+
+  margin-top: px-to-rem(-8px);
+  margin-bottom: px-to-rem(-8px);
+
+  #{$root}__checkmark {
+    padding-right: 0;
+
+    //Временный размер
+    input {
+      width: px-to-rem(24px);
+      height: px-to-rem(24px);
+    }
+  }
+
+  #{$root}__name-caption {
+    @include h7--size($root,"l");
+  }
+
+  thead {
+    tr {
+      th {
+        @include desc--size($root,"xs");
+
+        // Скругление углов хедера таблицы
+        &:first-child {
+          border-top-left-radius: px-to-rem(6px);
+          border-bottom-left-radius: px-to-rem(6px);
+        }
+
+        &:last-child {
+          border-top-right-radius: px-to-rem(6px);
+          border-bottom-right-radius: px-to-rem(6px);
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr{
+      td {
+        @include desc--size($root, "s");
+      }
+    }
+  }
+
+  @if $size == "l" {
+    $paddingL: px-to-rem(16px);
+
+    border-spacing: 0 px-to-rem(8px);
+
+    tr {
+      th, td {
+
+        //Временная ширина
+        &:not(#{$root}__checkmark) {
+          width: 25%;
+        }
+
+        //Вертикальная линия справа от колонки
+        &::after {
+          right: 0;
+          bottom: $paddingL;
+          width: px-to-rem(1px);
+          height: calc(100% - (#{$paddingL} * 2));
+        }
+
+        //Не показывать вертикальную линию последнему элементу
+        &:last-child {
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    thead {
+      tr {
+        height: px-to-rem(56px);
+
+        th {
+          padding: $paddingL;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: $paddingL;
+          height: px-to-rem(76px);
+
+          //Скругление углов боди таблицы
+          &:first-child {
+            border-top-left-radius: px-to-rem(6px);
+            border-bottom-left-radius: px-to-rem(6px);
+          }
+
+          &:last-child {
+            border-top-right-radius: px-to-rem(6px);
+            border-bottom-right-radius: px-to-rem(6px);
+          }
+        }
+      }
+    }
+  }
+
+  @if $size == "m" {
+    $paddingM: px-to-rem(16px);
+
+    //Если есть checkmark,
+    //всем соседним элементам сделать отступ
+    #{$root}__checkmark ~ td {
+      padding-left: px-to-rem(56px);
+    }
+
+    //Применять скругление td следующему за checkmark,
+    //или первому элементу
+
+    #{$root}__checkmark + td,
+    td:first-child {
+      border-top-left-radius: px-to-rem(6px);
+      border-top-right-radius: px-to-rem(6px);
+    }
+
+    td:last-child {
+      border-bottom-left-radius: px-to-rem(6px)!important;
+      border-bottom-right-radius: px-to-rem(6px);
+    }
+
+    //Расположение абсолютного элемента checkmark
+    //и скругление сторон
+    #{$root}__checkmark {
+      width: px-to-rem(56px);
+      left: 0;
+      top: 0;
+      height: 100%;
+      z-index: 10;
+      border-top-left-radius: px-to-rem(6px);
+      border-bottom-left-radius: px-to-rem(6px) !important;
+    }
+
+    tr {
+      th, td {
+        &:not(#{$root}__checkmark) {
+          width: 100% !important;
+        }
+      }
+    }
+
+    thead {
+      min-height: px-to-rem(56px);
+      tr {
+        margin-bottom: px-to-rem(8px);
+
+        &:not(#{$root}__checkmark) {
+          #{$root}__header {
+            display: none;
+          }
+        }
+
+        th {
+          width: 100%;
+          height:px-to-rem(56px);
+          padding: $paddingM;
+
+          #{$root}__mobile-desc {
+            @include desc--size($root, "xs");
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        margin-bottom: px-to-rem(8px);
+
+        #{$root}__checkmark {
+          input {
+            margin-top: px-to-rem(10px);
+          }
+        }
+
+        td {
+          padding: $paddingM;
+          height: 100% !important;
+
+          &:first-child {
+            border-bottom-left-radius: 0;
+          }
+
+          //Горизонтальная полоса под ячейками
+          &::after {
+            width: calc(100% - (#{$paddingM * 2}));;
+            height: 1px;
+            bottom: 0;
+            left: $paddingM;
+          }
+        }
+      }
+    }
+  }
+
+  @if $size == "s" {
+    $paddingS: px-to-rem(12px);
+
+    //Если есть checkmark,
+    //всем соседним элементам сделать отступ
+    #{$root}__checkmark ~ td {
+      padding-left: px-to-rem(48px);
+    }
+
+    //Ширина checkmark
+    #{$root}__checkmark {
+      width: px-to-rem(48px);
+      left: 0;
+      top: 0;
+      height: 100%;
+    }
+
+    thead {
+      tr {
+        th {
+          padding: $paddingS;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: $paddingS;
+          &::after {
+            left: $paddingS;
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$tablePrimarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin table-primary-sizes($root) {
+  @each $key in $tablePrimarySizes {
+    &[data-size="#{$key}"] {
+      @include table-primary--size($root, $key, !important);
+    }
+  }
+}

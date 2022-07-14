@@ -1,0 +1,31 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- PaymentSystem
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.payment-system {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
+
+  display: flex;
+  align-items: center;
+
+  &__item {
+    margin-right: px-to-rem(16px);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__logo {
+    height: px-to-rem(16px);
+  }
+}

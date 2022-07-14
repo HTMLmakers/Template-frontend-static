@@ -1,0 +1,63 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Widget
+   ========================================================================== */
+
+.widget {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include widget-sizes($root);
+  @include widget-color-themes($root);
+  @include widget--size($root, "l");
+  @include widget--color-theme($root, "white");
+
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__section {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__heading {
+
+  }
+
+  &__decs {
+
+  }
+
+  &__place {
+    margin-top: auto;
+  }
+
+  &__add {
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  &__image {
+
+    img {
+      width: auto;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include widget--size($root, "m");
+  }
+}

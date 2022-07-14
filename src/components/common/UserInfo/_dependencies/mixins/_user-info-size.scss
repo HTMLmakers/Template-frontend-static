@@ -1,0 +1,169 @@
+// =============================================================================
+// Mixins -- UserInfo size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin user-info--size($root, $size, $important: null) {
+
+  &[data-color-theme="white"] {
+
+    #{$root}__avatar {
+      border-width: px-to-rem(6px);
+    }
+  }
+
+  #{$root}__avatar {
+    border-radius: 50%;
+
+    .button-primary {
+      @include button-primary--size($root, "s");
+
+      bottom: 0;
+      right: 0;
+    }
+
+    .icon-svg {
+      @include icon--size($root, "s");
+    }
+  }
+
+  #{$root}__name {
+    @include h6--size($root, "l");
+
+    margin-top: px-to-rem(4px);
+    margin-bottom: px-to-rem(4px);
+  }
+
+  #{$root}__status {
+    @include desc--size($root, "s");
+  }
+
+
+  @if $size == "xl" {
+
+    #{$root}__avatar {
+
+      .button-primary {
+        @include button-primary--size($root, "m");
+      }
+
+      .icon-svg {
+        @include icon--size($root, "m");
+      }
+
+      .avatar {
+        @include avatar--size($root, "xxxxl");
+
+        margin-right: 0 !important;
+      }
+    }
+
+    #{$root}__name {
+      @include h5--size($root, "l");
+    }
+
+    &[data-color-theme="blue-dark-secondary"] {
+
+      #{$root}__avatar {
+        border-width: px-to-rem(12px);
+      }
+    }
+  }
+
+  @if $size == "l" {
+
+    #{$root}__avatar {
+
+      .avatar {
+        @include avatar--size($root, "xxl");
+
+        margin-right: 0 !important;
+      }
+    }
+
+    &[data-color-theme="blue-dark-secondary"] {
+
+      #{$root}__avatar {
+        border-width: px-to-rem(8px);
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__avatar {
+
+      .avatar {
+        @include avatar--size($root, "xl");
+
+        margin-right: 0 !important;
+      }
+
+      .button-primary {
+        bottom: -3px;
+        right: -3px;
+      }
+    }
+
+    #{$root}__status {
+      @include desc--size($root, "xs");
+    }
+
+    &[data-color-theme="blue-dark-secondary"] {
+
+      #{$root}__avatar {
+        border-width: px-to-rem(6px);
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+    #{$root}__avatar {
+
+      .avatar {
+        @include avatar--size($root, "l");
+
+        margin-right: 0 !important;
+      }
+
+      .button-primary {
+        bottom: -3px;
+        right: -3px;
+      }
+    }
+
+    #{$root}__name {
+      @include h7--size($root, "l");
+    }
+
+    &[data-color-theme="blue-dark-secondary"] {
+
+      #{$root}__avatar {
+        border-width: px-to-rem(6px);
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$userInfoSizes: (
+  "xl",
+  "l",
+  "m",
+  "s",
+);
+
+@mixin user-info-sizes($root) {
+  @each $key in $userInfoSizes {
+    &[data-size="#{$key}"] {
+      @include user-info--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,64 @@
+// =============================================================================
+// Mixins -- ButtonTab color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-tab--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+    background-color: $color-white;
+    color: $color-gray-primary;
+    border: px-to-rem(2px) solid $color-white;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color:$color-blue-dark-secondary;
+
+      .icon-svg {
+        transform: scale(1, -1);
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &:disabled,
+    &[data-state="disabled"] {
+      color:$color-gray-secondary;
+
+      .mark-primary,
+      .icon-svg {
+        opacity: 0.2;
+      }
+    }
+
+    &[data-state="current"] {
+      background-color: transparent;
+      color: $color-blue-dark-secondary;
+      border-color: $color-blue-dark-secondary;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$buttonTabColorThemes: (
+  "default",
+);
+
+@mixin button-tab-color-themes($root) {
+  @each $key in $buttonTabColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-tab--color-theme($root, $key);
+    }
+  }
+}

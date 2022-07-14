@@ -1,0 +1,55 @@
+// =============================================================================
+// Mixins -- ContextMenu size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin context-menu--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    .button-primary {
+      @include button-primary--size($root, "l", !important);
+    }
+
+    .drop-down {
+      @include drop-down--size($root, "l", !important);
+    }
+  }
+
+  @if $size == "m" {
+
+    .button-primary {
+      @include button-primary--size($root, "m", !important);
+    }
+
+    .drop-down {
+      @include drop-down--size($root, "m", !important);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$contextMenuSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin context-menu-sizes($root) {
+  @each $key in $contextMenuSizes {
+    &[data-size="#{$key}"] {
+      @include context-menu--size($root, $key, !important);
+    }
+  }
+}

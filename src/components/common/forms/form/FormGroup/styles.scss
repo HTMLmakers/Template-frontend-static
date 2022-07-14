@@ -1,0 +1,90 @@
+@import "../../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- FormGroup
+   ========================================================================== */
+
+.form-group {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include form-group-sizes($root);
+  @include form-group--size($root, "l");
+
+  &__heading {
+
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &[data-direction="horizontal"] {
+
+    #{$root}__content {
+      flex-direction: row;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    &[data-position="left"] {
+
+      #{$root}__content {
+        justify-content: flex-start;
+      }
+    }
+
+    &[data-position="center"] {
+
+      #{$root}__content {
+        justify-content: center;
+      }
+    }
+
+    &[data-position="right"] {
+
+      #{$root}__content {
+        justify-content: flex-end;
+      }
+    }
+
+    &[data-position="between"] {
+
+      #{$root}__content {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &[data-direction="vertical"] {
+
+    #{$root}__content {
+      flex-direction: column;
+    }
+
+    &[data-position="left"] {
+
+      #{$root}__content {
+        align-items: flex-start;
+      }
+    }
+
+    &[data-position="center"] {
+
+      #{$root}__content {
+        align-items: center;
+      }
+    }
+
+    &[data-position="right"] {
+
+      #{$root}__content {
+        align-items: flex-end;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include form-group--size($root, "m");
+  }
+}

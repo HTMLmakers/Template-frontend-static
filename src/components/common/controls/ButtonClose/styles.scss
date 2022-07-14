@@ -1,0 +1,18 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonClose
+   ========================================================================== */
+
+.button-close {
+  $root: &;
+
+  @include button-close-sizes($root);
+  @include button-close-color-themes($root);
+  @include button-close--size($root, "l");
+  @include button-close--color-theme($root, "white", !important);
+
+  @include media-breakpoint-down(md) {
+    @include button-close--size($root, "m");
+  }
+}

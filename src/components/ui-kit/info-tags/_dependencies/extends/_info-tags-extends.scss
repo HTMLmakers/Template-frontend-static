@@ -1,0 +1,55 @@
+// =============================================================================
+// Extends -- info-tag
+// =============================================================================
+
+//
+// Core
+// --------------------------------------------------------------------------
+
+%info-tags {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: px-to-rem(8px);
+  font-weight: 500;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  &:last-child,
+  &:only-child {
+    margin-right: 0;
+  }
+
+  &[data-width="fullwidth"] {
+    @extend %info-tag-full-width;
+  }
+}
+
+//
+// Dimensions
+// --------------------------------------------------------------------------
+
+%info-tag-full-width {
+  @include fullwidth;
+}
+
+//
+// States
+// --------------------------------------------------------------------------
+
+%info-tag-state--focus {
+  outline: 0;
+}
+
+%info-tag-state--hover,
+%info-tag-state--active {
+  cursor: pointer;
+}
+
+%info-tag-state--disabled {
+  cursor: default;
+  pointer-events: none;
+}

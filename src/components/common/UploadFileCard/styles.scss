@@ -1,0 +1,49 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Component -- CompanyDocuments
+   ========================================================================== */
+
+.document-card {
+  $root: '.document-card';
+  //@include media-breakpoint-down(md) {}
+
+  &__dropzone {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border: 1px dashed #7B61FF;
+    border-radius: px-to-rem(5px);
+    outline: none;
+    transition: border .24s ease-in-out;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  &__footer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .link-option__icon {
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+
+
+
+}

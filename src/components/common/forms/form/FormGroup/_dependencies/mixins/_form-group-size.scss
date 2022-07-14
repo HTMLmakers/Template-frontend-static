@@ -1,0 +1,118 @@
+// =============================================================================
+// Mixins -- FormGroup size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin form-group--size($root, $size, $important: null) {
+
+  &[data-direction="horizontal"] {
+
+    #{$root}__content {
+
+      > * {
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &[data-direction="vertical"] {
+
+    #{$root}__content {
+
+      > * {
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+
+  @if $size == "l" {
+
+    #{$root}__heading {
+      margin-bottom: px-to-rem(16px);
+    }
+
+    &[data-direction="horizontal"] {
+
+      #{$root}__content {
+        margin-bottom: px-to-rem(-24px);
+
+        > * {
+          margin-right: px-to-rem(32px);
+          margin-bottom: px-to-rem(24px);
+        }
+      }
+    }
+
+    &[data-direction="vertical"] {
+
+      #{$root}__content {
+
+        > * {
+          margin-bottom: px-to-rem(24px);
+        }
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__heading {
+      margin-bottom: px-to-rem(8px);
+    }
+
+    &[data-direction="horizontal"] {
+
+      #{$root}__content {
+        margin-bottom: px-to-rem(-16px);
+
+        > * {
+          margin-right: px-to-rem(24px);
+          margin-bottom: px-to-rem(16px);
+        }
+      }
+    }
+
+
+    &[data-direction="vertical"] {
+
+      #{$root}__content {
+
+        > * {
+          margin-bottom: px-to-rem(16px);
+        }
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$formGroupSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin form-group-sizes($root) {
+  @each $key in $formGroupSizes {
+    &[data-size="#{$key}"] {
+      @include form-group--size($root, $key, !important);
+    }
+  }
+}

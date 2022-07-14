@@ -1,0 +1,37 @@
+// =============================================================================
+// Mixins -- comments-list color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-list--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    background-color: $color-gray-quaternary;
+
+    #{$root}__item {
+      background-color: $color-white;
+    }
+
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$commentsListColorThemes: (
+  "default",
+);
+
+@mixin comments-list-color-themes($root) {
+  @each $key in $commentsListColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include comments-list--color-theme($root, $key);
+    }
+  }
+}

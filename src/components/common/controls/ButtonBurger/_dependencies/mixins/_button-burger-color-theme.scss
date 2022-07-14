@@ -1,0 +1,81 @@
+// =============================================================================
+// Mixins -- ButtonBurger color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-burger--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+
+    .button-primary {
+      @include button-primary--color-theme($root, "white-primary", !important);
+    }
+  }
+
+  //blue-dark-primary
+  @if $color-theme == "blue-dark-primary" {
+
+    .button-primary {
+      background-color: $color-blue-dark-primary;
+    }
+
+    .icon-svg {
+      &[data-type="fill"] {
+        svg {
+          fill: rgba($color-blue-senary, 0.8) !important;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: rgba($color-blue-senary, 0.9) !important;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover {
+
+      .button-primary {
+        background-color: rgba($color-blue-primary, 0.3);
+      }
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-white !important;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-white !important;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonBurgerColorThemes: (
+  "white",
+  "blue-dark-primary",
+);
+
+@mixin button-burger-color-themes($root) {
+  @each $key in $buttonBurgerColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-burger--color-theme($root, $key);
+    }
+  }
+}

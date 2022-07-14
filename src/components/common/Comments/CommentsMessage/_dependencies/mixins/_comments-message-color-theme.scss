@@ -1,0 +1,35 @@
+// =============================================================================
+// Mixins -- comments-message color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-message--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+    background-color: $color-gray-quaternary;
+
+    #{$root}__person-action {
+      color: $color-gray-primary;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$commentsMessageColorThemes: (
+  "default",
+);
+
+@mixin comments-message-color-themes($root) {
+  @each $key in $commentsMessageColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include comments-message--color-theme($root, $key);
+    }
+  }
+}

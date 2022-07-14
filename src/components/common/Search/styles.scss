@@ -1,0 +1,26 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Search
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.search {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include search-sizes($root);
+  @include search--size($root, "l");
+  @include search-color-themes($root);
+  @include search--color-theme($root, "white");
+
+
+  @include media-breakpoint-down(md) {
+    @include search--size($root, "m");
+  }
+}

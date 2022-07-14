@@ -1,0 +1,39 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Component -- UserInfo
+   ========================================================================== */
+
+.user-info {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include user-info-sizes($root);
+  //@include user-info--size($root, "xl");
+  @include user-info-color-themes($root);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__avatar {
+    position: relative;
+    display: flex;
+    border-style: solid;
+
+    .button-primary {
+      position: absolute;
+    }
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__name {
+
+    span {
+      display: block;
+    }
+  }
+}

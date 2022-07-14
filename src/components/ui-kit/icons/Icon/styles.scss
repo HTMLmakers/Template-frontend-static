@@ -1,0 +1,24 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Icon
+   ========================================================================== */
+
+//
+// Icon svg
+// --------------------------------------------------------------------------
+
+.icon-svg {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %transition-primary;
+  @extend %icon;
+  @include icon-sizes($root);
+  @include icon-color-themes($root);
+  @include icon--color-theme($root, "default");
+
+  svg {
+    @extend %transition-primary;
+  }
+}

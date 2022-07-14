@@ -1,0 +1,92 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- MainHeader
+   ========================================================================== */
+
+.main-header {
+  $root: &;
+
+  &__wrap {
+    @include section-primary;
+
+    display: flex;
+    padding-top: px-to-rem(12px);
+    padding-bottom: px-to-rem(12px);
+    border-radius: 0;
+  }
+
+  &__search,
+  &__controls {
+    display: flex;
+    margin-right: px-to-rem(-8px);
+  }
+
+  &__search {
+    flex-grow: 1;
+    margin-right: px-to-rem(8px);
+
+    //удалить после добавления компонента поиска
+    input {
+      flex-grow: 1;
+    }
+  }
+
+  &__controls {
+
+  }
+
+  &__toggle {
+    display: none;
+  }
+
+  @include media-breakpoint-down(lg) {
+
+    #{$root}__personal-account {
+      display: none;
+    }
+
+    #{$root}__control-user {
+
+      .button-user {
+
+        &__content {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+
+    &__controls {
+      margin-right: 0 !important;
+    }
+
+    .button-primary {
+      @include button-primary--size($root, "m", !important);
+    }
+
+    #{$root}__cart {
+
+      .button-primary {
+
+        &__text {
+          display: none;
+        }
+      }
+
+      .icon-svg {
+        margin-right: px-to-rem(-8px) !important;
+      }
+    }
+
+    #{$root}__control-user {
+      display: none;
+    }
+
+    #{$root}__toggle {
+      display: block;
+    }
+  }
+}

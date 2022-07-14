@@ -1,0 +1,35 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- NotificationSecondary
+   ========================================================================== */
+
+.notification-secondary {
+  $root: &;
+
+  @include notification-secondary-sizes($root);
+  @include notification-secondary-color-themes($root);
+  @include notification-secondary--size($root, "l");
+  @include notification-secondary--color-theme($root, "default");
+
+  display: flex;
+  position: relative;
+
+  &__pic {
+
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__close {
+    position: absolute;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include notification-secondary--size($root, "m");
+  }
+}

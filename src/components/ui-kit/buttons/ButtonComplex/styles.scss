@@ -1,0 +1,27 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonComplex
+   ========================================================================== */
+
+.button-complex {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %button;
+  @include button-complex-sizes($root);
+  @include button-complex-color-themes($root);
+  @include button-complex--size($root, "l");
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__text-primary,
+  &__text-secondary {
+    display: block;
+    font-weight: 500;
+  }
+}

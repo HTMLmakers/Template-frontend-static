@@ -1,0 +1,41 @@
+// =============================================================================
+// Mixins -- SectionSecondary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin section-secondary--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include section-secondary-size-l;
+  }
+
+  @if $size == "m" {
+    @include section-secondary-size-m;
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$sectionSecondarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin section-secondary-sizes($root) {
+  @each $key in $sectionSecondarySizes {
+    &[data-size="#{$key}"] {
+      @include section-secondary--size($root, $key, !important);
+    }
+  }
+}

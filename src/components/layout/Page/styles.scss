@@ -1,0 +1,284 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Components -- Page
+   ========================================================================== */
+
+.page {
+  $root: &;
+
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  background-color: $color-gray-tertiary;
+
+  &__wrap,
+  &__base-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: inherit;
+  }
+
+  &__header {
+
+  }
+
+  &__footer {
+
+  }
+
+  &__base {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+  }
+
+  &__add {
+
+  }
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &__sidebar-primary {
+
+  }
+
+  &__sidebar-secondary {
+
+  }
+}
+
+//.page {
+//  $root: ".page";
+//
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: space-between;
+//  height: 100%;
+//
+//  &--scroll {
+//    overflow-x: hidden;
+//    overflow-y: auto;
+//    height: 100vh;
+//  }
+//
+//  &__container {
+//    @include make-container();
+//
+//    display: flex;
+//    flex-direction: column;
+//    flex-grow: 1;
+//  }
+//
+//  &__inner-container {
+//    @include media-breakpoint-down(xl) {
+//      padding-right: px-to-rem(32px);
+//      padding-left: px-to-rem(32px);
+//    }
+//
+//    @include media-breakpoint-down(md) {
+//      padding-right: px-to-rem(20px);
+//      padding-left: px-to-rem(20px);
+//    }
+//
+//    padding-right: px-to-rem(40px);
+//    padding-left: px-to-rem(40px);
+//  }
+//
+//  &__row {
+//    @include make-row();
+//
+//    flex-grow: 1;
+//    flex-wrap: nowrap;
+//  }
+//
+//  &__col {
+//    @include make-col-ready();
+//  }
+//
+//  &__main {
+//    display: flex;
+//    flex-direction: column;
+//
+//    &--admin {
+//      padding-bottom: px-to-rem(24px);
+//      height: 100%;
+//
+//      #{$root}__body {
+//        padding-bottom: 24px;
+//      }
+//    }
+//  }
+//
+//  &__main-map {
+//    @include media-breakpoint-down(xxxl) {
+//      padding-right: px-to-rem(map-get($width-deployed-sidebar-secondary, v2));
+//    }
+//
+//    @include media-breakpoint-down(xl) {
+//      padding-right: 0;
+//
+//      &--reduced-indent {
+//        padding-right: 0 !important;
+//      }
+//    }
+//
+//    height: 100vh;
+//    padding-right: px-to-rem(map-get($width-deployed-sidebar-secondary, v1));
+//    background-clip: content-box;
+//    background-color: $white;
+//    transition: all 0.3s;
+//
+//    &--reduced-indent {
+//      padding-right: px-to-rem($width-collapsed-sidebar-secondary);
+//    }
+//  }
+//
+//  &__sidebar-secondary {
+//    @include media-breakpoint-down(xxxl) {
+//      @include make-col-fix(px-to-rem(map-get($width-deployed-sidebar-secondary, v2)));
+//    }
+//
+//    @include media-breakpoint-down(xl) {
+//      right: 0;
+//      z-index: 959;
+//      width: map-get($width-deployed-sidebar-secondary, v3);
+//      box-shadow: 0 px-to-rem(10px) px-to-rem(30px) rgba($black, 0.15);
+//
+//      &--is-collapsed {
+//        @include make-col-fix(px-to-rem(0px) !important) ;
+//      }
+//    }
+//
+//    @include media-breakpoint-down(md) {
+//      width: map-get($width-deployed-sidebar-secondary, v4);
+//    }
+//
+//    @include media-breakpoint-down(sm) {
+//      width: map-get($width-deployed-sidebar-secondary, v5);
+//    }
+//
+//    @include make-col-fix(px-to-rem(map-get($width-deployed-sidebar-secondary, v1)));
+//
+//    position: fixed;
+//    right: 17px;
+//    z-index: 900;
+//    height: 100%;
+//    background-color: $white;
+//    overflow: hidden;
+//    box-shadow: 0 0 60px rgba(42, 47, 54, 0.09);
+//    transition: all 0.3s;
+//
+//    &--is-collapsed {
+//      max-width: px-to-rem($width-collapsed-sidebar-secondary);
+//      width: px-to-rem($width-collapsed-sidebar-secondary);
+//    }
+//  }
+//
+//  &__header {
+//
+//    &--admin {
+//      overflow-x: hidden;
+//      padding-bottom: 160px;
+//      margin-bottom: -160px;
+//    }
+//  }
+//
+//  &__bar {
+//    @include media-breakpoint-down(xl) {
+//      overflow-x: auto;
+//    }
+//
+//    display: flex;
+//    align-items: center;
+//    justify-content: space-between;
+//    flex-wrap: nowrap;
+//    padding-top: px-to-rem(24px);
+//    padding-bottom: px-to-rem(24px);
+//    background-color: $white;
+//    border-bottom: 1px solid $gray-lighter;
+//    scrollbar-width: none;
+//  }
+//
+//  &__bar-section {
+//    scrollbar-width: none;
+//  }
+//
+//  &__info-total {
+//    @include caption--size-l;
+//
+//    font-weight: 600;
+//    color: $gray-light;
+//  }
+//
+//  &__info-total-number {
+//    color: $black;
+//  }
+//
+//  &__body {
+//    @include media-breakpoint-down(md) {
+//      padding-bottom: px-to-rem(80px);
+//    }
+//
+//    flex-grow: 1;
+//    padding-bottom: px-to-rem(128px);
+//  }
+//
+//  &__steps {
+//    @include media-breakpoint-down(md) {
+//      padding-top: px-to-rem(24px);
+//    }
+//
+//    margin-top: auto;
+//    padding-top: px-to-rem(64px);
+//  }
+//
+//  &__footer {
+//    position: relative;
+//    margin-top: auto;
+//  }
+//
+//  &__search-line {
+//    margin-bottom: px-to-rem(24px);
+//  }
+//
+//  &__map-button {
+//    @include media-breakpoint-down(xl) {
+//      display: inline-flex;
+//    }
+//
+//    display: none;
+//  }
+//
+//  &__map-control-button {
+//    position: absolute !important;
+//    top: px-to-rem(24px);
+//    left: px-to-rem(32px);
+//    z-index: 1;
+//  }
+//
+//  &__map {
+//    @include media-breakpoint-down(xxxl) {
+//      width: px-to-rem(map-get($width-deployed-sidebar-secondary, v2));
+//    }
+//
+//    @include media-breakpoint-down(xl) {
+//      width: map-get($width-deployed-sidebar-secondary, v5);
+//    }
+//
+//    @include media-breakpoint-down(md) {
+//      width: map-get($width-deployed-sidebar-secondary, v5);
+//    }
+//
+//    @include media-breakpoint-down(sm) {
+//      width: map-get($width-deployed-sidebar-secondary, v5);
+//    }
+//
+//    position: relative;
+//    width: px-to-rem(map-get($width-deployed-sidebar-secondary, v1));
+//    height: 100%;
+//  }
+//}

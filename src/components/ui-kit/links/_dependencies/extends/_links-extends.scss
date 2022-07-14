@@ -1,0 +1,82 @@
+// =============================================================================
+// Extends -- links
+// =============================================================================
+
+//
+// Core
+// --------------------------------------------------------------------------
+
+%link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: auto;
+  margin-right: px-to-rem(8px);
+  padding-right: 0;
+  padding-left: 0;
+  font-weight: 600;
+  text-decoration: none;
+  transition: $transition-primary;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  &:last-child,
+  &:only-child {
+    margin-right: 0;
+  }
+
+  &:focus,
+  &[data-state="focus"] {
+    @extend %link-state--focus;
+  }
+
+  &:hover,
+  &[data-state="hover"] {
+    @extend %link-state--hover;
+  }
+
+  &:active,
+  &[data-state="active"] {
+    @extend %link-state--active;
+
+    opacity: 0.7;
+  }
+
+  &[disabled],
+  &[data-state="disabled"] {
+    @extend %link-state--disabled;
+  }
+
+  &[data-width="fullwidth"] {
+    @extend %link-full-width;
+  }
+}
+
+//
+// Dimensions
+// --------------------------------------------------------------------------
+
+%link-full-width {
+  @include fullwidth;
+}
+
+//
+// States
+// --------------------------------------------------------------------------
+
+%link-state--focus {
+  outline: 0;
+}
+
+%link-state--hover,
+%link-state--active {
+  cursor: pointer;
+}
+
+%link-state--disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.4;
+}

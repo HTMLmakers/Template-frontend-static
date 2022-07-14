@@ -1,0 +1,133 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- table primary
+   ========================================================================== */
+
+.table-primary {
+  $root: ".table-primary";
+
+  @include table-primary-sizes($root);
+  @include table-primary-color-themes($root);
+  @include table-primary--size($root, "l");
+  @include table-primary--color-theme($root, "default");
+
+  border-collapse: initial;
+
+  p {
+    margin: 0;
+  }
+
+  #{$root}__name-caption {
+    font-weight: 800;
+  }
+
+  #{$root}__checkmark {
+    input {
+      //display: block;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  &__mobile-desc {
+    display: none;
+  }
+
+  tr {
+    //Относительное позиционирование для checkmark
+    position: relative;
+
+    th, td {
+      //Относительное позиционирование для вертикальной линии
+      position: relative;
+      word-break: break-word;
+
+      &::after {
+        content: '';
+        position: absolute;
+      }
+    }
+  }
+
+  thead {
+    tr {
+      th {
+        text-align: left;
+        font-weight: 800;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        transition: all .2s ease;
+
+        & > * {
+          vertical-align: middle;
+        }
+      }
+
+      &:hover {
+        box-shadow: 0 0 0 px-to-rem(1px) $color-gray-secondary;
+        border-radius: px-to-rem(6px);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    @include table-primary--size($root, "m");
+
+    tr {
+      display: block;
+    }
+
+    thead {
+
+      #{$root}__checkmark {
+        align-items: center;
+      }
+
+      tr {
+        #{$root}__mobile-desc {
+          display: block;
+        }
+
+        th {
+          //Скрыть все элементы внутри ячеек
+          & > * {
+            display: none;
+          }
+
+          // Скрыть горизонтальную черту
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        #{$root}__checkmark {
+          position: absolute;
+            &::after {
+              display: none;
+            }
+        }
+
+        // На маленьком разрешении переход на блочную модель.
+        td {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include table-primary--size($root, "s");
+  }
+}

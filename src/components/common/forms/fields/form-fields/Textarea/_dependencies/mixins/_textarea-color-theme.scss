@@ -1,0 +1,46 @@
+// =============================================================================
+// Mixins -- Textarea color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin textarea--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+    @extend %field-bg-default;
+
+    &:focus-within,
+    &[data-state="focus"] {
+      @extend %field-border-color-default;
+    }
+
+    textarea {
+      @extend %field-flex-width-default;
+    }
+  }
+
+  //opacity
+  @if $color-theme == "opacity" {
+    @extend %field-bg-opacity;
+    @extend %field-border-opacity;
+  }
+}
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$textareaColorThemes: (
+  "default",
+  "opacity",
+);
+
+@mixin textarea-color-themes($root) {
+  @each $key in $textareaColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include textarea--color-theme($root, $key);
+    }
+  }
+}

@@ -1,0 +1,35 @@
+// =============================================================================
+// Mixins -- WorkerInfoBar color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin worker-info-bar--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+    background-color: $color-white;
+
+    .desc {
+      @include desc--color-theme($root, "gray-primary");
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$workerInfoBarColorThemes: (
+  "default",
+);
+
+@mixin worker-info-bar-color-themes($root) {
+  @each $key in $workerInfoBarColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include worker-info-bar--color-theme($root, $key);
+    }
+  }
+}

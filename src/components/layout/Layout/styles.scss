@@ -1,0 +1,83 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Components -- Layout
+   ========================================================================== */
+
+.layout {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: map-get($container-max-widths, xs);
+  height: inherit;
+
+  &__container {
+    @include make-container();
+    //@include make-container-with-sides();
+    //@include make-container-with-sides-max-widths();
+
+    height: inherit;
+  }
+
+  &__row {
+    @include make-row();
+
+    flex-wrap: nowrap;
+    height: inherit;
+  }
+
+  &__col {
+    height: inherit;
+  }
+
+  //&__base-container {
+  //  @include make-container();
+  //  //@include make-container-with-sides();
+  //  //@include make-container-with-sides-max-widths();
+  //}
+
+  &__base {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: $color-gray-tertiary;
+  }
+
+  &__header {
+    //min-height: px-to-rem(150px);
+  }
+
+  &__footer {
+    //min-height: px-to-rem(300px);
+  }
+
+  //&__add {
+  //
+  //}
+
+  //&__section {
+  //  min-height: auto;
+  //}
+
+  //&__headline {
+  //
+  //}
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &__sidebar-primary {
+    @include media-breakpoint-down(md) {
+      @include make-col-fix(0);
+    }
+
+    //@include make-col-fix(200px);
+  }
+
+  &__sidebar-secondary {
+    @include make-col-fix(0);
+  }
+}

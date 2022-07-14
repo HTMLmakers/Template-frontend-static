@@ -1,0 +1,57 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- HelpWidget
+   ========================================================================== */
+
+.help-widget {
+  //@include media-breakpoint-down(md) {}
+  $root: &;
+
+  @include help-widget-sizes($root);
+  @include help-widget-color-themes($root);
+  @include help-widget--size($root, "l");
+  @include help-widget--color-theme($root, "white", !important);
+
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &__wrap {
+
+  }
+
+  &__title {
+
+  }
+
+  &__desc {
+
+  }
+
+  &__info {
+
+  }
+
+  .button-bitrix-widget {
+
+    &.button-primary {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-right: 0;
+      border: 3px solid rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &[data-size="s"] {
+
+    #{$root}__wrap
+      {
+        display: none;
+      }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include help-widget--size($root, "m");
+  }
+}

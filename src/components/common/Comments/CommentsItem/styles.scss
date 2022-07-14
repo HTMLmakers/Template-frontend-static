@@ -1,0 +1,30 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- CommentsItem
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.comments-item {
+  $root: '.comments-item';
+
+  @include comments-item-sizes($root);
+  @include comments-item-color-themes($root);
+  @include comments-item--size($root, "l");
+  @include comments-item--color-theme($root, "default");
+
+  @include media-breakpoint-down(md) {
+    @include comments-item--size($root, "m");
+  }
+
+  display: flex;
+
+  &__content {
+    display: flex;
+  }
+}

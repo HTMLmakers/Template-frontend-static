@@ -1,0 +1,121 @@
+// ==========================================================================
+// Ui-kit properties -- Size -- list
+// ==========================================================================
+
+$size-l--list: (
+  width-marker: px-to-rem(24px),
+  height-marker: px-to-rem(24px),
+  padding-left-item: px-to-rem(32px),
+);
+
+$size-m--list: (
+  width-marker: px-to-rem(18px),
+  height-marker: px-to-rem(18px),
+  padding-left-item: px-to-rem(24px),
+);
+
+$size-s--list: (
+  width-marker: px-to-rem(16px),
+  height-marker: px-to-rem(16px),
+  padding-left-item: px-to-rem(20px),
+);
+
+// ==========================================================================
+// Ui-kit mixins-- Size -- list
+// ==========================================================================
+
+// $p - properties
+// $dp - default properties
+// $important - !important state
+@mixin size-list($p, $important: null) {
+
+  &--stylized-marker {
+
+    > li {
+      padding-left: prop-filter(map-get($p, padding-left-item), $important);
+
+      &::before {
+        width: prop-filter(map-get($p, width-marker), $important);
+        height: prop-filter(map-get($p, height-marker), $important);
+      }
+    }
+  }
+}
+
+@mixin size-l--list($important: null) {
+  @include size-list($size-l--list, $important);
+}
+
+@mixin size-m--list($important: null) {
+  @include size-list($size-m--list, $important);
+}
+
+@mixin size-s--list($important: null) {
+  @include size-list($size-s--list, $important);
+}
+
+
+// ==========================================================================
+// Ui-kit mixins-- lists
+// ==========================================================================
+
+//
+// Ordered list
+// --------------------------------------------------------------------------
+
+// sizes
+@mixin list--size-l {
+
+}
+
+@mixin list--size-m {
+
+}
+
+@mixin list--size-s {
+
+}
+
+// group
+@mixin list--size {
+  @include list--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include list--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include list--size-s;
+  }
+}
+
+//
+// Description list
+// --------------------------------------------------------------------------
+
+// sizes
+@mixin desclist--size-l {
+
+}
+
+@mixin desclist--size-m {
+
+}
+
+@mixin desclist--size-s {
+
+}
+
+// group
+/*
+@mixin desclist--size {
+  @include desclist--size-l;
+
+  @include media-breakpoint-down(lg) {
+    @include desclist--size-m;
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include desclist--size-s;
+  }
+}*/

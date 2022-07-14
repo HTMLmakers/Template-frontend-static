@@ -1,0 +1,162 @@
+// =============================================================================
+// Mixins -- table secondary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+
+@mixin table-secondary--size($root, $size, $important: null) {
+
+  @include fullwidth;
+
+  #{$root}__section-title-wrap {
+    .desc {
+      margin-bottom: px-to-rem(4px);
+    }
+
+    .notification-primary {
+      margin-top: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "l" {
+
+    //Скругление углов
+    tr {
+      &:first-child {
+        td {
+          &:first-child {
+            border-top-left-radius: px-to-rem(6px);
+          }
+
+          &:last-child {
+            border-top-right-radius: px-to-rem(6px);
+          }
+        }
+      }
+
+      &:last-child {
+        td {
+          &:first-child {
+            border-bottom-left-radius: px-to-rem(6px);
+          }
+
+          &:last-child {
+            border-bottom-right-radius: px-to-rem(6px);
+          }
+        }
+      }
+    }
+
+    th, td {
+      padding: px-to-rem(16px);
+    }
+
+    #{$root}__section-title {
+      #{$root}__title {
+        .heading {
+          padding-right: px-to-rem(24px);
+        }
+      }
+
+      #{$root}__controls {
+        .link {
+          margin-right: px-to-rem(24px);
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    #{$root}__name {
+      width: 25%;
+    }
+
+    #{$root}__desc {
+      width: 75%;
+    }
+  }
+
+  @if $size == "m" {
+
+    //Скругление углов
+    tr {
+      &:first-child {
+
+        border-top-left-radius: px-to-rem(6px);
+        border-top-right-radius: px-to-rem(6px);
+      }
+
+      &:last-child {
+        border-bottom-left-radius: px-to-rem(6px);
+        border-bottom-right-radius: px-to-rem(6px);
+      }
+    }
+
+    //Перестороение ячеек
+    tr {
+      display: block;
+
+      td {
+        display: block;
+        width: 100%;
+        padding: px-to-rem(12px);
+      }
+    }
+
+    #{$root}__name {
+      padding-bottom: 0;
+      margin-bottom: px-to-rem(4px);
+    }
+
+    #{$root}__desc {
+      padding-top: 0;
+    }
+
+    #{$root}__section-title {
+      #{$root}__controls {
+        .link {
+          margin-right: px-to-rem(16px);
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          .icon-svg {
+            margin-right: 0 !important;
+          }
+
+          .link__text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$tableSecondarySizes: (
+        "l",
+        "m",
+        "s",
+);
+
+@mixin table-secondary-sizes($root) {
+  @each $key in $tablePrimarySizes {
+    &[data-size="#{$key}"] {
+      @include table-secondary--size($root, $key, !important);
+    }
+  }
+}

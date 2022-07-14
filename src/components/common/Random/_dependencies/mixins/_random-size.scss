@@ -1,0 +1,108 @@
+// =============================================================================
+// Mixins -- Random size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin random--size($root, $size, $important: null) {
+
+  #{$root}__place-pic {
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  #{$root}__title {
+    @include h7--size($root, "l");
+  }
+
+  #{$root}__wrap {
+    margin-top: px-to-rem(4px);
+  }
+
+  #{$root}__desc {
+    @include desc--size($root, "s");
+
+    margin-right: px-to-rem(14px);
+
+    &::before {
+      @include desc--size($root, "m");
+
+      top: 0;
+      right: px-to-rem(-10px);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  #{$root}__place-desc-before {
+    margin-right: px-to-rem(8px) !important;
+  }
+
+  #{$root}__place-desc-after {
+    margin-left: px-to-rem(8px) !important;
+  }
+
+  .link-primary {
+    @include link-primary--size($root, "l");
+
+
+  }
+
+  @if $size == "l" {
+
+    #{$root}__place-pic {
+      margin-right: px-to-rem(16px) !important;
+
+      .icon-wrap {
+        @include icon-wrap--size($root, "l");
+      }
+
+      .avatar {
+        @include avatar--size($root, "m");
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__place-pic {
+      margin-right: px-to-rem(12px) !important;
+
+      .icon-wrap {
+        @include icon-wrap--size($root, "m");
+      }
+
+      .avatar {
+        @include avatar--size($root, "s");
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$randomSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin random-sizes($root) {
+  @each $key in $randomSizes {
+    &[data-size="#{$key}"] {
+      @include random--size($root, $key, !important);
+    }
+  }
+}

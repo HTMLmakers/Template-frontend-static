@@ -1,0 +1,61 @@
+// =============================================================================
+// Mixins -- comments-image size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-image--size($root, $size, $important: null) {
+
+  #{$root}__list {
+    margin-top: px-to-rem(8px);
+  }
+
+  #{$root}__item {
+    margin-top: px-to-rem(8px);
+    margin-right: px-to-rem(8px);
+  }
+
+  @if $size == "l" {
+
+    #{$root}__pic {
+      width: px-to-rem(160px);
+      height: px-to-rem(160px);
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__pic {
+      width: px-to-rem(132px);
+      height: px-to-rem(132px);
+    }
+  }
+
+  @if $size == "s" {
+
+    #{$root}__pic {
+      width: px-to-rem(72px);
+      height: px-to-rem(72px);
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$commentsImageSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin comments-image-sizes($root) {
+  @each $key in $commentsImageSizes {
+    &[data-size="#{$key}"] {
+      @include comments-image--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,73 @@
+// =============================================================================
+// Mixins -- LinkSecondary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin link-secondary--size($root, $size, $important: null) {
+
+  @include desc--size($root, "s");
+
+  .icon-svg {
+
+    &:first-child {
+      @include icon--size($root, "m");
+    }
+  }
+
+  @if $size == "l" {
+
+    &__text {
+      margin-top: px-to-rem(2px) !important;
+    }
+
+    .icon-svg {
+
+      &:first-child {
+        margin-right: px-to-rem(16px) !important;
+      }
+
+      &:last-child {
+        margin-left: px-to-rem(16px) !important;;
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    .icon-svg {
+
+      &:first-child {
+        margin-right: px-to-rem(12px) !important;
+      }
+
+      &:last-child {
+        margin-left: px-to-rem(12px) !important;;
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$linkSecondarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin link-secondary-sizes($root) {
+  @each $key in $linkSecondarySizes {
+    &[data-size="#{$key}"] {
+      @include link-secondary--size($root, $key, !important);
+    }
+  }
+}

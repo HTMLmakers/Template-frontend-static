@@ -1,0 +1,50 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ControlTotal
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.control-total {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include control-total-sizes($root);
+  @include control-total--size($root, "l");
+  @include control-total-color-themes($root);
+  @include control-total--color-theme($root, "default");
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  &__total {
+    flex-shrink: 0;
+  }
+
+  &__link {
+    position: relative;
+    flex-shrink: 0;
+
+    &::before {
+      content: "/";
+      position: absolute;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+
+    &__total {
+      display: none;
+    }
+
+    &__link {
+      display: none;
+    }
+  }
+}

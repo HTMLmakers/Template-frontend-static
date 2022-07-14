@@ -1,0 +1,98 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Component -- PayBlock
+   ========================================================================== */
+
+.pay-block {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+  @include section-secondary-size-l;
+  @include section-secondary-color;
+
+  padding: px-to-rem(16px) px-to-rem(16px) px-to-rem(24px);
+
+  &__header {
+    margin-bottom: px-to-rem(24px);
+
+    .desc {
+      margin-top: 0;
+    }
+  }
+
+  &__title {
+    @include h6--size($root, "l");
+
+    margin-bottom: px-to-rem(4px);
+
+    @include media-breakpoint-down(md) {
+      @include h7--size($root, "l");
+    }
+  }
+
+  &__body {
+    padding-bottom: px-to-rem(24px);
+  }
+
+  &__form-body {
+    padding-bottom: px-to-rem(24px);
+
+    .label {
+      display: inline-block;
+      margin-bottom: px-to-rem(8px);
+    }
+  }
+
+  &__form {
+    .input-text {
+      @include input-text--size($root, "l");
+
+      @include media-breakpoint-down(md) {
+        @include input-text--size($root, "m");
+      }
+    }
+  }
+
+  &__form-footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-right: px-to-rem(-8px);
+    margin-bottom: px-to-rem(-8px);
+
+    .button-primary {
+      flex-grow: 1;
+      margin-right: px-to-rem(8px);
+      margin-bottom: px-to-rem(8px);
+    }
+
+    @include media-breakpoint-down(xl) {
+      flex-direction: row;
+    }
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+    }
+  }
+
+  &[data-discount] &__form-footer {
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding-top: px-to-rem(24px);
+    border-top: 1px solid $color-gray-tertiary;
+
+    @include media-breakpoint-down(xl) {
+      justify-content: flex-start;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: px-to-rem(12px) px-to-rem(12px) px-to-rem(24px);
+  }
+}

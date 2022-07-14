@@ -1,0 +1,18 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ContextMenu
+   ========================================================================== */
+
+.context-menu {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include context-menu-sizes($root);
+  @include context-menu-color-themes($root);
+  @include context-menu--size($root, "l");
+
+  @include media-breakpoint-down(md) {
+    @include context-menu--size($root, "m");
+  }
+}

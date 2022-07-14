@@ -1,0 +1,85 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- PlugPrimary
+   ========================================================================== */
+
+.plug-primary {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @extend %plug-bg-color;
+  @extend %plug-outline;
+
+
+  min-height: px-to-rem(400px);
+  height: 100vh;
+  padding-left: px-to-rem(128px);
+  padding-right: px-to-rem(128px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/common/assets/img/start_page_block.png");
+  background-repeat: repeat-x;
+  background-position: center bottom;
+
+  &__img {
+    @include avatar--size($root, "xxxxl");
+
+    margin-right: 0 !important;
+    margin-bottom: px-to-rem(24px);
+    border-radius: 50%;
+  }
+
+  &__content {
+    max-width: px-to-rem(496px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .heading {
+      @include h5--size($root, "l");
+
+      margin-top: 0;
+      margin-bottom: px-to-rem(16px);
+    }
+
+    .desc {
+      @include desc--size($root, "s");
+
+      margin-top: 0;
+      margin-bottom: px-to-rem(24px);
+    }
+
+    .button-primary {
+      @include button-primary--size($root, "l");
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+
+    padding-left: px-to-rem(16px);
+    padding-right: px-to-rem(16px);
+
+    &__img {
+      @include avatar--size($root, "xxl");
+    }
+
+    &__content {
+
+      .heading {
+        @include h6--size($root, "l");
+
+        margin-top: 0;
+        margin-bottom: px-to-rem(16px);
+      }
+
+      .button-primary {
+        @include button-primary--size($root, "m");
+      }
+    }
+  }
+}

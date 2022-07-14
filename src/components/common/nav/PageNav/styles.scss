@@ -1,0 +1,40 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- PageNav
+   ========================================================================== */
+
+.page-nav {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include page-nav-sizes($root);
+  @include page-nav--size($root, "l");
+
+  display: flex;
+
+  &__add-controls {
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
+  }
+
+  &__list {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+
+  &__list-more {
+    display: none;
+
+    @include media-breakpoint-down(xl) {
+      display: inline-flex;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include page-nav--size($root, "m", !important);
+  }
+}

@@ -1,0 +1,29 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Desc
+   ========================================================================== */
+
+.value {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include value-sizes($root);
+  @include value-color-themes($root);
+  @include value--size($root, "l");
+  @include value--color-theme($root, "gray-primary");
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    .tooltip-trigger {
+      opacity: 0.5;
+    }
+  }
+
+  &__discount {
+    display: inline-block;
+    color: $color-orange-primary;
+  }
+}

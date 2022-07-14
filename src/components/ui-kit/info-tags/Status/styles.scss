@@ -1,0 +1,32 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- status
+   ========================================================================== */
+
+.status {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %info-tags;
+  @include status-sizes($root);
+  @include status-color-themes($root);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+
+  &[data-type="light"] {
+    border-radius: 0 !important;
+
+    &::before {
+      display: inline-block;
+      border-style: solid;
+      border-radius: 50%;
+      content: "";
+    }
+  }
+}
+
+

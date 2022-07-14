@@ -1,0 +1,170 @@
+// =============================================================================
+// Mixins -- ButtonPrimary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-primary--size($root, $size, $important: null) {
+
+  &[data-before-separator] {
+
+    #{$root}__text {
+
+      &::before {
+        width: px-to-rem(1px);
+      }
+    }
+  }
+
+  @if $size == "l" {
+    min-width: px-to-rem(48px);
+    height: px-to-rem(48px) !important;
+    padding-right: px-to-rem(16px) !important;
+    padding-left: px-to-rem(16px) !important;
+    border-radius: px-to-rem(48px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(4px);
+        right: px-to-rem(2px);
+      }
+    }
+
+    &[data-before-separator] {
+
+      #{$root}__text {
+
+        &::before {
+          height: px-to-rem(24px);
+          margin-right: px-to-rem(16px);
+          margin-left: px-to-rem(4px);
+        }
+      }
+    }
+
+    #{$root}__text-value {
+      margin-left: px-to-rem(4px);
+    }
+
+    .icon-svg {
+
+      &:first-child {
+        margin-left: px-to-rem(-4px) !important;
+      }
+
+      &:last-child {
+        margin-left: px-to-rem(12px) !important;
+      }
+
+      &:only-child {
+        margin-right: px-to-rem(-4px) !important;
+        margin-left: px-to-rem(-4px) !important;
+      }
+    }
+  }
+
+  @if $size == "m" {
+    min-width: px-to-rem(40px);
+    height: px-to-rem(40px) !important;
+    padding-right: px-to-rem(16px) !important;
+    padding-left: px-to-rem(16px) !important;
+    border-radius: px-to-rem(40px) !important;
+
+    &[data-before-separator] {
+
+      #{$root}__text {
+
+        &::before {
+          height: px-to-rem(20px);
+          margin-right: px-to-rem(12px);
+          margin-left: 0;
+        }
+      }
+    }
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(3px);
+        right: px-to-rem(1px);
+      }
+    }
+
+    .icon-svg {
+
+      &:first-child {
+        margin-left: px-to-rem(-8px) !important;
+      }
+
+      &:last-child {
+        margin-left: px-to-rem(12px) !important;
+      }
+
+      &:only-child {
+        margin-right: px-to-rem(-8px) !important;
+        margin-left: px-to-rem(-8px) !important;
+      }
+    }
+  }
+
+  @if $size == "s" {
+    min-width: px-to-rem(32px) !important;
+    height: px-to-rem(32px) !important;
+    padding-right: px-to-rem(12px) !important;
+    padding-left: px-to-rem(12px) !important;
+    border-radius: px-to-rem(32px) !important;
+
+    &[data-before-separator] {
+
+      #{$root}__text {
+
+        &::before {
+          height: px-to-rem(16px);
+          margin-right: px-to-rem(8px);
+          margin-left: 0;
+        }
+      }
+    }
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(2px);
+        right: 0;
+      }
+    }
+
+    .icon-svg {
+
+      &:first-child {
+        margin-left: px-to-rem(-4px) !important;
+      }
+
+      &:only-child {
+        margin-right: px-to-rem(-4px) !important;
+        margin-left: px-to-rem(-4px) !important;
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonPrimarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin button-primary-sizes($root) {
+  @each $key in $buttonPrimarySizes {
+    &[data-size="#{$key}"] {
+      @include button-primary--size($root, $key, !important);
+    }
+  }
+}

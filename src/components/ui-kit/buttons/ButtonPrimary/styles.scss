@@ -1,0 +1,35 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- ButtonPrimary
+   ========================================================================== */
+
+.button-primary {
+  $root: &;
+
+  @extend %button;
+  @include button-primary-sizes($root);
+  @include button-primary-color-themes($root);
+  @include button-primary--size($root, "l");
+
+  &[data-before-separator] {
+
+    #{$root}__text {
+      display: inline-flex;
+      align-items: center;
+
+      &::before {
+        display: inline-block;
+        content: "";
+      }
+    }
+  }
+
+  &__text-value {
+
+  }
+
+  @include media-breakpoint-down(md) {
+    @include button-primary--size($root, "m");
+  }
+}

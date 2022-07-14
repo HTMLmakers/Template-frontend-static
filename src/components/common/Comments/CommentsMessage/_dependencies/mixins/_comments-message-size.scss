@@ -1,0 +1,63 @@
+// =============================================================================
+// Mixins -- comments-message size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-message--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    padding: px-to-rem(16px);
+
+    #{$root}__header {
+      margin-bottom: px-to-rem(8px);
+    }
+
+    #{$root}__person {
+      @include h7--size($root, "l");
+      font-weight: 800;
+    }
+
+    #{$root}__text {
+      @include desc--size($root, "s");
+    }
+
+    #{$root}__person-action {
+      @include h7--size($root, "l");
+
+      margin-left: px-to-rem(3px);
+    }
+
+    #{$root}__control {
+      margin-left: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$commentsMessageSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin comments-message-sizes($root) {
+  @each $key in $commentsMessageSizes {
+    &[data-size="#{$key}"] {
+      @include comments-message--size($root, $key, !important);
+    }
+  }
+}

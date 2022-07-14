@@ -1,0 +1,90 @@
+// =============================================================================
+// Mixins -- Avatar color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin avatar--color-theme($root, $color-theme, $important: null) {
+  color: $color-white;
+
+  @if $color-theme == "blue-primary" {
+
+    #{$root}__plug{
+      background-color: $color-blue-primary;
+    }
+  }
+
+  @if $color-theme == "blue-light-primary" {
+
+    #{$root}__plug{
+      background-color: $color-blue-light-primary;
+    }
+  }
+
+  @if $color-theme == "orange-primary" {
+
+    #{$root}__plug{
+      background-color: $color-orange-primary;
+    }
+  }
+
+  @if $color-theme == "yellow-primary" {
+
+    #{$root}__plug{
+      background-color: $color-yellow-primary;
+    }
+  }
+
+  @if $color-theme == "green-primary" {
+
+    #{$root}__plug{
+      background-color: $color-green-primary;
+    }
+  }
+
+  @if $color-theme == "azure-primary" {
+
+    #{$root}__plug{
+      background-color: $color-azure-primary;
+    }
+  }
+
+  @if $color-theme == "velvet-primary" {
+
+    #{$root}__plug{
+      background-color: $color-velvet-primary;
+    }
+  }
+
+  @if $color-theme == "red-primary" {
+
+    #{$root}__plug{
+      background-color: $color-red-primary;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$avatarColorThemes: (
+  "blue-primary",
+  "blue-light-primary",
+  "orange-primary",
+  "yellow-primary",
+  "green-primary",
+  "azure-primary",
+  "velvet-primary",
+  "red-primary",
+);
+
+@mixin avatar-color-themes($root) {
+  @each $key in $avatarColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include avatar--color-theme($root, $key);
+    }
+  }
+}

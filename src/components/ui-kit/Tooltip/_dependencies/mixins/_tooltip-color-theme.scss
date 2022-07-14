@@ -1,0 +1,71 @@
+// =============================================================================
+// Mixins -- Tooltip color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin tooltip--color-theme($root, $color-theme, $important: null) {
+
+  //blue-primary
+  @if $color-theme == "blue-primary" {
+    color: $color-white;
+    background-color: $color-blue-primary;
+
+      .icon-svg {
+
+        svg {
+          fill: $color-white !important;
+        }
+      }
+  }
+
+  //white
+  @if $color-theme == "white" {
+    color: $color-gray-primary;
+    background: $color-white;
+
+    b {
+      color: $color-blue-dark-secondary;
+    }
+
+    .icon-svg {
+
+        svg {
+        fill: $color-gray-primary !important;
+      }
+    }
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+    color: $color-white;
+    background: $color-orange-primary;
+
+    .icon-svg {
+
+      svg {
+        fill: $color-white !important;
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$tooltipColorThemes: (
+  "blue-primary",
+  "white",
+  "orange-primary",
+);
+
+@mixin tooltip-color-themes($root) {
+  @each $key in $tooltipColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include tooltip--color-theme($root, $key);
+    }
+  }
+}

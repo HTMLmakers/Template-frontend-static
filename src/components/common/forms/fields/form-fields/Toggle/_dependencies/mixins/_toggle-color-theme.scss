@@ -1,0 +1,67 @@
+// =============================================================================
+// Mixins -- toggle color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin toggle--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    #{$root}__custom {
+      background-color: $color-gray-secondary;
+
+      &:before,
+      &:after {
+        border-color: $color-white;
+      }
+
+      &:before {
+        background-color: $color-white;
+      }
+
+      &:after {
+
+      }
+    }
+
+    input:checked + #{$root}__custom,
+    input[checked] + #{$root}__custom,
+    &[data-state="checked"] #{$root}__custom {
+      background-color: $color-blue-light-primary;
+
+      &:before {
+        background-color: transparent;
+      }
+
+      &:after {
+        background-color: $color-white;
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"] {
+      #{$root}__custom {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$toggleColorThemes: (
+  "default",
+);
+
+@mixin toggle-color-themes($root) {
+  @each $key in $toggleColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include toggle--color-theme($root, $key);
+    }
+  }
+}

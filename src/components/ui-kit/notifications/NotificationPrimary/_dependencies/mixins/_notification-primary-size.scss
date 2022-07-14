@@ -1,0 +1,52 @@
+// =============================================================================
+// Mixins -- NotificationPrimary size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin notification-primary--size($root, $size, $important: null) {
+
+  @include fullwidth;
+
+  line-height: 1.3;
+
+  .icon-svg {
+    margin-right: px-to-rem(12px);
+  }
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    min-height: px-to-rem(52px);
+    padding: px-to-rem(5px) px-to-rem(16px);
+    border-radius: px-to-rem(6px);
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$notificationPrimarySizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin notification-primary-sizes($root) {
+  @each $key in $notificationPrimarySizes {
+    &[data-size="#{$key}"] {
+      @include notification-primary--size($root, $key, !important);
+    }
+  }
+}

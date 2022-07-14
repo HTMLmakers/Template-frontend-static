@@ -1,0 +1,47 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- table primary
+   ========================================================================== */
+
+.table-secondary {
+  $root: ".table-secondary";
+
+  @include table-secondary-sizes($root);
+  @include table-secondary-color-themes($root);
+  @include table-secondary--size($root, "l");
+  @include table-secondary--color-theme($root, "default");
+
+  word-break: break-word;
+
+  p {
+    margin: 0;
+  }
+
+  &__section-title {
+    #{$root}__controls {
+      flex-shrink: 0;
+    }
+  }
+
+  &__section-title-wrap {
+    #{$root}__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid $color-gray-tertiary;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include table-secondary--size($root, "m");
+  }
+
+}

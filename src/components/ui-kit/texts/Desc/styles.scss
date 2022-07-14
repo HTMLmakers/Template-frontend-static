@@ -1,0 +1,19 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Desc
+   ========================================================================== */
+
+.desc {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %text;
+  @include desc-sizes($root);
+  @include desc-color-themes($root);
+  @include desc--color-theme($root, "inherit");
+
+  &[data-weight="bold"] {
+    font-weight: 800;
+  }
+}

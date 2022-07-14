@@ -1,0 +1,52 @@
+// =============================================================================
+// Mixins -- LinkTertiary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin link-tertiary--color-theme($root, $color-theme, $important: null) {
+
+  //gray-primary
+  @if $color-theme == "blue-dark-secondary" {
+    color: $color-blue-dark-secondary;
+
+    .mark-primary {
+      @include mark-primary--color-theme($root, "blue-dark-secondary", !important);
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$linkTertiaryColorThemes: (
+  "blue-dark-secondary",
+);
+
+@mixin link-tertiary-color-themes($root) {
+  @each $key in $linkTertiaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include link-tertiary--color-theme($root, $key);
+    }
+  }
+}

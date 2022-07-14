@@ -1,0 +1,143 @@
+// =============================================================================
+// Mixins -- MainNav size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin main-nav--size($root, $size, $important: null) {
+
+  #{$root}__item {
+    @include section-secondary-size-l;
+
+    margin-bottom: px-to-rem(8px);
+    padding: 0 !important;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  #{$root}__arrow {
+    margin-top: px-to-rem(8px);
+  }
+
+  #{$root}__subitem {
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .link-primary {
+      font-weight: 500;
+    }
+  }
+
+  #{$root}__link {
+
+    .link-secondary {
+
+      &__text {
+        font-weight: 800;
+      }
+    }
+  }
+
+  @if $size == "l" {
+
+    #{$root}__item {
+
+      .link-secondary {
+        @include section-secondary-size-l;
+        @include link-secondary--size($root, "l");
+
+        padding-top: px-to-rem(12px) !important;
+        padding-bottom: px-to-rem(12px) !important;
+      }
+    }
+
+    #{$root}__sublist {
+      padding-left: px-to-rem(56px);
+      padding-right: px-to-rem(16px);
+      padding-top: px-to-rem(8px);
+      padding-bottom: px-to-rem(24px);
+    }
+
+    #{$root}__subitem {
+      margin-bottom: px-to-rem(24px);
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__item {
+
+      .link-secondary {
+        @include section-secondary-size-m;
+        @include link-secondary--size($root, "m");
+
+        padding-top: px-to-rem(8px) !important;
+        padding-bottom: px-to-rem(8px) !important;
+      }
+    }
+
+    #{$root}__arrow {
+      margin-top: px-to-rem(8px);
+    }
+
+    #{$root}__sublist {
+      padding-left: px-to-rem(48px);
+      padding-right: px-to-rem(12px);
+      padding-top: px-to-rem(12px);
+      padding-bottom: px-to-rem(24px);
+    }
+
+    #{$root}__subitem {
+      margin-bottom: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "s" {
+    width: px-to-rem(72px);
+    padding: px-to-rem(8px);
+
+    #{$root}__item {
+      height: px-to-rem(56px);
+      border-radius: px-to-rem(12px);
+
+      .link-secondary {
+        .icon-svg:first-child {
+          margin-right: 0 !important;
+        }
+      }
+
+      .tooltip-trigger {
+        height: inherit;
+      }
+    }
+
+    #{$root}__link {
+      height: inherit;
+    }
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$mainNavSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin main-nav-sizes($root) {
+  @each $key in $mainNavSizes {
+    &[data-size="#{$key}"] {
+      @include main-nav--size($root, $key, !important);
+    }
+  }
+}

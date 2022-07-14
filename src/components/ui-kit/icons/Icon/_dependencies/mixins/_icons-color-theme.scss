@@ -1,0 +1,223 @@
+// =============================================================================
+// Mixins -- Icon color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin icon--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-gray-primary;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-gray-primary;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //blue-primary
+  @if $color-theme == "blue-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-blue-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-blue-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //blue-light-primary
+  @if $color-theme == "blue-light-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-blue-light-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-blue-light-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //blue-dark-primary
+  @if $color-theme == "blue-dark-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-blue-dark-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-blue-dark-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-orange-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-orange-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //yellow-primary
+  @if $color-theme == "yellow-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-yellow-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-yellow-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //green-primary
+  @if $color-theme == "green-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-green-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-green-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //azure-primary
+  @if $color-theme == "azure-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-azure-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-azure-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //velvet-primary
+  @if $color-theme == "velvet-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-velvet-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-velvet-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //red-primary
+  @if $color-theme == "red-primary" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-red-primary !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-red-primary !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //white
+  @if $color-theme == "white" {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-white !important;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-white !important;
+        fill-opacity: 0;
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$iconColorThemes: (
+  "default",
+  "white",
+  "blue-primary",
+  "blue-light-primary",
+  "blue-dark-primary",
+  "orange-primary",
+  "yellow-primary",
+  "green-primary",
+  "azure-primary",
+  "velvet-primary",
+  "red-primary",
+);
+
+@mixin icon-color-themes($root) {
+  @each $key in $iconColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include icon--color-theme($root, $key);
+    }
+  }
+}

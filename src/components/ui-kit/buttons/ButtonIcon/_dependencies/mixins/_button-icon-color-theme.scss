@@ -1,0 +1,62 @@
+// =============================================================================
+// Mixins -- ButtonIcon color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-icon--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+
+    &:hover,
+    &[data-state="hover"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &:disabled,
+    &[data-state="disabled"] {
+
+      .icon-svg {
+        opacity: 0.2;
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$buttonIconColorThemes: (
+  "default",
+);
+
+@mixin button-icon-color-themes($root) {
+  @each $key in $buttonIconColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-icon--color-theme($root, $key);
+    }
+  }
+}

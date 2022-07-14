@@ -1,0 +1,19 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- SectionSecondary
+   ========================================================================== */
+
+.section-secondary {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include section-secondary-sizes($root);
+  @include section-secondary-color-themes($root);
+  @include section-secondary--size($root, "l");
+  @include section-secondary--color-theme($root, "white");
+
+  @include media-breakpoint-down(md) {
+    @include section-secondary--size($root, "m");
+  }
+}

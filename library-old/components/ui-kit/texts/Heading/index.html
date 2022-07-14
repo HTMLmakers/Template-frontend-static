@@ -1,0 +1,12 @@
+<!-- Required props: context.level, context.text -->
+@{ui-kit}if (context.level && context.text) {
+@{ui-kit}if (context.customTag) { <@{ui-kit}customTag }    
+@{ui-kit}if (!context.customTag) { <h@{ui-kit}level }
+    class="heading @{ui-kit}if (context.additionalClass) { @{ui-kit}additionalClass }"
+    @{ui-kit}if (context.level) { data-level=@{ui-kit}level }
+    @{ui-kit}if (context.size) { data-size=@{ui-kit}size }
+    @{ui-kit}if (context.colorTheme) { data-size=@{ui-kit}colorTheme }>
+    @{ui-kit}text
+    <div>@{ui-kit}component</div>
+</h@{ui-kit}level> @{ui-kit}if (context.customTag) { </@{ui-kit}customTag > }
+}

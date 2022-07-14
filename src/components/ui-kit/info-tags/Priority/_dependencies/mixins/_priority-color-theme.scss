@@ -1,0 +1,67 @@
+// =============================================================================
+// Mixins -- Priority color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin priority--color-theme($root, $color-theme, $important: null) {
+
+  color: $color-gray-primary;
+  border-color: $color-gray-tertiary;
+
+  .icon-svg {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-white;
+      }
+    }
+  }
+
+  /* blue-dark-secondary */
+  @if $color-theme == "blue-dark-secondary" {
+
+    #{$root}__icon-wrap {
+      background-color: $color-blue-dark-secondary;
+    }
+
+  }
+
+  /* gray-primary */
+  @if $color-theme == "gray-primary" {
+
+    #{$root}__icon-wrap {
+      background-color: $color-gray-primary;
+    }
+
+  }
+
+  /* gray-secondary */
+  @if $color-theme == "gray-secondary" {
+
+    #{$root}__icon-wrap {
+      background-color: $color-gray-secondary;
+    }
+
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$priorityColorThemes: (
+  "blue-dark-secondary",
+  "gray-primary",
+  "gray-secondary",
+);
+
+@mixin priority-color-themes($root) {
+  @each $key in $priorityColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include priority--color-theme($root, $key, !important);
+    }
+  }
+}

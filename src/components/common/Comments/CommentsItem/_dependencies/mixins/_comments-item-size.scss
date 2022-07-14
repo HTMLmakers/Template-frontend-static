@@ -1,0 +1,78 @@
+// =============================================================================
+// Mixins -- comments-item size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-item--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    &__date {
+      width: 25%;
+
+      .date-time {
+        &__date {
+          display: block;
+        }
+      }
+    }
+
+    &__content {
+      width: 75%;
+
+      .button-primary {
+        margin-left: px-to-rem(16px);
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    flex-direction: column;
+
+    &__date {
+      @include fullwidth;
+
+      margin-bottom: px-to-rem(12px);
+
+      .date-time {
+        &__date {
+          display: inline-block;
+        }
+      }
+    }
+
+    &__content {
+      @include fullwidth;
+
+      .button-primary {
+        margin-left: px-to-rem(8px);
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$commentsItemSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin comments-item-sizes($root) {
+  @each $key in $commentsItemSizes {
+    &[data-size="#{$key}"] {
+      @include comments-item--size($root, $key, !important);
+    }
+  }
+}

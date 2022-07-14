@@ -1,0 +1,103 @@
+// =============================================================================
+// Mixins -- ButtonComplex color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-complex--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "blue-primary" {
+    color: $color-white;
+    background-color: $color-blue-primary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-white;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-white;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-blue-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  @if $color-theme == "red-primary" {
+    color: $color-white;
+    background-color: $color-red-primary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-white;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-white;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-red-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$buttonComplexColorThemes: (
+  "blue-primary",
+  "red-primary"
+);
+
+@mixin button-complex-color-themes($root) {
+  @each $key in $buttonComplexColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-complex--color-theme($root, $key);
+    }
+  }
+}

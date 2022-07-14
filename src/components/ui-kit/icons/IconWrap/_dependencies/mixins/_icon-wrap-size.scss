@@ -1,0 +1,112 @@
+// =============================================================================
+// Mixins -- IconWrap size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin icon-wrap--size($root, $size, $important: null) {
+
+  margin-right: px-to-rem(8px);
+
+  @if $size == "xl" {
+    width: px-to-rem(56px) !important;
+    height: px-to-rem(56px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(4px) !important;
+        right: px-to-rem(4px) !important;
+      }
+    }
+
+    .icon-svg {
+      @include icon--size($root, "l");
+    }
+  }
+
+  @if $size == "l" {
+    width: px-to-rem(48px) !important;
+    height: px-to-rem(48px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(4px) !important;
+        right: px-to-rem(2px) !important;
+      }
+    }
+
+    .icon-svg {
+      @include icon--size($root, "m");
+    }
+  }
+
+  @if $size == "m" {
+    width: px-to-rem(40px) !important;
+    height: px-to-rem(40px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(2px) !important;
+        right: px-to-rem(1px) !important;
+      }
+    }
+
+    .icon-svg {
+      @include icon--size($root, "m");
+    }
+  }
+
+  @if $size == "s" {
+    width: px-to-rem(32px) !important;
+    height: px-to-rem(32px) !important;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        top: px-to-rem(2px) !important;
+        right: 0 !important;
+      }
+    }
+
+    .icon-svg {
+      @include icon--size($root, "s");
+    }
+  }
+
+  &:first-child {
+    margin-left: 0 !important;
+  }
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+
+  &:only-child {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$iconWrapSizes: (
+  "xl",
+  "l",
+  "m",
+  "s",
+);
+
+@mixin icon-wrap-sizes($root) {
+  @each $key in $iconWrapSizes {
+    &[data-size="#{$key}"] {
+      @include icon-wrap--size($root, $key, !important);
+    }
+  }
+}

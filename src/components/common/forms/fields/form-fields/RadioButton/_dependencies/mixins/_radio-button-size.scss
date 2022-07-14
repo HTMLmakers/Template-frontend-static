@@ -1,0 +1,57 @@
+// =============================================================================
+// Mixins -- radio button text size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin radio-button--size($root, $size, $important: null) {
+
+  @include field-size-check($root);
+
+  @if $size == "l" {
+
+    #{$root}__custom {
+
+      &:before {
+        width: px-to-rem(10px);
+        height: px-to-rem(10px);
+        border-radius: 50%;
+      }
+    }
+
+    .label {
+      @include field-padding-check-l;
+    }
+  }
+
+  @if $size == "m" {
+
+    .label {
+      @include field-padding-check-m;
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$radioButtonSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin radio-button-sizes($root) {
+  @each $key in $radioButtonSizes {
+    &[data-size="#{$key}"] {
+      @include radio-button--size($root, $key, !important);
+    }
+  }
+}

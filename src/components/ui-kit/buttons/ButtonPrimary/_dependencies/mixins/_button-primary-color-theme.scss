@@ -1,0 +1,507 @@
+// =============================================================================
+// Mixins -- ButtonPrimary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-primary--color-theme($root, $color-theme, $important: null) {
+
+  &[data-before-separator] {
+
+    #{$root}__text {
+
+      &::before {
+        background-color: $color-white;
+      }
+    }
+  }
+
+  #{$root}__text-value {
+    color: $color-white;
+  }
+
+  .icon-svg {
+
+    &[data-type="fill"] {
+      svg {
+        fill: $color-white;
+      }
+    }
+
+    &[data-type="stroke"] {
+      svg {
+        stroke: $color-white;
+        fill-opacity: 0;
+      }
+    }
+  }
+
+  //blue-primary
+  @if $color-theme == "blue-primary" {
+    color: $color-white;
+    background-color: $color-blue-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-blue-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //blue-secondary
+  @if $color-theme == "blue-secondary" {
+    color: $color-white;
+    background-color: $color-blue-light-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-blue-light-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //gray-primary
+  @if $color-theme == "gray-primary" {
+    color: $color-gray-primary;
+    background-color: $color-gray-tertiary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-dark-secondary;
+      background-color: $color-gray-tertiary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      color: $color-gray-secondary;
+      background-color: $color-gray-tertiary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-gray-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-gray-secondary;
+          }
+        }
+      }
+    }
+  }
+
+  //gray-quaternary
+  @if $color-theme == "gray-quaternary" {
+    color: $color-gray-primary;
+    background-color: $color-gray-quaternary;
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-dark-secondary;
+      background-color: $color-gray-quaternary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      color: $color-gray-secondary;
+      background-color: $color-gray-quaternary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-gray-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-gray-secondary;
+          }
+        }
+      }
+    }
+  }
+
+  //white-primary
+  @if $color-theme == "white-primary" {
+    color: $color-gray-primary;
+    background-color: $color-white;
+
+    &[data-before-separator] {
+
+      #{$root}__text {
+
+        &::before {
+          background-color: $color-gray-secondary;
+        }
+      }
+    }
+
+    #{$root}__text-value {
+      color: $color-blue-dark-secondary;
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-dark-secondary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      color: $color-gray-secondary;
+      opacity: 1;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-gray-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-gray-secondary;
+          }
+        }
+      }
+    }
+  }
+
+  //red-primary
+  @if $color-theme == "red-primary" {
+    color: $color-white;
+    background-color: $color-red-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-red-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //green-primary
+  @if $color-theme == "green-primary" {
+    color: $color-white;
+    background-color: $color-green-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-green-secondary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+    color: $color-white;
+    background-color: $color-orange-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-orange-primary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //velvet-primary
+  @if $color-theme == "velvet-primary" {
+    color: $color-white;
+    background-color: $color-velvet-primary;
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      background-color: $color-velvet-primary;
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      background-color: $color-gray-secondary;
+    }
+  }
+
+  //orange-primary-light
+  @if $color-theme == "orange-primary-light" {
+    color: $color-orange-primary;
+    background-color: $color-white;
+    border: 1px solid $color-orange-primary;
+
+    &[data-mark-notice="true"] {
+
+      &:after {
+        box-shadow: 0 0 0 px-to-rem(4px) $color-gray-quaternary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-orange-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-orange-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+
+    &:hover,
+    &[data-state="hover"],
+    &:active,
+    &[data-state="active"] {
+      color: $color-blue-dark-secondary;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-blue-dark-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-blue-dark-secondary;
+          }
+        }
+      }
+    }
+
+    &:active,
+    &[data-state="active"] {
+
+    }
+
+    &[disabled],
+    &[data-state="disabled"] {
+      color: $color-gray-secondary;
+      opacity: 1;
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-gray-secondary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-gray-secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$buttonPrimaryColorThemes: (
+  "blue-primary",
+  "blue-secondary",
+  "gray-primary",
+  "gray-quaternary",
+  "white-primary",
+  "red-primary",
+  "green-primary",
+  "orange-primary",
+  "orange-primary-light",
+  "velvet-primary",
+);
+
+@mixin button-primary-color-themes($root) {
+  @each $key in $buttonPrimaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include button-primary--color-theme($root, $key);
+    }
+  }
+}

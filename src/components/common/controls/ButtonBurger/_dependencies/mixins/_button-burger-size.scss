@@ -1,0 +1,58 @@
+// =============================================================================
+// Mixins -- ButtonBurger size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-burger--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    .button-primary {
+      @include button-primary--size($root, "l", !important);
+    }
+
+    &[data-color-theme="blue-dark-primary"] {
+
+      .button-primary {
+        width: px-to-rem(56px) !important;
+        height: px-to-rem(56px) !important;
+        border-radius: px-to-rem(12px) !important;
+      }
+
+    }
+
+  }
+
+  @if $size == "m" {
+
+    .button-primary {
+      @include button-primary--size($root, "m", !important);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonBurgerSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin button-burger-sizes($root) {
+  @each $key in $buttonBurgerSizes {
+    &[data-size="#{$key}"] {
+      @include button-burger--size($root, $key, !important);
+    }
+  }
+}

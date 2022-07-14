@@ -1,0 +1,39 @@
+// =============================================================================
+// Mixins -- Promocode color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin promocode--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+    background-color: $color-white;
+
+    #{$root}__desc {
+      color: $color-gray-primary;
+    }
+
+    #{$root}__input {
+      background-color: $color-gray-quaternary;
+      color: $color-blue-dark-secondary;
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$promocodeColorThemes: (
+  "default",
+);
+
+@mixin promocodes-color-themes($root) {
+  @each $key in $promocodeColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include promocode--color-theme($root, $key);
+    }
+  }
+}

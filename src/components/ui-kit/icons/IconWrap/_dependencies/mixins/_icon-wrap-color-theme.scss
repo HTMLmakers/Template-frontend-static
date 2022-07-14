@@ -1,0 +1,79 @@
+// =============================================================================
+// Mixins -- IconWrap color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin icon-wrap--color-theme($root, $color-theme, $important: null) {
+
+  //gray-primary-light
+  @if $color-theme == "gray-primary-light" {
+    border: 1px dashed $color-gray-primary;
+  }
+
+  //gray-secondary
+  @if $color-theme == "gray-secondary" {
+    background-color: $color-gray-secondary;
+  }
+
+  //gray-tertiary
+  @if $color-theme == "gray-tertiary" {
+    background-color: $color-gray-tertiary;
+  }
+
+  //gray-quaternary
+  @if $color-theme == "gray-quaternary" {
+    background-color: $color-gray-quaternary;
+  }
+
+  //blue-dark-secondary
+  @if $color-theme == "blue-dark-secondary" {
+    background-color: $color-blue-dark-secondary;
+  }
+
+  //green-primary
+  @if $color-theme == "green-primary" {
+    background-color: $color-green-primary;
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+    background-color: $color-orange-primary;
+  }
+
+  //red-primary
+  @if $color-theme == "red-primary" {
+    background-color: $color-red-primary;
+  }
+
+  //velvet-primary
+  @if $color-theme == "velvet-primary" {
+    background-color: $color-velvet-primary;
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$iconWrapColorThemes: (
+  "gray-primary-light",
+  "gray-secondary",
+  "gray-tertiary",
+  "gray-quaternary",
+  "blue-dark-secondary",
+  "green-primary",
+  "orange-primary",
+  "red-primary",
+  "velvet-primary",
+);
+
+@mixin icon-wrap-color-themes($root) {
+  @each $key in $iconWrapColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include icon-wrap--color-theme($root, $key);
+    }
+  }
+}

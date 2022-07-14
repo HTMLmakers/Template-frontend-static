@@ -1,0 +1,51 @@
+// =============================================================================
+// Mixins -- Scroll size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin scroll--size($root, $size, $important: null) {
+
+  .ScrollbarsCustom-Track {
+    top: 0 !important;
+    right: px-to-rem(2px) !important;
+    height: 100% !important;
+  }
+
+  @if $size == "l" {
+
+    .ScrollbarsCustom-Track {
+      width: px-to-rem(4px) !important;
+    }
+
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$scrollSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin scroll-sizes($root) {
+  @each $key in $scrollSizes {
+    &[data-size="#{$key}"] {
+      @include scroll--size($root, $key, !important);
+    }
+  }
+}

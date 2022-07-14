@@ -1,0 +1,108 @@
+// =============================================================================
+// Mixins -- avatar size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin avatar--size($root, $size, $important: null) {
+
+  @include h6--size($root, "l");
+
+  margin-right: px-to-rem(16px);
+  margin-left: px-to-rem(16px);
+
+  @include media-breakpoint-down(sm) {
+    margin-right: px-to-rem(12px);
+    margin-left: px-to-rem(12px);
+  }
+
+  @if $size == "xxxxl" {
+    @include h1--size($root, "l");
+
+    width:px-to-rem(128px) !important;
+    height:px-to-rem(128px) !important;
+    margin-right: px-to-rem(24px);
+    margin-left: px-to-rem(24px);
+  }
+
+  @if $size == "xxxl" {
+    @include h2--size($root, "l");
+
+    width:px-to-rem(108px) !important;
+    height:px-to-rem(108px) !important;
+    margin-right: px-to-rem(24px);
+    margin-left: px-to-rem(24px);
+  }
+
+  @if $size == "xxl" {
+    @include h2--size($root, "l");
+
+    width:px-to-rem(88px) !important;
+    height:px-to-rem(88px) !important;
+  }
+
+  @if $size == "xl" {
+    @include h4--size($root, "l");
+
+    width:px-to-rem(64px) !important;
+    height:px-to-rem(64px) !important;
+  }
+
+  @if $size == "l" {
+    width:px-to-rem(56px) !important;
+    height:px-to-rem(56px) !important;
+  }
+
+  @if $size == "m" {
+    width:px-to-rem(48px) !important;
+    height:px-to-rem(48px) !important;
+  }
+
+  @if $size == "s" {
+    width:px-to-rem(40px)  !important;
+    height:px-to-rem(40px)  !important;
+  }
+
+  @if $size == "xs" {
+    width:px-to-rem(32px) !important;
+    height:px-to-rem(32px) !important;
+  }
+
+  &:first-child {
+    margin-left: 0 !important;
+  }
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+
+  &:only-child {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$avatarSizes: (
+  "xxxxl",
+  "xxxl",
+  "xxl",
+  "xl",
+  "l",
+  "m",
+  "s",
+  "xs",
+);
+
+@mixin avatar-sizes($root) {
+  @each $key in $avatarSizes {
+    &[data-size="#{$key}"] {
+      @include avatar--size($root, $key, !important);
+    }
+  }
+}

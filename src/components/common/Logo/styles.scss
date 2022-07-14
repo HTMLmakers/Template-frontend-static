@@ -1,0 +1,17 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Logo
+   ========================================================================== */
+
+.logo {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include logo-sizes($root);
+  @include logo-color-themes($root);
+  @include logo--size($root, "m");
+  @include logo--color-theme($root, "blue-primary");
+
+  display: block;
+}

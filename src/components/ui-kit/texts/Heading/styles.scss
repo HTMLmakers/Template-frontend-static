@@ -1,0 +1,58 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Heading
+   ========================================================================== */
+
+.heading {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include heading-color-themes($root);
+  @include heading--color-theme($root, "blue-dark-secondary");
+
+  font-weight: 800;
+
+  &[data-level="1"] {
+    @include heading-sizes($root, "h1");
+    @include h1--size($root, "l");
+
+    /*@include media-breakpoint-down(lg) {
+      @include h1--size($root, "m");
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include h1--size($root, "s");
+    }*/
+  }
+
+  &[data-level="2"] {
+    @include heading-sizes($root, "h2");
+    @include h2--size($root, "l");
+  }
+
+  &[data-level="3"] {
+    @include heading-sizes($root, "h3");
+    @include h3--size($root, "l");
+  }
+
+  &[data-level="4"] {
+    @include heading-sizes($root, "h4");
+    @include h4--size($root, "l");
+  }
+
+  &[data-level="5"] {
+    @include heading-sizes($root, "h5");
+    @include h5--size($root, "l")
+  }
+
+  &[data-level="6"] {
+    @include heading-sizes($root, "h6");
+    @include h6--size($root, "l");
+  }
+
+  &[data-level="7"] {
+    @include heading-sizes($root, "h7");
+    @include h7--size($root, "l");
+  }
+}

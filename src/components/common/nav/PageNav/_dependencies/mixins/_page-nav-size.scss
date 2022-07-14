@@ -1,0 +1,68 @@
+// =============================================================================
+// Mixins -- PageNav size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin page-nav--size($root, $size, $important: null) {
+
+  #{$root}__list {
+    @include elements-wrap--size($root, "m", !important);
+  }
+
+  @if $size == "l" {
+
+    .button-primary {
+      @include button-primary--size($root, "l", !important);
+    }
+
+    .button-tab {
+      @include button-tab--size($root, "l", !important);
+    }
+  }
+
+  @if $size == "m" {
+
+    .button-primary {
+      @include button-primary--size($root, "m", !important);
+    }
+
+    .button-tab {
+      @include button-tab--size($root, "m", !important);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+
+  #{$root}__add-controls {
+    margin-right: px-to-rem(8px) !important;
+
+    > * {
+      &:last-child {
+        margin-right: 0 !important;
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$pageNavSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin page-nav-sizes($root) {
+  @each $key in $pageNavSizes {
+    &[data-size="#{$key}"] {
+      @include page-nav--size($root, $key, !important);
+    }
+  }
+}

@@ -1,0 +1,125 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- SideBar
+   ========================================================================== */
+
+.sidebar {
+  $root: ".sidebar";
+  //@include media-breakpoint-down(sm) {}
+
+  @extend %box-shadow-primary;
+
+  width: px-to-rem(360px);
+  min-height: 100%;
+  background: $color-gray-quaternary;
+
+  @include media-breakpoint-down(sm) {
+    width: px-to-rem(310px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: px-to-rem(80px);
+    padding: px-to-rem(16px);
+    background: $color-blue-primary;
+
+    @include media-breakpoint-down(md) {
+      height: px-to-rem(56px);
+      padding: px-to-rem(8px);
+    }
+  }
+
+  &__add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 px-to-rem(16px) px-to-rem(24px);
+    background: $color-blue-primary;
+    text-align: center;
+
+    .user-info {
+      $root: ".user-info";
+
+      @include user-info--size($root, "m", !important);
+
+      @include media-breakpoint-down(md) {
+        @include user-info--size($root, "s");
+      }
+    }
+
+    @include media-breakpoint-down(md) {
+      flex-direction: row;
+      text-align: left;
+      padding: px-to-rem(4px) px-to-rem(12px) px-to-rem(16px);
+
+      .user-info {
+        flex-direction: row;
+
+        &__avatar {
+          margin-right: px-to-rem(12px);
+        }
+
+        &__content {
+          text-align: left;
+        }
+
+        &__name {
+          margin-top: 0 !important;
+        }
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      text-align: center;
+
+      .user-info {
+        flex-direction: column;
+
+        &__avatar {
+          margin-right: 0;
+        }
+
+        &__content {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &__body {
+    padding: px-to-rem(16px) px-to-rem(16px) px-to-rem(25px);
+
+    @include media-breakpoint-down(md) {
+      padding: px-to-rem(8px);
+    }
+  }
+
+  &__footer {
+    padding: px-to-rem(8px) px-to-rem(16px) px-to-rem(16px);
+
+    @include media-breakpoint-down(md) {
+      padding: px-to-rem(8px);
+    }
+  }
+
+  &__footer-section {
+    margin-bottom: px-to-rem(16px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .scroll {
+
+    .ScrollbarsCustom {
+      max-height: 100vh !important;
+    }
+  }
+}

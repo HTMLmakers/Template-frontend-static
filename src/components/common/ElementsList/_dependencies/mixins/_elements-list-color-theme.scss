@@ -1,0 +1,30 @@
+// =============================================================================
+// Mixins -- ElementsList color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin elements-list--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$elementsListColorThemes: (
+  "default",
+);
+
+@mixin elements-list-color-themes($root) {
+  @each $key in $elementsListColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include elements-list--color-theme($root, $key);
+    }
+  }
+}

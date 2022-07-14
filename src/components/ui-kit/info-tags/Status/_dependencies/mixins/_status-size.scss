@@ -1,0 +1,104 @@
+// =============================================================================
+// Mixins -- Status size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin status--size($root, $size, $important: null) {
+
+  border-radius: px-to-rem(20px) !important;
+
+  &[data-type="extralight"] {
+    min-width: auto !important;
+    height: auto !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    min-width: px-to-rem(32px) !important;
+    height: px-to-rem(32px) !important;
+    padding-right: px-to-rem(12px) !important;
+    padding-left: px-to-rem(12px) !important;
+
+    &[data-type="light"] {
+      height: px-to-rem(24px) !important;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+
+      &::before {
+        width: px-to-rem(16px) !important;
+        height: px-to-rem(16px) !important;
+        border-width: px-to-rem(1px) !important;
+      }
+
+      #{$root}__text {
+        margin-left: px-to-rem(16px) !important;
+      }
+    }
+  }
+
+  @if $size == "m" {
+    @include desc--size($root, "xs");
+
+    min-width: px-to-rem(21px) !important;
+    height: px-to-rem(21px) !important;
+    padding-right: px-to-rem(6px) !important;
+    padding-left: px-to-rem(6px) !important;
+
+    &[data-type="light"] {
+      height: px-to-rem(16px) !important;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+
+      &::before {
+        width: px-to-rem(10px) !important;
+        height: px-to-rem(10px) !important;
+        border-width: px-to-rem(1px) !important;
+      }
+
+      #{$root}__text {
+        margin-left: px-to-rem(12px) !important;
+      }
+    }
+
+    .icon-svg {
+      margin-right: px-to-rem(4px) !important;
+      margin-left: px-to-rem(4px) !important;
+
+      &:first-child {
+        margin-left: 0 !important;
+      }
+
+      &:last-child {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$statusSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin status-sizes($root) {
+  @each $key in $statusSizes {
+    &[data-size="#{$key}"] {
+      @include status--size($root, $key, !important);
+    }
+  }
+}

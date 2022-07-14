@@ -1,0 +1,48 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Promocode
+   ========================================================================== */
+
+.promocode {
+  $root: ".promocode";
+  //@include media-breakpoint-down(sm) {}
+
+  @include promocodes-sizes($root);
+  @include promocodes-color-themes($root);
+  @include promocode--size($root, "l");
+  @include promocode--color-theme($root, "default");
+
+  border-radius: px-to-rem(6px);
+
+  &__heading {
+    font-weight: 800;
+  }
+
+  &__desc {
+    font-weight: 500;
+  }
+
+  &__form-field {
+    position: relative;
+  }
+
+  &__button {
+    position: absolute;
+    top: px-to-rem(8px);
+    right: px-to-rem(8px);
+  }
+
+  &__icon {
+    position: absolute;
+    top: px-to-rem(16px);
+    right: px-to-rem(16px)
+  }
+
+  &__input {
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-radius: px-to-rem(8px);
+  }
+}

@@ -1,0 +1,248 @@
+// =============================================================================
+// Mixins -- Status color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin status--color-theme($root, $color-theme, $important: null) {
+
+  &[data-type="light"] {
+    color: $color-gray-primary;
+    border: none;
+  }
+
+  &[data-type="extralight"] {
+    border: none;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  /* blue-primary-light */
+  @if $color-theme == "blue-primary-light" {
+    color: $color-blue-primary;
+    border: 1px solid $color-blue-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-blue-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-blue-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-blue-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* orange-primary-light */
+  @if $color-theme == "orange-primary-light" {
+    color: $color-orange-primary;
+    border: 1px solid $color-orange-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-orange-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-orange-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-orange-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* velvet-primary-light */
+  @if $color-theme == "velvet-primary-light" {
+    color: $color-velvet-primary;
+    border: 1px solid $color-velvet-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-velvet-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-velvet-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-velvet-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* gray-secondary-light */
+  @if $color-theme == "gray-secondary-light" {
+    color: $color-gray-secondary;
+    border: 1px solid $color-gray-secondary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-gray-secondary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-gray-secondary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-gray-secondary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* green-primary-light */
+  @if $color-theme == "green-primary-light" {
+    color: $color-green-primary;
+    border: 1px solid $color-green-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-green-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-green-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-green-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* red-primary-light */
+  @if $color-theme == "red-primary-light" {
+    color: $color-red-primary;
+    border: 1px solid $color-red-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-red-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-red-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-red-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+
+  /* yellow-primary-light */
+  @if $color-theme == "yellow-primary-light" {
+    color: $color-yellow-primary;
+    border: 1px solid $color-yellow-primary;
+
+    &[data-type="light"] {
+
+      &::before {
+        border-color: $color-yellow-primary;
+      }
+    }
+
+    .icon-svg {
+
+      &[data-type="fill"] {
+        svg {
+          fill: $color-yellow-primary;
+        }
+      }
+
+      &[data-type="stroke"] {
+        svg {
+          stroke: $color-yellow-primary;
+          fill-opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$statusColorThemes: (
+  "blue-primary-light",
+  "orange-primary-light",
+  "velvet-primary-light",
+  "gray-secondary-light",
+  "green-primary-light",
+  "red-primary-light",
+  "yellow-primary-light",
+);
+
+@mixin status-color-themes($root) {
+  @each $key in $statusColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include status--color-theme($root, $key);
+    }
+  }
+}

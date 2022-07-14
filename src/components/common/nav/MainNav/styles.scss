@@ -1,0 +1,99 @@
+@import "../../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- MainNav
+   ========================================================================== */
+
+.main-nav {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include main-nav-sizes($root);
+  @include main-nav-color-themes($root);
+  @include main-nav--size($root, "l");
+  @include main-nav--color-theme($root, "white");
+
+  &__item {
+
+    &--more {
+      display: none;
+    }
+  }
+
+  &__link {
+    @extend %transition-primary;
+
+    display: flex;
+    justify-content: flex-start;
+
+    .link-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+
+      &__text {
+        flex-grow: 1;
+      }
+    }
+
+    &.active {
+
+      #{$root}__arrow {
+        display: inline-flex !important;
+      }
+    }
+  }
+
+  &__arrow {
+    display: none;
+  }
+
+  &__sublist {
+
+  }
+
+  &__subitem {
+
+  }
+
+  &__sublink {
+
+  }
+
+  &[data-size="s"] {
+
+    #{$root}__item {
+
+      &--more {
+        display: flex;
+      }
+    }
+
+    #{$root}__link {
+
+      .link-secondary {
+
+        &__text {
+          display: none;
+        }
+      }
+
+      &.active {
+
+        #{$root}__arrow {
+          display: none !important;
+        }
+      }
+    }
+
+    #{$root}__arrow,
+    #{$root}__sublist {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include main-nav--size($root, "m");
+  }
+}

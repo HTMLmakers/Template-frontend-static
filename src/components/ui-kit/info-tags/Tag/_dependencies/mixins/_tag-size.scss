@@ -1,0 +1,72 @@
+// =============================================================================
+// Mixins -- Tag size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin tag--size($root, $size, $important: null) {
+
+  border-radius: px-to-rem(20px) !important;
+
+  @if $size == "l" {
+    @include desc--size($root, "s");
+
+    min-width: px-to-rem(32px) !important;
+    height: px-to-rem(32px) !important;
+    padding-right: px-to-rem(12px) !important;
+    padding-left: px-to-rem(12px) !important;
+
+    .mark-primary {
+      @include mark-primary--size($root, "s");
+    }
+
+    .mark-primary,
+    .icon-svg {
+
+      &:first-child {
+        margin-left: px-to-rem(-4px) !important;
+      }
+
+      &:last-child {
+        margin-right: px-to-rem(-4px) !important;
+      }
+    }
+  }
+
+  @if $size == "m" {
+    @include desc--size($root, "xs");
+
+    min-width: px-to-rem(21px) !important;
+    height: px-to-rem(21px) !important;
+    padding-right: px-to-rem(6px) !important;
+    padding-left: px-to-rem(6px) !important;
+
+    .mark-primary {
+      @include mark-primary--size($root, "xs");
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$tagSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin tag-sizes($root) {
+  @each $key in $tagSizes {
+    &[data-size="#{$key}"] {
+      @include tag--size($root, $key, !important);
+    }
+  }
+}

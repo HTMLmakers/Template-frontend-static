@@ -1,0 +1,58 @@
+// =============================================================================
+// Mixins -- Promocode size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin promocode--size($root, $size, $important: null) {
+  padding: px-to-rem(16px);
+
+  #{$root}__heading {
+    margin-bottom: px-to-rem(4px);
+  }
+
+  #{$root}__desc {
+    @include desc--size($root, "s");
+
+    margin-top: 0;
+    margin-bottom: px-to-rem(24px);
+  }
+
+  #{$root}__input {
+    padding-left: px-to-rem(14px);
+    width: 100%;
+    height: px-to-rem(48px);
+  }
+
+  @if $size == "l" {
+
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$promocodeSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin promocodes-sizes($root) {
+  @each $key in $promocodeSizes {
+    &[data-size="#{$key}"] {
+      @include promocode--size($root, $key, !important);
+    }
+  }
+}

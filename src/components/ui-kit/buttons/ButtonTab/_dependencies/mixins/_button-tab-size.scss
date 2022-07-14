@@ -1,0 +1,58 @@
+// =============================================================================
+// Mixins -- ButtonTab size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-tab--size($root, $size, $important: null) {
+
+  padding-right: px-to-rem(16px) !important;
+  padding-left: px-to-rem(16px) !important;
+  border-radius: px-to-rem(44px) !important;
+
+  @if $size == "l" {
+    @include h6--size($root, "l");
+
+    min-width: px-to-rem(48px) !important;
+    height: px-to-rem(48px) !important;
+
+    .mark-primary {
+      @include mark-primary--size($root, "l");
+    }
+  }
+
+  @if $size == "m" {
+    @include h7--size($root, "l");
+
+    min-width: px-to-rem(40px) !important;
+    height: px-to-rem(40px) !important;
+
+    .mark-primary {
+      @include mark-primary--size($root, "m");
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonTabSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin button-tab-sizes($root) {
+  @each $key in $buttonTabSizes {
+    &[data-size="#{$key}"] {
+      @include button-tab--size($root, $key, !important);
+    }
+  }
+}

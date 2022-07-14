@@ -1,0 +1,75 @@
+// =============================================================================
+// Mixins -- Header size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin header--size($root, $size, $important: null) {
+
+  #{$root}__desc {
+    @include desc--size($root, "s");
+
+    margin-top: px-to-rem(8px);
+  }
+
+  #{$root}__place-after {
+    margin-top: px-to-rem(24px);
+
+    @include media-breakpoint-down(md) {
+      margin-top: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "l" {
+
+    #{$root}__heading {
+
+      .heading {
+        @include h1--size($root, "l", !important);
+
+        @include media-breakpoint-down(md) {
+          @include h4--size($root, "l", !important);
+        }
+      }
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__heading {
+
+      .heading {
+        @include h3--size($root, "l", !important);
+
+        @include media-breakpoint-down(md) {
+          @include h5--size($root, "l", !important);
+        }
+      }
+    }
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$headerSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin header-sizes($root) {
+  @each $key in $headerSizes {
+    &[data-size="#{$key}"] {
+      @include header--size($root, $key, !important);
+    }
+  }
+}

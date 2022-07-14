@@ -1,0 +1,135 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- popups
+   ========================================================================== */
+
+/* Library styles
+   ========================================================================== */
+
+.ReactModalPortal {
+
+  > * {
+    opacity: 0;
+  }
+}
+.ReactModal {
+
+  &__Overlay {
+    @extend %overlay-primary;
+    @extend %transition-secondary;
+
+    z-index: 999;
+
+    &--after-open {
+      opacity: 1;
+    }
+
+    &--before-close {
+      opacity: 0;
+    }
+  }
+
+  &__Content {
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 9999 !important;
+    max-width: px-to-rem(1200px);
+    min-width: px-to-rem(800px);
+    min-height: 100px;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transform: translate(-50%, -50%) !important;
+
+    @include media-breakpoint-down(lg) {
+      width: 100% !important;
+      max-width: none !important;
+      min-width: px-to-rem(280px) !important;
+      padding-right: px-to-rem(16px) !important;
+      padding-left: px-to-rem(16px) !important;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding-right: px-to-rem(8px) !important;
+      padding-left: px-to-rem(8px) !important;
+    }
+  }
+}
+
+/* Custom styles
+   ========================================================================== */
+
+.popup {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include section-primary;
+
+  background-color: $color-gray-tertiary;
+
+  &[data-not-close="true"] {
+
+    .header {
+      &__heading,
+      &__desc {
+
+        @include media-breakpoint-down(md) {
+          padding-right: 0 !important;
+        }
+      }
+    }
+  }
+
+  &__header {
+    position: relative;
+    margin-bottom: px-to-rem(16px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: px-to-rem(8px);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: px-to-rem(16px);
+    right: px-to-rem(16px);
+
+    @include media-breakpoint-down(md) {
+      top: px-to-rem(8px);
+      right: px-to-rem(8px);
+    }
+  }
+
+  &__body {
+
+  }
+
+  &__footer {
+    @include section-primary;
+
+    margin-top: px-to-rem(16px);
+
+    @include media-breakpoint-down(md) {
+      margin-top: px-to-rem(8px);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__controls-before {
+    justify-content: flex-start !important;
+  }
+
+  &__controls-after {
+    justify-content: flex-end !important;
+    flex-grow: 1;
+  }
+}

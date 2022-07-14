@@ -1,0 +1,34 @@
+// =============================================================================
+// Mixins -- Search color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin search--color-theme($root, $color-theme, $important: null) {
+
+  //white (default)
+  @if $color-theme == "white" {
+
+    .input-text {
+      background-color: $color-white;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$searchColorThemes: (
+  "white",
+);
+
+@mixin search-color-themes($root) {
+  @each $key in $searchColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include search--color-theme($root, $key);
+    }
+  }
+}

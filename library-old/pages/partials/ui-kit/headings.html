@@ -1,0 +1,81 @@
+<section class="components-library__section">
+  <header class="components-library__header">
+    <h2 class="components-library__heading h2">Headings</h2>
+  </header>
+
+  <div class="components-library__content">
+    <div class="components-library__row">
+      <div class="components-library__col col-sm-8">
+
+        <div class="ui-kit-library__container">
+          <div class="ui-kit-library__row">
+            <div class="ui-kit-library__col">
+              <h4 class="ui-kit-library__heading ui-kit-library__heading--h4">
+                <span>L</span>
+              </h4>
+
+              @{ui-kit}include('./texts/Heading/index.html', { 
+                text: 'H1', 
+                level: '1',
+                component: @{ui-kit}include('./texts/Heading/index.html', { 
+                  text: 'H1', 
+                  level: '1',
+                }),
+              })
+
+              <h1 class="heading" data-level="1" data-size="l">H1</h1>
+              <h2 class="heading" data-level="2" data-size="l">H2</h2>
+              <h3 class="heading" data-level="3" data-size="l">H3</h3>
+              <h4 class="heading" data-level="4" data-size="l">H4</h4>
+              <h5 class="heading" data-level="5" data-size="l">H5</h5>
+              <h6 class="heading" data-level="6" data-size="l">H6</h6>
+
+            </div>
+            <div class="ui-kit-library__col">
+              <h4 class="ui-kit-library__heading ui-kit-library__heading--h4">
+                <span>M</span>
+              </h4>
+
+              <h1 class="heading" data-level="1" data-size="m">H1</h1>
+              <h2 class="heading" data-level="2" data-size="m">H2</h2>
+              <h3 class="heading" data-level="3" data-size="m">H3</h3>
+              <h4 class="heading" data-level="4" data-size="m">H4</h4>
+              <h5 class="heading" data-level="5" data-size="m">H5</h5>
+              <h6 class="heading" data-level="6" data-size="m">H6</h6>
+
+            </div>
+            <div class="ui-kit-library__col">
+              <h4 class="ui-kit-library__heading ui-kit-library__heading--h4">
+                <span>S</span>
+              </h4>
+
+              <h1 class="heading" data-level="1" data-size="s">H1</h1>
+              <h2 class="heading" data-level="2" data-size="s">H2</h2>
+              <h3 class="heading" data-level="3" data-size="s">H3</h3>
+              <h4 class="heading" data-level="4" data-size="s">H4</h4>
+              <h5 class="heading" data-level="5" data-size="s">H5</h5>
+              <h6 class="heading" data-level="6" data-size="s">H6</h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="components-library__col col-sm-4">
+        <div class="components-library__container">
+          <h4 class="components-library__heading h4">
+            <span>Differ</span>
+          </h4>
+          <h5 class="heading" data-level="5" data-size="l">
+            Heading <span class="heading__differ">differ</span>
+          </h5>
+          <h4 class="components-library__heading h4">
+            <span>Mark</span>
+          </h4>
+          <h5 class="heading" data-level="5" data-size="l">
+            Heading <span class="heading__mark">mark</span>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

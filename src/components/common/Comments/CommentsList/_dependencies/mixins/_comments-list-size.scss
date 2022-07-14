@@ -1,0 +1,50 @@
+// =============================================================================
+// Mixins -- comments-list size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-list--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    margin-bottom: px-to-rem(16px);
+    padding: px-to-rem(16px);
+
+    #{$root}__item {
+      padding: px-to-rem(16px);
+    }
+  }
+
+  @if $size == "m" {
+    margin-bottom: px-to-rem(8px);
+    padding: px-to-rem(8px);
+
+    #{$root}__item {
+      padding: px-to-rem(8px);
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$commentsListSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin comments-list-sizes($root) {
+  @each $key in $commentsListSizes {
+    &[data-size="#{$key}"] {
+      @include comments-list--size($root, $key, !important);
+    }
+  }
+}

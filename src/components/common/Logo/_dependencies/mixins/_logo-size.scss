@@ -1,0 +1,42 @@
+// =============================================================================
+// Mixins -- Logo size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin logo--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+  }
+
+  @if $size == "m" {
+    width: px-to-rem(97px);
+    height: px-to-rem(32px);
+  }
+
+  @if $size == "s" {
+
+  }
+
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$logoSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin logo-sizes($root) {
+  @each $key in $logoSizes {
+    &[data-size="#{$key}"] {
+      @include logo--size($root, $key, !important);
+    }
+  }
+}

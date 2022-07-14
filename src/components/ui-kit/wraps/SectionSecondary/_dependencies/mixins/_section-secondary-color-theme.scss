@@ -1,0 +1,31 @@
+// =============================================================================
+// Mixins -- SectionSecondary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin section-secondary--color-theme($root, $color-theme, $important: null) {
+
+  //grey-quaternary
+  @if $color-theme == "white" {
+    @include section-secondary-color;
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$sectionSecondaryColorThemes: (
+  "white",
+);
+
+@mixin section-secondary-color-themes($root) {
+  @each $key in $sectionSecondaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include section-secondary--color-theme($root, $key);
+    }
+  }
+}

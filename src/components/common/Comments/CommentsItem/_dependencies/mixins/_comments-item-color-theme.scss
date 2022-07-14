@@ -1,0 +1,32 @@
+// =============================================================================
+// Mixins -- comments-item color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin comments-item--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$commentsItemColorThemes: (
+  "default",
+);
+
+@mixin comments-item-color-themes($root) {
+  @each $key in $commentsItemColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include comments-item--color-theme($root, $key);
+    }
+  }
+}

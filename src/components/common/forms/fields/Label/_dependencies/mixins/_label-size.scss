@@ -1,0 +1,40 @@
+// =============================================================================
+// Mixins -- label size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin label--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    @include desc--size($root,"s")
+  }
+
+  @if $size == "m" {
+
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$labelSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin label-sizes($root) {
+  @each $key in $labelSizes {
+    &[data-size="#{$key}"] {
+      @include label--size($root, $key, !important);
+    }
+  }
+}

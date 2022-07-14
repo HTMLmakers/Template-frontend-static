@@ -1,0 +1,199 @@
+// =============================================================================
+// Mixins -- NotificationSecondary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin notification-secondary--color-theme($root, $color-theme, $important: null) {
+
+  @include section-secondary-color;
+
+  color: $color-gray-primary;
+
+  #{$root}__desc {
+    b {
+      color: $color-blue-dark-primary;
+      font-weight: 600;
+    }
+  }
+
+  .icon-svg {
+    svg {
+      fill: $color-white;
+    }
+  }
+
+  &__close {
+
+    svg {
+      fill: $color-gray-secondary !important;
+    }
+  }
+
+  @if $color-theme == "default" {
+
+    &#{$root}[data-group="tertiary"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-gray-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-gray-primary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+
+    &#{$root}[data-group="primary"] {
+
+      #{$root}__title {
+        color: $color-orange-primary;
+      }
+    }
+
+    &#{$root}[data-group="tertiary"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-orange-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-orange-primary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+  }
+
+  //velvet-primary
+  @if $color-theme == "velvet-primary" {
+
+    &#{$root}[data-group="primary"] {
+
+      #{$root}__title {
+        color: $color-velvet-primary;
+      }
+    }
+
+    &#{$root}[data-group="tertiary"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-velvet-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-velvet-primary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+  }
+
+  //red-primary
+  @if $color-theme == "red-primary" {
+
+    &#{$root}[data-group="primary"] {
+
+      #{$root}__title {
+        color: $color-red-primary;
+      }
+    }
+
+    &#{$root}[data-group="tertiary"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-red-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-red-primary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+  }
+
+  //green-primary
+  @if $color-theme == "green-primary" {
+
+    &#{$root}[data-group="primary"] {
+
+      #{$root}__title {
+        color: $color-green-primary;
+      }
+    }
+
+    &#{$root}[data-group="tertiary"] {
+
+      .icon-svg {
+
+        &[data-type="fill"] {
+          svg {
+            fill: $color-green-primary;
+          }
+        }
+
+        &[data-type="stroke"] {
+          svg {
+            stroke: $color-green-primary;
+            fill-opacity: 0;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$notificationSecondaryColorThemes: (
+  "default",
+  "orange-primary",
+  "velvet-primary",
+  "red-primary",
+  "green-primary",
+);
+
+@mixin notification-secondary-color-themes($root) {
+  @each $key in $notificationSecondaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include notification-secondary--color-theme($root, $key);
+    }
+  }
+}

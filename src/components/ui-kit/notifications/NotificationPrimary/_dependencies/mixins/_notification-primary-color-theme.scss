@@ -1,0 +1,56 @@
+// =============================================================================
+// Mixins -- NotificationPrimary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin notification-primary--color-theme($root, $color-theme, $important: null) {
+  color: $color-white;
+
+  .icon-svg {
+    svg {
+      fill: $color-white;
+    }
+  }
+
+  //orange-primary
+  @if $color-theme == "orange-primary" {
+    background-color: $color-orange-primary;
+  }
+
+  //velvet-primary
+  @if $color-theme == "velvet-primary" {
+    background-color: $color-velvet-primary;
+  }
+
+  //red-primary
+  @if $color-theme == "red-primary" {
+    background-color: $color-red-primary;
+  }
+
+  //green-primary
+  @if $color-theme == "green-primary" {
+    background-color: $color-green-primary;
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$notificationPrimaryColorThemes: (
+  "orange-primary",
+  "velvet-primary",
+  "red-primary",
+  "green-primary",
+);
+
+@mixin notification-primary-color-themes($root) {
+  @each $key in $notificationPrimaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include notification-primary--color-theme($root, $key);
+    }
+  }
+}

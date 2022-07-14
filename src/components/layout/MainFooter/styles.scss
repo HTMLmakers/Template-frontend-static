@@ -1,0 +1,49 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- MainFooter
+   ========================================================================== */
+
+.main-footer {
+  $root: &;
+
+  &__wrap {
+    @include section-primary;
+
+    display: flex;
+    flex-wrap: wrap;
+    padding: px-to-rem(24px) px-to-rem(32px);
+    border-radius: 0;
+  }
+
+  &__copyright,
+  &__contact-info {
+    display: flex;
+    width: 50%;
+  }
+
+  &__contact-info {
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  @include media-breakpoint-down(md) {
+
+    &__wrap {
+      padding: px-to-rem(12px) px-to-rem(16px);
+    }
+
+    &__copyright,
+    &__contact-info {
+      width: 100%;
+    }
+
+    &__copyright {
+      margin-bottom: px-to-rem(12px);
+    }
+
+    &__contact-info {
+      justify-content: flex-start;
+    }
+  }
+}

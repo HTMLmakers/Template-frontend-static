@@ -1,0 +1,33 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Scroll
+   ========================================================================== */
+
+.scroll {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include scroll-sizes($root);
+  @include scroll-color-themes($root);
+  @include scroll--size($root, "l");
+  @include scroll--color-theme($root, "gray-secondary");
+
+  z-index: 10;
+
+  .ScrollbarsCustom {
+    max-height: px-to-rem(200px);
+  }
+
+  .ScrollbarsCustom-Wrapper {
+    inset: 0 !important;
+  }
+
+  .ScrollbarsCustom-Content {
+    display: block !important;
+  }
+
+  .ScrollbarsCustom-Track {
+    z-index: 10;
+  }
+}

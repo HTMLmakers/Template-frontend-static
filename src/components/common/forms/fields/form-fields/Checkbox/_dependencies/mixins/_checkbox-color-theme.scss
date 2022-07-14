@@ -1,0 +1,32 @@
+// =============================================================================
+// Mixins -- Checkbox color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin checkbox--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    @include field-default-check($root);
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$checkboxColorThemes: (
+  "default",
+);
+
+@mixin checkbox-color-themes($root) {
+  @each $key in $checkboxColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include checkbox--color-theme($root, $key);
+    }
+  }
+}

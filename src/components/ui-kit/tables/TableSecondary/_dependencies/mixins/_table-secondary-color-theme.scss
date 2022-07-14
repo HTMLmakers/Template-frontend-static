@@ -1,0 +1,45 @@
+// =============================================================================
+// Mixins -- table secondary color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin table-secondary--color-theme($root, $color-theme, $important: null) {
+
+  //default
+  @if $color-theme == "default" {
+
+    #{$root}__section-title {
+      .desc {
+        color: $color-gray-primary;
+      }
+    }
+
+    #{$root}__name {
+      color: $color-gray-primary;
+    }
+
+    //Временный цвет ячеек
+    tr {
+      background-color: $color-white;
+    }
+  }
+}
+
+//
+// Color themes
+// --------------------------------------------------------------------------
+
+$tableSecondaryColorThemes: (
+  "default",
+);
+
+@mixin table-secondary-color-themes($root) {
+  @each $key in $tableSecondaryColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include table-secondary--color-theme($root, $key);
+    }
+  }
+}

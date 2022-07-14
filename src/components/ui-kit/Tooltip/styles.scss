@@ -1,0 +1,78 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- Tooltip
+   ========================================================================== */
+
+.tippy-box {
+  max-width: none !important;
+  background-color: transparent !important;
+  color: unset !important;
+  border-radius: px-to-rem(10px) !important;
+  font-size: unset !important;
+  line-height: unset !important;
+  box-shadow: 0 px-to-rem(10px) px-to-rem(40px) rgba($color-blue-dark-primary, 0.25);
+
+  &[data-theme="blue-primary"] {
+
+    .tippy-arrow {
+      color: $color-blue-primary;
+    }
+  }
+
+  &[data-theme="white"] {
+
+    .tippy-arrow {
+      color: $color-white;
+    }
+  }
+
+  &[data-theme="orange-primary"] {
+
+    .tippy-arrow {
+      color: $color-orange-primary;
+    }
+  }
+}
+
+.tippy-content {
+  display: flex;
+  align-items: center;
+  padding: 0 !important;
+}
+
+
+.tooltip {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include tooltip-sizes($root);
+  @include tooltip-color-themes($root);
+  @include tooltip--size($root, "l");
+
+  position: relative;
+  display: flex;
+  font-weight: 500;
+
+  &__content {
+
+  }
+
+  .button-icon {
+    display: none;
+    position: absolute;
+  }
+
+  &[data-behavior="click"] {
+
+    .button-icon {
+      display: block;
+    }
+  }
+}
+
+.tooltip-trigger {
+  line-height: 0;
+  cursor: pointer;
+}
+

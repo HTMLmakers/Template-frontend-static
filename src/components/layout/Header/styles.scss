@@ -1,0 +1,53 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- HeaderPartial
+   ========================================================================== */
+
+.header {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include header-sizes($root);
+
+  &__wrap {
+    @include section-primary;
+
+    display: flex;
+    min-height: px-to-rem(80px);
+
+    @include media-breakpoint-down(md) {
+      min-height: px-to-rem(56px);
+    }
+  }
+
+  &__main,
+  &__controls {
+
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  &__controls {
+    align-items: flex-end !important;
+    padding-left: px-to-rem(16px);
+  }
+
+  &__heading,
+  &__desc {
+    padding-right: px-to-rem(88px);
+
+    @include media-breakpoint-down(md) {
+      padding-right: px-to-rem(64px);
+    }
+  }
+
+  &__desc {
+    color: $color-gray-primary;
+  }
+}

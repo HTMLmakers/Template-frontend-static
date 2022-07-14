@@ -1,0 +1,34 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- DateTime
+   ========================================================================== */
+
+/* Default styles
+   -------------------------------------------------------------------------- */
+
+/* Established styles
+   -------------------------------------------------------------------------- */
+
+.date-time {
+  $root: &;
+  //@include media-breakpoint-down(md) {}
+
+  @include date-time-sizes($root);
+  @include date-time-color-themes($root);
+  @include date-time--size($root, "m");
+  @include date-time--color-theme($root, "inherit");
+
+  display: inline-flex;
+  flex-shrink: 0;
+  font-weight: 500;
+
+  &[data-wrap] {
+    flex-direction: column;
+  }
+
+  &__date,
+  &__time {
+    display: inline-block;
+  }
+}

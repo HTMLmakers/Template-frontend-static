@@ -1,0 +1,125 @@
+// =============================================================================
+// Mixins -- DropDown color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin drop-down--color-theme($root, $color-theme, $important: null) {
+
+  @if $color-theme == "default" {
+
+    .drop-down-nav {
+      $root: &;
+
+      @include section-primary-color;
+      @extend %box-shadow-primary;
+
+      &__title {
+        color: $color-gray-primary;
+      }
+
+      &__item {
+
+        &[data-state="disabled"] {
+          opacity: 0.4;
+          pointer-events: none;
+        }
+      }
+
+      &__item-content {
+        @include section-secondary-color;
+
+        color: $color-gray-primary;
+        border-color: $color-white;
+
+        &:hover {
+          color: $color-blue-dark-secondary;
+          border-color: $color-gray-secondary;
+
+          .link-secondary {
+            color: $color-blue-dark-secondary;
+
+            .icon-svg {
+
+              &[data-type="fill"] {
+                svg {
+                  fill: $color-blue-dark-secondary;
+                }
+              }
+
+              &[data-type="stroke"] {
+                svg {
+                  stroke: $color-blue-dark-secondary;
+                }
+              }
+            }
+          }
+        }
+
+        &:active {
+          opacity: 0.7;
+        }
+
+        > * {
+          pointer-events: none;
+        }
+      }
+
+      &__icon-drag {
+
+        .icon-svg {
+
+          &[data-type="fill"] {
+            svg {
+              fill: $color-gray-secondary;
+            }
+          }
+
+          &[data-type="stroke"] {
+            svg {
+              stroke: $color-gray-secondary;
+              fill-opacity: 0;
+            }
+          }
+        }
+
+        &:active {
+
+          .icon-svg {
+
+            &[data-type="fill"] {
+              svg {
+                fill: $color-blue-dark-secondary;
+              }
+            }
+
+            &[data-type="stroke"] {
+              svg {
+                stroke: $color-blue-dark-secondary;
+                fill-opacity: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$dropDownColorThemes: (
+  "default",
+);
+
+@mixin drop-down-color-themes($root) {
+  @each $key in $dropDownColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include drop-down--color-theme($root, $key);
+    }
+  }
+}

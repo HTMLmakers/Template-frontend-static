@@ -1,0 +1,39 @@
+// =============================================================================
+// Mixins -- SidebarDrop color theme
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin sidebar-drop--color-theme($root, $color-theme, $important: null) {
+
+  //gray-quaternary (default)
+  @if $color-theme == "gray-quaternary" {
+
+    @include section-primary-color;
+  }
+
+  //white
+  @if $color-theme == "white" {
+
+    @include section-secondary-color;
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$sidebarDropColorThemes: (
+  "blue-dark-secondary",
+  "white",
+);
+
+@mixin sidebar-drop-color-themes($root) {
+  @each $key in $sidebarDropColorThemes {
+    &[data-color-theme="#{$key}"] {
+      @include sidebar-drop--color-theme($root, $key);
+    }
+  }
+}

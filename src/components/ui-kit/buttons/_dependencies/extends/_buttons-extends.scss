@@ -1,0 +1,96 @@
+// =============================================================================
+// Extends -- Buttons
+// =============================================================================
+
+//
+// Core
+// --------------------------------------------------------------------------
+
+%button {
+  $root: &;
+  @include desc--size($root, "s");
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: auto;
+  margin-right: px-to-rem(8px);
+  font-weight: 600;
+  text-decoration: none;
+  transition: $transition-primary;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  &:last-child,
+  &:only-child {
+    margin-right: 0;
+  }
+
+  &:focus,
+  &[data-state="focus"] {
+    @extend %button-state--focus;
+  }
+
+  &:hover,
+  &[data-state="hover"] {
+    @extend %button-state--hover;
+  }
+
+  &:active,
+  &[data-state="active"] {
+    @extend %button-state--active;
+
+    opacity: 0.7;
+  }
+
+  &[disabled],
+  &[data-state="disabled"] {
+    @extend %button-state--disabled;
+  }
+
+  &[data-width="fullwidth"] {
+    @extend %button-full-width;
+  }
+
+  &[data-mark-notice="true"] {
+    @extend %button-mark-notice;
+  }
+}
+
+//
+// Dimensions
+// --------------------------------------------------------------------------
+
+%button-full-width {
+  @include fullwidth;
+}
+
+//
+// States
+// --------------------------------------------------------------------------
+
+%button-state--focus {
+  outline: 0;
+}
+
+%button-state--hover,
+%button-state--active {
+  cursor: pointer;
+}
+
+%button-state--disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+//
+// Other
+// --------------------------------------------------------------------------
+
+%button-mark-notice {
+  @extend %mark-notice;
+}

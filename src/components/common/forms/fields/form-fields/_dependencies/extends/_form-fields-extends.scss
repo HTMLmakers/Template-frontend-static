@@ -1,0 +1,115 @@
+// =============================================================================
+// Extends -- form-fields
+// =============================================================================
+
+//
+// Core
+// --------------------------------------------------------------------------
+
+%field-text {
+  $root: &;
+
+  @extend %field-border-default;
+  @include fullwidth;
+  @include transition-primary;
+
+  color: $color-blue-dark-secondary;
+  border-radius: px-to-rem(8px);
+  overflow: hidden;
+
+  input, textarea {
+    @extend %field-reset;
+    @include field-font($root);
+    @include placeholder {
+      @include field-placeholder;
+    }
+
+    height: 100%;
+
+    &:focus {
+      @include placeholder {
+        @include field-placeholder-active;
+      }
+    }
+  }
+
+  &:focus-within,
+  &[data-state="focus"] {
+
+    input, textarea {
+      @include placeholder {
+        @include field-placeholder-active;
+      }
+    }
+  }
+
+  &[disabled],
+  &[data-state="disabled"] {
+    @extend %field-state--disabled;
+  }
+}
+
+%field-check {
+
+  &:disabled,
+  &[data-state="disabled"] {
+    @extend %field-state--disabled;
+  }
+}
+
+//
+// Auxiliary
+// --------------------------------------------------------------------------
+
+//width
+%field-flex-width-default {
+  flex-grow: 1;
+}
+
+//background
+%field-bg-default {
+  background-color: $color-gray-quaternary;
+}
+
+%field-bg-opacity {
+  background-color: transparent !important;
+}
+
+// border
+%field-border-default {
+  border: px-to-rem(1px) solid transparent;
+}
+
+%field-border-color-default {
+  border-color: $color-gray-secondary;
+}
+
+%field-border-color-default-active {
+  border-color: $color-blue-primary;
+}
+
+%field-border-opacity {
+  border: none !important;
+}
+
+// reset
+%field-reset {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+//
+// States
+// --------------------------------------------------------------------------
+
+%field-state--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+
+  input, input:focus,
+  textarea {
+    pointer-events: none;
+  }
+}

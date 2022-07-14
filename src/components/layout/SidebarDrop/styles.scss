@@ -1,0 +1,32 @@
+@import "../../../styles/dependencies";
+
+/* ==========================================================================
+   Ui-kit elements -- SidebarDrop
+   ========================================================================== */
+
+.sidebar-drop {
+  $root: &;
+  //@include media-breakpoint-down(sm) {}
+
+  @include sidebar-drop-sizes($root);
+  @include sidebar-drop--size($root, "l");
+  @include sidebar-drop-color-themes($root);
+  @include sidebar-drop--color-theme($root, "gray-quaternary");
+  @extend %box-shadow-primary;
+  @include transition-primary;
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  min-width: 64px;
+
+  &__close {
+    position: absolute;
+    z-index: 10;
+  }
+
+  @include media-breakpoint-down(md) {
+    @include sidebar-drop--size($root, "m");
+  }
+}

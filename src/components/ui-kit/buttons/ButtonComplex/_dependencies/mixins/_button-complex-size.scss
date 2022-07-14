@@ -1,0 +1,57 @@
+// =============================================================================
+// Mixins -- ButtonComplex size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin button-complex--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+    min-width: px-to-rem(48px) !important;
+    height: px-to-rem(48px) !important;
+    padding-right: px-to-rem(16px) !important;
+    padding-left: px-to-rem(16px) !important;
+    border-radius: px-to-rem(80px) !important;
+
+    #{$root}__text-primary,
+    #{$root}__text-secondary {
+      @include desc--size($root, "xs");
+    }
+
+    #{$root}__icon {
+
+      &:first-child {
+        margin-right: px-to-rem(12px) !important;
+        margin-left: px-to-rem(-4px) !important;
+      }
+
+      &:last-child {
+        margin-right: px-to-rem(-4px) !important;
+        margin-left: px-to-rem(12px) !important;
+      }
+
+      &:only-child {
+        margin-right: px-to-rem(-4px) !important;
+        margin-left: px-to-rem(-4px) !important;
+      }
+    }
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$buttonComplexSizes: (
+  "l",
+);
+
+@mixin button-complex-sizes($root) {
+  @each $key in $buttonComplexSizes {
+    &[data-size="#{$key}"] {
+      @include button-complex--size($root, $key, !important);
+    }
+  }
+}

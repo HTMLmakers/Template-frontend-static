@@ -1,0 +1,58 @@
+// =============================================================================
+// Mixins -- ContactInfo size
+// =============================================================================
+
+//
+// Mixin properties
+// --------------------------------------------------------------------------
+
+@mixin contact-info--size($root, $size, $important: null) {
+
+  @if $size == "l" {
+
+    #{$root}__phone{
+      @include desc--size("root", "s");
+
+      margin-right: px-to-rem(24px);
+    }
+
+    #{$root}__mail{
+      @include link-primary--size("root", "l");
+    }
+  }
+
+  @if $size == "m" {
+
+    #{$root}__phone{
+      @include desc--size("root", "xs");
+
+      margin-right: px-to-rem(12px);
+    }
+
+    #{$root}__mail{
+      @include link-primary--size("root", "m");
+    }
+  }
+
+  @if $size == "s" {
+
+  }
+}
+
+//
+// Mixin data-attributes
+// --------------------------------------------------------------------------
+
+$contactInfoSizes: (
+  "l",
+  "m",
+  "s",
+);
+
+@mixin contact-info-sizes($root) {
+  @each $key in $contactInfoSizes {
+    &[data-size="#{$key}"] {
+      @include contact-info--size($root, $key, !important);
+    }
+  }
+}
